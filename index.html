@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="ckb" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZiNDAN The Gold Chaser - Father Of Gold</title>
+    <!-- Google Fonts: Vazirmatn -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-dark: #080a0f;
+            --card-bg: #121620;
+            --gold: #ffb703;
+            --gold-glow: #fb8500;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #232a3b;
+            --gold-gradient: linear-gradient(135deg, #ffb703, #fb8500);
+            --telegram-gradient: linear-gradient(135deg, #0088cc, #24A1DE);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Vazirmatn', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        header {
+            background: rgba(8, 10, 15, 0.95);
+            backdrop-filter: blur(12px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            font-size: 2rem;
+            color: var(--gold);
+        }
+
+        .brand-name {
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: var(--text-light);
+            letter-spacing: 0.5px;
+        }
+
+        .brand-sub {
+            font-size: 0.75rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .lang-btn {
+            background: var(--gold-gradient);
+            color: #000;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: 800;
+            cursor: pointer;
+            font-size: 0.85rem;
+            box-shadow: 0 4px 15px rgba(255, 183, 3, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 183, 3, 0.5);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            padding: 60px 20px 40px;
+            text-align: center;
+            background: radial-gradient(circle at top, rgba(255, 183, 3, 0.12) 0%, rgba(8, 10, 15, 1) 70%);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .profile-img-container {
+            width: 170px;
+            height: 170px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            padding: 4px;
+            background: var(--gold-gradient);
+            box-shadow: 0 0 35px rgba(255, 183, 3, 0.6);
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            background-color: var(--card-bg);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 183, 3, 0.1);
+            border: 1px solid var(--gold);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 5px;
+            background: linear-gradient(180deg, #fff 0%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--gold);
+            font-weight: 800;
+            margin-bottom: 25px;
+        }
+
+        /* Hero Social Links Header */
+        .social-buttons-hero {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .btn-telegram {
+            background: var(--telegram-gradient);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 136, 204, 0.4);
+            border-radius: 30px;
+            padding: 10px 22px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-telegram:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 136, 204, 0.6);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            max-width: 800px;
+            margin: 0 auto 10px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        .stat-icon {
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 5px;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #fff;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Valetax Broker Box */
+        .broker-card {
+            background: linear-gradient(145deg, #151b28, #0e121b);
+            border: 2px solid var(--gold);
+            border-radius: 24px;
+            padding: 35px;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            margin-bottom: 40px;
+        }
+
+        .broker-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+        }
+
+        .broker-title {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--gold);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 12px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-item i {
+            color: var(--gold);
+            font-size: 1.1rem;
+            margin-top: 3px;
+        }
+
+        .feature-item span {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 14px;
+            font-weight: 800;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-gold {
+            background: var(--gold-gradient);
+            color: #000;
+            box-shadow: 0 5px 20px rgba(255, 183, 3, 0.3);
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 183, 3, 0.5);
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: #fff;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            background: #040508;
+            border-top: 1px solid var(--border-color);
+            padding: 30px 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 1.7rem; }
+            .btn { width: 100%; justify-content: center; }
+            .broker-card { padding: 20px; }
+            .social-buttons-hero { flex-direction: column; }
+            .btn-telegram { width: 100%; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="brand-box">
+            <i class="fa-solid fa-coins brand-icon"></i>
+            <div>
+                <div class="brand-name">ZiNDAN <span style="color: var(--gold);">Gold Chaser</span></div>
+                <div class="brand-sub" id="txt-sub">👑 Father Of Gold - باوکی گۆڵد</div>
+            </div>
+        </div>
+        <button class="lang-btn" onclick="toggleLang()" id="btn-lang">عەرەبی 🇮🇶</button>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="profile-img-container">
+            <!-- لینکی ڕاستەوخۆی وێنە نوێیەکەت -->
+            <img src="https://i.postimg.cc/mD8ZJ2k4/zindan.jpg" alt="ZiNDAN The Gold Chaser" class="profile-img">
+        </div>
+
+        <div class="hero-badge">
+            <i class="fa-solid fa-crown"></i>
+            <span id="txt-badge">گەورەترین کەناڵی شیکاری و سیگناڵی زێڕ</span>
+        </div>
+
+        <h1>ZiNDAN The Gold Chaser</h1>
+        <div class="hero-subtitle" id="hero-sub">Father Of Gold 😍 باوکی گۆڵد</div>
+
+        <!-- Telegram Links Box -->
+        <div class="social-buttons-hero">
+            <a href="https://t.me/ZiNDANSNRZ" target="_blank" class="btn-telegram" id="btn-tg-channel">
+                <i class="fa-brands fa-telegram"></i> <span>جۆینی کەناڵی فەرمی تێلیگرام</span>
+            </a>
+            <a href="https://t.me/zindan_xurshid" target="_blank" class="btn-telegram" style="background: linear-gradient(135deg, #1d9bf0, #0088cc);" id="btn-tg-owner">
+                <i class="fa-solid fa-user-gear"></i> <span>پەیوەندی ڕاستەوخۆ (ZiNDAN)</span>
+            </a>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <i class="fa-solid fa-bolt stat-icon"></i>
+                <div class="stat-number">5-15</div>
+                <div class="stat-label" id="st1">سیگناڵی ڕۆژانە 🔥</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" style="color: var(--gold);">87%+</div>
+                <div class="stat-label" id="st2">ڕێژەی سەرکەوتن 💰</div>
+            </div>
+            <div class="stat-card">
+                <i class="fa-solid fa-trophy stat-icon"></i>
+                <div class="stat-number">15,000+</div>
+                <div class="stat-label" id="st3">پیپ مانگانە 🥇</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+
+        <!-- Valetax Broker Section -->
+        <div class="broker-card">
+            <div class="broker-header">
+                <div>
+                    <div class="broker-title" id="broker-h">سودەکانی ڤالێتاکس (Valetax) بۆ ئەزموونی بازرگانی پیشەیی! 👇</div>
+                    <p style="color: var(--text-muted); font-size: 0.85rem;" id="broker-sub">خۆتۆمارکردن لە باشترین بروکاری جیهانی بە مۆڵەتی فەرمی</p>
+                </div>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-item">
+                    <i class="fa-solid fa-certificate"></i>
+                    <span id="f1"><strong>مۆڵەتی جیهانی:</strong> مۆریس لە بەریتانیا & سانت ڤینسێنت</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-globe"></i>
+                    <span id="f2"><strong>لقی نێودەوڵەتی:</strong> مالیزیا، سەنگافورە، پۆڵەندا، میسر، ئەندەنوسیا، بێلاڕوس</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-laptop-code"></i>
+                    <span id="f3"><strong>پلاتفۆرمی بازرگانی:</strong> MT4, MT5, WebTrade</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span id="f4"><strong>بازرگانی گشتگیر:</strong> هەموو بازاڕە داراییەکان (ئەمریکی، ئەوروپی، و ئاسیا)</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-arrow-trend-up"></i>
+                    <span id="f5"><strong>لیڤەرج:</strong> تا 1:2000</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-hand-holding-heart"></i>
+                    <span id="f6"><strong>حساباتی ئیسلامی:</strong> بێ کرێی شەوانە / سواپ (Swap Free)</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-headset"></i>
+                    <span id="f7"><strong>پشتیوانی:</strong> 24/7 بە زمانی کوردی و عەرەبی</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span id="f8"><strong>کەمترین ڕادەی دانان و کێشانەوە:</strong> تەنها $40 (پارەی ناوخۆیی & USDT)</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-mobile-screen"></i>
+                    <span id="f9"><strong>Valetax App:</strong> هەموو ئامرازەکانی بازرگانیت لە یەک ئەپدا</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-users"></i>
+                    <span id="f10"><strong>بازرگانی کۆپی:</strong> وەبەرهێنان لەگەڵ بازرگانانی سەرەکی</span>
+                </div>
+                <div class="feature-item">
+                    <i class="fa-solid fa-id-card"></i>
+                    <span id="f11"><strong>ناونوسینی ئاسان:</strong> تەنها بە ناسنامەکەت دەستبەجێ ئەکاونتەکەت چالاک دەبێت! 💳</span>
+                </div>
+            </div>
+
+            <div class="btn-group">
+                <a href="https://ma.valetax.com/p/3064312" target="_blank" class="btn btn-gold" id="btn-reg">
+                    <i class="fa-solid fa-user-plus"></i> <span>خۆتۆمارکردنی ڕاستەوخۆ لە Valetax</span>
+                </a>
+                <a href="https://wa.me/9647701516029" target="_blank" class="btn btn-whatsapp" id="btn-contact">
+                    <i class="fa-brands fa-whatsapp"></i> <span>پەیوەندی لە واتسئەپ</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 ZiNDAN The Gold Chaser. All rights reserved.</p>
+        <p style="margin-top: 5px; font-size: 0.75rem; color: #64748b;" id="txt-disclaimer">ئاگاداری: بازرگانیکردن لە فۆڕێکس مەترسی دارایی تێدایە. هەمیشە بە لێپرسراویەتییەوە مامەڵە بکە.</p>
+    </footer>
+
+    <!-- Multilingual Script -->
+    <script>
+        let currentLang = 'ckb';
+
+        const dict = {
+            ckb: {
+                sub: "👑 Father Of Gold - باوکی گۆڵد",
+                langBtn: "عەرەبی 🇮🇶",
+                badge: "گەورەترین کەناڵی شیکاری و سیگناڵی زێڕ",
+                heroSub: "Father Of Gold 😍 باوکی گۆڵد",
+                tgChannel: "جۆینی کەناڵی فەرمی تێلیگرام",
+                tgOwner: "پەیوەندی ڕاستەوخۆ (ZiNDAN)",
+                st1: "سیگناڵی ڕۆژانە 🔥",
+                st2: "ڕێژەی سەرکەوتن 💰",
+                st3: "پیپ مانگانە 🥇",
+                brokerH: "سودەکانی ڤالێتاکس (Valetax) بۆ ئەزموونی بازرگانی پیشەیی! 👇",
+                brokerSub: "خۆتۆمارکردن لە باشترین بروکاری جیهانی بە مۆڵەتی فەرمی",
+                f1: "<strong>مۆڵەتی جیهانی:</strong> مۆریس لە بەریتانیا & سانت ڤینسێنت",
+                f2: "<strong>لقی نێودەوڵەتی:</strong> مالیزیا، سەنگافورە، پۆڵەندا، میسر، ئەندەنوسیا، بێلاڕوس",
+                f3: "<strong>پلاتفۆرمی بازرگانی:</strong> MT4, MT5, WebTrade",
+                f4: "<strong>بازرگانی گشتگیر:</strong> هەموو بازاڕە داراییەکان (ئەمریکی، ئەوروپی، و ئاسیا)",
+                f5: "<strong>لیڤەرج:</strong> تا 1:2000",
+                f6: "<strong>حساباتی ئیسلامی:</strong> بێ کرێی شەوانە / سواپ (Swap Free)",
+                f7: "<strong>پشتیوانی:</strong> 24/7 بە زمانی کوردی و عەرەبی",
+                f8: "<strong>کەمترین ڕادەی دانان و کێشانەوە:</strong> تەنها $40 (پارەی ناوخۆیی & USDT)",
+                f9: "<strong>Valetax App:</strong> هەموو ئامرازەکانی بازرگانیت لە یەک ئەپدا",
+                f10: "<strong>بازرگانی کۆپی:</strong> وەبەرهێنان لەگەڵ بازرگانانی سەرەکی",
+                f11: "<strong>ناونوسینی ئاسان:</strong> تەنها بە ناسنامەکەت دەستبەجێ ئەکاونتەکەت چالاک دەبێت! 💳",
+                btnReg: "خۆتۆمارکردنی ڕاستەوخۆ لە Valetax",
+                btnContact: "پەیوەندی لە واتسئەپ",
+                disclaimer: "ئاگاداری: بازرگانیکردن لە فۆڕێکس مەترسی دارایی تێدایە. هەمیشە بە لێپرسراویەتییەوە مامەڵە بکە."
+            },
+            ar: {
+                sub: "👑 Father Of Gold - أبولذهب",
+                langBtn: "کوردی ☀️",
+                badge: "أكبر قناة للتحليلات وتوصيات الذهب",
+                heroSub: "Father Of Gold 😍 أبولذهب",
+                tgChannel: "الانضمام للقناة الرسمية على التليجرام",
+                tgOwner: "التواصل المباشر مع (ZiNDAN)",
+                st1: "توصية يومية 🔥",
+                st2: "نسبة النجاح 💰",
+                st3: "نقطة شهرياً 🥇",
+                brokerH: "مزايا فاليتكس (Valetax) لتجربة تداول احترافية! 👇",
+                brokerSub: "التسجيل في أفضل بروكر عالمي بتراخيص رسمية",
+                f1: "<strong>التراخيص العالمية:</strong> موريشيوس في المملكة المتحدة & سانت فينسنت",
+                f2: "<strong>الفروع الدولية:</strong> ماليزيا، سنغافورة، بولندا، مصر، إندونيسيا، بيلاروسيا",
+                f3: "<strong>منصات التداول:</strong> MT4, MT5, WebTrade",
+                f4: "<strong>تداول شامل:</strong> جميع الأسواق المالية (الأسهم، العملات، والسلع)",
+                f5: "<strong>الرافعة المالية:</strong> تصل إلى 1:2000",
+                f6: "<strong>حسابات إسلامية:</strong> خالية تماماً من فوائد التبيت (Swap Free)",
+                f7: "<strong>الدعم الفني:</strong> 24/7 باللغة العربية والكردية",
+                f8: "<strong>الحد الأدنى للإيداع والسحب:</strong> 40$ فقط (عبر USDT أو الإيداع المحلي)",
+                f9: "<strong>Valetax App:</strong> جميع أدوات التداول في تطبيق واحد",
+                f10: "<strong>خدمة التداول النسخي (Copy Trade):</strong> استثمر مع كبار المتداولين",
+                f11: "<strong>تسجيل سريع:</strong> تفعيل فوري فقط باستخدام الهوية الوطنية! 💳",
+                btnReg: "سجّل الآن مباشرة في Valetax",
+                btnContact: "تواصل عبر الواتساب",
+                disclaimer: "تنبيه: التداول في سوق الفوركس ينطوي على مخاطر مالية. تداول دائماً بمسؤولية."
+            }
+        };
+
+        function toggleLang() {
+            currentLang = currentLang === 'ckb' ? 'ar' : 'ckb';
+            const l = dict[currentLang];
+
+            document.getElementById('txt-sub').innerText = l.sub;
+            document.getElementById('btn-lang').innerText = l.langBtn;
+            document.getElementById('txt-badge').innerText = l.badge;
+            document.getElementById('hero-sub').innerText = l.heroSub;
+
+            document.querySelector('#btn-tg-channel span').innerText = l.tgChannel;
+            document.querySelector('#btn-tg-owner span').innerText = l.tgOwner;
+
+            document.getElementById('st1').innerText = l.st1;
+            document.getElementById('st2').innerText = l.st2;
+            document.getElementById('st3').innerText = l.st3;
+
+            document.getElementById('broker-h').innerText = l.brokerH;
+            document.getElementById('broker-sub').innerText = l.brokerSub;
+
+            document.getElementById('f1').innerHTML = l.f1;
+            document.getElementById('f2').innerHTML = l.f2;
+            document.getElementById('f3').innerHTML = l.f3;
+            document.getElementById('f4').innerHTML = l.f4;
+            document.getElementById('f5').innerHTML = l.f5;
+            document.getElementById('f6').innerHTML = l.f6;
+            document.getElementById('f7').innerHTML = l.f7;
+            document.getElementById('f8').innerHTML = l.f8;
+            document.getElementById('f9').innerHTML = l.f9;
+            document.getElementById('f10').innerHTML = l.f10;
+            document.getElementById('f11').innerHTML = l.f11;
+
+            document.querySelector('#btn-reg span').innerText = l.btnReg;
+            document.querySelector('#btn-contact span').innerText = l.btnContact;
+            document.getElementById('txt-disclaimer').innerText = l.disclaimer;
+        }
+    </script>
+</body>
+</html>
