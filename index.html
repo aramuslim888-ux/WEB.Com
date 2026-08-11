@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>San: Grand Theft Auto Style 🎮</title>
+    <title>GTA: San Andreas - Web Edition 🚗</title>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
             font-family: 'Vazirmatn', sans-serif;
-            background-color: #050508;
+            background-color: #0b0f19;
             color: #fff;
             margin: 0;
             overflow: hidden;
@@ -20,29 +20,43 @@
             height: 100vh;
         }
         canvas {
-            background: linear-gradient(to bottom, #111827, #1f2937);
-            border: 3px solid #facc15;
-            border-radius: 12px;
-            box-shadow: 0 0 30px rgba(250, 204, 21, 0.3);
+            background: #27272a;
+            border: 3px solid #eab308;
+            border-radius: 16px;
+            box-shadow: 0 0 35px rgba(234, 179, 8, 0.3);
         }
     </style>
 </head>
 <body>
 
-    <div class="text-center mb-2">
-        <h1 class="text-xl font-black text-yellow-400 tracking-wider">GTA: San Street 🚗💨</h1>
-        <p class="text-xs text-gray-400" id="levelInfo">مەرحەلەی ١: شەقامی ئازاد</p>
+    <div class="text-center mb-1">
+        <h1 class="text-base font-black text-yellow-400">GTA: San Andreas (Street Life) 🌴</h1>
+        <p class="text-[11px] text-gray-300" id="statusText">بارودۆخ: بە پێ دەڕوات 🚶‍♂️</p>
     </div>
 
-    <canvas id="gameCanvas" width="400" height="250"></canvas>
+    <canvas id="gameCanvas" width="380" height="340"></canvas>
 
-    <div class="mt-3 flex gap-3">
-        <button onclick="jump()" class="px-5 py-2.5 bg-yellow-500 hover:bg-yellow-400 text-black font-black rounded-xl shadow-lg text-xs transition active:scale-95">
-            بازدان ⬆️ (Jump)
-        </button>
-        <button onclick="toggleCar()" id="carBtn" class="px-5 py-2.5 bg-red-600 hover:bg-red-500 text-white font-black rounded-xl shadow-lg text-xs transition active:scale-95">
-            سواری سەیارە 🏎️
-        </button>
+    <!-- کۆنتڕۆڵی یاری وەک مۆبایل -->
+    <div class="mt-2 flex justify-between w-[380px] px-2">
+        <!-- دەستە چەپ: ڕۆیشتن / ڕاکردن و سواربوون -->
+        <div class="flex flex-col gap-1.5">
+            <button onclick="enterCar()" class="px-4 py-2 bg-yellow-500 hover:bg-yellow-400 text-black font-black rounded-xl shadow text-xs active:scale-95 transition">
+                🚗 سوار/دابەزین
+            </button>
+            <button onmousedown="startMove()" onmouseup="stopMove()" ontouchstart="startMove()" ontouchend="stopMove()" class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-black rounded-xl shadow text-xs active:scale-95 transition">
+                🏃‍♂️ ڕاکردن (چەپ)
+            </button>
+        </div>
+
+        <!-- دەستە ڕاست: پێشەوە و دواوە -->
+        <div class="flex flex-col gap-1.5">
+            <button onmousedown="accelerate(1)" onmouseup="stopAccelerate()" ontouchstart="accelerate(1)" ontouchend="stopAccelerate()" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl shadow text-xs active:scale-95 transition">
+                ⬆️ پێشەوە
+            </button>
+            <button onmousedown="accelerate(-1)" onmouseup="stopAccelerate()" ontouchstart="accelerate(-1)" ontouchend="stopAccelerate()" class="px-5 py-2 bg-red-600 hover:bg-red-500 text-white font-black rounded-xl shadow text-xs active:scale-95 transition">
+                ⬇️ دواوە
+            </button>
+        </div>
     </div>
 
     <script>
@@ -50,160 +64,151 @@
         const ctx = canvas.getContext("2d");
 
         let score = 0;
-        let level = 1;
         let isGameOver = false;
 
         const sanImg = new Image();
         sanImg.src = 'san.PNG';
 
         let player = {
-            x: 40,
-            y: 150,
-            size: 45,
-            dy: 0,
-            jumpPower: -10,
-            gravity: 0.5,
-            grounded: true,
-            inCar: false
+            x: 180,
+            y: 250,
+            size: 35,
+            speed: 3,
+            inCar: false,
+            dir: 0 // 0: پێشەوە، 1: چەپ، 2: ڕاست
         };
 
-        let obstacles = [];
-        let obstacleTimer = 0;
+        let cars = [
+            { x: 60, y: 50, width: 35, height: 60, color: "#ef4444", speed: 1.5 },
+            { x: 280, y: 180, width: 35, height: 60, color: "#3b82f6", speed: -1.5 }
+        ];
 
-        function jump() {
-            if (player.grounded && !isGameOver) {
-                player.dy = player.jumpPower;
-                player.grounded = false;
-            }
-            if (isGameOver) {
-                resetGame();
-            }
+        let movingUp = false;
+        let movingDown = false;
+        let movingLeft = false;
+
+        function startMove() {
+            player.x -= 15;
+            if(player.x < 20) player.x = 20;
         }
 
-        function toggleCar() {
-            if (!isGameOver) {
-                player.inCar = !player.inCar;
-                const btn = document.getElementById('carBtn');
-                if (player.inCar) {
-                    btn.innerText = "دابەزین لە سەیارە 🏃‍♂️";
-                    btn.className = "px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-black rounded-xl shadow-lg text-xs transition active:scale-95";
-                    document.getElementById('levelInfo').innerText = "مەرحەلەی خێرایی سەیارە 🔥";
-                } else {
-                    btn.innerText = "سواری سەیارە 🏎️";
-                    btn.className = "px-5 py-2.5 bg-red-600 hover:bg-red-500 text-white font-black rounded-xl shadow-lg text-xs transition active:scale-95";
-                    document.getElementById('levelInfo').innerText = "پیاسەکردن لە شەقامدا 🚶‍♂️";
+        function accelerate(val) {
+            if(val === 1) movingUp = true;
+            if(val === -1) movingDown = true;
+        }
+
+        function stopAccelerate() {
+            movingUp = false;
+            movingDown = false;
+        }
+
+        function enterCar() {
+            // پشکنینی نزیکی لە سەیارەکان بۆ سواربوون
+            cars.forEach(car => {
+                let dist = Math.hypot(player.x - car.x, player.y - car.y);
+                if(dist < 50) {
+                    player.inCar = !player.inCar;
+                    document.getElementById('statusText').innerText = player.inCar ? "بارودۆخ: سواری سەیارە بوو! 🏎️" : "بارودۆخ: بە پێ دەڕوات 🚶‍♂️";
                 }
-            }
+            });
         }
-
-        window.addEventListener('keydown', (e) => {
-            if (e.code === 'Space' || e.code === 'ArrowUp') {
-                jump();
-            } else if (e.code === 'KeyC') {
-                toggleCar();
-            }
-        });
 
         function update() {
-            if (isGameOver) return;
+            if(isGameOver) return;
 
-            player.dy += player.gravity;
-            player.y += player.dy;
+            // جووڵەی سەیارەکان لە شەقامدا
+            cars.forEach(car => {
+                car.y += car.speed;
+                if(car.y > canvas.height) car.y = -70;
+                if(car.y < -70) car.y = canvas.height;
 
-            if (player.y > 150) {
-                player.y = 150;
-                player.dy = 0;
-                player.grounded = true;
-            }
+                // پشکنینی پێکدادان ئەگەر بە پێ یان سەیارە بێت
+                let pWidth = player.inCar ? 35 : player.size;
+                let pHeight = player.inCar ? 60 : player.size;
 
-            obstacleTimer++;
-            let spawnInterval = level === 1 ? 100 : level === 2 ? 75 : 55;
-            
-            if (obstacleTimer > spawnInterval) {
-                obstacles.push({
-                    x: canvas.width,
-                    y: 160,
-                    width: player.inCar ? 30 : 20,
-                    height: player.inCar ? 35 : 40,
-                    speed: (level === 1 ? 4 : level === 2 ? 5.5 : 7) * (player.inCar ? 1.4 : 1)
-                });
-                obstacleTimer = 0;
-            }
-
-            for (let i = obstacles.length - 1; i >= 0; i--) {
-                obstacles[i].x -= obstacles[i].speed;
-
-                let pWidth = player.inCar ? 65 : player.size;
-                let pHeight = player.inCar ? 35 : player.size;
-
-                if (
-                    player.x < obstacles[i].x + obstacles[i].width &&
-                    player.x + pWidth > obstacles[i].x &&
-                    player.y < obstacles[i].y + obstacles[i].height &&
-                    player.y + pHeight > obstacles[i].y
+                if(
+                    player.x < car.x + car.width &&
+                    player.x + pWidth > car.x &&
+                    player.y < car.y + car.height &&
+                    player.y + pHeight > car.y
                 ) {
-                    isGameOver = true;
-                }
-
-                if (obstacles[i].x + obstacles[i].width < 0) {
-                    obstacles.splice(i, 1);
-                    score += player.inCar ? 25 : 10;
-
-                    if (score >= 50 && score < 100) {
-                        level = 2;
-                        document.getElementById('levelInfo').innerText = "مەرحەلەی ٢: پۆلیس لە دواوەیە! 🚨";
-                    } else if (score >= 100) {
-                        level = 3;
-                        document.getElementById('levelInfo').innerText = "مەرحەلەی ٣: ستایلی گەورەی GTA 🌟";
+                    // ئەگەر لەناو سەیارەدا نەبێت و پێکدادان ڕووبدات واستد دەبێت
+                    if(!player.inCar) {
+                        isGameOver = true;
                     }
                 }
-            }
+            });
+
+            if(movingUp) player.y -= player.inCar ? 4 : 2.5;
+            if(movingDown) player.y += player.inCar ? 3 : 2;
+
+            // سنوری شاشە
+            if(player.y < 10) player.y = 10;
+            if(player.y > canvas.height - 50) player.y = canvas.height - 50;
+
+            score++;
+        }
+
+        function drawMap() {
+            // زەوی و شەقامەکان
+            ctx.fillStyle = "#1e293b";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // شەقامی سەرەکی (تۆنی خۆڵەمێشی GTA)
+            ctx.fillStyle = "#334155";
+            ctx.fillRect(40, 0, 300, canvas.height);
+
+            // هێڵی ناوەڕاستی شەقام
+            ctx.strokeStyle = "#eab308";
+            ctx.setLineDash([15, 15]);
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(190, 0); ctx.lineTo(190, canvas.height);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // کێشانی خانووەکان لە لای چەپ و ڕاست (ستایلی گیتا)
+            ctx.fillStyle = "#78716c";
+            // خانووی چەپ
+            ctx.fillRect(0, 0, 40, 110);
+            ctx.fillRect(0, 150, 40, 130);
+            // خانووی ڕاست
+            ctx.fillRect(340, 0, 40, 140);
+            ctx.fillRect(340, 190, 40, 150);
+
+            // دەرگاو پەنجەرەی خانووەکان بۆ جوانی گرافیکەکە
+            ctx.fillStyle = "#292524";
+            ctx.fillRect(10, 30, 20, 30);
+            ctx.fillRect(350, 50, 20, 30);
         }
 
         function draw() {
-            // شاشەی سەرەکی و شەقامەکە
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // کێشانی هێڵی شەقام (شێوازی GTA)
-            ctx.fillStyle = "#1f2937";
-            ctx.fillRect(0, 195, canvas.width, 55);
-            ctx.strokeStyle = "#facc15";
-            ctx.setLineDash([10, 10]);
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            ctx.moveTo(0, 222);
-            ctx.lineTo(canvas.width, 222);
-            ctx.stroke();
-            ctx.setLineDash([]); // گەڕاندنەوەی هێڵ بۆ باری ئاسایی
+            drawMap();
 
-            if (player.inCar) {
-                // سەیارەی وەک GTA
-                ctx.fillStyle = "#ef4444";
-                ctx.fillRect(player.x, player.y + 12, 65, 30);
+            // کێشانی سەیارەکانی ناو شەقام
+            cars.forEach(car => {
+                ctx.fillStyle = car.color;
+                ctx.fillRect(car.x, car.y, car.width, car.height);
+                // شووشەی سەیارە
+                ctx.fillStyle = "#0f172a";
+                ctx.fillRect(car.x + 5, car.y + 10, 25, 12);
+                ctx.fillRect(car.x + 5, car.y + 38, 25, 12);
+            });
+
+            // کێشانی کەسایەتی San (یان سەیارەکەی کاتێک سوار دەبێت)
+            if(player.inCar) {
+                ctx.fillStyle = "#eab308";
+                ctx.fillRect(player.x, player.y, 35, 60);
                 ctx.fillStyle = "#000";
-                ctx.beginPath();
-                ctx.arc(player.x + 15, player.y + 42, 8, 0, Math.PI * 2);
-                ctx.arc(player.x + 50, player.y + 42, 8, 0, Math.PI * 2);
-                ctx.fill();
-
-                // ڕوخساری San لەسەر سەیارەکە
-                ctx.save();
-                ctx.beginPath();
-                ctx.arc(player.x + 32, player.y + 10, 15, 0, Math.PI * 2);
-                ctx.closePath();
-                ctx.clip();
-                if (sanImg.complete && sanImg.naturalWidth !== 0) {
-                    ctx.drawImage(sanImg, player.x + 17, player.y - 5, 30, 30);
-                }
-                ctx.restore();
+                ctx.fillRect(player.x + 5, player.y + 12, 25, 15);
             } else {
-                // کەسایەتی بە پێ بە دەموچاوی San
                 ctx.save();
                 ctx.beginPath();
-                ctx.arc(player.x + player.size / 2, player.y + player.size / 2, player.size / 2, 0, Math.PI * 2);
+                ctx.arc(player.x + player.size/2, player.y + player.size/2, player.size/2, 0, Math.PI * 2);
                 ctx.closePath();
                 ctx.clip();
-
                 if (sanImg.complete && sanImg.naturalWidth !== 0) {
                     ctx.drawImage(sanImg, player.x, player.y, player.size, player.size);
                 } else {
@@ -212,57 +217,42 @@
                 }
                 ctx.restore();
 
-                ctx.beginPath();
-                ctx.arc(player.x + player.size / 2, player.y + player.size / 2, player.size / 2, 0, Math.PI * 2);
-                ctx.strokeStyle = "#facc15";
-                ctx.lineWidth = 2;
-                ctx.stroke();
-
                 // نوسینی ناوی San لەسەری
                 ctx.fillStyle = "#facc15";
-                ctx.font = "bold 11px Vazirmatn";
-                ctx.fillText("San", player.x + 12, player.y - 6);
+                ctx.font = "bold 10px Vazirmatn";
+                ctx.fillText("San", player.x + 8, player.y - 4);
             }
 
-            // ئاستەنگەکان (ماشینی تر یان بەربەست)
-            ctx.fillStyle = "#38bdf8";
-            obstacles.forEach(obs => {
-                ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
-            });
-
-            // نیشاندانی خاڵ و ستایلی مینیماپی GTA
+            // نیشاندانی خاڵەکان
             ctx.fillStyle = "#ffffff";
-            ctx.font = "bold 13px Vazirmatn";
-            ctx.fillText(`خاڵ (Score): ${score}`, 15, 25);
+            ctx.font = "bold 12px Vazirmatn";
+            ctx.fillText(`Score: ${Math.floor(score/10)}`, 15, 25);
 
-            if (isGameOver) {
-                ctx.fillStyle = "rgba(0, 0, 0, 0.9)";
+            if(isGameOver) {
+                ctx.fillStyle = "rgba(0, 0, 0, 0.88)";
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
                 ctx.fillStyle = "#ef4444";
-                ctx.font = "bold 20px Vazirmatn";
+                ctx.font = "bold 22px Vazirmatn";
                 ctx.textAlign = "center";
                 ctx.fillText("WASTED 💀", canvas.width / 2, canvas.height / 2 - 15);
 
-                ctx.fillStyle = "#facc15";
+                ctx.fillStyle = "#eab308";
                 ctx.font = "12px Vazirmatn";
-                ctx.fillText("بۆ دوبارە دەستپێکردنەوە کلیک بکە", canvas.width / 2, canvas.height / 2 + 15);
+                ctx.fillText("کلیک بکە بۆ دوبارە دەستپێکردنەوە", canvas.width / 2, canvas.height / 2 + 15);
                 ctx.textAlign = "left";
             }
         }
 
-        function resetGame() {
-            score = 0;
-            level = 1;
-            obstacles = [];
-            isGameOver = false;
-            player.inCar = false;
-            document.getElementById('carBtn').innerText = "سواری سەیارە 🏎️";
-            document.getElementById('carBtn').className = "px-5 py-2.5 bg-red-600 hover:bg-red-500 text-white font-black rounded-xl shadow-lg text-xs transition active:scale-95";
-            document.getElementById('levelInfo').innerText = "مەرحەلەی ١: شەقامی ئازاد";
-            player.y = 150;
-            player.dy = 0;
-        }
+        canvas.addEventListener('click', () => {
+            if(isGameOver) {
+                score = 0;
+                isGameOver = false;
+                player.x = 180;
+                player.y = 250;
+                player.inCar = false;
+            }
+        });
 
         function loop() {
             update();
