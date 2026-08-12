@@ -60,6 +60,8 @@ button{
   user-select:none;
 }
 
+/* HUD */
+
 #hud{
   position:fixed;
   top:calc(env(safe-area-inset-top) + 12px);
@@ -89,6 +91,8 @@ button{
   opacity:.72;
   margin-left:4px;
 }
+
+/* INTRO */
 
 #intro{
   position:fixed;
@@ -148,6 +152,8 @@ button{
   box-shadow:none;
 }
 
+/* SAN */
+
 #san{
   position:fixed;
   width:82px;
@@ -168,12 +174,16 @@ button{
   }
 }
 
+/* CONTROLS */
+
 #controls{
   position:fixed;
   inset:0;
   z-index:80;
   pointer-events:none;
 }
+
+/* JOYSTICK */
 
 #joystick{
   position:absolute;
@@ -212,6 +222,8 @@ button{
   transition:transform .05s linear;
 }
 
+/* ACTIONS */
+
 #actionArea{
   position:absolute;
   right:max(18px,env(safe-area-inset-right) + 18px);
@@ -241,6 +253,8 @@ button{
   background:rgba(108,76,255,.85);
 }
 
+/* IDEA */
+
 #levelIdea{
   position:fixed;
   left:50%;
@@ -259,6 +273,8 @@ button{
   opacity:.94;
   backdrop-filter:blur(8px);
 }
+
+/* WIN */
 
 #win{
   position:fixed;
@@ -317,6 +333,8 @@ button{
   color:#fff;
 }
 
+/* FINISH */
+
 #finishBanner{
   position:fixed;
   top:50%;
@@ -352,6 +370,8 @@ button{
   }
 }
 
+/* SMALL STATUS */
+
 #danger{
   position:fixed;
   left:50%;
@@ -372,6 +392,17 @@ button{
 #danger.show{
   opacity:1;
 }
+
+/* AFTER LEVEL 15: NO GUIDE TEXT */
+
+body.hardMode #levelIdea{
+  display:none;
+}
+
+body.hardMode #tier{
+  display:none;
+}
+
 </style>
 </head>
 
@@ -379,13 +410,9 @@ button{
 
 <canvas id="game"></canvas>
 
-<!-- Background Music Audio Element -->
-<audio id="bgMusic" loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-</audio>
-
 <div id="intro">
   <div class="introCard">
+
     <h1 class="introTitle">
       SAN<br>
       B AHAMD
@@ -403,10 +430,12 @@ button{
     <button id="start">
       TAP TO BEGIN
     </button>
+
   </div>
 </div>
 
 <div id="hud">
+
   <div class="pill">
     SAN B AHAMD
   </div>
@@ -417,6 +446,7 @@ button{
     / 5000
     <span id="tier"></span>
   </div>
+
 </div>
 
 <img id="san" src="san.PNG" alt="">
@@ -470,7 +500,7 @@ button{
     </p>
 
     <p>
-      تۆ دیار جۆینی گروپی سان FX ـت کردوە 😎
+      تۆ دیار جۆینی گروپی سان FX ـت کردووە 😎
     </p>
 
     <div class="winButtons">
@@ -496,6 +526,10 @@ button{
 <script>
 "use strict";
 
+/* =========================================================
+   SETUP
+========================================================= */
+
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 
@@ -513,26 +547,35 @@ const winText = document.getElementById("winText");
 const finishBanner = document.getElementById("finishBanner");
 const dangerEl = document.getElementById("danger");
 
-const bgMusic = document.getElementById("bgMusic");
-bgMusic.volume = 0.4; // دەتوانیت دەنگەکە کەم و زیاد بکەیت لە 0.0 بۆ 1.0
-
 let W = innerWidth;
 let H = innerHeight;
 
-let DPR = Math.min(window.devicePixelRatio || 1,2);
+let DPR = Math.min(
+  window.devicePixelRatio || 1,
+  2
+);
 
 function resize(){
 
   W = innerWidth;
   H = innerHeight;
 
-  DPR = Math.min(window.devicePixelRatio || 1,2);
+  DPR = Math.min(
+    window.devicePixelRatio || 1,
+    2
+  );
 
-  canvas.width = Math.floor(W * DPR);
-  canvas.height = Math.floor(H * DPR);
+  canvas.width =
+    Math.floor(W * DPR);
 
-  canvas.style.width = W + "px";
-  canvas.style.height = H + "px";
+  canvas.height =
+    Math.floor(H * DPR);
+
+  canvas.style.width =
+    W + "px";
+
+  canvas.style.height =
+    H + "px";
 
   ctx.setTransform(
     DPR,
@@ -544,16 +587,27 @@ function resize(){
   );
 }
 
-window.addEventListener("resize",resize);
+window.addEventListener(
+  "resize",
+  resize
+);
+
 resize();
 
-const SAVE_KEY = "san_b_ahamd_5000_v10";
+/* =========================================================
+   SAVE
+========================================================= */
+
+const SAVE_KEY =
+  "san_b_ahamd_5000_v11";
+
 const TOTAL_LEVELS = 5000;
 
-let level = parseInt(
-  localStorage.getItem(SAVE_KEY) || "1",
-  10
-);
+let level =
+  parseInt(
+    localStorage.getItem(SAVE_KEY) || "1",
+    10
+  );
 
 if(
   !Number.isFinite(level) ||
@@ -563,8 +617,13 @@ if(
   level = 1;
 }
 
+/* =========================================================
+   STATE
+========================================================= */
+
 let playing = false;
 let paused = false;
+
 let cameraX = 0;
 let lastTime = 0;
 
@@ -575,6 +634,10 @@ let stormFlash = 0;
 let screenShake = 0;
 
 let particles = [];
+
+/* =========================================================
+   PLAYER
+========================================================= */
 
 const player = {
 
@@ -605,9 +668,17 @@ const player = {
 
 };
 
+/* =========================================================
+   INPUT
+========================================================= */
+
 const input = {
   x:0
 };
+
+/* =========================================================
+   JOYSTICK
+========================================================= */
 
 const joystick =
   document.getElementById("joystick");
@@ -623,19 +694,22 @@ function setJoystick(e){
     joystick.getBoundingClientRect();
 
   const cx =
-    r.left + r.width / 2;
+    r.left +
+    r.width / 2;
 
   let dx =
     e.clientX - cx;
 
   const max = 42;
 
-  dx = Math.max(
-    -max,
-    Math.min(max,dx)
-  );
+  dx =
+    Math.max(
+      -max,
+      Math.min(max,dx)
+    );
 
-  input.x = dx / max;
+  input.x =
+    dx / max;
 
   stick.style.transform =
     `translateX(${dx}px)`;
@@ -644,7 +718,9 @@ function setJoystick(e){
 function resetJoystick(){
 
   joystickPointer = null;
+
   input.x = 0;
+
   stick.style.transform =
     "translateX(0)";
 }
@@ -654,7 +730,8 @@ joystick.addEventListener(
   e=>{
     e.preventDefault();
 
-    joystickPointer = e.pointerId;
+    joystickPointer =
+      e.pointerId;
 
     joystick.setPointerCapture(
       e.pointerId
@@ -694,6 +771,10 @@ joystick.addEventListener(
   resetJoystick
 );
 
+/* =========================================================
+   BUTTONS
+========================================================= */
+
 const jumpBtn =
   document.getElementById("jumpBtn");
 
@@ -717,16 +798,19 @@ function jump(){
       -player.jumpPower;
 
     player.grounded = false;
-    player.coyote = 0;
 
+    player.coyote = 0;
   }
 }
 
 function dash(){
 
   if(
-    player.dashCooldown > 0
-  ) return;
+    player.dashCooldown > 0 ||
+    !levelData
+  ){
+    return;
+  }
 
   let dir =
     Math.abs(input.x) > .1
@@ -740,12 +824,12 @@ function dash(){
 
   player.dashCooldown =
     Math.max(
-      .3,
-      .8 -
-      levelData.tier.d * .25
+      .32,
+      .82 -
+      levelData.tier.d * .22
     );
 
-  player.invincible = .12;
+  player.invincible = .16;
 
   screenShake = 5;
 }
@@ -784,6 +868,10 @@ nextQuickBtn.addEventListener(
     }
   }
 );
+
+/* =========================================================
+   KEYBOARD
+========================================================= */
 
 window.addEventListener(
   "keydown",
@@ -838,11 +926,17 @@ window.addEventListener(
         "d"
       ].includes(e.key)
     ){
+
       input.x = 0;
+
     }
 
   }
 );
+
+/* =========================================================
+   IPHONE LOCK
+========================================================= */
 
 document.addEventListener(
   "gesturestart",
@@ -868,17 +962,31 @@ document.addEventListener(
   {passive:false}
 );
 
+/* =========================================================
+   RANDOM
+========================================================= */
+
 function random(n){
 
   const x =
     Math.sin(
       n * 12.9898
-    ) * 43758.5453123;
+    ) *
+    43758.5453123;
 
-  return x - Math.floor(x);
+  return x -
+    Math.floor(x);
 }
 
-function clamp(value,min,max){
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function clamp(
+  value,
+  min,
+  max
+){
 
   return Math.max(
     min,
@@ -887,10 +995,13 @@ function clamp(value,min,max){
 }
 
 function lerp(a,b,t){
-  return a + (b-a)*t;
+
+  return a +
+    (b-a)*t;
 }
 
 function chance(seed,p){
+
   return random(seed) < p;
 }
 
@@ -904,7 +1015,12 @@ function rectHit(a,b){
   );
 }
 
-function circleHit(px,py,pr,box){
+function circleHit(
+  px,
+  py,
+  pr,
+  box
+){
 
   const cx =
     clamp(
@@ -934,6 +1050,19 @@ function circleHit(px,py,pr,box){
 
 function difficulty(n){
 
+  /*
+    LEVEL 1–15
+    ORIGINAL TUTORIAL.
+
+    LEVEL 16–1000
+    Difficulty increases slowly and fairly.
+
+    LEVEL 1001–5000
+    Difficulty continues increasing,
+    but never becomes mathematically
+    impossible.
+  */
+
   if(n <= 15){
 
     const p =
@@ -946,15 +1075,26 @@ function difficulty(n){
 
       stage:1,
 
-      name:`فێرکاری ${n}`,
+      name:
+        `فێرکاری ${n}`,
 
-      gap:145-p*28,
-      width:185-p*25,
-      rise:5+p*18,
+      gap:
+        145-p*28,
 
-      spikes:n>=8 ? p*.18 : 0,
-      balls:n>=10 ? p*.15 : 0,
-      cracks:n>=12 ? p*.12 : 0,
+      width:
+        185-p*25,
+
+      rise:
+        5+p*18,
+
+      spikes:
+        n>=8 ? p*.18 : 0,
+
+      balls:
+        n>=10 ? p*.15 : 0,
+
+      cracks:
+        n>=12 ? p*.12 : 0,
 
       moving:0,
       disappearing:0,
@@ -972,25 +1112,68 @@ function difficulty(n){
       fallers:0,
       storms:0,
 
-      ballSpeed:120+p*30,
+      ballSpeed:
+        120+p*30,
 
       speed:245,
       jump:665,
 
-      groups:4+Math.floor(p*3)
+      groups:
+        4+
+        Math.floor(p*3)
 
     };
   }
 
+  /*
+    IMPORTANT:
+
+    16 starts gently hard.
+
+    16 -> 1000:
+    gradual increase.
+
+    1000 -> 5000:
+    continues from 0.72 to 1.00.
+
+    This prevents Level 16 from suddenly
+    becoming impossible.
+  */
+
+  let d;
+
+  if(n<=1000){
+
+    const p =
+      (n-16)/(1000-16);
+
+    d =
+      .045+
+      Math.pow(
+        clamp(p,0,1),
+        1.12
+      )*.675;
+
+  }else{
+
+    const p =
+      (n-1000)/
+      (5000-1000);
+
+    d =
+      .72+
+      Math.pow(
+        clamp(p,0,1),
+        .82
+      )*.28;
+  }
+
   const p =
     clamp(
-      (n-16)/(TOTAL_LEVELS-16),
+      (n-16)/(5000-16),
       0,
       1
     );
-
-  const d =
-    Math.pow(p,.63);
 
   const stage =
     Math.min(
@@ -1010,84 +1193,188 @@ function difficulty(n){
       `ئاستی قورس ${stage}`,
 
     gap:
-      lerp(118,30,d),
+      lerp(
+        118,
+        38,
+        d
+      ),
 
     width:
-      lerp(155,38,d),
+      lerp(
+        155,
+        48,
+        d
+      ),
 
     rise:
-      lerp(12,145,d),
+      lerp(
+        12,
+        105,
+        d
+      ),
 
     spikes:
-      lerp(.18,.97,d),
+      lerp(
+        .12,
+        .78,
+        d
+      ),
 
     balls:
-      lerp(.15,.96,d),
+      lerp(
+        .10,
+        .74,
+        d
+      ),
 
     cracks:
-      lerp(.12,.94,d),
+      lerp(
+        .08,
+        .72,
+        d
+      ),
 
     moving:
-      lerp(.12,.96,d),
+      lerp(
+        .08,
+        .70,
+        d
+      ),
 
     disappearing:
-      lerp(.04,.93,d),
+      lerp(
+        .02,
+        .62,
+        d
+      ),
 
     saws:
-      lerp(.04,.94,d),
+      lerp(
+        .015,
+        .68,
+        d
+      ),
 
     lasers:
-      lerp(.02,.90,d),
+      lerp(
+        .01,
+        .60,
+        d
+      ),
 
     bombs:
-      lerp(.01,.88,d),
+      lerp(
+        .005,
+        .56,
+        d
+      ),
 
     wind:
-      lerp(.02,.86,d),
+      lerp(
+        .01,
+        .55,
+        d
+      ),
 
     ice:
-      lerp(.03,.84,d),
+      lerp(
+        .02,
+        .54,
+        d
+      ),
 
     fake:
-      lerp(.02,.72,d),
+      lerp(
+        .005,
+        .42,
+        d
+      ),
 
     walls:
-      lerp(.01,.78,d),
+      lerp(
+        .005,
+        .45,
+        d
+      ),
 
     springs:
-      lerp(.08,.72,d),
+      lerp(
+        .06,
+        .55,
+        d
+      ),
 
     portals:
-      lerp(.01,.55,d),
+      lerp(
+        .005,
+        .30,
+        d
+      ),
 
     gravity:
-      lerp(.01,.65,d),
+      lerp(
+        .005,
+        .36,
+        d
+      ),
 
     reverse:
-      lerp(.01,.62,d),
+      lerp(
+        .003,
+        .32,
+        d
+      ),
 
     fallers:
-      lerp(.02,.90,d),
+      lerp(
+        .01,
+        .65,
+        d
+      ),
 
     storms:
-      lerp(.05,1,d),
+      lerp(
+        .04,
+        .78,
+        d
+      ),
 
     ballSpeed:
-      lerp(145,470,d),
+      lerp(
+        145,
+        390,
+        d
+      ),
 
     speed:
-      lerp(250,310,d),
+      lerp(
+        250,
+        300,
+        d
+      ),
 
     jump:
-      lerp(650,570,d),
+      lerp(
+        650,
+        590,
+        d
+      ),
 
     groups:
       Math.round(
-        lerp(7,34,d)
+        lerp(
+          7,
+          28,
+          d
+        )
       )
 
   };
 }
+
+/* =========================================================
+   IDEAS
+========================================================= */
 
 const ideas = [
 
@@ -1106,15 +1393,15 @@ const ideas = [
 "💡 لە ئێستاوە یارییەکە جدی دەبێت.",
 "💡 کۆتایی فێرکاری نزیکە.",
 "💡 Level 15 دوا قۆناغی فێرکارییە.",
-"😈 Level 16: هیچ ئاسانکارییەک نییە.",
+"😈 Level 16: ئێستا بەربەستەکان دەست پێدەکەن.",
 "🔥 دوو مەترسی دەتوانن لە یەک کاتدا بێن.",
 "🔥 پلاتفۆرمی جوڵاو دەتوانێت ڕێگاکەت بگۆڕێت.",
 "⚠️ تۆپەکان خێراتر دەبن.",
 "⚠️ saw ـەکان لە ڕێگادا دەسوڕێن.",
-"⚡ laser ـەکان لە کاتێکی دیاریکراودا دەدرەوشێن.",
+"⚡ laser ـەکان پێش شەق warning دەدەن.",
 "💣 bomb لە نزیکتدا مەوەستێت.",
 "🌪 wind دەتوانێت ئاراستەی جوڵانت بگۆڕێت.",
-"🧊 ice واتە کۆنترۆڵکردنت کەمتر دەبێت.",
+"🧊 ice کۆنترۆڵکردنت کەم دەکات.",
 "👻 هەندێک پلاتفۆرم fake ـن.",
 "🧱 دیوارە جوڵاوەکان ڕێگات دەگرن.",
 "🌀 portal دەتوانێت شوێنت بگۆڕێت.",
@@ -1122,171 +1409,16 @@ const ideas = [
 "🔄 هەندێک کات direction دەگۆڕێت.",
 "🌌 gravity دەتوانێت گۆڕانکاری بکات.",
 "☠️ falling block ـەکان چاودێری بکە.",
-"⚡ lightning لە شوێنی خۆی پێشتر warning دەدات.",
-"🔥 warning ـەکان کورتتر دەبن.",
-"💀 safe zone کەمتر دەبێت.",
-"😈 هەموو mechanic ـەکان دەتوانن کۆببنەوە.",
-"🔥 لەو ئاستەدا تەنها reaction بەس نییە.",
-"💀 پێویستە route ـەکە پێشبینی بکەیت.",
-"☠️ Level 1000: یارییەکە دەچێتە قۆناغێکی نوێ.",
-"☠️ Level 2500: هیچ شتێک بە دڵنیایی safe نییە.",
-"☠️ Level 4000: هەموو mechanic ـەکان نزیکەی تەواوی هێزیان هەیە.",
-"💀 Level 4500+: ئەمە تاقیکردنەوەی reaction ـە.",
-"👑 Level 5000: کۆتایی SAN."
+"⚡ lightning لە شوێنی خۆی warning دەدات.",
+"🔥 هەرچەند Level بەرزتر بێت، کات کەمتر دەبێت.",
+"💀 route ـەکە پێشبینی بکە.",
+"😈 mechanic ـەکان دەتوانن پێکەوە بێن.",
+"🔥 لە ئاستە بەرزەکاندا reaction زۆر گرنگە.",
+"👑 Level 1000 قۆناغێکی زۆر قورسە.",
+"☠️ Level 2500 تاقیکردنەوەی reaction ـە.",
+"☠️ Level 4000 هەموو شتێک زۆرتر دەبێت.",
+"💀 Level 5000: کۆتایی SAN."
 ];
-
-/* =========================================================
-   1000 ADVANCED OBSTACLE TYPES
-========================================================= */
-
-const ADVANCED_OBSTACLE_TYPES = 1000;
-
-function makeAdvancedObstacles(n,groundY,finishX,D){
-
-  const result=[];
-
-  if(n<16){
-    return result;
-  }
-
-  const count =
-    Math.min(
-      92,
-      10+
-      Math.floor(D.d*82)
-    );
-
-  const worldLength =
-    Math.max(
-      1200,
-      finishX-520
-    );
-
-  for(let i=0;i<count;i++){
-
-    const seed =
-      n*1000003+
-      i*7919;
-
-    const id =
-      Math.floor(
-        random(seed)*
-        ADVANCED_OBSTACLE_TYPES
-      );
-
-    const type =
-      id%20;
-
-    const progress =
-      count===1
-      ?0
-      :i/(count-1);
-
-    const baseX =
-      520+
-      progress*
-      worldLength;
-
-    const variant =
-      id;
-
-    const size =
-      12+
-      random(seed+1)*
-      (10+D.d*30);
-
-    const speed =
-      80+
-      random(seed+2)*
-      (100+D.d*430);
-
-    const phase =
-      random(seed+3)*
-      Math.PI*2;
-
-    const width =
-      35+
-      random(seed+4)*
-      (45+D.d*70);
-
-    result.push({
-
-      id,
-      type,
-      variant,
-
-      baseX,
-      x:baseX,
-
-      baseY:
-        groundY-
-        40-
-        random(seed+5)*
-        Math.max(
-          20,
-          150+D.rise
-        ),
-
-      y:
-        groundY-
-        40-
-        random(seed+5)*
-        Math.max(
-          20,
-          150+D.rise
-        ),
-
-      w:width,
-      h:
-        18+
-        random(seed+6)*
-        (25+D.d*50),
-
-      size,
-
-      speed,
-
-      phase,
-
-      range:
-        25+
-        random(seed+7)*
-        (45+D.d*150),
-
-      delay:
-        random(seed+8)*
-        1.5,
-
-      timer:
-        random(seed+9)*
-        2,
-
-      active:true,
-
-      triggered:false,
-
-      vy:
-        80+
-        random(seed+10)*
-        200,
-
-      targetX:
-        baseX+
-        (
-          random(seed+11)-.5
-        )*
-        (160+D.d*260),
-
-      dir:
-        random(seed+12)>.5
-        ?1
-        :-1
-
-    });
-  }
-
-  return result;
-}
 
 /* =========================================================
    LEVEL GENERATOR
@@ -1294,13 +1426,17 @@ function makeAdvancedObstacles(n,groundY,finishX,D){
 
 function makeLevel(n){
 
-  const D = difficulty(n);
+  const D =
+    difficulty(n);
 
   const groundY =
     H -
     Math.max(
       125,
-      Math.min(165,H*.18)
+      Math.min(
+        165,
+        H*.18
+      )
     );
 
   const platforms=[];
@@ -1327,41 +1463,59 @@ function makeLevel(n){
   const reverseZones=[];
   const finishGates=[];
 
+  /*
+    NEW:
+    Ten guaranteed, fair obstacle slots
+    from Level 16 onward.
+
+    Each obstacle has a safe gap,
+    warning time and predictable movement.
+  */
+
+  const fairObstacles=[];
+
   platforms.push({
+
     x:-300,
     y:groundY,
     w:520,
     h:80,
     safe:true
+
   });
 
   let x=230;
 
-  const count=D.groups;
+  const count =
+    D.groups;
 
-  for(let i=0;i<count;i++){
+  for(
+    let i=0;
+    i<count;
+    i++
+  ){
 
-    const base=
+    const base =
       n*100000+
       i*997;
 
-    const gap=
+    const gap =
       Math.max(
-        25,
+        32,
         D.gap+
-        random(base+1)*45
+        random(base+1)*38
       );
 
     x+=gap;
 
-    let width=
+    let width =
       Math.max(
-        36,
+        48,
         D.width+
-        random(base+2)*42
+        random(base+2)*38
       );
 
-    let py=
+    let py =
       groundY-
       random(base+3)*D.rise;
 
@@ -1381,16 +1535,25 @@ function makeLevel(n){
     ){
 
       stars.push({
+
         x:x+width*.5,
         y:py-38,
         r:9,
         taken:false
+
       });
 
     }
 
+    /*
+      MOVING PLATFORM
+    */
+
     if(
-      chance(base+10,D.moving)
+      chance(
+        base+10,
+        D.moving
+      )
     ){
 
       movingPlatforms.push({
@@ -1401,21 +1564,26 @@ function makeLevel(n){
         baseX:x+width*.5,
         baseY:py,
 
-        w:Math.max(42,width*.75),
+        w:Math.max(
+          46,
+          width*.75
+        ),
+
         h:18,
 
         range:
-          35+
+          30+
           random(base+11)*
-          (70+D.d*90),
+          (60+D.d*65),
 
         speed:
-          .6+
+          .55+
           random(base+12)*
-          (1.2+D.d*1.6),
+          (1+D.d*1.25),
 
         phase:
-          random(base+13)*Math.PI*2,
+          random(base+13)*
+          Math.PI*2,
 
         axis:
           random(base+14)>.5
@@ -1428,8 +1596,15 @@ function makeLevel(n){
 
     }
 
+    /*
+      DISAPPEARING PLATFORM
+    */
+
     if(
-      chance(base+20,D.disappearing)
+      chance(
+        base+20,
+        D.disappearing
+      )
     ){
 
       disappearingPlatforms.push({
@@ -1440,21 +1615,28 @@ function makeLevel(n){
         h:18,
 
         timer:
-          .8+
-          random(base+21)*1.5,
+          1.15+
+          random(base+21)*1.3,
 
         active:true,
 
         respawn:
-          1.2+
-          random(base+22)*2
+          1.5+
+          random(base+22)*1.5
 
       });
 
     }
 
+    /*
+      FAKE PLATFORM
+    */
+
     if(
-      chance(base+30,D.fake)
+      chance(
+        base+30,
+        D.fake
+      )
     ){
 
       fakePlatforms.push({
@@ -1462,17 +1644,20 @@ function makeLevel(n){
         x:
           x+
           random(base+31)*
-          Math.max(10,width-30),
+          Math.max(
+            10,
+            width-30
+          ),
 
         y:
           py-
-          40-
-          random(base+32)*70,
+          45-
+          random(base+32)*45,
 
         w:
           Math.max(
-            35,
-            width*.6
+            38,
+            width*.55
           ),
 
         h:14,
@@ -1483,19 +1668,26 @@ function makeLevel(n){
 
     }
 
+    /*
+      SPIKES
+    */
+
     if(
-      chance(base+40,D.spikes)
+      chance(
+        base+40,
+        D.spikes
+      )
     ){
 
       const amount =
         n<16
         ?1
         :Math.min(
-          5,
+          4,
           1+
           Math.floor(
-            D.d*4+
-            random(base+41)*2
+            D.d*3+
+            random(base+41)
           )
         );
 
@@ -1510,7 +1702,9 @@ function makeLevel(n){
           x:
             x+
             8+
-            random(base+50+s)*
+            random(
+              base+50+s
+            )*
             Math.max(
               12,
               width-28
@@ -1528,19 +1722,26 @@ function makeLevel(n){
 
     }
 
+    /*
+      BALLS
+    */
+
     if(
-      chance(base+60,D.balls)
+      chance(
+        base+60,
+        D.balls
+      )
     ){
 
-      const amount=
+      const amount =
         n<16
         ?1
         :Math.min(
-          4,
+          3,
           1+
           Math.floor(
-            D.d*3+
-            random(base+61)*2
+            D.d*2+
+            random(base+61)
           )
         );
 
@@ -1555,38 +1756,45 @@ function makeLevel(n){
           x:
             x+
             width+
-            50+
-            random(base+70+b)*120,
+            55+
+            random(
+              base+70+b
+            )*100,
 
           y:
             py-
-            20-
+            28-
             b*18,
 
           r:
-            16+
-            D.d*5,
+            15+
+            D.d*4,
 
           speed:
             D.ballSpeed*
-            (1+b*.12),
+            (1+b*.10),
 
-          minX:x-65,
+          minX:
+            x-50,
 
           maxX:
             x+
             width+
-            260+
-            D.d*130,
+            220+
+            D.d*90,
 
           dir:
-            random(base+80+b)>.5
+            random(
+              base+80+b
+            )>.5
             ?1
             :-1,
 
           targetTimer:
-            .5+
-            random(base+90+b)*1.3
+            .8+
+            random(
+              base+90+b
+            )*1.1
 
         });
 
@@ -1594,8 +1802,15 @@ function makeLevel(n){
 
     }
 
+    /*
+      SAW
+    */
+
     if(
-      chance(base+100,D.saws)
+      chance(
+        base+100,
+        D.saws
+      )
     ){
 
       saws.push({
@@ -1603,29 +1818,29 @@ function makeLevel(n){
         x:
           x+
           width+
-          45+
-          random(base+101)*80,
+          55+
+          random(base+101)*70,
 
         y:
           py-
-          35-
-          random(base+102)*60,
+          40-
+          random(base+102)*45,
 
         r:
-          17+
-          D.d*10,
+          16+
+          D.d*7,
 
         baseY:
           py-
-          35,
+          40,
 
         amp:
-          15+
-          D.d*60,
+          10+
+          D.d*40,
 
         speed:
-          1+
-          D.d*4,
+          .7+
+          D.d*2.5,
 
         phase:
           random(base+103)*6.28
@@ -1634,8 +1849,15 @@ function makeLevel(n){
 
     }
 
+    /*
+      LASER
+    */
+
     if(
-      chance(base+110,D.lasers)
+      chance(
+        base+110,
+        D.lasers
+      )
     ){
 
       lasers.push({
@@ -1643,37 +1865,44 @@ function makeLevel(n){
         x:
           x+
           width+
-          35+
-          random(base+111)*100,
+          40+
+          random(base+111)*70,
 
         y:
           py-
-          15-
-          random(base+112)*70,
+          20-
+          random(base+112)*50,
 
         w:
-          80+
-          random(base+113)*120,
+          70+
+          random(base+113)*90,
 
         h:8,
 
         period:
-          .65+
-          random(base+114)*1.4,
+          1.0+
+          random(base+114)*1.2,
 
         phase:
           random(base+115)*2,
 
         warning:
-          .25+
+          .38+
           random(base+116)*.25
 
       });
 
     }
 
+    /*
+      BOMB
+    */
+
     if(
-      chance(base+120,D.bombs)
+      chance(
+        base+120,
+        D.bombs
+      )
     ){
 
       bombs.push({
@@ -1681,21 +1910,21 @@ function makeLevel(n){
         x:
           x+
           width+
-          70+
-          random(base+121)*120,
+          65+
+          random(base+121)*90,
 
         y:
           py-
-          40-
-          random(base+122)*100,
+          55-
+          random(base+122)*65,
 
         r:
-          13+
-          D.d*5,
+          12+
+          D.d*4,
 
         timer:
-          1+
-          random(base+123)*2,
+          1.8+
+          random(base+123)*1.8,
 
         pulse:0
 
@@ -1703,26 +1932,33 @@ function makeLevel(n){
 
     }
 
+    /*
+      SLOPE
+    */
+
     if(
-      random(base+130)<
-      .12+
-      D.d*.70
+      random(base+130) <
+      .10+
+      D.d*.45
     ){
 
-      const sx=x+width+15;
+      const sx =
+        x+
+        width+
+        15;
 
-      const sw=
+      const sw =
         100+
         random(base+131)*
         Math.max(
-          70,
-          180-D.d*60
+          60,
+          150-D.d*40
         );
 
-      const rise=
-        12+
+      const rise =
+        10+
         random(base+132)*
-        (20+D.rise*.8);
+        (18+D.rise*.55);
 
       slopes.push({
         x:sx,
@@ -1731,7 +1967,9 @@ function makeLevel(n){
         rise
       });
 
-      x=sx+sw;
+      x =
+        sx+
+        sw;
 
     }else{
 
@@ -1739,21 +1977,28 @@ function makeLevel(n){
 
     }
 
+    /*
+      CRACK
+    */
+
     if(
-      chance(base+140,D.cracks)
+      chance(
+        base+140,
+        D.cracks
+      )
     ){
 
-      const amount=
+      const amount =
         Math.min(
-          4,
+          3,
           1+
-          Math.floor(
-            D.d*3
-          )
+          Math.floor(D.d*2)
         );
 
       for(
-        let c=0;c<amount;c++
+        let c=0;
+        c<amount;
+        c++
       ){
 
         cracks.push({
@@ -1779,8 +2024,15 @@ function makeLevel(n){
 
     }
 
+    /*
+      WIND
+    */
+
     if(
-      chance(base+150,D.wind)
+      chance(
+        base+150,
+        D.wind
+      )
     ){
 
       windZones.push({
@@ -1789,16 +2041,16 @@ function makeLevel(n){
 
         y:
           groundY-
-          150-
-          random(base+151)*100,
+          135-
+          random(base+151)*65,
 
         w:
-          100+
-          random(base+152)*120,
+          90+
+          random(base+152)*90,
 
         h:
-          130+
-          random(base+153)*100,
+          120+
+          random(base+153)*70,
 
         force:
           (
@@ -1807,26 +2059,35 @@ function makeLevel(n){
             :-1
           )*
           (
-            100+
-            D.d*400
+            75+
+            D.d*250
           )
 
       });
 
     }
 
+    /*
+      ICE
+    */
+
     if(
-      chance(base+160,D.ice)
+      chance(
+        base+160,
+        D.ice
+      )
     ){
 
       iceZones.push({
 
         x:x-20,
-        y:groundY-25,
+
+        y:
+          groundY-25,
 
         w:
-          80+
-          random(base+161)*150,
+          75+
+          random(base+161)*120,
 
         h:30
 
@@ -1834,8 +2095,15 @@ function makeLevel(n){
 
     }
 
+    /*
+      SPRING
+    */
+
     if(
-      chance(base+170,D.springs)
+      chance(
+        base+170,
+        D.springs
+      )
     ){
 
       springs.push({
@@ -1855,15 +2123,22 @@ function makeLevel(n){
         h:12,
 
         power:
-          720+
-          D.d*520
+          700+
+          D.d*430
 
       });
 
     }
 
+    /*
+      PORTAL
+    */
+
     if(
-      chance(base+180,D.portals)
+      chance(
+        base+180,
+        D.portals
+      )
     ){
 
       portals.push({
@@ -1872,19 +2147,19 @@ function makeLevel(n){
           x+
           width+
           30+
-          random(base+181)*80,
+          random(base+181)*70,
 
         y:
           py-
-          80-
-          random(base+182)*100,
+          70-
+          random(base+182)*70,
 
         r:20,
 
         targetOffset:
-          260+
+          220+
           random(base+183)*
-          600,
+          400,
 
         used:false
 
@@ -1892,8 +2167,15 @@ function makeLevel(n){
 
     }
 
+    /*
+      GRAVITY
+    */
+
     if(
-      chance(base+190,D.gravity)
+      chance(
+        base+190,
+        D.gravity
+      )
     ){
 
       gravityZones.push({
@@ -1902,26 +2184,32 @@ function makeLevel(n){
 
         y:
           py-
-          130,
+          120,
 
         w:
-          90+
-          random(base+191)*130,
+          80+
+          random(base+191)*100,
 
-        h:
-          170,
+        h:150,
 
         scale:
           random(base+192)>.5
-          ? .48
-          : 1.75
+          ? .58
+          : 1.55
 
       });
 
     }
 
+    /*
+      REVERSE
+    */
+
     if(
-      chance(base+200,D.reverse)
+      chance(
+        base+200,
+        D.reverse
+      )
     ){
 
       reverseZones.push({
@@ -1930,75 +2218,73 @@ function makeLevel(n){
 
         y:
           py-
-          160,
+          145,
 
         w:
-          100+
-          random(base+201)*140,
+          90+
+          random(base+201)*100,
 
-        h:
-          180,
+        h:160,
 
         time:
-          1.2+
-          random(base+202)*2.2
+          1+
+          random(base+202)*1.6
 
       });
 
     }
 
+    /*
+      FALLING OBJECT
+    */
+
     if(
-      chance(base+210,D.fallers)
+      chance(
+        base+210,
+        D.fallers
+      )
     ){
 
-      const amount=
-        Math.min(
-          4,
-          1+
-          Math.floor(D.d*3)
-        );
+      fallers.push({
 
-      for(
-        let f=0;
-        f<amount;
-        f++
-      ){
+        x:
+          x+
+          random(base+220)*100,
 
-        fallers.push({
+        y:
+          -120-
+          random(base+230)*250,
 
-          x:
-            x+
-            random(base+220+f)*100,
+        w:
+          20+
+          D.d*9,
 
-          y:
-            -100-
-            random(base+230+f)*300,
+        h:
+          20+
+          D.d*9,
 
-          w:
-            20+
-            D.d*12,
+        vy:
+          100+
+          random(base+240)*150+
+          D.d*180,
 
-          h:
-            20+
-            D.d*12,
+        resetY:
+          -220-
+          random(base+250)*130
 
-          vy:
-            100+
-            random(base+240+f)*220+
-            D.d*250,
-
-          resetY:
-            -220-
-            random(base+250+f)*150
-
-        });
-
-      }
+      });
 
     }
 
+    /*
+      MOVING WALL
+    */
+
     if(
-      chance(base+260,D.walls)
+      chance(
+        base+260,
+        D.walls
+      )
     ){
 
       walls.push({
@@ -2006,28 +2292,28 @@ function makeLevel(n){
         x:
           x+
           width+
-          70+
-          random(base+261)*90,
+          60+
+          random(base+261)*80,
 
         y:
           py-
-          100,
+          90,
 
         w:
           18+
-          D.d*12,
+          D.d*8,
 
         h:
-          100+
-          D.d*120,
+          85+
+          D.d*90,
 
         range:
-          20+
-          D.d*100,
+          15+
+          D.d*65,
 
         speed:
-          .8+
-          D.d*2,
+          .7+
+          D.d*1.5,
 
         phase:
           random(base+262)*6.28
@@ -2035,10 +2321,14 @@ function makeLevel(n){
       });
 
     }
-
   }
 
-  const finalStart=x+60;
+  /*
+    FINAL SAFE PLATFORM
+  */
+
+  const finalStart =
+    x+60;
 
   platforms.push({
 
@@ -2050,12 +2340,142 @@ function makeLevel(n){
 
   });
 
-  const gateCount=
+  /*
+    GUARANTEED 10 FAIR OBSTACLES
+
+    These are intentionally spaced across
+    the route. They never spawn directly
+    on the starting point and always leave
+    a possible jump/dash route.
+  */
+
+  if(n>=16){
+
+    const obstacleTypes = [
+      "ball",
+      "spike",
+      "fall",
+      "saw",
+      "laser",
+      "bomb",
+      "moving",
+      "crack",
+      "wind",
+      "lightning"
+    ];
+
+    const routeLength =
+      Math.max(
+        1200,
+        x-250
+      );
+
+    for(
+      let i=0;
+      i<10;
+      i++
+    ){
+
+      const seed =
+        n*70000+
+        i*811;
+
+      const type =
+        obstacleTypes[i];
+
+      /*
+        The first obstacle starts farther away.
+        Later ones move gradually closer together.
+      */
+
+      const progress =
+        i/9;
+
+      const ox =
+        430+
+        progress*
+        Math.max(
+          500,
+          routeLength-600
+        )+
+        (
+          random(seed)-.5
+        )*
+        65;
+
+      const oy =
+        groundY-
+        55-
+        random(seed+1)*
+        Math.min(
+          80,
+          D.rise*.45
+        );
+
+      fairObstacles.push({
+
+        type,
+
+        x:ox,
+
+        y:oy,
+
+        w:
+          35+
+          D.d*18,
+
+        h:
+          28+
+          D.d*15,
+
+        speed:
+          45+
+          D.d*110,
+
+        phase:
+          random(seed+2)*6.28,
+
+        active:true,
+
+        warning:
+          Math.max(
+            .55,
+            1.25-
+            D.d*.45
+          ),
+
+        /*
+          Every obstacle has a clear safe
+          radius/space around it.
+        */
+
+        safeGap:
+          Math.max(
+            42,
+            80-
+            D.d*22
+          )
+
+      });
+
+    }
+  }
+
+  /*
+    FINISH GATES
+  */
+
+  const gateCount =
     n<16
     ?0
     :Math.min(
-      5,
-      Math.floor(D.d*5)
+      3,
+      Math.floor(
+        Math.max(
+          0,
+          D.d-.62
+        )*8
+      )
     );
 
   for(
@@ -2072,11 +2492,9 @@ function makeLevel(n){
         g*75,
 
       y:
-        groundY-
-        130,
+        groundY-130,
 
       w:12,
-
       h:130,
 
       phase:
@@ -2085,27 +2503,30 @@ function makeLevel(n){
         )*6.28,
 
       period:
-        .8+
+        1.05+
         random(
           n*6001+g
-        )*1.3
+        )*1.1
 
     });
 
   }
 
-  const finishX=
-    finalStart+
-    430;
+  const finishX =
+    finalStart+430;
 
-  const stormCount=
+  /*
+    LIGHTNING
+  */
+
+  const stormCount =
     n<16
     ?0
     :Math.min(
-      12,
+      8,
       1+
       Math.floor(
-        D.d*11
+        D.d*7
       )
     );
 
@@ -2115,54 +2536,63 @@ function makeLevel(n){
     i++
   ){
 
-    const seed=
-      n*8000+i*31;
+    const seed =
+      n*8000+
+      i*31;
 
     lightnings.push({
 
       x:
-        430+
+        500+
         random(seed)*
         Math.max(
           300,
-          x-400
+          x-500
         ),
 
       y:
         groundY-
-        250-
-        random(seed+1)*180,
+        230-
+        random(seed+1)*130,
 
       timer:
         random(seed+2)*1.5,
 
       cool:
         Math.max(
-          .42,
-          1.35-
-          D.d*.78-
-          random(seed+3)*.35
+          .65,
+          1.45-
+          D.d*.48-
+          random(seed+3)*.25
         ),
 
       warning:
         Math.max(
-          .16,
+          .28,
           .72-
-          D.d*.48
+          D.d*.25
         )
 
     });
 
   }
 
+  /*
+    VISUAL CHAOS ONLY
+
+    These objects are decorative.
+    They no longer kill the player.
+    This removes unfair random deaths.
+  */
+
   const chaos=[];
 
-  const chaosCount=
+  const chaosCount =
     n<16
     ?0
     :Math.floor(
-      5+
-      D.d*35
+      4+
+      D.d*18
     );
 
   for(
@@ -2171,8 +2601,9 @@ function makeLevel(n){
     i++
   ){
 
-    const seed=
-      n*90000+i*719;
+    const seed =
+      n*90000+
+      i*719;
 
     chaos.push({
 
@@ -2200,12 +2631,12 @@ function makeLevel(n){
       size:
         8+
         random(seed+3)*
-        (10+D.d*35),
+        (10+D.d*25),
 
       speed:
         40+
         random(seed+4)*
-        (100+D.d*350),
+        (100+D.d*220),
 
       phase:
         random(seed+5)*6.28
@@ -2213,14 +2644,6 @@ function makeLevel(n){
     });
 
   }
-
-  const advancedObstacles =
-    makeAdvancedObstacles(
-      n,
-      groundY,
-      finishX,
-      D
-    );
 
   let ideaIndex;
 
@@ -2230,14 +2653,14 @@ function makeLevel(n){
 
   }else{
 
-    ideaIndex=
+    ideaIndex =
       15+
       Math.floor(
         D.d*
         (ideas.length-16)
       );
 
-    ideaIndex=
+    ideaIndex =
       Math.min(
         ideas.length-1,
         ideaIndex
@@ -2272,17 +2695,23 @@ function makeLevel(n){
     reverseZones,
     finishGates,
 
-    chaos,
+    fairObstacles,
 
-    advancedObstacles,
+    chaos,
 
     finishX,
 
-    idea:ideas[ideaIndex],
+    idea:
+      ideas[ideaIndex],
 
     tier:D
+
   };
 }
+
+/* =========================================================
+   SAVE
+========================================================= */
 
 function saveLevel(){
 
@@ -2292,17 +2721,21 @@ function saveLevel(){
   );
 }
 
+/* =========================================================
+   RESET
+========================================================= */
+
 function resetLevel(){
 
   levelWon=false;
   paused=false;
 
-  levelData=
+  levelData =
     makeLevel(level);
 
   player.x=70;
 
-  player.y=
+  player.y =
     levelData.groundY-
     player.h;
 
@@ -2314,9 +2747,12 @@ function resetLevel(){
 
   player.dashCooldown=0;
   player.dashTime=0;
+
   player.gravityScale=1;
+
   player.slowTimer=0;
   player.reverseTimer=0;
+
   player.invincible=0;
 
   cameraX=0;
@@ -2324,35 +2760,49 @@ function resetLevel(){
   stormFlash=0;
   screenShake=0;
 
-  levelEl.textContent=level;
+  levelEl.textContent =
+    level;
 
-  tierEl.textContent=
-    "• "+
-    levelData.tier.name;
+  /*
+    Remove all guide text from 16 -> 5000.
+  */
 
-  if(level<=15){
+  if(level>=16){
 
-    levelIdea.style.display="block";
+    document.body.classList.add(
+      "hardMode"
+    );
 
-    levelIdea.textContent=
-      `LEVEL ${level}: ${levelData.idea}`;
+    levelIdea.textContent="";
 
   }else{
 
-    levelIdea.style.display="none";
+    document.body.classList.remove(
+      "hardMode"
+    );
 
+    tierEl.textContent =
+      "• "+
+      levelData.tier.name;
+
+    levelIdea.textContent =
+      `LEVEL ${level}: ${levelData.idea}`;
   }
 
-  player.speed=
+  player.speed =
     levelData.tier.speed;
 
-  player.jumpPower=
+  player.jumpPower =
     levelData.tier.jump;
 
   win.style.display="none";
 
   saveLevel();
 }
+
+/* =========================================================
+   START
+========================================================= */
 
 startBtn.addEventListener(
   "pointerdown",
@@ -2364,17 +2814,19 @@ startBtn.addEventListener(
 
     playing=true;
 
-    // لێدانی میوزیک کاتێک یاری دەستپێدەکات
-    bgMusic.play().catch(err => console.log("Audio play blocked:", err));
-
     resetLevel();
 
-    lastTime=
+    lastTime =
       performance.now();
 
     requestAnimationFrame(loop);
+
   }
 );
+
+/* =========================================================
+   WIN
+========================================================= */
 
 function winLevel(){
 
@@ -2386,23 +2838,36 @@ function winLevel(){
 
   saveLevel();
 
-  finishBanner.classList.remove("show");
+  finishBanner.classList.remove(
+    "show"
+  );
 
   void finishBanner.offsetWidth;
 
-  finishBanner.classList.add("show");
+  finishBanner.classList.add(
+    "show"
+  );
 
-  winText.textContent=
+  winText.textContent =
     `تۆ مەرحەلەی ${level} ـت بە سەرکەوتوویی بردەوە.`;
 
   win.style.display="flex";
 }
 
+/* =========================================================
+   NEXT
+========================================================= */
+
 function nextLevel(){
 
   if(level>=TOTAL_LEVELS){
 
-    level=1;
+    /*
+      Keep the game at 5000.
+      It does NOT reset to Level 1.
+    */
+
+    level=TOTAL_LEVELS;
 
   }else{
 
@@ -2411,6 +2876,7 @@ function nextLevel(){
   }
 
   saveLevel();
+
   resetLevel();
 }
 
@@ -2434,21 +2900,39 @@ document
     }
   );
 
-function slopeSurfaceY(s,x){
+/* =========================================================
+   SLOPE
+========================================================= */
 
-  const t=
+function slopeSurfaceY(
+  s,
+  x
+){
+
+  const t =
     clamp(
       (x-s.x)/s.w,
       0,
       1
     );
 
-  return s.y-s.rise*t;
+  return (
+    s.y-
+    s.rise*t
+  );
 }
 
-function particleBurst(x,y,type="normal"){
+/* =========================================================
+   PARTICLES
+========================================================= */
 
-  const count=
+function particleBurst(
+  x,
+  y,
+  type="normal"
+){
+
+  const count =
     type==="danger"
     ?18
     :10;
@@ -2465,24 +2949,33 @@ function particleBurst(x,y,type="normal"){
       y,
 
       vx:
-        (random(
-          performance.now()+i*31
-        )-.5)*220,
+        (
+          random(
+            performance.now()+
+            i*31
+          )-.5
+        )*220,
 
       vy:
-        (random(
-          performance.now()+i*53
-        )-.5)*220,
+        (
+          random(
+            performance.now()+
+            i*53
+          )-.5
+        )*220,
 
-      life:.5+
+      life:
+        .5+
         random(
-          performance.now()+i*71
+          performance.now()+
+          i*71
         )*.6,
 
       size:
         2+
         random(
-          performance.now()+i*91
+          performance.now()+
+          i*91
         )*5
 
     });
@@ -2498,14 +2991,19 @@ function updateParticles(dt){
     i--
   ){
 
-    const p=particles[i];
+    const p =
+      particles[i];
 
-    p.x+=p.vx*dt;
-    p.y+=p.vy*dt;
+    p.x +=
+      p.vx*dt;
 
-    p.vy+=300*dt;
+    p.y +=
+      p.vy*dt;
 
-    p.life-=dt;
+    p.vy +=
+      300*dt;
+
+    p.life -= dt;
 
     if(p.life<=0){
 
@@ -2516,708 +3014,228 @@ function updateParticles(dt){
   }
 }
 
-function updateAdvancedObstacles(dt){
+/* =========================================================
+   FAIR OBSTACLES
+========================================================= */
+
+function updateFairObstacles(dt){
 
   if(
     !levelData ||
-    !levelData.advancedObstacles
+    level < 16
   ){
-    return false;
+    return;
   }
 
   const now =
     performance.now()/1000;
 
-  const D =
-    levelData.tier.d;
-
   for(
     const o
-    of levelData.advancedObstacles
+    of levelData.fairObstacles
   ){
 
     const t =
       now+
-      o.phase+
-      o.variant*.001;
+      o.phase;
 
     let hit=false;
 
-    if(o.type===0){
+    if(o.type==="ball"){
 
-      const targetX =
-        player.x+
-        player.w/2;
-
-      const targetY =
-        player.y+
-        player.h/2;
-
-      const dx =
-        targetX-o.x;
-
-      const dy =
-        targetY-o.y;
-
-      const dist =
-        Math.max(
-          1,
-          Math.hypot(dx,dy)
-        );
-
-      const tracking =
-        .45+
-        D*1.7+
-        (o.variant%7)*.025;
-
-      o.x +=
-        dx/dist*
-        o.speed*
-        tracking*
-        dt;
-
-      o.y +=
-        dy/dist*
-        o.speed*
-        .35*
-        dt;
-
-      if(
-        Math.hypot(
-          player.x+
-          player.w/2-
-          o.x,
-
-          player.y+
-          player.h/2-
-          o.y
-        ) <
-        o.size+
-        17
-      ){
-
-        hit=true;
-
-      }
-
-    }
-
-    else if(o.type===1){
-
-      const distance =
-        Math.abs(
-          player.x+
-          player.w/2-
-          o.baseX
-        );
-
-      const triggerDistance =
-        110+
-        D*120;
-
-      if(
-        distance<
-        triggerDistance
-      ){
-
-        o.triggered=true;
-      }
-
-      if(o.triggered){
-
-        o.timer+=dt;
-
-        const activeDelay =
-          Math.max(
-            .08,
-            .42-
-            D*.28
-          );
-
-        if(
-          o.timer>
-          activeDelay
-        ){
-
-          hit=
-            player.grounded &&
-            player.x+player.w>
-            o.baseX-o.w &&
-            player.x<
-            o.baseX+o.w;
-
-        }
-
-      }
-
-    }
-
-    else if(o.type===2){
-
-      const cycle =
+      const bx =
+        o.x+
+        Math.sin(t*1.3)*
         (
-          t+
-          o.delay
-        )%
-        (
-          1.25-
-          D*.35
+          45+
+          levelData.tier.d*35
         );
 
-      const active =
-        cycle>
-        (
-          .55-
-          D*.2
-        );
-
-      if(active){
-
-        hit=
-          rectHit(
-            player,
-            {
-              x:o.baseX-o.w/2,
-              y:levelData.groundY-48-o.h,
-              w:o.w,
-              h:o.h+48
-            }
-          );
-
-      }
-
-    }
-
-    else if(o.type===3){
-
-      const cycle =
-        Math.sin(t*(
-          1.2+
-          D*3
-        ));
-
-      const xx =
-        o.baseX+
-        cycle*
-        o.range;
-
-      const yy =
-        o.baseY+
-        Math.sin(t*2)*25;
-
-      hit=
-        rectHit(
-          player,
-          {
-            x:xx,
-            y:yy,
-            w:o.w,
-            h:o.h
-          }
-        );
-
-    }
-
-    else if(o.type===4){
-
-      const cycle =
-        (
-          t*
-          (
-            .75+
-            D*2.2
-          )
-        )%2;
-
-      const down =
-        cycle<1
-        ?cycle
-        :2-cycle;
-
-      const yy =
-        50+
-        down*
-        (
-          levelData.groundY-
-          100
-        );
-
-      hit=
-        rectHit(
-          player,
-          {
-            x:o.baseX-o.w/2,
-            y:yy,
-            w:o.w,
-            h:o.h+25
-          }
-        );
-
-    }
-
-    else if(o.type===5){
-
-      const distance =
-        Math.abs(
-          player.x+
-          player.w/2-
-          o.baseX
-        );
-
-      if(
-        distance<
-        170+
-        D*130
-      ){
-
-        o.triggered=true;
-      }
-
-      if(o.triggered){
-
-        o.timer+=dt;
-
-        const radius =
-          o.timer*
-          (
-            180+
-            D*260
-          );
-
-        const vertical =
-          Math.abs(
-            player.y+
-            player.h/2-
-            o.baseY
-          );
-
-        if(
-          Math.abs(
-            player.x+
-            player.w/2-
-            o.baseX
-          )<
-          radius+18 &&
-          vertical<
-          42+
-          D*35
-        ){
-
-          hit=true;
-
-        }
-
-        if(
-          radius>
-          300+
-          D*500
-        ){
-
-          o.triggered=false;
-          o.timer=0;
-
-        }
-
-      }
-
-    }
-
-    else if(o.type===6){
-
-      const distance =
-        Math.abs(
-          player.x+
-          player.w/2-
-          o.baseX
-        );
-
-      if(
-        distance<
-        70+
-        D*80
-      ){
-
-        o.triggered=true;
-      }
-
-      if(o.triggered){
-
-        const fall =
-          Math.min(
-            1,
-            (
-              o.timer+=dt
-            )*
-            (
-              1+
-              D*2
-            )
-          );
-
-        if(
-          player.grounded &&
-          player.x+player.w>
-          o.baseX-o.w &&
-          player.x<
-          o.baseX+o.w
-        ){
-
-          player.vy +=
-            250+
-            D*450;
-
-          if(fall>.45){
-            hit=true;
-          }
-
-        }
-
-      }
-
-    }
-
-    else if(o.type===7){
-
-      o.y +=
-        o.vy*
-        (
-          1+
-          D*1.8
-        )*
-        dt;
-
-      if(
-        o.y>
-        levelData.groundY+80
-      ){
-
-        o.y=
-          -120-
-          random(
-            o.variant*77+
-            level
-          )*240;
-
-        o.x=
-          o.baseX+
-          (
-            random(
-              o.variant*81+
-              Math.floor(now)
-            )-.5
-          )*
-          (
-            120+
-            D*260
-          );
-
-      }
-
-      hit=
-        rectHit(
-          player,
-          {
-            x:o.x-o.size,
-            y:o.y-o.size,
-            w:o.size*2,
-            h:o.size*2
-          }
-        );
-
-    }
-
-    else if(o.type===8){
-
-      const xx =
-        o.baseX+
-        Math.sin(t*(
-          .8+
-          D*2.5
-        ))*
-        o.range;
-
-      const yy =
-        levelData.groundY-
-        o.h-
-        10-
-        Math.abs(
-          Math.sin(t*1.4)
-        )*
-        (
-          30+
-          D*100
-        );
-
-      hit=
-        rectHit(
-          player,
-          {
-            x:xx,
-            y:yy,
-            w:o.w,
-            h:o.h
-          }
-        );
-
-    }
-
-    else if(o.type===9){
-
-      const cycle =
-        (
-          t*
-          (
-            .9+
-            D*3
-          )
-        )%1;
-
-      const active =
-        cycle>
-        (
-          .22-
-          D*.1
-        );
-
-      if(active){
-
-        const yy =
-          o.baseY+
-          Math.sin(t*1.7)*
-          (
-            25+
-            D*100
-          );
-
-        hit=
-          rectHit(
-            player,
-            {
-              x:o.baseX-90-D*60,
-              y:yy,
-              w:180+D*120,
-              h:7+D*7
-            }
-          );
-
-      }
-
-    }
-
-    else if(o.type===10){
-
-      const distance =
-        Math.hypot(
-          player.x+
-          player.w/2-
-          o.baseX,
-
-          player.y+
-          player.h/2-
-          o.baseY
-        );
-
-      if(
-        distance<
-        120+
-        D*100
-      ){
-
-        o.triggered=true;
-      }
-
-      if(o.triggered){
-
-        o.timer+=dt;
-
-        if(
-          o.timer>
-          Math.max(
-            .15,
-            .75-
-            D*.45
-          )
-        ){
-
-          const blast =
-            55+
-            D*95;
-
-          hit=
-            distance<
-            blast;
-
-        }
-
-      }
-
-      if(o.timer>1.3){
-
-        o.triggered=false;
-        o.timer=0;
-
-      }
-
-    }
-
-    else if(o.type===11){
-
-      const xx =
-        o.baseX+
-        Math.sin(
-          t*
-          (
-            1.5+
-            D*3
-          )
-        )*
-        o.range;
-
-      const yy =
-        o.baseY+
-        Math.cos(
-          t*
-          (
-            2+
-            D*3
-          )
-        )*
-        (
-          20+
-          D*80
-        );
-
-      hit=
+      const by =
+        o.y+
+        Math.cos(t*1.8)*18;
+
+      hit =
         circleHit(
-          xx,
-          yy,
-          o.size,
+          bx,
+          by,
+          o.w*.5,
           player
         );
 
     }
 
-    else if(o.type===12){
+    else if(
+      o.type==="spike"
+    ){
 
-      const cx=o.baseX;
-      const cy=o.baseY;
-
-      const angle =
-        t*
-        (
-          1.5+
-          D*5
-        );
-
-      const length =
-        45+
-        D*75;
-
-      const ex =
-        cx+
-        Math.cos(angle)*
-        length;
-
-      const ey =
-        cy+
-        Math.sin(angle)*
-        length;
-
-      const px =
-        player.x+
-        player.w/2;
-
-      const py =
-        player.y+
-        player.h/2;
-
-      const A=
-        ex-cx;
-
-      const B=
-        ey-cy;
-
-      const C=
-        px-cx;
-
-      const E=
-        py-cy;
-
-      const dot=
-        A*C+B*E;
-
-      const len2=
-        A*A+B*B;
-
-      const u=
-        clamp(
-          dot/Math.max(1,len2),
-          0,
-          1
-        );
-
-      const closestX=
-        cx+A*u;
-
-      const closestY=
-        cy+B*u;
-
-      hit=
-        Math.hypot(
-          px-closestX,
-          py-closestY
-        )<
-        13+
-        D*9;
-
-    }
-
-    else if(o.type===13){
-
-      const distance =
-        Math.abs(
-          player.x+
-          player.w/2-
-          o.baseX
-        );
-
-      if(
-        distance<
-        100+
-        D*120
-      ){
-
-        o.triggered=true;
-      }
-
-      if(o.triggered){
-
-        o.y +=
-          (
-            120+
-            D*500
-          )*
-          dt;
-
-        if(
-          o.y>
-          levelData.groundY+100
-        ){
-
-          o.y=
-            o.baseY;
-
-          o.triggered=false;
-
-        }
-
-      }
-
-      hit=
+      hit =
         rectHit(
           player,
           {
-            x:o.baseX-o.w/2,
+            x:o.x,
+            y:
+              o.y+
+              Math.sin(t*1.2)*4,
+            w:o.w,
+            h:o.h
+          }
+        );
+
+    }
+
+    else if(
+      o.type==="fall"
+    ){
+
+      const cycle =
+        2.5;
+
+      const phase =
+        (
+          t+
+          o.phase
+        )%
+        cycle;
+
+      const fy =
+        phase<.65
+        ? o.y+
+          phase*
+          (
+            260+
+            levelData.tier.d*160
+          )
+        : o.y;
+
+      hit =
+        rectHit(
+          player,
+          {
+            x:o.x,
+            y:fy,
+            w:o.w,
+            h:o.h
+          }
+        );
+
+    }
+
+    else if(
+      o.type==="saw"
+    ){
+
+      const sx =
+        o.x+
+        Math.sin(t*1.7)*
+        (
+          35+
+          levelData.tier.d*35
+        );
+
+      const sy =
+        o.y+
+        Math.cos(t*1.2)*25;
+
+      hit =
+        circleHit(
+          sx,
+          sy,
+          o.w*.55,
+          player
+        );
+
+    }
+
+    else if(
+      o.type==="laser"
+    ){
+
+      const period =
+        1.5+
+        levelData.tier.d*.6;
+
+      const phase =
+        (
+          t+
+          o.phase
+        )%period;
+
+      /*
+        Warning period is deliberately long.
+      */
+
+      const active =
+        phase>
+        o.warning;
+
+      if(active){
+
+        hit =
+          rectHit(
+            player,
+            {
+              x:o.x-25,
+              y:o.y,
+              w:
+                o.w+
+                50,
+              h:7
+            }
+          );
+
+      }
+
+    }
+
+    else if(
+      o.type==="bomb"
+    ){
+
+      const pulse =
+        Math.sin(t*5);
+
+      const radius =
+        o.w*
+        (
+          1+
+          Math.max(
+            0,
+            pulse
+          )*.35
+        );
+
+      /*
+        Only dangerous close to the bomb.
+      */
+
+      hit =
+        circleHit(
+          o.x,
+          o.y,
+          radius,
+          player
+        );
+
+    }
+
+    else if(
+      o.type==="moving"
+    ){
+
+      const mx =
+        o.x+
+        Math.sin(t*1.2)*
+        (
+          55+
+          levelData.tier.d*35
+        );
+
+      hit =
+        rectHit(
+          player,
+          {
+            x:mx,
             y:o.y,
             w:o.w,
             h:o.h
@@ -3226,215 +3244,118 @@ function updateAdvancedObstacles(dt){
 
     }
 
-    else if(o.type===14){
+    else if(
+      o.type==="crack"
+    ){
 
-      const distance =
-        Math.abs(
-          player.x+
-          player.w/2-
-          o.baseX
-        );
-
-      if(
-        distance<
-        80+
-        D*120
-      ){
-
-        player.gravityScale=
-          1.7+
-          D*1.7;
-
-        player.vy+=
-          80+
-          D*180;
-
-      }
-
-    }
-
-    else if(o.type===15){
-
-      const distance =
-        Math.abs(
-          player.x+
-          player.w/2-
-          o.baseX
-        );
-
-      if(
-        distance<
-        75+
-        D*115
-      ){
-
-        player.reverseTimer=
-          Math.max(
-            player.reverseTimer,
-            .45+
-            D*1.4
-          );
-
-      }
-
-    }
-
-    else if(o.type===16){
-
-      const distance =
-        Math.hypot(
-          player.x+
-          player.w/2-
-          o.baseX,
-
-          player.y+
-          player.h/2-
-          o.baseY
-        );
-
-      if(
-        distance<
-        o.size+
-        22 &&
-        !o.triggered
-      ){
-
-        o.triggered=true;
-
-        player.x=
-          Math.max(
-            70,
-            player.x-
-            (
-              180+
-              D*350
-            )
-          );
-
-        screenShake=8;
-
-        particleBurst(
-          o.baseX,
-          o.baseY,
-          "danger"
-        );
-
-      }
-
-      if(
-        distance>
-        100
-      ){
-
-        o.triggered=false;
-
-      }
-
-    }
-
-    else if(o.type===17){
-
-      const cx=o.baseX;
-      const cy=o.baseY;
-
-      const radius =
-        30+
+      const active =
         (
-          Math.sin(t*(
-            2+
-            D*4
-          ))*.5+.5
-        )*
-        (
-          60+
-          D*100
-        );
-
-      const distance=
-        Math.hypot(
-          player.x+
-          player.w/2-
-          cx,
-
-          player.y+
-          player.h/2-
-          cy
-        );
-
-      hit=
-        Math.abs(
-          distance-radius
-        )<
-        12+
-        D*8;
-
-    }
-
-    else if(o.type===18){
-
-      const xx =
-        o.baseX+
-        Math.sin(t*2)*
-        o.range;
-
-      hit=
-        rectHit(
-          player,
-          {
-            x:xx,
-            y:
-              levelData.groundY-
-              90-
-              D*80,
-
-            w:
-              16+
-              D*20,
-
-            h:
-              90+
-              D*120
-          }
-        );
-
-    }
-
-    else if(o.type===19){
-
-      o.y =
-        o.baseY+
-        Math.abs(
-          Math.sin(
-            t*
-            (
-              1.5+
-              D*3
-            )
+          t%
+          (
+            2.8-
+            levelData.tier.d*.5
           )
-        )*
-        (
-          80+
-          D*170
-        );
+        )>
+        .8;
 
-      o.x =
-        o.baseX+
-        Math.sin(t*.8)*
-        (
-          25+
-          D*80
-        );
+      if(active){
 
-      hit=
-        circleHit(
-          o.x,
-          o.y,
-          o.size+
-          D*5,
-          player
-        );
+        hit =
+          rectHit(
+            player,
+            {
+              x:o.x,
+              y:o.y+10,
+              w:o.w,
+              h:18
+            }
+          );
+
+      }
 
     }
+
+    else if(
+      o.type==="wind"
+    ){
+
+      /*
+        Wind never directly kills.
+        It only pushes the player.
+      */
+
+      if(
+        player.x+player.w>
+          o.x-o.safeGap &&
+        player.x<
+          o.x+o.w+o.safeGap &&
+        player.y+player.h>
+          o.y-o.safeGap &&
+        player.y<
+          o.y+o.h+o.safeGap
+      ){
+
+        player.vx +=
+          Math.sin(t*1.4)*
+          (
+            35+
+            levelData.tier.d*80
+          )*
+          dt;
+
+      }
+
+    }
+
+    else if(
+      o.type==="lightning"
+    ){
+
+      const period =
+        1.8+
+        levelData.tier.d*.5;
+
+      const phase =
+        (
+          t+
+          o.phase
+        )%period;
+
+      /*
+        Long warning.
+      */
+
+      const warning =
+        1.05-
+        levelData.tier.d*.25;
+
+      if(
+        phase>warning &&
+        phase<
+          warning+.18
+      ){
+
+        hit =
+          Math.abs(
+            player.x+
+            player.w/2-
+            o.x
+          )<
+          25+
+          o.w*.25;
+
+      }
+
+    }
+
+    /*
+      IMPORTANT:
+
+      Obstacles only kill if the player is
+      genuinely inside them.
+
+      No distance-based random death.
+    */
 
     if(
       hit &&
@@ -3442,14 +3363,15 @@ function updateAdvancedObstacles(dt){
     ){
 
       resetLevel();
+      return;
 
-      return true;
     }
-
   }
-
-  return false;
 }
+
+/* =========================================================
+   UPDATE
+========================================================= */
 
 function update(dt){
 
@@ -3462,53 +3384,73 @@ function update(dt){
 
   updateParticles(dt);
 
-  player.dashCooldown=
+  /*
+    TIMERS
+  */
+
+  player.dashCooldown =
     Math.max(
       0,
       player.dashCooldown-dt
     );
 
-  player.dashTime=
+  player.dashTime =
     Math.max(
       0,
       player.dashTime-dt
     );
 
-  player.slowTimer=
+  player.slowTimer =
     Math.max(
       0,
       player.slowTimer-dt
     );
 
-  player.reverseTimer=
+  player.reverseTimer =
     Math.max(
       0,
       player.reverseTimer-dt
     );
 
-  player.invincible=
+  player.invincible =
     Math.max(
       0,
       player.invincible-dt
     );
 
-  const oldY=player.y;
+  /*
+    OLD POSITION
+  */
 
-  const oldBottom=
-    oldY+player.h;
+  const oldY =
+    player.y;
+
+  const oldBottom =
+    oldY+
+    player.h;
+
+  /*
+    DIFFICULTY PHYSICS
+  */
 
   let gravityScale=1;
 
-  let speedMultiplier=
+  let speedMultiplier =
     player.slowTimer>0
-    ? .55
+    ? .58
     : 1;
 
   if(
     player.reverseTimer>0
   ){
+
     speedMultiplier*=.9;
+
   }
+
+  /*
+    GRAVITY ZONES
+  */
 
   for(
     const g
@@ -3522,9 +3464,16 @@ function update(dt){
       player.y<g.y+g.h
     ){
 
-      gravityScale=g.scale;
+      gravityScale =
+        g.scale;
+
     }
+
   }
+
+  /*
+    WIND
+  */
 
   let windForce=0;
 
@@ -3540,31 +3489,44 @@ function update(dt){
       player.y<w.y+w.h
     ){
 
-      windForce+=w.force;
+      windForce +=
+        w.force;
+
     }
+
   }
 
-  let controlX=input.x;
+  /*
+    REVERSE
+  */
+
+  let controlX =
+    input.x;
 
   if(
     player.reverseTimer>0
   ){
 
-    controlX=-controlX;
+    controlX =
+      -controlX;
 
   }
 
-  const targetVX=
+  /*
+    MOVEMENT
+  */
+
+  const targetVX =
     controlX*
     player.speed*
     speedMultiplier;
 
-  const accel=
+  const accel =
     player.slowTimer>0
     ?6
     :12;
 
-  player.vx+=
+  player.vx +=
     (
       targetVX-
       player.vx
@@ -3574,29 +3536,44 @@ function update(dt){
       dt*accel
     );
 
-  player.vx+=
+  player.vx +=
     windForce*dt;
 
-  if(player.dashTime>0){
+  /*
+    DASH
+  */
 
-    player.vx*=1.015;
+  if(
+    player.dashTime>0
+  ){
+
+    player.vx *=
+      1.015;
 
   }
 
-  player.vy+=
+  /*
+    GRAVITY
+  */
+
+  player.vy +=
     1550*
     gravityScale*
     dt;
 
-  player.x+=
+  player.x +=
     player.vx*dt;
 
-  player.y+=
+  player.y +=
     player.vy*dt;
 
   player.grounded=false;
 
-  const now=
+  /*
+    MOVING PLATFORMS
+  */
+
+  const now =
     performance.now()/1000;
 
   for(
@@ -3606,7 +3583,7 @@ function update(dt){
 
     if(m.axis==="x"){
 
-      m.x=
+      m.x =
         m.baseX+
         Math.sin(
           now*m.speed+
@@ -3616,7 +3593,7 @@ function update(dt){
 
     }else{
 
-      m.y=
+      m.y =
         m.baseY+
         Math.sin(
           now*m.speed+
@@ -3628,16 +3605,18 @@ function update(dt){
 
     const p=m;
 
-    const horizontal=
-      player.x+player.w>p.x-
-      p.w/2 &&
-      player.x<p.x+
-      p.w/2;
+    const horizontal =
+      player.x+player.w>
+        p.x-p.w/2 &&
+      player.x<
+        p.x+p.w/2;
 
-    const top=p.y;
+    const top =
+      p.y;
 
-    const newBottom=
-      player.y+player.h;
+    const newBottom =
+      player.y+
+      player.h;
 
     if(
       horizontal &&
@@ -3646,7 +3625,7 @@ function update(dt){
       newBottom>=top
     ){
 
-      player.y=
+      player.y =
         top-player.h;
 
       player.vy=0;
@@ -3656,17 +3635,22 @@ function update(dt){
 
   }
 
+  /*
+    NORMAL PLATFORMS
+  */
+
   for(
     const p
     of levelData.platforms
   ){
 
-    const horizontal=
+    const horizontal =
       player.x+player.w>p.x &&
       player.x<p.x+p.w;
 
-    const newBottom=
-      player.y+player.h;
+    const newBottom =
+      player.y+
+      player.h;
 
     if(
       horizontal &&
@@ -3675,7 +3659,7 @@ function update(dt){
       newBottom>=p.y
     ){
 
-      player.y=
+      player.y =
         p.y-player.h;
 
       player.vy=0;
@@ -3684,6 +3668,10 @@ function update(dt){
     }
 
   }
+
+  /*
+    DISAPPEARING PLATFORMS
+  */
 
   for(
     const p
@@ -3698,7 +3686,8 @@ function update(dt){
 
         p.active=false;
 
-        p.timer=p.respawn;
+        p.timer =
+          p.respawn;
 
       }
 
@@ -3710,9 +3699,9 @@ function update(dt){
 
         p.active=true;
 
-        p.timer=
-          .8+
-          levelData.tier.d;
+        p.timer =
+          .9+
+          levelData.tier.d*.5;
 
       }
 
@@ -3721,12 +3710,13 @@ function update(dt){
     if(!p.active)
       continue;
 
-    const horizontal=
+    const horizontal =
       player.x+player.w>p.x &&
       player.x<p.x+p.w;
 
-    const newBottom=
-      player.y+player.h;
+    const newBottom =
+      player.y+
+      player.h;
 
     if(
       horizontal &&
@@ -3735,7 +3725,7 @@ function update(dt){
       newBottom>=p.y
     ){
 
-      player.y=
+      player.y =
         p.y-player.h;
 
       player.vy=0;
@@ -3745,26 +3735,17 @@ function update(dt){
 
   }
 
-  for(
-    const p
-    of levelData.fakePlatforms
-  ){
+  /*
+    FAKE PLATFORMS
 
-    if(
-      rectHit(player,p)
-    ){
+    Fake floors no longer cause a sudden
+    invisible death. They simply stop
+    supporting the player.
+  */
 
-      particleBurst(
-        p.x+p.w/2,
-        p.y,
-        "danger"
-      );
-
-      player.vy+=100;
-
-    }
-
-  }
+  /*
+    SLOPES
+  */
 
   for(
     const s
@@ -3776,14 +3757,14 @@ function update(dt){
       player.x<s.x+s.w
     ){
 
-      const surface=
+      const surface =
         slopeSurfaceY(
           s,
           player.x+
           player.w*.5
         );
 
-      const bottom=
+      const bottom =
         player.y+
         player.h;
 
@@ -3793,7 +3774,7 @@ function update(dt){
         oldBottom<=surface+15
       ){
 
-        player.y=
+        player.y =
           surface-player.h;
 
         player.vy=0;
@@ -3805,19 +3786,29 @@ function update(dt){
 
   }
 
-  if(player.grounded){
+  /*
+    COYOTE
+  */
+
+  if(
+    player.grounded
+  ){
 
     player.coyote=.12;
 
   }else{
 
-    player.coyote=
+    player.coyote =
       Math.max(
         0,
         player.coyote-dt
       );
 
   }
+
+  /*
+    ICE
+  */
 
   for(
     const ice
@@ -3839,6 +3830,10 @@ function update(dt){
 
   }
 
+  /*
+    SPRINGS
+  */
+
   for(
     const s
     of levelData.springs
@@ -3852,7 +3847,7 @@ function update(dt){
       player.vy>=0
     ){
 
-      player.vy=
+      player.vy =
         -s.power;
 
       player.grounded=false;
@@ -3867,6 +3862,10 @@ function update(dt){
 
   }
 
+  /*
+    STARS
+  */
+
   for(
     const s
     of levelData.stars
@@ -3875,18 +3874,21 @@ function update(dt){
     if(s.taken)
       continue;
 
-    const dx=
+    const dx =
       player.x+
       player.w/2-
       s.x;
 
-    const dy=
+    const dy =
       player.y+
       player.h/2-
       s.y;
 
     if(
-      Math.hypot(dx,dy)<30
+      Math.hypot(
+        dx,
+        dy
+      )<30
     ){
 
       s.taken=true;
@@ -3900,12 +3902,16 @@ function update(dt){
 
   }
 
+  /*
+    CRACKS
+  */
+
   for(
     const c
     of levelData.cracks
   ){
 
-    const hit=
+    const hit =
       player.x+player.w>c.x &&
       player.x<c.x+c.w &&
       player.y+player.h>=c.y-12 &&
@@ -3918,11 +3924,11 @@ function update(dt){
 
       c.active=true;
 
-      c.timer=
+      c.timer =
         Math.max(
-          .35,
-          1.0-
-          levelData.tier.d*.6
+          .45,
+          1.05-
+          levelData.tier.d*.4
         );
 
     }
@@ -3948,24 +3954,11 @@ function update(dt){
 
     }
 
-    if(
-      c.broken &&
-      rectHit(
-        player,
-        {
-          x:c.x,
-          y:c.y,
-          w:c.w,
-          h:30
-        }
-      )
-    ){
-
-      player.vy+=260;
-
-    }
-
   }
+
+  /*
+    BALLS
+  */
 
   for(
     const b
@@ -3978,27 +3971,27 @@ function update(dt){
       b.targetTimer<=0
     ){
 
-      b.dir=
+      b.dir =
         player.x>b.x
         ?1
         :-1;
 
-      b.targetTimer=
+      b.targetTimer =
         Math.max(
-          .25,
-          .75+
+          .4,
+          .8+
           random(
             level*77+
             Math.floor(
               performance.now()/700
             )
-          )*1.2-
-          levelData.tier.d*.4
+          )*.7-
+          levelData.tier.d*.2
         );
 
     }
 
-    b.x+=
+    b.x +=
       b.dir*
       b.speed*
       dt;
@@ -4030,7 +4023,9 @@ function update(dt){
       )
     ){
 
-      if(player.invincible<=0){
+      if(
+        player.invincible<=0
+      ){
 
         resetLevel();
         return;
@@ -4041,12 +4036,16 @@ function update(dt){
 
   }
 
+  /*
+    SAWS
+  */
+
   for(
     const s
     of levelData.saws
   ){
 
-    s.y=
+    s.y =
       s.baseY+
       Math.sin(
         now*s.speed+
@@ -4063,7 +4062,9 @@ function update(dt){
       )
     ){
 
-      if(player.invincible<=0){
+      if(
+        player.invincible<=0
+      ){
 
         resetLevel();
         return;
@@ -4074,19 +4075,23 @@ function update(dt){
 
   }
 
+  /*
+    LASERS
+  */
+
   for(
     const l
     of levelData.lasers
   ){
 
-    const phase=
+    const phase =
       (
         now+
         l.phase
       )%
       l.period;
 
-    const active=
+    const active =
       phase>
       l.warning;
 
@@ -4103,7 +4108,9 @@ function update(dt){
       )
     ){
 
-      if(player.invincible<=0){
+      if(
+        player.invincible<=0
+      ){
 
         resetLevel();
         return;
@@ -4114,6 +4121,10 @@ function update(dt){
 
   }
 
+  /*
+    BOMBS
+  */
+
   for(
     const b
     of levelData.bombs
@@ -4122,27 +4133,39 @@ function update(dt){
     b.timer-=dt;
     b.pulse+=dt;
 
-    if(b.timer<=0){
+    if(
+      b.timer<=0
+    ){
 
-      const dx=
+      const dx =
         player.x+
         player.w/2-
         b.x;
 
-      const dy=
+      const dy =
         player.y+
         player.h/2-
         b.y;
 
-      const distance=
-        Math.hypot(dx,dy);
+      const distance =
+        Math.hypot(
+          dx,
+          dy
+        );
 
-      if(distance<
-        110+
-        levelData.tier.d*80
+      /*
+        Smaller, fair blast radius.
+      */
+
+      if(
+        distance<
+        75+
+        levelData.tier.d*35
       ){
 
-        if(player.invincible<=0){
+        if(
+          player.invincible<=0
+        ){
 
           resetLevel();
           return;
@@ -4151,29 +4174,35 @@ function update(dt){
 
       }
 
-      b.timer=
-        .8+
+      b.timer =
+        1.1+
         random(
           performance.now()
-        )*1.5;
+        )*1.1;
 
     }
 
   }
+
+  /*
+    FALLING OBJECTS
+  */
 
   for(
     const f
     of levelData.fallers
   ){
 
-    f.y+=f.vy*dt;
+    f.y +=
+      f.vy*dt;
 
     if(
       f.y>
       levelData.groundY+40
     ){
 
-      f.y=f.resetY;
+      f.y =
+        f.resetY;
 
     }
 
@@ -4191,7 +4220,9 @@ function update(dt){
       )
     ){
 
-      if(player.invincible<=0){
+      if(
+        player.invincible<=0
+      ){
 
         resetLevel();
         return;
@@ -4202,12 +4233,16 @@ function update(dt){
 
   }
 
+  /*
+    MOVING WALLS
+  */
+
   for(
     const w
     of levelData.walls
   ){
 
-    w.x+=
+    w.x +=
       Math.sin(
         now*w.speed+
         w.phase
@@ -4222,7 +4257,9 @@ function update(dt){
       )
     ){
 
-      if(player.invincible<=0){
+      if(
+        player.invincible<=0
+      ){
 
         resetLevel();
         return;
@@ -4232,6 +4269,10 @@ function update(dt){
     }
 
   }
+
+  /*
+    PORTALS
+  */
 
   for(
     const p
@@ -4250,13 +4291,22 @@ function update(dt){
         player.y+
         player.h/2-
         p.y
-      )<p.r+18
+      )<
+      p.r+15
     ){
 
       p.used=true;
 
-      player.x+=
-        p.targetOffset;
+      /*
+        Keep portal destination
+        inside playable route.
+      */
+
+      player.x +=
+        Math.min(
+          p.targetOffset,
+          420
+        );
 
       particleBurst(
         p.x,
@@ -4268,6 +4318,10 @@ function update(dt){
     }
 
   }
+
+  /*
+    REVERSE ZONES
+  */
 
   for(
     const r
@@ -4281,14 +4335,16 @@ function update(dt){
       player.y<r.y+r.h
     ){
 
-      player.reverseTimer=
+      player.reverseTimer =
         r.time;
-
-      dangerEl.classList.add("show");
 
     }
 
   }
+
+  /*
+    SPIKES
+  */
 
   for(
     const h
@@ -4302,7 +4358,9 @@ function update(dt){
       )
     ){
 
-      if(player.invincible<=0){
+      if(
+        player.invincible<=0
+      ){
 
         resetLevel();
         return;
@@ -4312,6 +4370,10 @@ function update(dt){
     }
 
   }
+
+  /*
+    LIGHTNING
+  */
 
   for(
     const l
@@ -4328,15 +4390,15 @@ function update(dt){
 
     }
 
-    const phase=
+    const phase =
       l.timer/l.cool;
 
-    const strikeStart=
+    const strikeStart =
       l.warning/l.cool;
 
     if(
       phase>=strikeStart &&
-      phase<strikeStart+.14
+      phase<strikeStart+.12
     ){
 
       stormFlash=1;
@@ -4346,12 +4408,14 @@ function update(dt){
           player.x+
           player.w/2-
           l.x
-        )<48 &&
+        )<38 &&
         player.y>
         l.y-15
       ){
 
-        if(player.invincible<=0){
+        if(
+          player.invincible<=0
+        ){
 
           resetLevel();
           return;
@@ -4364,327 +4428,64 @@ function update(dt){
 
   }
 
-  for(
-    const c
-    of levelData.chaos
-  ){
+  /*
+    FAIR 10 OBSTACLES
 
-    const t=
-      now+
-      c.phase;
+    Added separately so every hard level
+    has exactly 10 extra challenge events.
+  */
 
-    let hit=false;
+  updateFairObstacles(dt);
 
-    if(c.type===0){
+  /*
+    DANGER INDICATOR
 
-      const cx=
-        c.x+
-        Math.sin(t*2)*40;
-
-      const cy=
-        c.y+
-        Math.cos(t*1.5)*30;
-
-      hit=
-        circleHit(
-          cx,
-          cy,
-          c.size,
-          player
-        );
-
-    }
-
-    else if(c.type===1){
-
-      hit=
-        rectHit(
-          player,
-          {
-            x:
-              c.x+
-              Math.sin(t)*60,
-
-            y:c.y,
-
-            w:c.size*2,
-            h:c.size
-          }
-        );
-
-    }
-
-    else if(c.type===2){
-
-      hit=
-        rectHit(
-          player,
-          {
-            x:c.x,
-            y:
-              c.y+
-              Math.sin(t*2)*40,
-
-            w:c.size,
-            h:c.size*3
-          }
-        );
-
-    }
-
-    else if(c.type===3){
-
-      const cx=
-        c.x+
-        Math.cos(t*2)*55;
-
-      const cy=
-        c.y+
-        Math.sin(t*2)*55;
-
-      hit=
-        circleHit(
-          cx,
-          cy,
-          c.size,
-          player
-        );
-
-    }
-
-    else if(c.type===4){
-
-      const radius=
-        c.size*
-        (
-          1+
-          Math.sin(t*5)*.5
-        );
-
-      hit=
-        circleHit(
-          c.x,
-          c.y,
-          radius,
-          player
-        );
-
-    }
-
-    else if(c.type===5){
-
-      const yy=
-        c.y+
-        (
-          (t*c.speed)%280
-        );
-
-      hit=
-        circleHit(
-          c.x,
-          yy,
-          c.size*.7,
-          player
-        );
-
-    }
-
-    else if(c.type===6){
-
-      const yy=
-        c.y+
-        Math.sin(t*1.7)*90;
-
-      hit=
-        rectHit(
-          player,
-          {
-            x:c.x-80,
-            y:yy,
-            w:160,
-            h:5
-          }
-        );
-
-    }
-
-    else if(c.type===7){
-
-      const cx=
-        c.x+
-        Math.cos(t)*70;
-
-      const cy=
-        c.y+
-        Math.sin(t)*70;
-
-      hit=
-        circleHit(
-          cx,
-          cy,
-          c.size,
-          player
-        );
-
-    }
-
-    else if(c.type===8){
-
-      const xx=
-        c.x+
-        Math.sin(t*2)*45;
-
-      hit=
-        rectHit(
-          player,
-          {
-            x:xx,
-            y:c.y-70,
-            w:c.size,
-            h:140
-          }
-        );
-
-    }
-
-    else if(c.type===9){
-
-      const yy=
-        c.y+
-        Math.abs(
-          Math.sin(t*2)
-        )*
-        80;
-
-      hit=
-        circleHit(
-          c.x,
-          yy,
-          c.size,
-          player
-        );
-
-    }
-
-    else if(c.type===10){
-
-      const xx=
-        c.x+
-        Math.sin(t*3)*90;
-
-      hit=
-        circleHit(
-          xx,
-          c.y,
-          c.size,
-          player
-        );
-
-    }
-
-    else if(c.type===11){
-
-      hit=
-        circleHit(
-          c.x+
-          Math.sin(t)*50,
-
-          c.y+
-          Math.cos(t)*50,
-
-          c.size,
-
-          player
-        );
-
-    }
-
-    else if(c.type===12){
-
-      hit=
-        rectHit(
-          player,
-          {
-            x:
-              c.x+
-              Math.sin(t)*35,
-
-            y:
-              c.y+
-              Math.cos(t)*35,
-
-            w:c.size,
-            h:c.size
-          }
-        );
-
-    }
-
-    else{
-
-      if(
-        Math.sin(t*c.speed*.03)>0.8
-      ){
-
-        hit=
-          circleHit(
-            c.x,
-            c.y,
-            c.size,
-            player
-          );
-
-      }
-
-    }
-
-    if(
-      hit &&
-      player.invincible<=0
-    ){
-
-      resetLevel();
-      return;
-
-    }
-
-  }
+    It is only shown in harder levels.
+    It does not affect gameplay.
+  */
 
   if(
-    updateAdvancedObstacles(dt)
-  ){
-    return;
-  }
-
-  const danger=
-    levelData.tier.d;
-
-  if(
-    danger>.65 ||
-    player.reverseTimer>0
+    level>=16 &&
+    levelData.tier.d>.58
   ){
 
-    dangerEl.classList.add("show");
+    dangerEl.classList.add(
+      "show"
+    );
 
   }else{
 
-    dangerEl.classList.remove("show");
+    dangerEl.classList.remove(
+      "show"
+    );
 
   }
 
-  stormFlash=
+  /*
+    FLASH
+  */
+
+  stormFlash =
     Math.max(
       0,
       stormFlash-
       dt*5
     );
 
-  screenShake=
+  /*
+    SCREEN SHAKE
+  */
+
+  screenShake =
     Math.max(
       0,
       screenShake-
       dt*18
     );
+
+  /*
+    FALL
+  */
 
   if(
     player.y>
@@ -4696,6 +4497,10 @@ function update(dt){
 
   }
 
+  /*
+    FINISH GATES
+  */
+
   let gateBlocked=false;
 
   for(
@@ -4703,14 +4508,14 @@ function update(dt){
     of levelData.finishGates
   ){
 
-    const phase=
+    const phase =
       (
         now+
         g.phase
       )%
       g.period;
 
-    const active=
+    const active =
       phase<
       g.period*.55;
 
@@ -4733,6 +4538,10 @@ function update(dt){
 
   }
 
+  /*
+    FINISH
+  */
+
   if(
     !gateBlocked &&
     player.x+
@@ -4745,14 +4554,18 @@ function update(dt){
 
   }
 
-  const targetCamera=
+  /*
+    CAMERA
+  */
+
+  const targetCamera =
     Math.max(
       0,
       player.x-
       W*.32
     );
 
-  cameraX+=
+  cameraX +=
     (
       targetCamera-
       cameraX
@@ -4761,17 +4574,20 @@ function update(dt){
       1,
       dt*7
     );
-
 }
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
 
 function drawBackground(){
 
-  const d=
+  const d =
     levelData
-    ?levelData.tier.d
-    :0;
+    ? levelData.tier.d
+    : 0;
 
-  const sky=
+  const sky =
     ctx.createLinearGradient(
       0,
       0,
@@ -4816,16 +4632,24 @@ function drawBackground(){
     0
   );
 
+  /*
+    CLOUDS
+  */
+
   for(
     let i=0;
     i<35;
     i++
   ){
 
-    const x=i*280+100;
-    const y=95+(i%4)*45;
+    const x =
+      i*280+100;
 
-    ctx.fillStyle=
+    const y =
+      95+
+      (i%4)*45;
+
+    ctx.fillStyle =
       d>.7
       ?"rgba(150,150,180,.15)"
       :"rgba(255,255,255,.45)";
@@ -4860,6 +4684,10 @@ function drawBackground(){
 
   }
 
+  /*
+    STORM CLOUDS
+  */
+
   if(
     levelData &&
     levelData.lightnings.length
@@ -4870,7 +4698,7 @@ function drawBackground(){
       of levelData.lightnings
     ){
 
-      const phase=
+      const phase =
         l.timer/l.cool;
 
       let alpha=.2;
@@ -4879,10 +4707,12 @@ function drawBackground(){
         phase<
         l.warning/l.cool
       ){
+
         alpha=.65;
+
       }
 
-      ctx.fillStyle=
+      ctx.fillStyle =
         `rgba(35,40,60,${alpha})`;
 
       ctx.beginPath();
@@ -4919,9 +4749,15 @@ function drawBackground(){
 
   ctx.restore();
 
-  if(stormFlash>0){
+  /*
+    FLASH
+  */
 
-    ctx.fillStyle=
+  if(
+    stormFlash>0
+  ){
+
+    ctx.fillStyle =
       `rgba(
         255,
         255,
@@ -4942,765 +4778,9 @@ function drawBackground(){
   }
 }
 
-function drawAdvancedObstacles(){
-
-  if(
-    !levelData ||
-    !levelData.advancedObstacles
-  ){
-    return;
-  }
-
-  const now=
-    performance.now()/1000;
-
-  const D=
-    levelData.tier.d;
-
-  for(
-    const o
-    of levelData.advancedObstacles
-  ){
-
-    const t=
-      now+
-      o.phase+
-      o.variant*.001;
-
-    ctx.save();
-
-    if(o.type===0){
-
-      ctx.fillStyle="#ff315d";
-
-      ctx.beginPath();
-
-      ctx.arc(
-        o.x,
-        o.y,
-        o.size+4,
-        0,
-        Math.PI*2
-      );
-
-      ctx.fill();
-
-      ctx.fillStyle="#fff";
-
-      ctx.beginPath();
-
-      ctx.arc(
-        o.x-4,
-        o.y-3,
-        3,
-        0,
-        Math.PI*2
-      );
-
-      ctx.arc(
-        o.x+5,
-        o.y-3,
-        3,
-        0,
-        Math.PI*2
-      );
-
-      ctx.fill();
-
-    }
-
-    else if(o.type===1){
-
-      ctx.fillStyle=
-        o.triggered
-        ?"rgba(255,50,80,.9)"
-        :"#4b4d55";
-
-      ctx.fillRect(
-        o.baseX-o.w,
-        levelData.groundY-7,
-        o.w*2,
-        9
-      );
-
-      if(o.triggered){
-
-        ctx.fillStyle="#ef476f";
-
-        for(
-          let i=-1;
-          i<=1;
-          i++
-        ){
-
-          ctx.beginPath();
-
-          ctx.moveTo(
-            o.baseX+i*18-8,
-            levelData.groundY
-          );
-
-          ctx.lineTo(
-            o.baseX+i*18,
-            levelData.groundY-35-D*25
-          );
-
-          ctx.lineTo(
-            o.baseX+i*18+8,
-            levelData.groundY
-          );
-
-          ctx.fill();
-
-        }
-
-      }
-
-    }
-
-    else if(o.type===2){
-
-      const cycle=
-        (
-          t+
-          o.delay
-        )%
-        (
-          1.25-
-          D*.35
-        );
-
-      const active=
-        cycle>
-        (
-          .55-
-          D*.2
-        );
-
-      ctx.fillStyle="#ef476f";
-
-      const h=
-        active
-        ?48+D*35
-        :7;
-
-      ctx.beginPath();
-
-      ctx.moveTo(
-        o.baseX-o.w/2,
-        levelData.groundY
-      );
-
-      ctx.lineTo(
-        o.baseX,
-        levelData.groundY-h
-      );
-
-      ctx.lineTo(
-        o.baseX+o.w/2,
-        levelData.groundY
-      );
-
-      ctx.fill();
-
-    }
-
-    else if(o.type===3){
-
-      const xx =
-        o.baseX+
-        Math.sin(t*(
-          1.2+
-          D*3
-        ))*
-        o.range;
-
-      const yy =
-        o.baseY+
-        Math.sin(t*2)*25;
-
-      ctx.fillStyle="#ff4d6d";
-
-      ctx.fillRect(
-        xx,
-        yy,
-        o.w,
-        o.h
-      );
-
-    }
-
-    else if(o.type===4){
-
-      const cycle=
-        (
-          t*
-          (
-            .75+
-            D*2.2
-          )
-        )%2;
-
-      const down=
-        cycle<1
-        ?cycle
-        :2-cycle;
-
-      const yy=
-        50+
-        down*
-        (
-          levelData.groundY-
-          100
-        );
-
-      ctx.fillStyle="#5f55a8";
-
-      ctx.fillRect(
-        o.baseX-o.w/2,
-        yy,
-        o.w,
-        o.h+25
-      );
-
-      ctx.fillStyle="#ef476f";
-
-      ctx.fillRect(
-        o.baseX-o.w/2,
-        yy+o.h+20,
-        o.w,
-        7
-      );
-
-    }
-
-    else if(o.type===5){
-
-      if(o.triggered){
-
-        const radius=
-          o.timer*
-          (
-            180+
-            D*260
-          );
-
-        ctx.strokeStyle=
-          "rgba(255,70,100,.85)";
-
-        ctx.lineWidth=
-          5+
-          D*4;
-
-        ctx.beginPath();
-
-        ctx.arc(
-          o.baseX,
-          o.baseY,
-          radius,
-          0,
-          Math.PI*2
-        );
-
-        ctx.stroke();
-
-      }else{
-
-        ctx.fillStyle="#ffb703";
-
-        ctx.beginPath();
-
-        ctx.arc(
-          o.baseX,
-          o.baseY,
-          10+
-          Math.sin(t*5)*3,
-          0,
-          Math.PI*2
-        );
-
-        ctx.fill();
-
-      }
-
-    }
-
-    else if(o.type===6){
-
-      ctx.globalAlpha=
-        o.triggered
-        ?.55
-        :1;
-
-      ctx.fillStyle="#8e72ff";
-
-      ctx.fillRect(
-        o.baseX-o.w,
-        levelData.groundY-8,
-        o.w*2,
-        8
-      );
-
-      ctx.globalAlpha=1;
-
-    }
-
-    else if(o.type===7){
-
-      ctx.fillStyle="#7b61ff";
-
-      ctx.beginPath();
-
-      ctx.arc(
-        o.x,
-        o.y,
-        o.size,
-        0,
-        Math.PI*2
-      );
-
-      ctx.fill();
-
-      ctx.strokeStyle="#ff4d6d";
-
-      ctx.lineWidth=4;
-
-      ctx.beginPath();
-
-      ctx.moveTo(
-        o.x,
-        o.y-o.size
-      );
-
-      ctx.lineTo(
-        o.x,
-        o.y-o.size-35
-      );
-
-      ctx.stroke();
-
-    }
-
-    else if(o.type===8){
-
-      const xx =
-        o.baseX+
-        Math.sin(t*(
-          .8+
-          D*2.5
-        ))*
-        o.range;
-
-      const yy =
-        levelData.groundY-
-        o.h-
-        10-
-        Math.abs(
-          Math.sin(t*1.4)
-        )*
-        (
-          30+
-          D*100
-        );
-
-      ctx.fillStyle="#8e72ff";
-
-      ctx.fillRect(
-        xx,
-        yy,
-        o.w,
-        o.h
-      );
-
-    }
-
-    else if(o.type===9){
-
-      const cycle=
-        (
-          t*
-          (
-            .9+
-            D*3
-          )
-        )%1;
-
-      const active=
-        cycle>
-        (
-          .22-
-          D*.1
-        );
-
-      const yy =
-        o.baseY+
-        Math.sin(t*1.7)*
-        (
-          25+
-          D*100
-        );
-
-      ctx.fillStyle=
-        active
-        ?"rgba(255,40,70,.95)"
-        :"rgba(255,220,70,.5)";
-
-      ctx.fillRect(
-        o.baseX-90-D*60,
-        yy,
-        180+D*120,
-        active
-        ?8+D*7
-        :3
-      );
-
-    }
-
-    else if(o.type===10){
-
-      const pulse=
-        Math.sin(t*8)*.2;
-
-      ctx.fillStyle="#222";
-
-      ctx.beginPath();
-
-      ctx.arc(
-        o.baseX,
-        o.baseY,
-        o.size*(1+pulse),
-        0,
-        Math.PI*2
-      );
-
-      ctx.fill();
-
-      ctx.fillStyle=
-        o.triggered
-        ?"red"
-        :"#ffb703";
-
-      ctx.beginPath();
-
-      ctx.arc(
-        o.baseX-4,
-        o.baseY-4,
-        4,
-        0,
-        Math.PI*2
-      );
-
-      ctx.fill();
-
-    }
-
-    else if(o.type===11){
-
-      const xx =
-        o.baseX+
-        Math.sin(
-          t*
-          (
-            1.5+
-            D*3
-          )
-        )*
-        o.range;
-
-      const yy =
-        o.baseY+
-        Math.cos(
-          t*
-          (
-            2+
-            D*3
-          )
-        )*
-        (
-          20+
-          D*80
-        );
-
-      ctx.fillStyle="#ff6b35";
-
-      ctx.beginPath();
-
-      ctx.arc(
-        xx,
-        yy,
-        o.size,
-        0,
-        Math.PI*2
-      );
-
-      ctx.fill();
-
-    }
-
-    else if(o.type===12){
-
-      const angle=
-        t*
-        (
-          1.5+
-          D*5
-        );
-
-      const length=
-        45+
-        D*75;
-
-      ctx.translate(
-        o.baseX,
-        o.baseY
-      );
-
-      ctx.rotate(angle);
-
-      ctx.fillStyle="#ef476f";
-
-      ctx.fillRect(
-        0,
-        -5,
-        length,
-        10
-      );
-
-      ctx.fillRect(
-        -length,
-        -5,
-        length,
-        10
-      );
-
-      ctx.fillStyle="#222";
-
-      ctx.beginPath();
-
-      ctx.arc(
-        0,
-        0,
-        10,
-        0,
-        Math.PI*2
-      );
-
-      ctx.fill();
-
-    }
-
-    else if(o.type===13){
-
-      ctx.fillStyle="#6c4cff";
-
-      ctx.fillRect(
-        o.baseX-o.w/2,
-        o.y,
-        o.w,
-        o.h
-      );
-
-      ctx.fillStyle="#fff";
-
-      ctx.fillRect(
-        o.baseX-4,
-        o.y+5,
-        4,
-        4
-      );
-
-    }
-
-    else if(o.type===14){
-
-      ctx.strokeStyle=
-        "rgba(120,80,255,.65)";
-
-      ctx.lineWidth=3;
-
-      ctx.beginPath();
-
-      ctx.arc(
-        o.baseX,
-        o.baseY,
-        30+
-        Math.sin(t*3)*8,
-        0,
-        Math.PI*2
-      );
-
-      ctx.stroke();
-
-    }
-
-    else if(o.type===15){
-
-      ctx.strokeStyle=
-        "rgba(255,80,160,.8)";
-
-      ctx.lineWidth=4;
-
-      ctx.beginPath();
-
-      ctx.arc(
-        o.baseX,
-        o.baseY,
-        25+
-        Math.sin(t*4)*8,
-        0,
-        Math.PI*2
-      );
-
-      ctx.stroke();
-
-      ctx.font="bold 17px system-ui";
-      ctx.fillStyle="#fff";
-      ctx.textAlign="center";
-      ctx.fillText(
-        "↔",
-        o.baseX,
-        o.baseY+6
-      );
-
-    }
-
-    else if(o.type===16){
-
-      ctx.strokeStyle=
-        o.triggered
-        ?"rgba(255,80,80,.4)"
-        :"#64d8ff";
-
-      ctx.lineWidth=5;
-
-      ctx.beginPath();
-
-      ctx.arc(
-        o.baseX,
-        o.baseY,
-        o.size+8,
-        0,
-        Math.PI*2
-      );
-
-      ctx.stroke();
-
-    }
-
-    else if(o.type===17){
-
-      const radius =
-        30+
-        (
-          Math.sin(t*(
-            2+
-            D*4
-          ))*.5+.5
-        )*
-        (
-          60+
-          D*100
-        );
-
-      ctx.strokeStyle="#ff315d";
-
-      ctx.lineWidth=
-        12+
-        D*8;
-
-      ctx.beginPath();
-
-      ctx.arc(
-        o.baseX,
-        o.baseY,
-        radius,
-        0,
-        Math.PI*2
-      );
-
-      ctx.stroke();
-
-    }
-
-    else if(o.type===18){
-
-      const xx =
-        o.baseX+
-        Math.sin(t*2)*
-        o.range;
-
-      ctx.fillStyle="#ff315d";
-
-      ctx.fillRect(
-        xx,
-        levelData.groundY-90-D*80,
-        16+D*20,
-        90+D*120
-      );
-
-    }
-
-    else if(o.type===19){
-
-      const yy =
-        o.baseY+
-        Math.abs(
-          Math.sin(
-            t*
-            (
-              1.5+
-              D*3
-            )
-          )
-        )*
-        (
-          80+
-          D*170
-        );
-
-      const xx =
-        o.baseX+
-        Math.sin(t*.8)*
-        (
-          25+
-          D*80
-        );
-
-      ctx.fillStyle="#222";
-
-      ctx.beginPath();
-
-      ctx.arc(
-        xx,
-        yy,
-        o.size+
-        D*5,
-        0,
-        Math.PI*2
-      );
-
-      ctx.fill();
-
-      ctx.fillStyle="#ff315d";
-
-      ctx.beginPath();
-
-      ctx.arc(
-        xx-4,
-        yy-4,
-        4,
-        0,
-        Math.PI*2
-      );
-
-      ctx.fill();
-
-    }
-
-    ctx.restore();
-
-  }
-}
+/* =========================================================
+   WORLD
+========================================================= */
 
 function drawWorld(){
 
@@ -5709,13 +4789,15 @@ function drawWorld(){
   let sx=0;
   let sy=0;
 
-  if(screenShake>0){
+  if(
+    screenShake>0
+  ){
 
-    sx=
+    sx =
       (Math.random()-.5)*
       screenShake;
 
-    sy=
+    sy =
       (Math.random()-.5)*
       screenShake;
 
@@ -5725,6 +4807,10 @@ function drawWorld(){
     -cameraX+sx,
     sy
   );
+
+  /*
+    PLATFORMS
+  */
 
   for(
     const p
@@ -5749,7 +4835,7 @@ function drawWorld(){
       7
     );
 
-    ctx.fillStyle=
+    ctx.fillStyle =
       "rgba(255,255,255,.13)";
 
     for(
@@ -5768,6 +4854,10 @@ function drawWorld(){
     }
 
   }
+
+  /*
+    MOVING PLATFORMS
+  */
 
   for(
     const p
@@ -5794,6 +4884,10 @@ function drawWorld(){
 
   }
 
+  /*
+    DISAPPEARING
+  */
+
   for(
     const p
     of levelData.disappearingPlatforms
@@ -5802,7 +4896,7 @@ function drawWorld(){
     if(!p.active)
       continue;
 
-    ctx.globalAlpha=
+    ctx.globalAlpha =
       .45+
       .55*
       Math.min(
@@ -5823,12 +4917,16 @@ function drawWorld(){
 
   }
 
+  /*
+    FAKE
+  */
+
   for(
     const p
     of levelData.fakePlatforms
   ){
 
-    ctx.fillStyle=
+    ctx.fillStyle =
       "rgba(255,255,255,.38)";
 
     ctx.fillRect(
@@ -5839,6 +4937,10 @@ function drawWorld(){
     );
 
   }
+
+  /*
+    SLOPES
+  */
 
   for(
     const s
@@ -5893,12 +4995,16 @@ function drawWorld(){
 
   }
 
+  /*
+    ICE
+  */
+
   for(
     const ice
     of levelData.iceZones
   ){
 
-    ctx.fillStyle=
+    ctx.fillStyle =
       "rgba(150,225,255,.75)";
 
     ctx.fillRect(
@@ -5909,6 +5015,10 @@ function drawWorld(){
     );
 
   }
+
+  /*
+    CRACKS
+  */
 
   for(
     const c
@@ -5930,9 +5040,9 @@ function drawWorld(){
 
     }
 
-    ctx.fillStyle=
+    ctx.fillStyle =
       c.active
-      ?"#ef476f"
+      ?" #ef476f"
       :"#555861";
 
     ctx.fillRect(
@@ -5972,6 +5082,10 @@ function drawWorld(){
 
   }
 
+  /*
+    SPIKES
+  */
+
   for(
     const h
     of levelData.hazards
@@ -6002,7 +5116,8 @@ function drawWorld(){
 
     ctx.fillStyle="#fff";
 
-    ctx.font="bold 9px system-ui";
+    ctx.font =
+      "bold 9px system-ui";
 
     ctx.fillText(
       "!",
@@ -6011,6 +5126,10 @@ function drawWorld(){
     );
 
   }
+
+  /*
+    STARS
+  */
 
   for(
     const s
@@ -6041,18 +5160,18 @@ function drawWorld(){
       i++
     ){
 
-      const a=
+      const a =
         i*Math.PI/5;
 
-      const r=
+      const r =
         i%2===0
         ?11
         :5;
 
-      const xx=
+      const xx =
         Math.cos(a)*r;
 
-      const yy=
+      const yy =
         Math.sin(a)*r;
 
       if(i===0)
@@ -6068,6 +5187,10 @@ function drawWorld(){
     ctx.restore();
 
   }
+
+  /*
+    BALLS
+  */
 
   for(
     const b
@@ -6137,6 +5260,10 @@ function drawWorld(){
 
   }
 
+  /*
+    SAWS
+  */
+
   for(
     const s
     of levelData.saws
@@ -6163,18 +5290,18 @@ function drawWorld(){
       i++
     ){
 
-      const a=
+      const a =
         i*Math.PI/8;
 
-      const r=
+      const r =
         i%2===0
         ?s.r
         :s.r*.65;
 
-      const xx=
+      const xx =
         Math.cos(a)*r;
 
-      const yy=
+      const yy =
         Math.sin(a)*r;
 
       if(i===0)
@@ -6201,97 +5328,103 @@ function drawWorld(){
 
     ctx.fill();
 
-    ctx.strokeStyle="#555";
-
-    ctx.lineWidth=3;
-
-    ctx.beginPath();
-
-    ctx.arc(
-      0,
-      0,
-      s.r*.35,
-      0,
-      Math.PI*2
-    );
-
-    ctx.stroke();
-
     ctx.restore();
 
   }
+
+  /*
+    LASERS
+  */
 
   for(
     const l
     of levelData.lasers
   ){
 
-    const phase=
+    const now =
+      performance.now()/1000;
+
+    const phase =
       (
-        performance.now()/1000+
+        now+
         l.phase
       )%
       l.period;
 
-    const active=
+    const active =
       phase>
       l.warning;
 
-    ctx.fillStyle=
+    ctx.fillStyle =
       active
-      ?"rgba(255,50,80,.88)"
-      :"rgba(255,220,100,.35)";
+      ?"rgba(255,60,80,.9)"
+      :"rgba(255,220,80,.5)";
 
     ctx.fillRect(
       l.x,
       l.y,
       l.w,
       active
-      ?l.h
-      :3
+      ?l.h*2
+      :l.h
     );
 
   }
+
+  /*
+    BOMBS
+  */
 
   for(
     const b
     of levelData.bombs
   ){
 
-    ctx.save();
+    const pulse =
+      Math.sin(
+        b.pulse*8
+      )*.2;
 
-    ctx.translate(
-      b.x,
-      b.y
-    );
-
-    ctx.fillStyle=
-      Math.sin(b.pulse*12)>0
-      ?"#ff315d"
-      :"#222";
+    ctx.fillStyle="#222";
 
     ctx.beginPath();
 
     ctx.arc(
-      0,
-      0,
-      b.r,
+      b.x,
+      b.y,
+      b.r*(1+pulse),
       0,
       Math.PI*2
     );
 
     ctx.fill();
 
-    ctx.restore();
+    ctx.fillStyle="#ff4d6d";
+
+    ctx.beginPath();
+
+    ctx.arc(
+      b.x-4,
+      b.y-4,
+      4,
+      0,
+      Math.PI*2
+    );
+
+    ctx.fill();
 
   }
+
+  /*
+    FALLING BLOCKS
+  */
 
   for(
     const f
     of levelData.fallers
   ){
 
-    ctx.fillStyle="#8e72ff";
+    ctx.fillStyle="#7b61ff";
 
     ctx.fillRect(
       f.x,
@@ -6303,20 +5436,32 @@ function drawWorld(){
     ctx.fillStyle="#fff";
 
     ctx.fillRect(
-      f.x+4,
-      f.y+4,
+      f.x+5,
+      f.y+5,
+      4,
+      4
+    );
+
+    ctx.fillRect(
+      f.x+12,
+      f.y+5,
       4,
       4
     );
 
   }
 
+  /*
+    WIND
+  */
+
   for(
     const w
-    of levelData.walls
+    of levelData.windZones
   ){
 
-    ctx.fillStyle="#ff315d";
+    ctx.fillStyle =
+      "rgba(120,220,255,.08)";
 
     ctx.fillRect(
       w.x,
@@ -6325,134 +5470,27 @@ function drawWorld(){
       w.h
     );
 
-  }
-
-  for(
-    const p
-    of levelData.portals
-  ){
-
-    ctx.fillStyle="#64d8ff";
-
-    ctx.beginPath();
-
-    ctx.arc(
-      p.x,
-      p.y,
-      p.r,
-      0,
-      Math.PI*2
-    );
-
-    ctx.fill();
-
-    ctx.fillStyle="#101116";
-
-    ctx.beginPath();
-
-    ctx.arc(
-      p.x,
-      p.y,
-      p.r-6,
-      0,
-      Math.PI*2
-    );
-
-    ctx.fill();
-
-  }
-
-  for(
-    const r
-    of levelData.reverseZones
-  ){
-
-    ctx.fillStyle=
-      "rgba(255,80,160,.12)";
-
-    ctx.fillRect(
-      r.x,
-      r.y,
-      r.w,
-      r.h
-    );
-
-    ctx.strokeStyle=
-      "rgba(255,80,160,.35)";
+    ctx.strokeStyle =
+      "rgba(255,255,255,.22)";
 
     ctx.lineWidth=2;
 
-    ctx.strokeRect(
-      r.x,
-      r.y,
-      r.w,
-      r.h
-    );
-
-  }
-
-  for(
-    const l
-    of levelData.lightnings
-  ){
-
-    const phase=
-      l.timer/l.cool;
-
-    const strikeStart=
-      l.warning/l.cool;
-
-    if(
-      phase>=strikeStart
+    for(
+      let yy=w.y+20;
+      yy<w.y+w.h;
+      yy+=30
     ){
-
-      ctx.strokeStyle="#fff";
-
-      ctx.lineWidth=5;
 
       ctx.beginPath();
 
       ctx.moveTo(
-        l.x,
-        l.y
+        w.x+10,
+        yy
       );
 
       ctx.lineTo(
-        l.x-8,
-        l.y+80
-      );
-
-      ctx.lineTo(
-        l.x+10,
-        l.y+150
-      );
-
-      ctx.lineTo(
-        l.x-5,
-        levelData.groundY
-      );
-
-      ctx.stroke();
-
-    }else if(
-      phase>strikeStart-.25
-    ){
-
-      ctx.strokeStyle=
-        "rgba(255,255,100,.5)";
-
-      ctx.lineWidth=2;
-
-      ctx.beginPath();
-
-      ctx.moveTo(
-        l.x,
-        l.y
-      );
-
-      ctx.lineTo(
-        l.x,
-        levelData.groundY
+        w.x+w.w-10,
+        yy
       );
 
       ctx.stroke();
@@ -6461,49 +5499,103 @@ function drawWorld(){
 
   }
 
+  /*
+    SPRINGS
+  */
+
   for(
-    const c
-    of levelData.chaos
+    const s
+    of levelData.springs
   ){
 
-    ctx.fillStyle="#ff315d";
+    ctx.fillStyle="#ffd166";
+
+    ctx.fillRect(
+      s.x,
+      s.y,
+      s.w,
+      s.h
+    );
+
+    ctx.strokeStyle="#fff";
+
+    ctx.lineWidth=2;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+      s.x+2,
+      s.y+10
+    );
+
+    ctx.lineTo(
+      s.x+8,
+      s.y+2
+    );
+
+    ctx.lineTo(
+      s.x+14,
+      s.y+10
+    );
+
+    ctx.stroke();
+
+  }
+
+  /*
+    PORTALS
+  */
+
+  for(
+    const p
+    of levelData.portals
+  ){
+
+    ctx.save();
+
+    ctx.translate(
+      p.x,
+      p.y
+    );
+
+    ctx.rotate(
+      performance.now()/500
+    );
+
+    ctx.strokeStyle =
+      p.used
+      ?"rgba(150,150,150,.3)"
+      :"#64d8ff";
+
+    ctx.lineWidth=5;
 
     ctx.beginPath();
 
     ctx.arc(
-      c.x,
-      c.y,
-      c.size,
+      0,
+      0,
+      p.r,
       0,
       Math.PI*2
     );
 
-    ctx.fill();
+    ctx.stroke();
+
+    ctx.restore();
 
   }
 
-  drawAdvancedObstacles();
+  /*
+    GRAVITY
+  */
 
   for(
     const g
-    of levelData.finishGates
+    of levelData.gravityZones
   ){
 
-    const phase=
-      (
-        performance.now()/1000+
-        g.phase
-      )%
-      g.period;
-
-    const active=
-      phase<
-      g.period*.55;
-
-    ctx.fillStyle=
-      active
-      ?"#65d878"
-      :"#ef476f";
+    ctx.fillStyle =
+      "rgba(130,80,255,.08)";
 
     ctx.fillRect(
       g.x,
@@ -6514,43 +5606,898 @@ function drawWorld(){
 
   }
 
-  ctx.fillStyle="#ffd166";
+  /*
+    REVERSE
+  */
+
+  for(
+    const r
+    of levelData.reverseZones
+  ){
+
+    ctx.fillStyle =
+      "rgba(255,80,150,.07)";
+
+    ctx.fillRect(
+      r.x,
+      r.y,
+      r.w,
+      r.h
+    );
+
+  }
+
+  /*
+    MOVING WALLS
+  */
+
+  for(
+    const w
+    of levelData.walls
+  ){
+
+    ctx.fillStyle="#8e72ff";
+
+    ctx.fillRect(
+      w.x,
+      w.y,
+      w.w,
+      w.h
+    );
+
+  }
+
+  /*
+    LIGHTNING
+  */
+
+  for(
+    const l
+    of levelData.lightnings
+  ){
+
+    const phase =
+      l.timer/l.cool;
+
+    const warning =
+      l.warning/l.cool;
+
+    if(
+      phase<warning
+    ){
+
+      ctx.fillStyle =
+        "rgba(255,230,80,.8)";
+
+      ctx.beginPath();
+
+      ctx.arc(
+        l.x,
+        l.y,
+        10+
+        Math.sin(
+          performance.now()/90
+        )*4,
+        0,
+        Math.PI*2
+      );
+
+      ctx.fill();
+
+    }else if(
+      phase<
+      warning+.14
+    ){
+
+      ctx.strokeStyle="#fff36b";
+
+      ctx.lineWidth=8;
+
+      ctx.beginPath();
+
+      ctx.moveTo(
+        l.x,
+        l.y
+      );
+
+      ctx.lineTo(
+        l.x-18,
+        l.y+45
+      );
+
+      ctx.lineTo(
+        l.x+10,
+        l.y+45
+      );
+
+      ctx.lineTo(
+        l.x-5,
+        l.y+105
+      );
+
+      ctx.stroke();
+
+    }
+
+  }
+
+  /*
+    FINISH GATES
+  */
+
+  for(
+    const g
+    of levelData.finishGates
+  ){
+
+    const now =
+      performance.now()/1000;
+
+    const phase =
+      (
+        now+
+        g.phase
+      )%
+      g.period;
+
+    const active =
+      phase<
+      g.period*.55;
+
+    ctx.fillStyle =
+      active
+      ?"rgba(255,60,80,.9)"
+      :"rgba(100,255,160,.45)";
+
+    ctx.fillRect(
+      g.x,
+      g.y,
+      g.w,
+      g.h
+    );
+
+  }
+
+  /*
+    FAIR 10 OBSTACLES
+  */
+
+  if(level>=16){
+
+    const now =
+      performance.now()/1000;
+
+    for(
+      const o
+      of levelData.fairObstacles
+    ){
+
+      const t =
+        now+
+        o.phase;
+
+      ctx.save();
+
+      /*
+        Warning ring
+      */
+
+      ctx.strokeStyle =
+        "rgba(255,255,255,.20)";
+
+      ctx.lineWidth=2;
+
+      ctx.beginPath();
+
+      ctx.arc(
+        o.x,
+        o.y,
+        o.safeGap,
+        0,
+        Math.PI*2
+      );
+
+      ctx.stroke();
+
+      if(
+        o.type==="ball"
+      ){
+
+        const bx =
+          o.x+
+          Math.sin(t*1.3)*
+          (
+            45+
+            levelData.tier.d*35
+          );
+
+        const by =
+          o.y+
+          Math.cos(t*1.8)*18;
+
+        ctx.fillStyle="#ff884d";
+
+        ctx.beginPath();
+
+        ctx.arc(
+          bx,
+          by,
+          o.w*.5,
+          0,
+          Math.PI*2
+        );
+
+        ctx.fill();
+
+      }
+
+      else if(
+        o.type==="spike"
+      ){
+
+        ctx.fillStyle="#ff416c";
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+          o.x,
+          o.y+o.h
+        );
+
+        ctx.lineTo(
+          o.x+o.w/2,
+          o.y-o.h*.45
+        );
+
+        ctx.lineTo(
+          o.x+o.w,
+          o.y+o.h
+        );
+
+        ctx.closePath();
+
+        ctx.fill();
+
+      }
+
+      else if(
+        o.type==="fall"
+      ){
+
+        const cycle=2.5;
+
+        const phase =
+          (
+            t+
+            o.phase
+          )%
+          cycle;
+
+        const fy =
+          phase<.65
+          ?o.y+
+           phase*
+           (
+             260+
+             levelData.tier.d*160
+           )
+          :o.y;
+
+        ctx.fillStyle="#7b61ff";
+
+        ctx.fillRect(
+          o.x,
+          fy,
+          o.w,
+          o.h
+        );
+
+      }
+
+      else if(
+        o.type==="saw"
+      ){
+
+        const sx =
+          o.x+
+          Math.sin(t*1.7)*
+          (
+            35+
+            levelData.tier.d*35
+          );
+
+        const sy =
+          o.y+
+          Math.cos(t*1.2)*25;
+
+        ctx.translate(
+          sx,
+          sy
+        );
+
+        ctx.rotate(
+          performance.now()/100
+        );
+
+        ctx.fillStyle="#ddd";
+
+        ctx.beginPath();
+
+        for(
+          let i=0;
+          i<16;
+          i++
+        ){
+
+          const a =
+            i*Math.PI/8;
+
+          const r =
+            i%2===0
+            ?o.w*.55
+            :o.w*.32;
+
+          const xx =
+            Math.cos(a)*r;
+
+          const yy =
+            Math.sin(a)*r;
+
+          if(i===0)
+            ctx.moveTo(xx,yy);
+          else
+            ctx.lineTo(xx,yy);
+
+        }
+
+        ctx.closePath();
+        ctx.fill();
+
+      }
+
+      else if(
+        o.type==="laser"
+      ){
+
+        const period =
+          1.5+
+          levelData.tier.d*.6;
+
+        const phase =
+          (
+            t+
+            o.phase
+          )%period;
+
+        const active =
+          phase>
+          o.warning;
+
+        ctx.fillStyle =
+          active
+          ?"rgba(255,50,80,.9)"
+          :"rgba(255,220,80,.7)";
+
+        ctx.fillRect(
+          o.x-25,
+          o.y,
+          o.w+50,
+          active?8:4
+        );
+
+      }
+
+      else if(
+        o.type==="bomb"
+      ){
+
+        ctx.fillStyle="#202020";
+
+        ctx.beginPath();
+
+        ctx.arc(
+          o.x,
+          o.y,
+          o.w*.55,
+          0,
+          Math.PI*2
+        );
+
+        ctx.fill();
+
+        ctx.fillStyle="#ff4d6d";
+
+        ctx.beginPath();
+
+        ctx.arc(
+          o.x-4,
+          o.y-4,
+          4,
+          0,
+          Math.PI*2
+        );
+
+        ctx.fill();
+
+      }
+
+      else if(
+        o.type==="moving"
+      ){
+
+        const mx =
+          o.x+
+          Math.sin(t*1.2)*
+          (
+            55+
+            levelData.tier.d*35
+          );
+
+        ctx.fillStyle="#ffd166";
+
+        ctx.fillRect(
+          mx,
+          o.y,
+          o.w,
+          o.h
+        );
+
+      }
+
+      else if(
+        o.type==="crack"
+      ){
+
+        ctx.fillStyle="#555";
+
+        ctx.fillRect(
+          o.x,
+          o.y,
+          o.w,
+          8
+        );
+
+        ctx.strokeStyle="#ef476f";
+
+        ctx.lineWidth=2;
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+          o.x+5,
+          o.y
+        );
+
+        ctx.lineTo(
+          o.x+15,
+          o.y+8
+        );
+
+        ctx.lineTo(
+          o.x+25,
+          o.y
+        );
+
+        ctx.lineTo(
+          o.x+35,
+          o.y+8
+        );
+
+        ctx.stroke();
+
+      }
+
+      else if(
+        o.type==="wind"
+      ){
+
+        ctx.strokeStyle =
+          "rgba(120,220,255,.35)";
+
+        ctx.lineWidth=3;
+
+        for(
+          let a=0;
+          a<3;
+          a++
+        ){
+
+          ctx.beginPath();
+
+          ctx.moveTo(
+            o.x-20,
+            o.y+
+            a*18
+          );
+
+          ctx.lineTo(
+            o.x+
+            o.w+
+            20,
+            o.y+
+            a*18
+          );
+
+          ctx.stroke();
+
+        }
+
+      }
+
+      else if(
+        o.type==="lightning"
+      ){
+
+        const period =
+          1.8+
+          levelData.tier.d*.5;
+
+        const phase =
+          (
+            t+
+            o.phase
+          )%period;
+
+        const warning =
+          1.05-
+          levelData.tier.d*.25;
+
+        if(
+          phase<warning
+        ){
+
+          ctx.fillStyle =
+            "rgba(255,230,80,.8)";
+
+          ctx.beginPath();
+
+          ctx.arc(
+            o.x,
+            o.y,
+            10,
+            0,
+            Math.PI*2
+          );
+
+          ctx.fill();
+
+        }else{
+
+          ctx.strokeStyle="#fff36b";
+
+          ctx.lineWidth=5;
+
+          ctx.beginPath();
+
+          ctx.moveTo(
+            o.x,
+            o.y
+          );
+
+          ctx.lineTo(
+            o.x-10,
+            o.y+35
+          );
+
+          ctx.lineTo(
+            o.x+8,
+            o.y+35
+          );
+
+          ctx.lineTo(
+            o.x-3,
+            o.y+75
+          );
+
+          ctx.stroke();
+
+        }
+
+      }
+
+      ctx.restore();
+
+    }
+
+  }
+
+  /*
+    CHAOS VISUALS ONLY
+  */
+
+  const chaosNow =
+    performance.now()/1000;
+
+  for(
+    const c
+    of levelData.chaos
+  ){
+
+    ctx.fillStyle =
+      "rgba(255,90,120,.32)";
+
+    let xx=c.x;
+    let yy=c.y;
+
+    if(c.type===0){
+
+      xx +=
+        Math.sin(
+          chaosNow*2+
+          c.phase
+        )*40;
+
+      yy +=
+        Math.cos(
+          chaosNow*1.5+
+          c.phase
+        )*30;
+
+    }
+
+    if(c.type===3){
+
+      xx +=
+        Math.cos(
+          chaosNow*2+
+          c.phase
+        )*55;
+
+      yy +=
+        Math.sin(
+          chaosNow*2+
+          c.phase
+        )*55;
+
+    }
+
+    if(c.type===7){
+
+      xx +=
+        Math.cos(
+          chaosNow+
+          c.phase
+        )*70;
+
+      yy +=
+        Math.sin(
+          chaosNow+
+          c.phase
+        )*70;
+
+    }
+
+    if(c.type===10){
+
+      xx +=
+        Math.sin(
+          chaosNow*3+
+          c.phase
+        )*90;
+
+    }
+
+    if(c.type===11){
+
+      xx +=
+        Math.sin(
+          chaosNow+
+          c.phase
+        )*50;
+
+      yy +=
+        Math.cos(
+          chaosNow+
+          c.phase
+        )*50;
+
+    }
+
+    ctx.beginPath();
+
+    ctx.arc(
+      xx,
+      yy,
+      c.size,
+      0,
+      Math.PI*2
+    );
+
+    ctx.fill();
+
+  }
+
+  /*
+    FINISH FLAG
+  */
+
+  const fx =
+    levelData.finishX;
+
+  ctx.fillStyle="#222";
 
   ctx.fillRect(
-    levelData.finishX,
-    levelData.groundY-140,
-    14,
-    140
+    fx,
+    levelData.groundY-120,
+    7,
+    120
   );
 
-  ctx.fillStyle="#65d878";
+  ctx.fillStyle="#ff4d6d";
 
   ctx.beginPath();
 
   ctx.moveTo(
-    levelData.finishX+14,
-    levelData.groundY-140
+    fx+7,
+    levelData.groundY-120
   );
 
   ctx.lineTo(
-    levelData.finishX+75,
-    levelData.groundY-115
+    fx+75,
+    levelData.groundY-94
   );
 
   ctx.lineTo(
-    levelData.finishX+14,
-    levelData.groundY-90
+    fx+7,
+    levelData.groundY-68
+  );
+
+  ctx.closePath();
+
+  ctx.fill();
+
+  /*
+    PLAYER
+  */
+
+  ctx.save();
+
+  ctx.translate(
+    player.x,
+    player.y
+  );
+
+  ctx.fillStyle="#684cff";
+
+  ctx.beginPath();
+
+  ctx.roundRect(
+    0,
+    0,
+    player.w,
+    player.h,
+    8
   );
 
   ctx.fill();
+
+  /*
+    DASH
+  */
+
+  if(
+    player.dashTime>0
+  ){
+
+    ctx.fillStyle =
+      "rgba(108,76,255,.3)";
+
+    ctx.fillRect(
+      -25,
+      5,
+      20,
+      30
+    );
+
+  }
+
+  /*
+    EYES
+  */
+
+  ctx.fillStyle="#fff";
+
+  ctx.beginPath();
+
+  ctx.arc(
+    10,
+    12,
+    5,
+    0,
+    Math.PI*2
+  );
+
+  ctx.arc(
+    23,
+    12,
+    5,
+    0,
+    Math.PI*2
+  );
+
+  ctx.fill();
+
+  ctx.fillStyle="#111";
+
+  ctx.beginPath();
+
+  ctx.arc(
+    11,
+    12,
+    2,
+    0,
+    Math.PI*2
+  );
+
+  ctx.arc(
+    24,
+    12,
+    2,
+    0,
+    Math.PI*2
+  );
+
+  ctx.fill();
+
+  /*
+    SMILE
+  */
+
+  ctx.strokeStyle="#111";
+
+  ctx.lineWidth=3;
+
+  ctx.beginPath();
+
+  ctx.arc(
+    17,
+    17,
+    9,
+    0,
+    Math.PI
+  );
+
+  ctx.stroke();
+
+  /*
+    LEGS
+  */
+
+  ctx.fillStyle="#222";
+
+  ctx.fillRect(
+    6,
+    38,
+    7,
+    5
+  );
+
+  ctx.fillRect(
+    21,
+    38,
+    7,
+    5
+  );
+
+  ctx.restore();
+
+  /*
+    PARTICLES
+  */
 
   for(
     const p
     of particles
   ){
 
-    ctx.fillStyle=
-      "rgba(255,255,255,.85)";
+    ctx.globalAlpha =
+      clamp(
+        p.life,
+        0,
+        1
+      );
+
+    ctx.fillStyle="#ffd166";
 
     ctx.fillRect(
       p.x,
@@ -6561,176 +6508,91 @@ function drawWorld(){
 
   }
 
+  ctx.globalAlpha=1;
+
+  /*
+    OLD FUNNY TEXT:
+    Removed from Level 16 onward.
+  */
+
+  if(level<=15){
+
+    ctx.fillStyle =
+      "rgba(20,20,20,.35)";
+
+    ctx.font =
+      "900 15px system-ui";
+
+    ctx.fillText(
+      "هەموو شتێک باشە 😎",
+      player.x+100,
+      player.y-30
+    );
+
+  }
+
   ctx.restore();
 }
 
 /* =========================================================
-   PLAYER DRAW
+   SAN POSITION
 ========================================================= */
 
-function drawPlayer(){
+function updateSanPosition(){
 
-  ctx.save();
+  const positions=[
 
-  ctx.translate(
-    -cameraX,
-    0
-  );
+    {right:18,top:110},
+    {right:W*.28,top:90},
+    {right:35,top:180},
+    {right:W*.45,top:120},
+    {right:20,top:250}
 
-  if(
-    player.invincible>0 &&
-    Math.floor(
-      performance.now()/60
-    )%2===0
-  ){
-    ctx.globalAlpha=.4;
-  }
+  ];
 
-  const pw=player.w;
-  const ph=player.h;
+  const p =
+    positions[
+      (level-1)%
+      positions.length
+    ];
 
-  const px=player.x;
-  const py=player.y;
-
-  const facing =
-    input.x<0
-    ? -1
-    : 1;
-
-  ctx.save();
-
-  ctx.translate(
-    px+pw/2,
-    py+ph/2
-  );
-
-  ctx.scale(
-    facing,
-    1
-  );
-
-  const squashX =
-    player.grounded
-    ? 1.12
-    : .9;
-
-  const squashY =
-    player.grounded
-    ? .88
-    : 1.1;
-
-  ctx.scale(
-    squashX,
-    squashY
-  );
-
-  ctx.fillStyle="#ffd166";
-
-  ctx.beginPath();
-
-  ctx.arc(
-    0,
-    -4,
-    16,
-    0,
-    Math.PI*2
-  );
-
-  ctx.fill();
-
-  ctx.fillStyle="#222";
-
-  ctx.beginPath();
-
-  ctx.arc(
-    5,
-    -7,
-    2.5,
-    0,
-    Math.PI*2
-  );
-
-  ctx.arc(
-    11,
-    -7,
-    2.5,
-    0,
-    Math.PI*2
-  );
-
-  ctx.fill();
-
-  ctx.fillStyle="#ff315d";
-
-  ctx.beginPath();
-
-  ctx.arc(
-    8,
-    -2,
-    2,
-    0,
-    Math.PI*2
-  );
-
-  ctx.fill();
-
-  ctx.fillStyle="#6c4cff";
-
-  ctx.fillRect(
-    -13,
-    5,
-    26,
-    22
-  );
-
-  ctx.fillStyle="#fff";
-
-  ctx.fillRect(
-    -3,
-    11,
-    6,
-    9
-  );
-
-  ctx.fillStyle="#30323a";
-
-  const legOffset =
-    Math.abs(player.vx)>20
-    ? Math.sin(
-        performance.now()/65
-      )*6
-    : 0;
-
-  ctx.fillRect(
-    -10,
-    27,
-    6,
-    10+legOffset
-  );
-
-  ctx.fillRect(
-    4,
-    27,
-    6,
-    10-legOffset
-  );
-
-  ctx.restore();
-  ctx.restore();
-
-  san.style.left =
-    (
-      player.x -
-      cameraX +
-      W/2 -
-      41
-    ) + "px";
+  san.style.right =
+    p.right+"px";
 
   san.style.top =
-    (
-      player.y -
-      12
-    ) + "px";
+    p.top+"px";
+
+  const size =
+    Math.min(
+      86,
+      Math.max(
+        64,
+        W*.19
+      )
+    );
+
+  san.style.width =
+    size+"px";
+
+  san.style.height =
+    size+"px";
+}
+
+/* =========================================================
+   DRAW
+========================================================= */
+
+function draw(){
+
+  drawBackground();
+
+  if(levelData){
+
+    drawWorld();
+
+  }
+
+  updateSanPosition();
 }
 
 /* =========================================================
@@ -6744,27 +6606,50 @@ function loop(time){
 
   const dt =
     Math.min(
-      .1,
-      (time-lastTime)/1000
+      .033,
+      Math.max(
+        .001,
+        (time-lastTime)/1000
+      )
     );
 
   lastTime=time;
 
   update(dt);
-
-  ctx.clearRect(
-    0,
-    0,
-    W,
-    H
-  );
-
-  drawBackground();
-  drawWorld();
-  drawPlayer();
+  draw();
 
   requestAnimationFrame(loop);
 }
+
+/* =========================================================
+   INITIAL
+========================================================= */
+
+levelData =
+  makeLevel(level);
+
+levelEl.textContent =
+  level;
+
+if(level>=16){
+
+  document.body.classList.add(
+    "hardMode"
+  );
+
+}else{
+
+  tierEl.textContent =
+    "• "+
+    levelData.tier.name;
+
+  levelIdea.textContent =
+    `LEVEL ${level}: ${levelData.idea}`;
+}
+
+draw();
+
 </script>
+
 </body>
 </html>
