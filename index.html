@@ -11,7 +11,7 @@ minimum-scale=1,
 user-scalable=no,
 viewport-fit=cover">
 
-<title>SAN B AHAMD — 5000 Levels</title>
+<title>SAN B AHAMD — 5000 Levels Brutal</title>
 
 <style>
 *{
@@ -26,7 +26,7 @@ html,body{
   width:100%;
   height:100%;
   overflow:hidden;
-  background:#101116;
+  background:#0a0b0e;
   font-family:
     system-ui,
     -apple-system,
@@ -75,15 +75,15 @@ button{
 }
 
 .pill{
-  background:rgba(16,20,27,.86);
+  background:rgba(16,20,27,.9);
   color:#fff;
   padding:10px 13px;
   border-radius:999px;
   font-size:13px;
   font-weight:900;
-  box-shadow:0 8px 28px rgba(0,0,0,.22);
+  box-shadow:0 8px 28px rgba(0,0,0,.3);
   backdrop-filter:blur(12px);
-  border:1px solid rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12);
 }
 
 #tier{
@@ -104,10 +104,10 @@ button{
   text-align:center;
   color:white;
   background:
-    radial-gradient(circle at 10% 15%,#ffd166 0 11%,transparent 12%),
-    radial-gradient(circle at 92% 88%,#7bdcb5 0 14%,transparent 15%),
-    radial-gradient(circle at 80% 15%,#6c4cff 0 8%,transparent 9%),
-    #f07157;
+    radial-gradient(circle at 10% 15%,#ff3366 0 11%,transparent 12%),
+    radial-gradient(circle at 92% 88%,#220033 0 14%,transparent 15%),
+    radial-gradient(circle at 80% 15%,#ff0055 0 8%,transparent 9%),
+    #050508;
 }
 
 .introCard{
@@ -117,17 +117,18 @@ button{
 
 .introTitle{
   margin:0;
-  font-size:clamp(42px,13vw,78px);
+  font-size:clamp(38px,12vw,72px);
   line-height:.84;
   font-weight:1000;
-  color:#fff;
-  text-shadow:5px 5px 0 #202020;
+  color:#ff2a5f;
+  text-shadow:4px 4px 0 #000, 0 0 25px rgba(255,42,95,.6);
 }
 
 .introName{
   margin:20px 0 7px;
   font-size:17px;
   font-weight:900;
+  color:#ffccd5;
 }
 
 .creator{
@@ -140,11 +141,11 @@ button{
   border:0;
   padding:16px 29px;
   border-radius:999px;
-  background:#20283a;
+  background:linear-gradient(135deg, #ff2a5f, #7b00ff);
   color:#fff;
   font-size:17px;
   font-weight:1000;
-  box-shadow:0 8px 0 rgba(0,0,0,.22);
+  box-shadow:0 8px 25px rgba(255,42,95,.4);
 }
 
 #start:active{
@@ -161,16 +162,16 @@ button{
   object-fit:contain;
   z-index:35;
   pointer-events:none;
-  filter:drop-shadow(0 8px 8px rgba(0,0,0,.25));
-  animation:sanFunny 2.1s ease-in-out infinite;
+  filter:drop-shadow(0 8px 12px rgba(255,0,80,.4));
+  animation:sanFunny 1.5s ease-in-out infinite;
 }
 
 @keyframes sanFunny{
   0%,100%{
-    transform:rotate(-7deg) translateY(0) scale(1);
+    transform:rotate(-12deg) translateY(0) scale(1);
   }
   50%{
-    transform:rotate(8deg) translateY(-8px) scale(1.04);
+    transform:rotate(12deg) translateY(-12px) scale(1.08);
   }
 }
 
@@ -194,13 +195,13 @@ button{
   border-radius:50%;
   background:radial-gradient(
     circle,
-    rgba(255,255,255,.14),
-    rgba(255,255,255,.04)
+    rgba(255,255,255,.18),
+    rgba(255,255,255,.05)
   );
-  border:3px solid rgba(255,255,255,.55);
+  border:3px solid rgba(255,255,255,.65);
   box-shadow:
-    inset 0 0 20px rgba(255,255,255,.08),
-    0 8px 30px rgba(0,0,0,.18);
+    inset 0 0 20px rgba(255,255,255,.12),
+    0 8px 30px rgba(0,0,0,.3);
   pointer-events:auto;
   touch-action:none;
 }
@@ -212,8 +213,8 @@ button{
   left:30px;
   top:30px;
   border-radius:50%;
-  background:rgba(255,255,255,.25);
-  border:2px solid rgba(255,255,255,.65);
+  background:rgba(255,255,255,.32);
+  border:2px solid rgba(255,255,255,.8);
   display:flex;
   align-items:center;
   justify-content:center;
@@ -238,8 +239,8 @@ button{
   width:78px;
   height:78px;
   border-radius:50%;
-  border:3px solid rgba(255,255,255,.5);
-  background:rgba(20,20,25,.58);
+  border:3px solid rgba(255,255,255,.6);
+  background:rgba(20,20,25,.75);
   color:#fff;
   font-size:12px;
   font-weight:1000;
@@ -250,7 +251,7 @@ button{
 
 .action:active{
   transform:scale(.91);
-  background:rgba(108,76,255,.85);
+  background:rgba(255,42,95,.85);
 }
 
 /* IDEA */
@@ -264,14 +265,15 @@ button{
   padding:9px 13px;
   text-align:center;
   border-radius:15px;
-  background:rgba(10,10,12,.62);
-  color:white;
+  background:rgba(15,10,18,.82);
+  color:#ff99bb;
   font-size:12px;
   font-weight:800;
   z-index:40;
   pointer-events:none;
-  opacity:.94;
+  opacity:.96;
   backdrop-filter:blur(8px);
+  border:1px solid rgba(255,42,95,.3);
 }
 
 /* WIN */
@@ -284,24 +286,25 @@ button{
   align-items:center;
   justify-content:center;
   padding:18px;
-  background:rgba(0,0,0,.58);
+  background:rgba(0,0,0,.75);
   backdrop-filter:blur(8px);
   text-align:center;
 }
 
 .winCard{
   width:min(93vw,430px);
-  background:#17181d;
+  background:#17121c;
   color:white;
   border-radius:28px;
   padding:27px 20px;
-  box-shadow:0 25px 80px rgba(0,0,0,.45);
-  border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 25px 80px rgba(255,0,80,.25);
+  border:1px solid rgba(255,42,95,.3);
 }
 
 .winCard h1{
   margin:0 0 8px;
   font-size:30px;
+  color:#ff2a5f;
 }
 
 .winCard p{
@@ -324,12 +327,12 @@ button{
 }
 
 #nextBtn{
-  background:#6c4cff;
+  background:linear-gradient(135deg, #ff2a5f, #7b00ff);
   color:#fff;
 }
 
 #retryBtn{
-  background:#30323a;
+  background:#30283a;
   color:#fff;
 }
 
@@ -342,7 +345,7 @@ button{
   transform:translate(-50%,-50%) scale(.8);
   z-index:140;
   color:#fff;
-  background:#6c4cff;
+  background:linear-gradient(135deg, #ff2a5f, #7b00ff);
   padding:18px 24px;
   border-radius:20px;
   font-size:21px;
@@ -379,7 +382,7 @@ button{
   transform:translateX(-50%);
   z-index:60;
   color:white;
-  background:rgba(220,40,70,.8);
+  background:rgba(255,30,60,.92);
   padding:6px 12px;
   border-radius:999px;
   font-size:10px;
@@ -387,6 +390,7 @@ button{
   opacity:0;
   pointer-events:none;
   transition:.15s;
+  box-shadow:0 0 15px rgba(255,30,60,.7);
 }
 
 #danger.show{
@@ -406,12 +410,12 @@ button{
 
     <h1 class="introTitle">
       SAN<br>
-      B AHAMD
+      BRUTAL
     </h1>
 
     <div class="introName">
-      One funny hero.<br>
-      5000 brutal challenges.
+      ١ تا ١٥ فێرکاری بێ مەترسی، ١٦ بۆ ٥٠٠٠: دۆزەخی بێبەزەیی!<br>
+      ئەمجارەیان لە ١ بۆ ١٥ هیچ مەترسییەکی مردنت تێدا نییە!
     </div>
 
     <p class="creator">
@@ -445,7 +449,7 @@ button{
 <img id="san" src="san.PNG" alt="">
 
 <div id="danger">
-  ⚠️ مەترسیی زۆر بەرزە
+  ⚠️ مەترسیی زۆر بەرزە: دۆزەخ دەستی پێکرد!
 </div>
 
 <div id="levelIdea">
@@ -579,7 +583,7 @@ resize();
    SAVE
 ========================================================= */
 
-const SAVE_KEY = "san_b_ahamd_5000_v10";
+const SAVE_KEY = "san_b_ahamd_5000_brutal_v2";
 const TOTAL_LEVELS = 5000;
 
 let level = parseInt(
@@ -791,14 +795,14 @@ function dash(){
   player.dashTime = .17;
   player.dashCooldown =
     Math.max(
-      .3,
-      .8 -
-      levelData.tier.d * .25
+      .2,
+      .6 -
+      levelData.tier.d * .2
     );
 
-  player.invincible = .12;
+  player.invincible = .15;
 
-  screenShake = 5;
+  screenShake = 6;
 }
 
 jumpBtn.addEventListener(
@@ -996,183 +1000,64 @@ function circleHit(px,py,pr,box){
 }
 
 /* =========================================================
-   DIFFICULTY
+   DIFFICULTY (0% DEATH RISK 1-15, BRUTAL 16-5000)
 ========================================================= */
-
-/*
-   LEVEL 1–15
-   = TRUE TUTORIAL
-
-   LEVEL 16–5000
-   = NO EASY MODE
-
-   d reaches 1 at 5000.
-
-   Hundreds of parameters are generated from d.
-   Every level gets deterministic procedural combinations.
-*/
 
 function difficulty(n){
 
   if(n <= 15){
-
-    const p =
-      (n-1)/14;
-
+    const p = (n-1)/14;
     return{
-
-      p,
-      d:0,
-
-      stage:1,
-
-      name:`فێرکاری ${n}`,
-
-      gap:145-p*28,
-      width:185-p*25,
-      rise:5+p*18,
-
-      spikes:n>=8 ? p*.18 : 0,
-      balls:n>=10 ? p*.15 : 0,
-      cracks:n>=12 ? p*.12 : 0,
-
-      moving:0,
-      disappearing:0,
-      saws:0,
-      lasers:0,
-      bombs:0,
-      wind:0,
-      ice:0,
-      fake:0,
-      walls:0,
-      springs:n>=5 ? p*.12 : 0,
-      portals:0,
-      gravity:0,
-      reverse:0,
-      fallers:0,
-      storms:0,
-
-      ballSpeed:120+p*30,
-
-      speed:245,
-      jump:665,
-
-      groups:4+Math.floor(p*3)
-
+      p, d:0, stage:1,
+      name:`فێرکاری ئارام و بێ مەترسی (${n}/15)`,
+      gap:140, width:180, rise:10,
+      spikes:0, balls:0, cracks:0,
+      moving:0, disappearing:0, saws:0, lasers:0, bombs:0,
+      wind:0, ice:0, fake:0, walls:0, springs:0.2, portals:0,
+      gravity:0, reverse:0, fallers:0, storms:0,
+      ballSpeed:0, speed:240, jump:650, groups:5
     };
   }
 
   /*
-    HARD CURVE
-
-    Level 16 already starts hard.
-    Last 1000 levels are brutal.
+    FROM LEVEL 16 TO 5000: GRADUAL HARDCORE BRUTAL HELL
   */
 
-  const p =
-    clamp(
-      (n-16)/(TOTAL_LEVELS-16),
-      0,
-      1
-    );
+  const p = clamp((n-16)/(TOTAL_LEVELS-16), 0, 1);
+  const d = Math.pow(p, 0.45); // Smooth scaling from 16 to 5000
 
-  const d =
-    Math.pow(p,.63);
-
-  const stage =
-    Math.min(
-      20,
-      1+
-      Math.floor(d*20)
-    );
+  const stage = Math.min(5000, n);
 
   return{
-
     p,
     d,
-
     stage,
-
-    name:
-      `ئاستی قورس ${stage}`,
-
-    gap:
-      lerp(118,30,d),
-
-    width:
-      lerp(155,38,d),
-
-    rise:
-      lerp(12,145,d),
-
-    spikes:
-      lerp(.18,.97,d),
-
-    balls:
-      lerp(.15,.96,d),
-
-    cracks:
-      lerp(.12,.94,d),
-
-    moving:
-      lerp(.12,.96,d),
-
-    disappearing:
-      lerp(.04,.93,d),
-
-    saws:
-      lerp(.04,.94,d),
-
-    lasers:
-      lerp(.02,.90,d),
-
-    bombs:
-      lerp(.01,.88,d),
-
-    wind:
-      lerp(.02,.86,d),
-
-    ice:
-      lerp(.03,.84,d),
-
-    fake:
-      lerp(.02,.72,d),
-
-    walls:
-      lerp(.01,.78,d),
-
-    springs:
-      lerp(.08,.72,d),
-
-    portals:
-      lerp(.01,.55,d),
-
-    gravity:
-      lerp(.01,.65,d),
-
-    reverse:
-      lerp(.01,.62,d),
-
-    fallers:
-      lerp(.02,.90,d),
-
-    storms:
-      lerp(.05,1,d),
-
-    ballSpeed:
-      lerp(145,470,d),
-
-    speed:
-      lerp(250,310,d),
-
-    jump:
-      lerp(650,570,d),
-
-    groups:
-      Math.round(
-        lerp(7,34,d)
-      )
-
+    name: n === 5000 ? `دۆزەخی کۆتایی 5000` : `ئاستی قورسی دۆزەخ ${n}`,
+    gap: lerp(120, 22, d),
+    width: lerp(140, 32, d),
+    rise: lerp(20, 160, d),
+    spikes: lerp(0.05, 0.99, d),
+    balls: lerp(0.05, 0.99, d),
+    cracks: lerp(0.05, 0.98, d),
+    moving: lerp(0.05, 0.98, d),
+    disappearing: lerp(0.05, 0.98, d),
+    saws: lerp(0.05, 0.98, d),
+    lasers: lerp(0.05, 0.98, d),
+    bombs: lerp(0.05, 0.98, d),
+    wind: lerp(0.05, 0.95, d),
+    ice: lerp(0.05, 0.95, d),
+    fake: lerp(0.05, 0.92, d),
+    walls: lerp(0.05, 0.95, d),
+    springs: lerp(0.2, 0.8, d),
+    portals: lerp(0.05, 0.8, d),
+    gravity: lerp(0.05, 0.85, d),
+    reverse: lerp(0.05, 0.85, d),
+    fallers: lerp(0.05, 0.99, d),
+    storms: lerp(0.05, 1.0, d),
+    ballSpeed: lerp(140, 580, d),
+    speed: lerp(255, 325, d),
+    jump: lerp(650, 560, d),
+    groups: Math.round(lerp(6, 45, d))
   };
 }
 
@@ -1181,50 +1066,31 @@ function difficulty(n){
 ========================================================= */
 
 const ideas = [
-
-"💡 بە joystick بڕۆ بۆ ڕاست.",
-"💡 JUMP بۆ بازدان بەکاربهێنە.",
-"💡 لە پلاتفۆرمەکان نەکەویت.",
-"💡 کاتی JUMP زۆر گرنگە.",
-"💡 DASH بۆ بۆشاییە درێژەکانە.",
-"💡 لە Level 6 بۆشاییەکان گەورەتر دەبن.",
-"💡 پلاتفۆرمی بەرز هەمیشە ڕێگای ئاسان نییە.",
-"💡 لە Level 8 ـەوە ئاگاداری spike بە.",
-"💡 تۆپەکان دەجوڵێن.",
-"💡 تۆپ + spike دەتوانن پێکەوە بێن.",
-"💡 crack ـەکان لەژێر پێت دەشکێن.",
-"💡 زۆر لەسەر crack مەوەستە.",
-"💡 لە ئێستاوە یارییەکە جدی دەبێت.",
-"💡 کۆتایی فێرکاری نزیکە.",
-"💡 Level 15 دوا قۆناغی فێرکارییە.",
-"😈 Level 16: هیچ ئاسانکارییەک نییە.",
-"🔥 دوو مەترسی دەتوانن لە یەک کاتدا بێن.",
-"🔥 پلاتفۆرمی جوڵاو دەتوانێت ڕێگاکەت بگۆڕێت.",
-"⚠️ تۆپەکان خێراتر دەبن.",
-"⚠️ saw ـەکان لە ڕێگادا دەسوڕێن.",
-"⚡ laser ـەکان لە کاتێکی دیاریکراودا دەدرەوشێن.",
-"💣 bomb لە نزیکتدا مەوەستێت.",
-"🌪 wind دەتوانێت ئاراستەی جوڵانت بگۆڕێت.",
-"🧊 ice واتە کۆنترۆڵکردنت کەمتر دەبێت.",
-"👻 هەندێک پلاتفۆرم fake ـن.",
-"🧱 دیوارە جوڵاوەکان ڕێگات دەگرن.",
-"🌀 portal دەتوانێت شوێنت بگۆڕێت.",
-"⬆️ spring دەتوانێت زۆر بەرزت بکات.",
-"🔄 هەندێک کات direction دەگۆڕێت.",
-"🌌 gravity دەتوانێت گۆڕانکاری بکات.",
-"☠️ falling block ـەکان چاودێری بکە.",
-"⚡ lightning لە شوێنی خۆی پێشتر warning دەدات.",
-"🔥 warning ـەکان کورتتر دەبن.",
-"💀 safe zone کەمتر دەبێت.",
-"😈 هەموو mechanic ـەکان دەتوانن کۆببنەوە.",
-"🔥 لەو ئاستەدا تەنها reaction بەس نییە.",
-"💀 پێویستە route ـەکە پێشبینی بکەیت.",
-"☠️ Level 1000: یارییەکە دەچێتە قۆناغێکی نوێ.",
-"☠️ Level 2500: هیچ شتێک بە دڵنیایی safe نییە.",
-"☠️ Level 4000: هەموو mechanic ـەکان نزیکەی تەواوی هێزیان هەیە.",
-"💀 Level 4500+: ئەمە تاقیکردنەوەی reaction ـە.",
-"👑 Level 5000: کۆتایی SAN."
+"💡 Level 1-15: فێرکاری پاک و بێ مەترسی، چێژ لە یاریەکە ببینە!",
+"⚡ Level 16: دۆزەخ دەستی پێکرد، ئامادەبە!",
+"💥 زەویەکە لەپڕ شەق دەبات و مەترسییەکان دێن!",
+"🌪 بادەکان هەڵتەسێنن و ئاراستەت دەگۆڕن!",
+"🧊 سەهۆڵ کۆنترۆڵ لە دەستت دەردەهێنێت!",
+"👻 پلاتفۆرمی درۆزن (Fake) لەژێر پێشت دەبەن!",
+"💣 بۆمبەکان بە دەوروبەرتدا دەتەقنەوە!",
+"🌀 پۆرتاڵەکان سەرت لێ تێکدەدەن!",
+"☠️ سەددان مەترسی و گیانداری کوشندە چاوەڕێتن!",
+"🔥 ئەوە سەرەتای گەیشتنە بە لووتکە!",
+"💀 هۆشیاربە: شتی بیتام و شێتگیر زیاتر دەبن!",
+"⚡ تریشقەکان بە بێ ئاگاداری لێت دەدەن!",
+"🌀 گრავیتی گۆڕاو و خولانەوەی مێشکبر!",
+"☠️ Level 1000: لێرەدا مردن مسۆگەرە ئەگەر خێرا نەبیت!",
+"🔥 Level 2500: دۆزەخی ڕاستەقینە، هیچ شوێنێك سەلامەت نییە!",
+"💀 Level 4000: هێزی شێتکەری هەموو مەترسییەکان بەیەکەوە!",
+"👑 Level 5000: لوتکەی سەرکەوتن، تەنها قاره‌مان دەیبڕێت!"
 ];
+
+function getIdeaForLevel(n, d) {
+  if (n <= 15) return `💡 فێرکاری ژمارە ${n}: هیچ مەترسییەک نییە (0% ئەگەری مردن). پشوو بدە و فێر بە!`;
+  if (n === 5000) return "👑 لوتکەی دۆزەخ: Level 5000 - کۆتایی گەورە!";
+  const index = Math.floor(d * (ideas.length - 1));
+  return ideas[clamp(index, 0, ideas.length - 1)] + ` (ئاستی قورسی: ${(d*100).toFixed(1)}%)`;
+}
 
 /* =========================================================
    LEVEL GENERATOR
@@ -1281,1038 +1147,324 @@ function makeLevel(n){
 
   for(let i=0;i<count;i++){
 
-    const base=
-      n*100000+
-      i*997;
+    const base = n * 10000 + i * 79;
 
-    /*
-      GAP
-    */
+    const gap = Math.max(22, D.gap + random(base + 1) * 35);
+    x += gap;
 
-    const gap=
-      Math.max(
-        25,
-        D.gap+
-        random(base+1)*45
-      );
+    let width = Math.max(32, D.width + random(base + 2) * 30);
+    let py = groundY - random(base + 3) * D.rise;
 
-    x+=gap;
-
-    /*
-      PLATFORM
-    */
-
-    let width=
-      Math.max(
-        36,
-        D.width+
-        random(base+2)*42
-      );
-
-    let py=
-      groundY-
-      random(base+3)*D.rise;
-
-    /*
-      NORMAL PLATFORM
-    */
-
-    const platform={
+    const platform = {
       x,
-      y:py,
-      w:width,
-      h:18,
-      safe:true
+      y: py,
+      w: width,
+      h: 18,
+      safe: true
     };
 
     platforms.push(platform);
 
-    /*
-      STAR
-    */
-
-    if(
-      i%2===0 ||
-      random(base+4)>.45
-    ){
-
+    /* STARS */
+    if(random(base + 4) > 0.3){
       stars.push({
-        x:x+width*.5,
-        y:py-38,
-        r:9,
-        taken:false
+        x: x + width * 0.5,
+        y: py - 38,
+        r: 9,
+        taken: false
       });
-
     }
 
-    /*
-      MOVING PLATFORM
-    */
-
-    if(
-      chance(base+10,D.moving)
-    ){
-
+    /* MOVING PLATFORM */
+    if(chance(base + 10, D.moving)){
       movingPlatforms.push({
-
-        x:x+width*.5,
-        y:py,
-
-        baseX:x+width*.5,
-        baseY:py,
-
-        w:Math.max(42,width*.75),
-        h:18,
-
-        range:
-          35+
-          random(base+11)*
-          (70+D.d*90),
-
-        speed:
-          .6+
-          random(base+12)*
-          (1.2+D.d*1.6),
-
-        phase:
-          random(base+13)*Math.PI*2,
-
-        axis:
-          random(base+14)>.5
-          ?"x"
-          :"y",
-
-        safe:true
-
+        x: x + width * 0.5,
+        y: py,
+        baseX: x + width * 0.5,
+        baseY: py,
+        w: Math.max(38, width * 0.7),
+        h: 18,
+        range: 40 + random(base + 11) * (80 + D.d * 100),
+        speed: 0.8 + random(base + 12) * (1.5 + D.d * 2.5),
+        phase: random(base + 13) * Math.PI * 2,
+        axis: random(base + 14) > 0.5 ? "x" : "y",
+        safe: true
       });
-
     }
 
-    /*
-      DISAPPEARING PLATFORM
-    */
-
-    if(
-      chance(base+20,D.disappearing)
-    ){
-
+    /* DISAPPEARING PLATFORM */
+    if(chance(base + 20, D.disappearing)){
       disappearingPlatforms.push({
-
-        x:x,
-        y:py,
-        w:width,
-        h:18,
-
-        timer:
-          .8+
-          random(base+21)*1.5,
-
-        active:true,
-
-        respawn:
-          1.2+
-          random(base+22)*2
-
+        x: x,
+        y: py,
+        w: width,
+        h: 18,
+        timer: 0.5 + random(base + 21) * 1.0,
+        active: true,
+        respawn: 0.8 + random(base + 22) * 1.5
       });
-
     }
 
-    /*
-      FAKE PLATFORM
-    */
-
-    if(
-      chance(base+30,D.fake)
-    ){
-
+    /* FAKE PLATFORM */
+    if(chance(base + 30, D.fake)){
       fakePlatforms.push({
-
-        x:
-          x+
-          random(base+31)*
-          Math.max(10,width-30),
-
-        y:
-          py-
-
-          40-
-
-          random(base+32)*70,
-
-        w:
-          Math.max(
-            35,
-            width*.6
-          ),
-
-        h:14,
-
-        fake:true
-
+        x: x + random(base + 31) * Math.max(10, width - 30),
+        y: py - 30 - random(base + 32) * 60,
+        w: Math.max(30, width * 0.5),
+        h: 14,
+        fake: true
       });
-
     }
 
-    /*
-      SPIKES
-    */
-
-    if(
-      chance(base+40,D.spikes)
-    ){
-
-      const amount =
-        n<16
-        ?1
-        :Math.min(
-          5,
-          1+
-          Math.floor(
-            D.d*4+
-            random(base+41)*2
-          )
-        );
-
-      for(
-        let s=0;
-        s<amount;
-        s++
-      ){
-
+    /* SPIKES (MULTI) */
+    if(chance(base + 40, D.spikes)){
+      const amount = Math.min(6, 1 + Math.floor(D.d * 5 + random(base + 41) * 3));
+      for(let s = 0; s < amount; s++){
         hazards.push({
-
-          x:
-            x+
-            8+
-            random(base+50+s)*
-            Math.max(
-              12,
-              width-28
-            ),
-
-          y:
-            py-22,
-
-          w:22,
-          h:22
-
+          x: x + 6 + random(base + 50 + s) * Math.max(10, width - 20),
+          y: py - 22,
+          w: 20,
+          h: 20
         });
-
       }
-
     }
 
-    /*
-      BALLS
-    */
-
-    if(
-      chance(base+60,D.balls)
-    ){
-
-      const amount=
-        n<16
-        ?1
-        :Math.min(
-          4,
-          1+
-          Math.floor(
-            D.d*3+
-            random(base+61)*2
-          )
-        );
-
-      for(
-        let b=0;
-        b<amount;
-        b++
-      ){
-
+    /* BALLS */
+    if(chance(base + 60, D.balls)){
+      const amount = Math.min(5, 1 + Math.floor(D.d * 4 + random(base + 61) * 2));
+      for(let b = 0; b < amount; b++){
         balls.push({
-
-          x:
-            x+
-            width+
-            50+
-            random(base+70+b)*120,
-
-          y:
-            py-
-            20-
-            b*18,
-
-          r:
-            16+
-            D.d*5,
-
-          speed:
-            D.ballSpeed*
-            (1+b*.12),
-
-          minX:x-65,
-
-          maxX:
-            x+
-            width+
-            260+
-            D.d*130,
-
-          dir:
-            random(base+80+b)>.5
-            ?1
-            :-1,
-
-          targetTimer:
-            .5+
-            random(base+90+b)*1.3
-
+          x: x + width + 40 + random(base + 70 + b) * 100,
+          y: py - 20 - b * 16,
+          r: 14 + D.d * 6,
+          speed: D.ballSpeed * (1 + b * 0.15),
+          minX: x - 50,
+          maxX: x + width + 280 + D.d * 150,
+          dir: random(base + 80 + b) > 0.5 ? 1 : -1,
+          targetTimer: 0.3 + random(base + 90 + b) * 1.0
         });
-
       }
-
     }
 
-    /*
-      SAW
-    */
-
-    if(
-      chance(base+100,D.saws)
-    ){
-
+    /* SAWS */
+    if(chance(base + 100, D.saws)){
       saws.push({
-
-        x:
-          x+
-          width+
-          45+
-          random(base+101)*80,
-
-        y:
-          py-
-
-          35-
-
-          random(base+102)*60,
-
-        r:
-          17+
-          D.d*10,
-
-        baseY:
-          py-
-          35,
-
-        amp:
-          15+
-          D.d*60,
-
-        speed:
-          1+
-          D.d*4,
-
-        phase:
-          random(base+103)*6.28
-
+        x: x + width + 35 + random(base + 101) * 70,
+        y: py - 30 - random(base + 102) * 50,
+        r: 16 + D.d * 12,
+        baseY: py - 30,
+        amp: 20 + D.d * 70,
+        speed: 1.5 + D.d * 5,
+        phase: random(base + 103) * 6.28
       });
-
     }
 
-    /*
-      LASER
-    */
-
-    if(
-      chance(base+110,D.lasers)
-    ){
-
+    /* LASERS */
+    if(chance(base + 110, D.lasers)){
       lasers.push({
-
-        x:
-          x+
-          width+
-          35+
-          random(base+111)*100,
-
-        y:
-          py-
-          15-
-          random(base+112)*70,
-
-        w:
-          80+
-          random(base+113)*120,
-
-        h:8,
-
-        period:
-          .65+
-          random(base+114)*1.4,
-
-        phase:
-          random(base+115)*2,
-
-        warning:
-          .25+
-          random(base+116)*.25
-
+        x: x + width + 25 + random(base + 111) * 90,
+        y: py - 15 - random(base + 112) * 60,
+        w: 90 + random(base + 113) * 110,
+        h: 8,
+        period: 0.5 + random(base + 114) * 1.2,
+        phase: random(base + 115) * 2,
+        warning: 0.2 + random(base + 116) * 0.2
       });
-
     }
 
-    /*
-      BOMB
-    */
-
-    if(
-      chance(base+120,D.bombs)
-    ){
-
+    /* BOMBS */
+    if(chance(base + 120, D.bombs)){
       bombs.push({
-
-        x:
-          x+
-          width+
-          70+
-          random(base+121)*120,
-
-        y:
-          py-
-
-          40-
-
-          random(base+122)*100,
-
-        r:
-          13+
-          D.d*5,
-
-        timer:
-          1+
-          random(base+123)*2,
-
-        pulse:0
-
+        x: x + width + 50 + random(base + 121) * 100,
+        y: py - 35 - random(base + 122) * 80,
+        r: 12 + D.d * 6,
+        timer: 0.8 + random(base + 123) * 1.5,
+        pulse: 0
       });
-
     }
 
-    /*
-      SLOPE
-    */
-
-    if(
-      random(base+130)<
-      .12+
-      D.d*.70
-    ){
-
-      const sx=x+width+15;
-
-      const sw=
-        100+
-        random(base+131)*
-        Math.max(
-          70,
-          180-D.d*60
-        );
-
-      const rise=
-        12+
-        random(base+132)*
-        (20+D.rise*.8);
-
+    /* SLOPES */
+    if(random(base + 130) < 0.15 + D.d * 0.75){
+      const sx = x + width + 10;
+      const sw = 90 + random(base + 131) * Math.max(60, 160 - D.d * 50);
+      const rise = 10 + random(base + 132) * (25 + D.rise * 0.8);
       slopes.push({
-        x:sx,
-        y:groundY,
-        w:sw,
+        x: sx,
+        y: groundY,
+        w: sw,
         rise
       });
-
-      x=sx+sw;
-
-    }else{
-
-      x+=width;
-
+      x = sx + sw;
+    } else {
+      x += width;
     }
 
-    /*
-      CRACK
-    */
-
-    if(
-      chance(base+140,D.cracks)
-    ){
-
-      const amount=
-        Math.min(
-          4,
-          1+
-          Math.floor(
-            D.d*3
-          )
-        );
-
-      for(
-        let c=0;c<amount;c++
-      ){
-
+    /* CRACKS */
+    if(chance(base + 140, D.cracks)){
+      const amount = Math.min(5, 1 + Math.floor(D.d * 4));
+      for(let c = 0; c < amount; c++){
         cracks.push({
-
-          x:
-            x-
-            75+
-            c*24,
-
-          y:
-            groundY-3,
-
-          w:48,
-          h:10,
-
-          timer:0,
-          active:false,
-          broken:false
-
+          x: x - 65 + c * 22,
+          y: groundY - 3,
+          w: 42,
+          h: 10,
+          timer: 0,
+          active: false,
+          broken: false
         });
-
       }
-
     }
 
-    /*
-      WIND ZONE
-    */
-
-    if(
-      chance(base+150,D.wind)
-    ){
-
+    /* WIND */
+    if(chance(base + 150, D.wind)){
       windZones.push({
-
-        x:x+20,
-
-        y:
-          groundY-
-          150-
-
-          random(base+151)*100,
-
-        w:
-          100+
-          random(base+152)*120,
-
-        h:
-          130+
-          random(base+153)*100,
-
-        force:
-          (
-            random(base+154)>.5
-            ?1
-            :-1
-          )*
-          (
-            100+
-            D.d*400
-          )
-
+        x: x + 15,
+        y: groundY - 140 - random(base + 151) * 80,
+        w: 90 + random(base + 152) * 110,
+        h: 120 + random(base + 153) * 90,
+        force: (random(base + 154) > 0.5 ? 1 : -1) * (150 + D.d * 450)
       });
-
     }
 
-    /*
-      ICE
-    */
-
-    if(
-      chance(base+160,D.ice)
-    ){
-
+    /* ICE */
+    if(chance(base + 160, D.ice)){
       iceZones.push({
-
-        x:x-20,
-        y:groundY-25,
-
-        w:
-          80+
-          random(base+161)*150,
-
-        h:30
-
+        x: x - 15,
+        y: groundY - 25,
+        w: 70 + random(base + 161) * 130,
+        h: 30
       });
-
     }
 
-    /*
-      SPRING
-    */
-
-    if(
-      chance(base+170,D.springs)
-    ){
-
+    /* SPRINGS */
+    if(chance(base + 170, D.springs)){
       springs.push({
-
-        x:
-          x+
-          random(base+171)*
-          Math.max(
-            10,
-            width-25
-          ),
-
-        y:
-          py-12,
-
-        w:22,
-        h:12,
-
-        power:
-          720+
-          D.d*520
-
+        x: x + random(base + 171) * Math.max(10, width - 22),
+        y: py - 12,
+        w: 22,
+        h: 12,
+        power: 750 + D.d * 550
       });
-
     }
 
-    /*
-      PORTAL
-    */
-
-    if(
-      chance(base+180,D.portals)
-    ){
-
+    /* PORTALS */
+    if(chance(base + 180, D.portals)){
       portals.push({
-
-        x:
-          x+
-          width+
-          30+
-
-          random(base+181)*80,
-
-        y:
-          py-
-          80-
-
-          random(base+182)*100,
-
-        r:20,
-
-        targetOffset:
-          260+
-          random(base+183)*
-          600,
-
-        used:false
-
+        x: x + width + 25 + random(base + 181) * 70,
+        y: py - 70 - random(base + 182) * 90,
+        r: 18,
+        targetOffset: 220 + random(base + 183) * 550,
+        used: false
       });
-
     }
 
-    /*
-      GRAVITY ZONE
-    */
-
-    if(
-      chance(base+190,D.gravity)
-    ){
-
+    /* GRAVITY */
+    if(chance(base + 190, D.gravity)){
       gravityZones.push({
-
-        x:x+10,
-
-        y:
-          py-
-          130,
-
-        w:
-          90+
-          random(base+191)*130,
-
-        h:
-          170,
-
-        scale:
-          random(base+192)>.5
-          ? .48
-          : 1.75
-
+        x: x + 10,
+        y: py - 120,
+        w: 80 + random(base + 191) * 120,
+        h: 160,
+        scale: random(base + 192) > 0.5 ? 0.45 : 1.85
       });
-
     }
 
-    /*
-      REVERSE CONTROL
-    */
-
-    if(
-      chance(base+200,D.reverse)
-    ){
-
+    /* REVERSE */
+    if(chance(base + 200, D.reverse)){
       reverseZones.push({
-
-        x:x+10,
-
-        y:
-          py-
-          160,
-
-        w:
-          100+
-          random(base+201)*140,
-
-        h:
-          180,
-
-        time:
-          1.2+
-          random(base+202)*2.2
-
+        x: x + 10,
+        y: py - 150,
+        w: 90 + random(base + 201) * 120,
+        h: 170,
+        time: 1.0 + random(base + 202) * 2.0
       });
-
     }
 
-    /*
-      FALLING OBJECT
-    */
-
-    if(
-      chance(base+210,D.fallers)
-    ){
-
-      const amount=
-        Math.min(
-          4,
-          1+
-          Math.floor(D.d*3)
-        );
-
-      for(
-        let f=0;
-        f<amount;
-        f++
-      ){
-
+    /* FALLERS */
+    if(chance(base + 210, D.fallers)){
+      const amount = Math.min(5, 1 + Math.floor(D.d * 4));
+      for(let f = 0; f < amount; f++){
         fallers.push({
-
-          x:
-            x+
-            random(base+220+f)*100,
-
-          y:
-            -100-
-            random(base+230+f)*300,
-
-          w:
-            20+
-            D.d*12,
-
-          h:
-            20+
-            D.d*12,
-
-          vy:
-            100+
-            random(base+240+f)*220+
-            D.d*250,
-
-          resetY:
-            -220-
-
-            random(base+250+f)*150
-
+          x: x + random(base + 220 + f) * 90,
+          y: -100 - random(base + 230 + f) * 250,
+          w: 18 + D.d * 14,
+          h: 18 + D.d * 14,
+          vy: 120 + random(base + 240 + f) * 250 + D.d * 300,
+          resetY: -200 - random(base + 250 + f) * 120
         });
-
       }
-
     }
 
-    /*
-      MOVING WALL
-    */
-
-    if(
-      chance(base+260,D.walls)
-    ){
-
+    /* WALLS */
+    if(chance(base + 260, D.walls)){
       walls.push({
-
-        x:
-          x+
-          width+
-          70+
-
-          random(base+261)*90,
-
-        y:
-          py-
-          100,
-
-        w:
-          18+
-
-          D.d*12,
-
-        h:
-          100+
-
-          D.d*120,
-
-        range:
-          20+
-          D.d*100,
-
-        speed:
-          .8+
-          D.d*2,
-
-        phase:
-          random(base+262)*6.28
-
+        x: x + width + 60 + random(base + 261) * 80,
+        y: py - 90,
+        w: 16 + D.d * 14,
+        h: 90 + D.d * 110,
+        range: 20 + D.d * 90,
+        speed: 1.0 + D.d * 2.5,
+        phase: random(base + 262) * 6.28
       });
-
     }
 
   }
 
-  /*
-    FINAL SAFE PLATFORM
-  */
-
-  const finalStart=x+60;
-
+  /* FINAL SAFE */
+  const finalStart = x + 50;
   platforms.push({
-
-    x:finalStart,
-    y:groundY,
-    w:500,
-    h:80,
-    safe:true
-
+    x: finalStart,
+    y: groundY,
+    w: 500,
+    h: 80,
+    safe: true
   });
 
-  /*
-    FINISH GATES
-
-    At high levels multiple gates appear.
-  */
-
-  const gateCount=
-    n<16
-    ?0
-    :Math.min(
-      5,
-      Math.floor(D.d*5)
-    );
-
-  for(
-    let g=0;
-    g<gateCount;
-    g++
-  ){
-
+  /* FINISH GATES */
+  const gateCount = n <= 15 ? 0 : Math.min(6, Math.floor(D.d * 6));
+  for(let g = 0; g < gateCount; g++){
     finishGates.push({
-
-      x:
-        finalStart+
-        80+
-        g*75,
-
-      y:
-        groundY-
-        130,
-
-      w:12,
-
-      h:130,
-
-      phase:
-        random(
-          n*6000+g
-        )*6.28,
-
-      period:
-        .8+
-        random(
-          n*6001+g
-        )*1.3
-
+      x: finalStart + 70 + g * 70,
+      y: groundY - 120,
+      w: 12,
+      h: 120,
+      phase: random(n * 6000 + g) * 6.28,
+      period: 0.7 + random(n * 6001 + g) * 1.1
     });
-
   }
 
-  /*
-    FINISH
-  */
+  const finishX = finalStart + 430;
 
-  const finishX=
-    finalStart+
-    430;
-
-  /*
-    LIGHTNING
-
-    More than before.
-  */
-
-  const stormCount=
-    n<16
-    ?0
-    :Math.min(
-      12,
-      1+
-      Math.floor(
-        D.d*11
-      )
-    );
-
-  for(
-    let i=0;
-    i<stormCount;
-    i++
-  ){
-
-    const seed=
-      n*8000+i*31;
-
+  /* LIGHTNINGNINGS */
+  const stormCount = n <= 15 ? 0 : Math.min(15, 2 + Math.floor(D.d * 14));
+  for(let i = 0; i < stormCount; i++){
+    const seed = n * 8000 + i * 31;
     lightnings.push({
-
-      x:
-        430+
-        random(seed)*
-        Math.max(
-          300,
-          x-400
-        ),
-
-      y:
-        groundY-
-        250-
-        random(seed+1)*180,
-
-      timer:
-        random(seed+2)*1.5,
-
-      cool:
-        Math.max(
-          .42,
-          1.35-
-          D.d*.78-
-          random(seed+3)*.35
-        ),
-
-      warning:
-        Math.max(
-          .16,
-          .72-
-          D.d*.48
-        )
-
+      x: 350 + random(seed) * Math.max(300, x - 350),
+      y: groundY - 220 - random(seed + 1) * 160,
+      timer: random(seed + 2) * 1.2,
+      cool: Math.max(0.35, 1.2 - D.d * 0.75 - random(seed + 3) * 0.3),
+      warning: Math.max(0.12, 0.6 - D.d * 0.4)
     });
-
   }
 
-  /*
-    EXTRA PROCEDURAL CHAOS
-
-    This adds hundreds of additional
-    combinations without manually
-    storing 5000 maps.
-  */
-
-  const chaos=[];
-
-  const chaosCount=
-    n<16
-    ?0
-    :Math.floor(
-      5+
-      D.d*35
-    );
-
-  for(
-    let i=0;
-    i<chaosCount;
-    i++
-  ){
-
-    const seed=
-      n*90000+i*719;
-
+  /* CHAOS TRAPS */
+  const chaos = [];
+  const chaosCount = n <= 15 ? 0 : Math.floor(8 + D.d * 45);
+  for(let i = 0; i < chaosCount; i++){
+    const seed = n * 90000 + i * 541;
     chaos.push({
-
-      x:
-        350+
-        random(seed)*
-        Math.max(
-          300,
-          x-300
-        ),
-
-      y:
-        80+
-        random(seed+1)*
-        Math.max(
-          100,
-          groundY-160
-        ),
-
-      type:
-        Math.floor(
-          random(seed+2)*14
-        ),
-
-      size:
-        8+
-        random(seed+3)*
-        (10+D.d*35),
-
-      speed:
-        40+
-        random(seed+4)*
-        (100+D.d*350),
-
-      phase:
-        random(seed+5)*6.28
-
+      x: 300 + random(seed) * Math.max(300, x - 300),
+      y: 70 + random(seed + 1) * Math.max(100, groundY - 150),
+      type: Math.floor(random(seed + 2) * 16),
+      size: 8 + random(seed + 3) * (10 + D.d * 40),
+      speed: 50 + random(seed + 4) * (120 + D.d * 400),
+      phase: random(seed + 5) * 6.28
     });
-
-  }
-
-  /*
-    IDEA
-  */
-
-  let ideaIndex;
-
-  if(n<=15){
-
-    ideaIndex=n-1;
-
-  }else{
-
-    ideaIndex=
-      15+
-      Math.floor(
-        D.d*
-        (ideas.length-16)
-      );
-
-    ideaIndex=
-      Math.min(
-        ideas.length-1,
-        ideaIndex
-      );
   }
 
   return{
-
     groundY,
-
     platforms,
     hazards,
     stars,
@@ -2321,7 +1473,6 @@ function makeLevel(n){
     cracks,
     lightnings,
     fallers,
-
     movingPlatforms,
     disappearingPlatforms,
     saws,
@@ -2336,15 +1487,10 @@ function makeLevel(n){
     gravityZones,
     reverseZones,
     finishGates,
-
     chaos,
-
     finishX,
-
-    idea:ideas[ideaIndex],
-
-    tier:D
-
+    idea: getIdeaForLevel(n, D.d),
+    tier: D
   };
 }
 
@@ -2353,11 +1499,7 @@ function makeLevel(n){
 ========================================================= */
 
 function saveLevel(){
-
-  localStorage.setItem(
-    SAVE_KEY,
-    String(level)
-  );
+  localStorage.setItem(SAVE_KEY, String(level));
 }
 
 /* =========================================================
@@ -2460,7 +1602,7 @@ function winLevel(){
   finishBanner.classList.add("show");
 
   winText.textContent=
-    `تۆ مەرحەلەی ${level} ـت بە سەرکەوتوویی بردەوە.`;
+    `تۆ مەرحەلەی ${level} ـت بە سەرکەوتوویی بردەوە!`;
 
   win.style.display="flex";
 }
@@ -2472,19 +1614,9 @@ function winLevel(){
 function nextLevel(){
 
   if(level>=TOTAL_LEVELS){
-
-    /*
-      Reaching 5000 does NOT mean
-      the game becomes easy again.
-      It simply loops if NEXT is pressed.
-    */
-
     level=1;
-
   }else{
-
     level++;
-
   }
 
   saveLevel();
@@ -2535,8 +1667,8 @@ function particleBurst(x,y,type="normal"){
 
   const count=
     type==="danger"
-    ?18
-    :10;
+    ?22
+    :12;
 
   for(
     let i=0;
@@ -2552,23 +1684,23 @@ function particleBurst(x,y,type="normal"){
       vx:
         (random(
           performance.now()+i*31
-        )-.5)*220,
+        )-.5)*260,
 
       vy:
         (random(
           performance.now()+i*53
-        )-.5)*220,
+        )-.5)*260,
 
-      life:.5+
+      life:.4+
         random(
           performance.now()+i*71
-        )*.6,
+        )*.5,
 
       size:
         2+
         random(
           performance.now()+i*91
-        )*5
+        )*6
 
     });
 
@@ -2587,15 +1719,11 @@ function updateParticles(dt){
 
     p.x+=p.vx*dt;
     p.y+=p.vy*dt;
-
-    p.vy+=300*dt;
-
+    p.vy+=350*dt;
     p.life-=dt;
 
     if(p.life<=0){
-
       particles.splice(i,1);
-
     }
 
   }
@@ -2607,1518 +1735,380 @@ function updateParticles(dt){
 
 function update(dt){
 
-  if(
-    paused ||
-    !levelData
-  ){
-    return;
-  }
+  if(paused || !levelData) return;
 
   updateParticles(dt);
 
-  /*
-    TIMERS
-  */
+  player.dashCooldown = Math.max(0, player.dashCooldown - dt);
+  player.dashTime = Math.max(0, player.dashTime - dt);
+  player.slowTimer = Math.max(0, player.slowTimer - dt);
+  player.reverseTimer = Math.max(0, player.reverseTimer - dt);
+  player.invincible = Math.max(0, player.invincible - dt);
 
-  player.dashCooldown=
-    Math.max(
-      0,
-      player.dashCooldown-dt
-    );
+  const oldY = player.y;
+  const oldBottom = oldY + player.h;
 
-  player.dashTime=
-    Math.max(
-      0,
-      player.dashTime-dt
-    );
+  let gravityScale = 1;
+  let speedMultiplier = player.slowTimer > 0 ? 0.5 : 1;
 
-  player.slowTimer=
-    Math.max(
-      0,
-      player.slowTimer-dt
-    );
-
-  player.reverseTimer=
-    Math.max(
-      0,
-      player.reverseTimer-dt
-    );
-
-  player.invincible=
-    Math.max(
-      0,
-      player.invincible-dt
-    );
-
-  /*
-    OLD POSITION
-  */
-
-  const oldY=player.y;
-
-  const oldBottom=
-    oldY+player.h;
-
-  /*
-    DIFFICULTY PHYSICS
-  */
-
-  let gravityScale=1;
-
-  let speedMultiplier=
-    player.slowTimer>0
-    ? .55
-    : 1;
-
-  if(
-    player.reverseTimer>0
-  ){
-    speedMultiplier*=.9;
+  if(player.reverseTimer > 0){
+    speedMultiplier *= 0.85;
   }
 
-  /*
-    GRAVITY ZONES
-  */
-
-  for(
-    const g
-    of levelData.gravityZones
-  ){
-
+  for(const g of levelData.gravityZones){
     if(
-      player.x+player.w>g.x &&
-      player.x<g.x+g.w &&
-      player.y+player.h>g.y &&
-      player.y<g.y+g.h
+      player.x + player.w > g.x &&
+      player.x < g.x + g.w &&
+      player.y + player.h > g.y &&
+      player.y < g.y + g.h
     ){
-
-      gravityScale=g.scale;
+      gravityScale = g.scale;
     }
   }
 
-  /*
-    WIND
-  */
-
-  let windForce=0;
-
-  for(
-    const w
-    of levelData.windZones
-  ){
-
+  let windForce = 0;
+  for(const w of levelData.windZones){
     if(
-      player.x+player.w>w.x &&
-      player.x<w.x+w.w &&
-      player.y+player.h>w.y &&
-      player.y<w.y+w.h
+      player.x + player.w > w.x &&
+      player.x < w.x + w.w &&
+      player.y + player.h > w.y &&
+      player.y < w.y + w.h
     ){
-
-      windForce+=w.force;
+      windForce += w.force;
     }
   }
 
-  /*
-    REVERSE CONTROL
-  */
-
-  let controlX=input.x;
-
-  if(
-    player.reverseTimer>0
-  ){
-
-    controlX=-controlX;
-
+  let controlX = input.x;
+  if(player.reverseTimer > 0){
+    controlX = -controlX;
   }
 
-  /*
-    MOVEMENT
-  */
+  const targetVX = controlX * player.speed * speedMultiplier;
+  const accel = player.slowTimer > 0 ? 5 : 14;
 
-  const targetVX=
-    controlX*
-    player.speed*
-    speedMultiplier;
+  player.vx += (targetVX - player.vx) * Math.min(1, dt * accel);
+  player.vx += windForce * dt;
 
-  const accel=
-    player.slowTimer>0
-    ?6
-    :12;
-
-  player.vx+=
-    (
-      targetVX-
-      player.vx
-    )*
-    Math.min(
-      1,
-      dt*accel
-    );
-
-  player.vx+=
-    windForce*dt;
-
-  /*
-    DASH
-  */
-
-  if(player.dashTime>0){
-
-    player.vx*=1.015;
-
+  if(player.dashTime > 0){
+    player.vx *= 1.02;
   }
 
-  /*
-    GRAVITY
-  */
+  player.vy += 1600 * gravityScale * dt;
+  player.x += player.vx * dt;
+  player.y += player.vy * dt;
 
-  player.vy+=
-    1550*
-    gravityScale*
-    dt;
+  player.grounded = false;
 
-  player.x+=
-    player.vx*dt;
+  const now = performance.now() / 1000;
 
-  player.y+=
-    player.vy*dt;
-
-  player.grounded=false;
-
-  /*
-    MOVING PLATFORMS
-  */
-
-  const now=
-    performance.now()/1000;
-
-  for(
-    const m
-    of levelData.movingPlatforms
-  ){
-
-    if(m.axis==="x"){
-
-      m.x=
-        m.baseX+
-        Math.sin(
-          now*m.speed+
-          m.phase
-        )*
-        m.range;
-
-    }else{
-
-      m.y=
-        m.baseY+
-        Math.sin(
-          now*m.speed+
-          m.phase
-        )*
-        m.range;
-
+  /* MOVING PLATFORMS */
+  for(const m of levelData.movingPlatforms){
+    if(m.axis === "x"){
+      m.x = m.baseX + Math.sin(now * m.speed + m.phase) * m.range;
+    } else {
+      m.y = m.baseY + Math.sin(now * m.speed + m.phase) * m.range;
     }
 
-    const p=m;
+    const horizontal = player.x + player.w > m.x - m.w/2 && player.x < m.x + m.w/2;
+    const top = m.y;
+    const newBottom = player.y + player.h;
 
-    const horizontal=
-      player.x+player.w>p.x-
-      p.w/2 &&
-      player.x<p.x+
-      p.w/2;
-
-    const top=p.y;
-
-    const newBottom=
-      player.y+player.h;
-
-    if(
-      horizontal &&
-      player.vy>=0 &&
-      oldBottom<=top+10 &&
-      newBottom>=top
-    ){
-
-      player.y=
-        top-player.h;
-
-      player.vy=0;
-      player.grounded=true;
-
+    if(horizontal && player.vy >= 0 && oldBottom <= top + 12 && newBottom >= top){
+      player.y = top - player.h;
+      player.vy = 0;
+      player.grounded = true;
     }
-
   }
 
-  /*
-    NORMAL PLATFORMS
-  */
+  /* NORMAL PLATFORMS */
+  for(const p of levelData.platforms){
+    const horizontal = player.x + player.w > p.x && player.x < p.x + p.w;
+    const newBottom = player.y + player.h;
 
-  for(
-    const p
-    of levelData.platforms
-  ){
-
-    const horizontal=
-      player.x+player.w>p.x &&
-      player.x<p.x+p.w;
-
-    const newBottom=
-      player.y+player.h;
-
-    if(
-      horizontal &&
-      player.vy>=0 &&
-      oldBottom<=p.y+10 &&
-      newBottom>=p.y
-    ){
-
-      player.y=
-        p.y-player.h;
-
-      player.vy=0;
-      player.grounded=true;
-
+    if(horizontal && player.vy >= 0 && oldBottom <= p.y + 12 && newBottom >= p.y){
+      player.y = p.y - player.h;
+      player.vy = 0;
+      player.grounded = true;
     }
-
   }
 
-  /*
-    DISAPPEARING PLATFORMS
-  */
-
-  for(
-    const p
-    of levelData.disappearingPlatforms
-  ){
-
+  /* DISAPPEARING PLATFORMS */
+  for(const p of levelData.disappearingPlatforms){
     if(p.active){
-
-      p.timer-=dt;
-
-      if(p.timer<=0){
-
-        p.active=false;
-
-        p.timer=p.respawn;
-
+      p.timer -= dt;
+      if(p.timer <= 0){
+        p.active = false;
+        p.timer = p.respawn;
       }
-
-    }else{
-
-      p.timer-=dt;
-
-      if(p.timer<=0){
-
-        p.active=true;
-
-        p.timer=
-          .8+
-          levelData.tier.d;
-
+    } else {
+      p.timer -= dt;
+      if(p.timer <= 0){
+        p.active = true;
+        p.timer = 0.6 + levelData.tier.d * 0.5;
       }
-
     }
 
-    if(!p.active)
-      continue;
+    if(!p.active) continue;
 
-    const horizontal=
-      player.x+player.w>p.x &&
-      player.x<p.x+p.w;
+    const horizontal = player.x + player.w > p.x && player.x < p.x + p.w;
+    const newBottom = player.y + player.h;
 
-    const newBottom=
-      player.y+player.h;
-
-    if(
-      horizontal &&
-      player.vy>=0 &&
-      oldBottom<=p.y+10 &&
-      newBottom>=p.y
-    ){
-
-      player.y=
-        p.y-player.h;
-
-      player.vy=0;
-      player.grounded=true;
-
+    if(horizontal && player.vy >= 0 && oldBottom <= p.y + 12 && newBottom >= p.y){
+      player.y = p.y - player.h;
+      player.vy = 0;
+      player.grounded = true;
     }
-
   }
 
-  /*
-    FAKE PLATFORMS
-  */
-
-  for(
-    const p
-    of levelData.fakePlatforms
-  ){
-
-    if(
-      rectHit(player,p)
-    ){
-
-      /*
-        Fake platform disappears.
-      */
-
-      particleBurst(
-        p.x+p.w/2,
-        p.y,
-        "danger"
-      );
-
-      player.vy+=100;
-
+  /* FAKE PLATFORMS */
+  for(const p of levelData.fakePlatforms){
+    if(rectHit(player, p)){
+      particleBurst(p.x + p.w/2, p.y, "danger");
+      if (level > 15) player.vy += 120;
     }
-
   }
 
-  /*
-    SLOPES
-  */
+  /* SLOPES */
+  for(const s of levelData.slopes){
+    if(player.x + player.w > s.x && player.x < s.x + s.w){
+      const surface = slopeSurfaceY(s, player.x + player.w * 0.5);
+      const bottom = player.y + player.h;
 
-  for(
-    const s
-    of levelData.slopes
-  ){
-
-    if(
-      player.x+player.w>s.x &&
-      player.x<s.x+s.w
-    ){
-
-      const surface=
-        slopeSurfaceY(
-          s,
-          player.x+
-          player.w*.5
-        );
-
-      const bottom=
-        player.y+
-        player.h;
-
-      if(
-        player.vy>=0 &&
-        bottom>=surface &&
-        oldBottom<=surface+15
-      ){
-
-        player.y=
-          surface-player.h;
-
-        player.vy=0;
-        player.grounded=true;
-
+      if(player.vy >= 0 && bottom >= surface && oldBottom <= surface + 15){
+        player.y = surface - player.h;
+        player.vy = 0;
+        player.grounded = true;
       }
-
     }
-
   }
-
-  /*
-    COYOTE
-  */
 
   if(player.grounded){
-
-    player.coyote=.12;
-
-  }else{
-
-    player.coyote=
-      Math.max(
-        0,
-        player.coyote-dt
-      );
-
+    player.coyote = 0.14;
+  } else {
+    player.coyote = Math.max(0, player.coyote - dt);
   }
 
-  /*
-    ICE
-  */
-
-  for(
-    const ice
-    of levelData.iceZones
-  ){
-
+  /* ICE */
+  for(const ice of levelData.iceZones){
     if(
-      player.x+player.w>ice.x &&
-      player.x<ice.x+ice.w &&
-      player.y+player.h>ice.y &&
-      player.y<ice.y+ice.h
+      player.x + player.w > ice.x &&
+      player.x < ice.x + ice.w &&
+      player.y + player.h > ice.y &&
+      player.y < ice.y + ice.h
     ){
-
-      player.slowTimer=.25;
-
-      player.vx*=.985;
-
+      player.slowTimer = 0.25;
+      player.vx *= 0.98;
     }
-
   }
 
-  /*
-    SPRINGS
-  */
-
-  for(
-    const s
-    of levelData.springs
-  ){
-
-    if(
-      rectHit(
-        player,
-        s
-      ) &&
-      player.vy>=0
-    ){
-
-      player.vy=
-        -s.power;
-
-      player.grounded=false;
-
-      particleBurst(
-        s.x,
-        s.y,
-        "normal"
-      );
-
+  /* SPRINGS */
+  for(const s of levelData.springs){
+    if(rectHit(player, s) && player.vy >= 0){
+      player.vy = -s.power;
+      player.grounded = false;
+      particleBurst(s.x, s.y, "normal");
     }
-
   }
 
-  /*
-    STARS
-  */
-
-  for(
-    const s
-    of levelData.stars
-  ){
-
-    if(s.taken)
-      continue;
-
-    const dx=
-      player.x+
-      player.w/2-
-      s.x;
-
-    const dy=
-      player.y+
-      player.h/2-
-      s.y;
-
-    if(
-      Math.hypot(dx,dy)<30
-    ){
-
-      s.taken=true;
-
-      particleBurst(
-        s.x,
-        s.y
-      );
-
+  /* STARS */
+  for(const s of levelData.stars){
+    if(s.taken) continue;
+    if(Math.hypot(player.x + player.w/2 - s.x, player.y + player.h/2 - s.y) < 32){
+      s.taken = true;
+      particleBurst(s.x, s.y);
     }
-
   }
 
-  /*
-    CRACKS
-  */
-
-  for(
-    const c
-    of levelData.cracks
-  ){
-
-    const hit=
-      player.x+player.w>c.x &&
-      player.x<c.x+c.w &&
-      player.y+player.h>=c.y-12 &&
-      player.y+player.h<=c.y+25;
-
-    if(
-      hit &&
-      !c.active
-    ){
-
-      c.active=true;
-
-      c.timer=
-        Math.max(
-          .35,
-          1.0-
-          levelData.tier.d*.6
-        );
-
+  /* CRACKS */
+  for(const c of levelData.cracks){
+    const hit = player.x + player.w > c.x && player.x < c.x + c.w && player.y + player.h >= c.y - 12 && player.y + player.h <= c.y + 25;
+    if(hit && !c.active){
+      c.active = true;
+      c.timer = Math.max(0.25, 0.8 - levelData.tier.d * 0.5);
     }
-
-    if(
-      c.active &&
-      !c.broken
-    ){
-
-      c.timer-=dt;
-
-      if(c.timer<=0){
-
-        c.broken=true;
-
-        particleBurst(
-          c.x+c.w/2,
-          c.y,
-          "danger"
-        );
-
+    if(c.active && !c.broken){
+      c.timer -= dt;
+      if(c.timer <= 0){
+        c.broken = true;
+        particleBurst(c.x + c.w/2, c.y, "danger");
       }
+    }
+    if(c.broken && rectHit(player, {x:c.x, y:c.y, w:c.w, h:30})){
+      if (level > 15) player.vy += 300;
+    }
+  }
 
+  /* ONLY HAZARDOUS IF LEVEL > 15 */
+  if(level > 15){
+
+    /* BALLS */
+    for(const b of levelData.balls){
+      b.targetTimer -= dt;
+      if(b.targetTimer <= 0){
+        b.dir = player.x > b.x ? 1 : -1;
+        b.targetTimer = Math.max(0.2, 0.6 + random(level * 77) * 0.8 - levelData.tier.d * 0.3);
+      }
+      b.x += b.dir * b.speed * dt;
+      if(b.x <= b.minX){ b.x = b.minX; b.dir = 1; }
+      if(b.x >= b.maxX){ b.x = b.maxX; b.dir = -1; }
+
+      if(circleHit(b.x, b.y, b.r, player)){
+        if(player.invincible <= 0){ resetLevel(); return; }
+      }
     }
 
-    if(
-      c.broken &&
-      rectHit(
-        player,
-        {
-          x:c.x,
-          y:c.y,
-          w:c.w,
-          h:30
+    /* SAWS */
+    for(const s of levelData.saws){
+      s.y = s.baseY + Math.sin(now * s.speed + s.phase) * s.amp;
+      if(circleHit(s.x, s.y, s.r, player)){
+        if(player.invincible <= 0){ resetLevel(); return; }
+      }
+    }
+
+    /* LASERS */
+    for(const l of levelData.lasers){
+      const phase = (now + l.phase) % l.period;
+      const active = phase > l.warning;
+      if(active && rectHit(player, {x:l.x, y:l.y, w:l.w, h:l.h})){
+        if(player.invincible <= 0){ resetLevel(); return; }
+      }
+    }
+
+    /* BOMBS */
+    for(const b of levelData.bombs){
+      b.timer -= dt;
+      b.pulse += dt;
+      if(b.timer <= 0){
+        const distance = Math.hypot(player.x + player.w/2 - b.x, player.y + player.h/2 - b.y);
+        if(distance < 120 + levelData.tier.d * 90){
+          if(player.invincible <= 0){ resetLevel(); return; }
         }
-      )
-    ){
-
-      player.vy+=260;
-
-    }
-
-  }
-
-  /*
-    BALLS
-  */
-
-  for(
-    const b
-    of levelData.balls
-  ){
-
-    b.targetTimer-=dt;
-
-    if(
-      b.targetTimer<=0
-    ){
-
-      b.dir=
-        player.x>b.x
-        ?1
-        :-1;
-
-      b.targetTimer=
-        Math.max(
-          .25,
-          .75+
-          random(
-            level*77+
-            Math.floor(
-              performance.now()/700
-            )
-          )*1.2-
-          levelData.tier.d*.4
-        );
-
-    }
-
-    b.x+=
-      b.dir*
-      b.speed*
-      dt;
-
-    if(
-      b.x<=b.minX
-    ){
-
-      b.x=b.minX;
-      b.dir=1;
-
-    }
-
-    if(
-      b.x>=b.maxX
-    ){
-
-      b.x=b.maxX;
-      b.dir=-1;
-
-    }
-
-    if(
-      circleHit(
-        b.x,
-        b.y,
-        b.r,
-        player
-      )
-    ){
-
-      if(player.invincible<=0){
-
-        resetLevel();
-        return;
-
+        b.timer = 0.6 + random(performance.now()) * 1.2;
       }
-
     }
 
-  }
-
-  /*
-    SAWS
-  */
-
-  for(
-    const s
-    of levelData.saws
-  ){
-
-    s.y=
-      s.baseY+
-      Math.sin(
-        now*s.speed+
-        s.phase
-      )*
-      s.amp;
-
-    if(
-      circleHit(
-        s.x,
-        s.y,
-        s.r,
-        player
-      )
-    ){
-
-      if(player.invincible<=0){
-
-        resetLevel();
-        return;
-
+    /* FALLERS */
+    for(const f of levelData.fallers){
+      f.y += f.vy * dt;
+      if(f.y > levelData.groundY + 40){ f.y = f.resetY; }
+      if(rectHit(player, {x:f.x-6, y:f.y-6, w:f.w+12, h:f.h+12})){
+        if(player.invincible <= 0){ resetLevel(); return; }
       }
-
     }
 
-  }
+    /* MOVING WALLS */
+    for(const w of levelData.walls){
+      w.x += Math.sin(now * w.speed + w.phase) * w.range * dt;
+      if(rectHit(player, w)){
+        if(player.invincible <= 0){ resetLevel(); return; }
+      }
+    }
 
-  /*
-    LASERS
-  */
+    /* SPIKES */
+    for(const h of levelData.hazards){
+      if(rectHit(player, h)){
+        if(player.invincible <= 0){ resetLevel(); return; }
+      }
+    }
 
-  for(
-    const l
-    of levelData.lasers
-  ){
+    /* LIGHTNING */
+    for(const l of levelData.lightnings){
+      l.timer += dt;
+      if(l.timer > l.cool){ l.timer = 0; }
+      const phase = l.timer / l.cool;
+      const strikeStart = l.warning / l.cool;
 
-    const phase=
-      (
-        now+
-        l.phase
-      )%
-      l.period;
-
-    const active=
-      phase>
-      l.warning;
-
-    if(
-      active &&
-      rectHit(
-        player,
-        {
-          x:l.x,
-          y:l.y,
-          w:l.w,
-          h:l.h
+      if(phase >= strikeStart && phase < strikeStart + 0.16){
+        stormFlash = 1;
+        if(Math.abs(player.x + player.w/2 - l.x) < 52 && player.y > l.y - 20){
+          if(player.invincible <= 0){ resetLevel(); return; }
         }
-      )
-    ){
+      }
+    }
 
-      if(player.invincible<=0){
+    /* CHAOS TRAPS */
+    for(const c of levelData.chaos){
+      const t = now + c.phase;
+      let hit = false;
+      let xx = c.x;
+      let yy = c.y;
 
+      if(c.type === 0){ xx += Math.sin(t*2)*45; yy += Math.cos(t*1.5)*35; hit = circleHit(xx, yy, c.size, player); }
+      else if(c.type === 1){ hit = rectHit(player, {x: xx + Math.sin(t)*70, y: yy, w: c.size*2, h: c.size}); }
+      else if(c.type === 2){ hit = rectHit(player, {x: xx, y: yy + Math.sin(t*2)*50, w: c.size, h: c.size*3}); }
+      else if(c.type === 3){ xx += Math.cos(t*2)*60; yy += Math.sin(t*2)*60; hit = circleHit(xx, yy, c.size, player); }
+      else if(c.type === 4){ hit = circleHit(c.x, c.y, c.size * (1 + Math.sin(t*6)*0.6), player); }
+      else if(c.type === 5){ hit = circleHit(c.x, c.y + ((t*c.speed)%300), c.size*0.7, player); }
+      else if(c.type === 6){ hit = rectHit(player, {x: c.x-90, y: c.y + Math.sin(t*2)*100, w: 180, h: 6}); }
+      else if(c.type === 7){ xx += Math.cos(t)*80; yy += Math.sin(t)*80; hit = circleHit(xx, yy, c.size, player); }
+      else if(c.type === 8){ hit = rectHit(player, {x: xx + Math.sin(t*2)*50, y: c.y-80, w: c.size, h: 160}); }
+      else if(c.type === 9){ hit = circleHit(c.x, c.y + Math.abs(Math.sin(t*2))*90, c.size, player); }
+      else if(c.type === 10){ hit = circleHit(c.x + Math.sin(t*3)*100, c.y, c.size, player); }
+      else if(c.type === 11){ hit = circleHit(c.x + Math.sin(t)*60, c.y + Math.cos(t)*60, c.size, player); }
+      else if(c.type === 12){ hit = rectHit(player, {x: c.x + Math.sin(t)*40, y: c.y + Math.cos(t)*40, w: c.size, h: c.size}); }
+      else { if(Math.sin(t * c.speed * 0.04) > 0.75){ hit = circleHit(c.x, c.y, c.size, player); } }
+
+      if(hit && player.invincible <= 0){
         resetLevel();
         return;
-
       }
-
     }
 
   }
 
-  /*
-    BOMBS
-  */
-
-  for(
-    const b
-    of levelData.bombs
-  ){
-
-    b.timer-=dt;
-    b.pulse+=dt;
-
-    if(b.timer<=0){
-
-      const dx=
-        player.x+
-        player.w/2-
-        b.x;
-
-      const dy=
-        player.y+
-        player.h/2-
-        b.y;
-
-      const distance=
-        Math.hypot(dx,dy);
-
-      if(distance<
-        110+
-        levelData.tier.d*80
-      ){
-
-        if(player.invincible<=0){
-
-          resetLevel();
-          return;
-
-        }
-
-      }
-
-      b.timer=
-        .8+
-        random(
-          performance.now()
-        )*1.5;
-
+  /* PORTALS */
+  for(const p of levelData.portals){
+    if(p.used) continue;
+    if(Math.hypot(player.x + player.w/2 - p.x, player.y + player.h/2 - p.y) < p.r + 18){
+      p.used = true;
+      player.x += p.targetOffset;
+      particleBurst(p.x, p.y);
+      screenShake = 9;
     }
-
   }
 
-  /*
-    FALLING OBJECTS
-  */
-
-  for(
-    const f
-    of levelData.fallers
-  ){
-
-    f.y+=f.vy*dt;
-
+  /* REVERSE */
+  for(const r of levelData.reverseZones){
     if(
-      f.y>
-      levelData.groundY+40
+      player.x + player.w > r.x &&
+      player.x < r.x + r.w &&
+      player.y + player.h > r.y &&
+      player.y < r.y + r.h
     ){
-
-      f.y=f.resetY;
-
+      player.reverseTimer = r.time;
+      if (level > 5) dangerEl.classList.add("show");
     }
-
-    const box={
-      x:f.x-8,
-      y:f.y-8,
-      w:f.w+16,
-      h:f.h+16
-    };
-
-    if(
-      rectHit(
-        player,
-        box
-      )
-    ){
-
-      if(player.invincible<=0){
-
-        resetLevel();
-        return;
-
-      }
-
-    }
-
   }
 
-  /*
-    MOVING WALLS
-  */
-
-  for(
-    const w
-    of levelData.walls
-  ){
-
-    w.x+=
-      Math.sin(
-        now*w.speed+
-        w.phase
-      )*
-      w.range*
-      dt;
-
-    if(
-      rectHit(
-        player,
-        w
-      )
-    ){
-
-      if(player.invincible<=0){
-
-        resetLevel();
-        return;
-
-      }
-
-    }
-
-  }
-
-  /*
-    PORTALS
-  */
-
-  for(
-    const p
-    of levelData.portals
-  ){
-
-    if(p.used)
-      continue;
-
-    if(
-      Math.hypot(
-        player.x+
-        player.w/2-
-        p.x,
-
-        player.y+
-        player.h/2-
-        p.y
-      )<p.r+18
-    ){
-
-      p.used=true;
-
-      player.x+=
-        p.targetOffset;
-
-      particleBurst(
-        p.x,
-        p.y
-      );
-
-      screenShake=8;
-
-    }
-
-  }
-
-  /*
-    REVERSE ZONES
-  */
-
-  for(
-    const r
-    of levelData.reverseZones
-  ){
-
-    if(
-      player.x+player.w>r.x &&
-      player.x<r.x+r.w &&
-      player.y+player.h>r.y &&
-      player.y<r.y+r.h
-    ){
-
-      player.reverseTimer=
-        r.time;
-
-      dangerEl.classList.add("show");
-
-    }
-
-  }
-
-  /*
-    SPIKES
-  */
-
-  for(
-    const h
-    of levelData.hazards
-  ){
-
-    if(
-      rectHit(
-        player,
-        h
-      )
-    ){
-
-      if(player.invincible<=0){
-
-        resetLevel();
-        return;
-
-      }
-
-    }
-
-  }
-
-  /*
-    LIGHTNING
-  */
-
-  for(
-    const l
-    of levelData.lightnings
-  ){
-
-    l.timer+=dt;
-
-    if(
-      l.timer>l.cool
-    ){
-
-      l.timer=0;
-
-    }
-
-    const phase=
-      l.timer/l.cool;
-
-    const strikeStart=
-      l.warning/l.cool;
-
-    if(
-      phase>=strikeStart &&
-      phase<strikeStart+.14
-    ){
-
-      stormFlash=1;
-
-      if(
-        Math.abs(
-          player.x+
-          player.w/2-
-          l.x
-        )<48 &&
-        player.y>
-        l.y-15
-      ){
-
-        if(player.invincible<=0){
-
-          resetLevel();
-          return;
-
-        }
-
-      }
-
-    }
-
-  }
-
-  /*
-    CHAOS OBJECTS
-
-    14 different procedural effects.
-  */
-
-  for(
-    const c
-    of levelData.chaos
-  ){
-
-    const t=
-      now+
-      c.phase;
-
-    let hit=false;
-
-    if(c.type===0){
-
-      /*
-        moving circle
-      */
-
-      const cx=
-        c.x+
-        Math.sin(t*2)*40;
-
-      const cy=
-        c.y+
-        Math.cos(t*1.5)*30;
-
-      hit=
-        circleHit(
-          cx,
-          cy,
-          c.size,
-          player
-        );
-
-    }
-
-    else if(c.type===1){
-
-      /*
-        horizontal blade
-      */
-
-      hit=
-        rectHit(
-          player,
-          {
-            x:
-              c.x+
-              Math.sin(t)*60,
-
-            y:c.y,
-
-            w:c.size*2,
-            h:c.size
-          }
-        );
-
-    }
-
-    else if(c.type===2){
-
-      /*
-        vertical crusher
-      */
-
-      hit=
-        rectHit(
-          player,
-          {
-            x:c.x,
-            y:
-              c.y+
-              Math.sin(t*2)*40,
-
-            w:c.size,
-            h:c.size*3
-          }
-        );
-
-    }
-
-    else if(c.type===3){
-
-      /*
-        rotating danger point
-      */
-
-      const cx=
-        c.x+
-        Math.cos(t*2)*55;
-
-      const cy=
-        c.y+
-        Math.sin(t*2)*55;
-
-      hit=
-        circleHit(
-          cx,
-          cy,
-          c.size,
-          player
-        );
-
-    }
-
-    else if(c.type===4){
-
-      /*
-        pulse zone
-      */
-
-      const radius=
-        c.size*
-        (
-          1+
-          Math.sin(t*5)*.5
-        );
-
-      hit=
-        circleHit(
-          c.x,
-          c.y,
-          radius,
-          player
-        );
-
-    }
-
-    else if(c.type===5){
-
-      /*
-        tiny falling dot
-      */
-
-      const yy=
-        c.y+
-        (
-          (t*c.speed)%280
-        );
-
-      hit=
-        circleHit(
-          c.x,
-          yy,
-          c.size*.7,
-          player
-        );
-
-    }
-
-    else if(c.type===6){
-
-      /*
-        sweeping laser
-      */
-
-      const yy=
-        c.y+
-        Math.sin(t*1.7)*90;
-
-      hit=
-        rectHit(
-          player,
-          {
-            x:c.x-80,
-            y:yy,
-            w:160,
-            h:5
-          }
-        );
-
-    }
-
-    else if(c.type===7){
-
-      /*
-        orbiting hazard
-      */
-
-      const cx=
-        c.x+
-        Math.cos(t)*70;
-
-      const cy=
-        c.y+
-        Math.sin(t)*70;
-
-      hit=
-        circleHit(
-          cx,
-          cy,
-          c.size,
-          player
-        );
-
-    }
-
-    else if(c.type===8){
-
-      /*
-        vertical gate
-      */
-
-      const xx=
-        c.x+
-        Math.sin(t*2)*45;
-
-      hit=
-        rectHit(
-          player,
-          {
-            x:xx,
-            y:c.y-70,
-            w:c.size,
-            h:140
-          }
-        );
-
-    }
-
-    else if(c.type===9){
-
-      /*
-        bounce danger
-      */
-
-      const yy=
-        c.y+
-        Math.abs(
-          Math.sin(t*2)
-        )*
-        80;
-
-      hit=
-        circleHit(
-          c.x,
-          yy,
-          c.size,
-          player
-        );
-
-    }
-
-    else if(c.type===10){
-
-      /*
-        horizontal pulse
-      */
-
-      const xx=
-        c.x+
-        Math.sin(t*3)*90;
-
-      hit=
-        circleHit(
-          xx,
-          c.y,
-          c.size,
-          player
-        );
-
-    }
-
-    else if(c.type===11){
-
-      /*
-        cross danger
-      */
-
-      hit=
-        circleHit(
-          c.x+
-          Math.sin(t)*50,
-
-          c.y+
-          Math.cos(t)*50,
-
-          c.size,
-
-          player
-        );
-
-    }
-
-    else if(c.type===12){
-
-      /*
-        spinning square
-      */
-
-      hit=
-        rectHit(
-          player,
-          {
-            x:
-              c.x+
-              Math.sin(t)*35,
-
-            y:
-              c.y+
-              Math.cos(t)*35,
-
-            w:c.size,
-            h:c.size
-          }
-        );
-
-    }
-
-    else{
-
-      /*
-        random rhythm hazard
-      */
-
-      if(
-        Math.sin(t*c.speed*.03)>0.8
-      ){
-
-        hit=
-          circleHit(
-            c.x,
-            c.y,
-            c.size,
-            player
-          );
-
-      }
-
-    }
-
-    if(
-      hit &&
-      player.invincible<=0
-    ){
-
-      resetLevel();
-      return;
-
-    }
-
-  }
-
-  /*
-    DANGER INDICATOR
-  */
-
-  const danger=
-    levelData.tier.d;
-
-  if(
-    danger>.65 ||
-    player.reverseTimer>0
-  ){
-
+  if(level > 15 && (levelData.tier.d > 0.5 || player.reverseTimer > 0)){
     dangerEl.classList.add("show");
-
-  }else{
-
+  } else {
     dangerEl.classList.remove("show");
-
   }
 
-  /*
-    FLASH
-  */
+  stormFlash = Math.max(0, stormFlash - dt * 6);
+  screenShake = Math.max(0, screenShake - dt * 20);
 
-  stormFlash=
-    Math.max(
-      0,
-      stormFlash-
-      dt*5
-    );
-
-  /*
-    SCREEN SHAKE
-  */
-
-  screenShake=
-    Math.max(
-      0,
-      screenShake-
-      dt*18
-    );
-
-  /*
-    FALL
-  */
-
-  if(
-    player.y>
-    H+180
-  ){
-
+  if(player.y > H + 180){
     resetLevel();
     return;
-
   }
 
-  /*
-    FINISH GATES
-  */
-
-  let gateBlocked=false;
-
-  for(
-    const g
-    of levelData.finishGates
-  ){
-
-    const phase=
-      (
-        now+
-        g.phase
-      )%
-      g.period;
-
-    const active=
-      phase<
-      g.period*.55;
-
-    if(
-      active &&
-      rectHit(
-        player,
-        {
-          x:g.x,
-          y:g.y,
-          w:g.w,
-          h:g.h
-        }
-      ){
-
-      gateBlocked=true;
-
+  let gateBlocked = false;
+  for(const g of levelData.finishGates){
+    const phase = (now + g.phase) % g.period;
+    if(phase < g.period * 0.6 && rectHit(player, {x:g.x, y:g.y, w:g.w, h:g.h})){
+      gateBlocked = true;
     }
-
   }
 
-  /*
-    FINISH
-  */
-
-  if(
-    !gateBlocked &&
-    player.x+
-    player.w>=
-    levelData.finishX
-  ){
-
+  if(!gateBlocked && player.x + player.w >= levelData.finishX){
     winLevel();
     return;
-
   }
 
-  /*
-    CAMERA
-  */
-
-  const targetCamera=
-    Math.max(
-      0,
-      player.x-
-      W*.32
-    );
-
-  cameraX+=
-    (
-      targetCamera-
-      cameraX
-    )*
-    Math.min(
-      1,
-      dt*7
-    );
-
+  const targetCamera = Math.max(0, player.x - W * 0.32);
+  cameraX += (targetCamera - cameraX) * Math.min(1, dt * 8);
 }
 
 /* =========================================================
@@ -4127,1458 +2117,355 @@ function update(dt){
 
 function drawBackground(){
 
-  const d=
-    levelData
-    ?levelData.tier.d
-    :0;
+  const d = levelData ? levelData.tier.d : 0;
 
-  const sky=
-    ctx.createLinearGradient(
-      0,
-      0,
-      0,
-      H
-    );
+  const sky = ctx.createLinearGradient(0, 0, 0, H);
+  sky.addColorStop(0, d > 0.5 ? "#1a0814" : "#101116");
+  sky.addColorStop(0.55, d > 0.5 ? "#260c1f" : "#1c1e28");
+  sky.addColorStop(1, d > 0.5 ? "#0c040a" : "#0d0e12");
 
-  /*
-    Background itself becomes
-    darker as difficulty rises.
-  */
-
-  sky.addColorStop(
-    0,
-    d>.7
-    ?"#20243a"
-    :"#8fd3ff"
-  );
-
-  sky.addColorStop(
-    .55,
-    d>.7
-    ?"#343047"
-    :"#b9e8b0"
-  );
-
-  sky.addColorStop(
-    1,
-    d>.7
-    ?"#171821"
-    :"#e9d8a6"
-  );
-
-  ctx.fillStyle=sky;
-
-  ctx.fillRect(
-    0,
-    0,
-    W,
-    H
-  );
+  ctx.fillStyle = sky;
+  ctx.fillRect(0, 0, W, H);
 
   ctx.save();
+  ctx.translate(-cameraX * 0.12, 0);
 
-  ctx.translate(
-    -cameraX*.12,
-    0
-  );
+  for(let i = 0; i < 35; i++){
+    const x = i * 280 + 100;
+    const y = 95 + (i % 4) * 45;
 
-  /*
-    CLOUDS
-  */
-
-  for(
-    let i=0;
-    i<35;
-    i++
-  ){
-
-    const x=i*280+100;
-    const y=95+(i%4)*45;
-
-    ctx.fillStyle=
-      d>.7
-      ?"rgba(150,150,180,.15)"
-      :"rgba(255,255,255,.45)";
-
+    ctx.fillStyle = d > 0.5 ? "rgba(255,42,95,.08)" : "rgba(255,255,255,.12)";
     ctx.beginPath();
-
-    ctx.arc(
-      x,
-      y,
-      28,
-      0,
-      Math.PI*2
-    );
-
-    ctx.arc(
-      x+30,
-      y-8,
-      35,
-      0,
-      Math.PI*2
-    );
-
-    ctx.arc(
-      x+65,
-      y,
-      25,
-      0,
-      Math.PI*2
-    );
-
+    ctx.arc(x, y, 28, 0, Math.PI*2);
+    ctx.arc(x+30, y-8, 35, 0, Math.PI*2);
+    ctx.arc(x+65, y, 25, 0, Math.PI*2);
     ctx.fill();
-
-  }
-
-  /*
-    STORM CLOUDS
-  */
-
-  if(
-    levelData &&
-    levelData.lightnings.length
-  ){
-
-    for(
-      const l
-      of levelData.lightnings
-    ){
-
-      const phase=
-        l.timer/l.cool;
-
-      let alpha=.2;
-
-      if(
-        phase<
-        l.warning/l.cool
-      ){
-        alpha=.65;
-      }
-
-      ctx.fillStyle=
-        `rgba(35,40,60,${alpha})`;
-
-      ctx.beginPath();
-
-      ctx.arc(
-        l.x,
-        75,
-        45,
-        0,
-        Math.PI*2
-      );
-
-      ctx.arc(
-        l.x+42,
-        85,
-        55,
-        0,
-        Math.PI*2
-      );
-
-      ctx.arc(
-        l.x-40,
-        88,
-        42,
-        0,
-        Math.PI*2
-      );
-
-      ctx.fill();
-
-    }
-
   }
 
   ctx.restore();
 
-  /*
-    FLASH
-  */
-
-  if(stormFlash>0){
-
-    ctx.fillStyle=
-      `rgba(
-        255,
-        255,
-        255,
-        ${Math.min(
-          .5,
-          stormFlash*.5
-        )}
-      )`;
-
-    ctx.fillRect(
-      0,
-      0,
-      W,
-      H
-    );
-
+  if(stormFlash > 0){
+    ctx.fillStyle = `rgba(255,42,95,${Math.min(0.6, stormFlash * 0.6)})`;
+    ctx.fillRect(0, 0, W, H);
   }
 }
 
 /* =========================================================
-   WORLD
+   WORLD DRAW
 ========================================================= */
 
 function drawWorld(){
 
   ctx.save();
 
-  let sx=0;
-  let sy=0;
+  let sx = 0;
+  let sy = 0;
 
-  if(screenShake>0){
-
-    sx=
-      (Math.random()-.5)*
-      screenShake;
-
-    sy=
-      (Math.random()-.5)*
-      screenShake;
-
+  if(screenShake > 0){
+    sx = (Math.random() - 0.5) * screenShake;
+    sy = (Math.random() - 0.5) * screenShake;
   }
 
-  ctx.translate(
-    -cameraX+sx,
-    sy
-  );
+  ctx.translate(-cameraX + sx, sy);
 
-  /*
-    PLATFORMS
-  */
-
-  for(
-    const p
-    of levelData.platforms
-  ){
-
-    ctx.fillStyle="#292b31";
-
-    ctx.fillRect(
-      p.x,
-      p.y,
-      p.w,
-      p.h
-    );
-
-    ctx.fillStyle="#65d878";
-
-    ctx.fillRect(
-      p.x,
-      p.y,
-      p.w,
-      7
-    );
-
-    ctx.fillStyle=
-      "rgba(255,255,255,.13)";
-
-    for(
-      let xx=p.x+18;
-      xx<p.x+p.w;
-      xx+=48
-    ){
-
-      ctx.fillRect(
-        xx,
-        p.y+22,
-        12,
-        5
-      );
-
-    }
-
+  /* PLATFORMS */
+  for(const p of levelData.platforms){
+    ctx.fillStyle = "#1e1b26";
+    ctx.fillRect(p.x, p.y, p.w, p.h);
+    ctx.fillStyle = level <= 15 ? "#00ff88" : "#ff2a5f";
+    ctx.fillRect(p.x, p.y, p.w, 7);
   }
 
-  /*
-    MOVING PLATFORMS
-  */
-
-  for(
-    const p
-    of levelData.movingPlatforms
-  ){
-
-    ctx.fillStyle="#39415c";
-
-    ctx.fillRect(
-      p.x-p.w/2,
-      p.y,
-      p.w,
-      p.h
-    );
-
-    ctx.fillStyle="#ffd166";
-
-    ctx.fillRect(
-      p.x-p.w/2,
-      p.y,
-      p.w,
-      6
-    );
-
+  /* MOVING PLATFORMS */
+  for(const p of levelData.movingPlatforms){
+    ctx.fillStyle = "#2d1b36";
+    ctx.fillRect(p.x - p.w/2, p.y, p.w, p.h);
+    ctx.fillStyle = level <= 15 ? "#55ffaa" : "#ff5588";
+    ctx.fillRect(p.x - p.w/2, p.y, p.w, 6);
   }
 
-  /*
-    DISAPPEARING
-  */
-
-  for(
-    const p
-    of levelData.disappearingPlatforms
-  ){
-
-    if(!p.active)
-      continue;
-
-    ctx.globalAlpha=
-      .45+
-      .55*
-      Math.min(
-        1,
-        p.timer
-      );
-
-    ctx.fillStyle="#6c4cff";
-
-    ctx.fillRect(
-      p.x,
-      p.y,
-      p.w,
-      p.h
-    );
-
-    ctx.globalAlpha=1;
-
+  /* DISAPPEARING */
+  for(const p of levelData.disappearingPlatforms){
+    if(!p.active) continue;
+    ctx.globalAlpha = 0.4 + 0.6 * Math.min(1, p.timer);
+    ctx.fillStyle = "#7b00ff";
+    ctx.fillRect(p.x, p.y, p.w, p.h);
+    ctx.globalAlpha = 1;
   }
 
-  /*
-    FAKE PLATFORMS
-  */
-
-  for(
-    const p
-    of levelData.fakePlatforms
-  ){
-
-    ctx.fillStyle=
-      "rgba(255,255,255,.38)";
-
-    ctx.fillRect(
-      p.x,
-      p.y,
-      p.w,
-      p.h
-    );
-
+  /* FAKE */
+  for(const p of levelData.fakePlatforms){
+    ctx.fillStyle = "rgba(255,255,255,.25)";
+    ctx.fillRect(p.x, p.y, p.w, p.h);
   }
 
-  /*
-    SLOPES
-  */
-
-  for(
-    const s
-    of levelData.slopes
-  ){
-
-    ctx.fillStyle="#292b31";
-
+  /* SLOPES */
+  for(const s of levelData.slopes){
+    ctx.fillStyle = "#1e1b26";
     ctx.beginPath();
-
-    ctx.moveTo(
-      s.x,
-      s.y
-    );
-
-    ctx.lineTo(
-      s.x+s.w,
-      s.y-s.rise
-    );
-
-    ctx.lineTo(
-      s.x+s.w,
-      s.y+55-s.rise
-    );
-
-    ctx.lineTo(
-      s.x,
-      s.y+55
-    );
-
+    ctx.moveTo(s.x, s.y);
+    ctx.lineTo(s.x + s.w, s.y - s.rise);
+    ctx.lineTo(s.x + s.w, s.y + 55 - s.rise);
+    ctx.lineTo(s.x, s.y + 55);
     ctx.closePath();
-
     ctx.fill();
 
-    ctx.strokeStyle="#65d878";
-
-    ctx.lineWidth=7;
-
+    ctx.strokeStyle = level <= 15 ? "#00ff88" : "#ff2a5f";
+    ctx.lineWidth = 7;
     ctx.beginPath();
-
-    ctx.moveTo(
-      s.x,
-      s.y
-    );
-
-    ctx.lineTo(
-      s.x+s.w,
-      s.y-s.rise
-    );
-
+    ctx.moveTo(s.x, s.y);
+    ctx.lineTo(s.x + s.w, s.y - s.rise);
     ctx.stroke();
-
   }
 
-  /*
-    ICE
-  */
-
-  for(
-    const ice
-    of levelData.iceZones
-  ){
-
-    ctx.fillStyle=
-      "rgba(150,225,255,.75)";
-
-    ctx.fillRect(
-      ice.x,
-      ice.y,
-      ice.w,
-      ice.h
-    );
-
+  /* ICE */
+  for(const ice of levelData.iceZones){
+    ctx.fillStyle = "rgba(100,220,255,.65)";
+    ctx.fillRect(ice.x, ice.y, ice.w, ice.h);
   }
 
-  /*
-    CRACKS
-  */
-
-  for(
-    const c
-    of levelData.cracks
-  ){
-
+  /* CRACKS */
+  for(const c of levelData.cracks){
     if(c.broken){
-
-      ctx.fillStyle="#111";
-
-      ctx.fillRect(
-        c.x-4,
-        c.y-4,
-        c.w+8,
-        24
-      );
-
+      ctx.fillStyle = "#050508";
+      ctx.fillRect(c.x-4, c.y-4, c.w+8, 24);
       continue;
-
     }
-
-    ctx.fillStyle=
-      c.active
-      ?" #ef476f"
-      :"#555861";
-
-    ctx.fillRect(
-      c.x,
-      c.y,
-      c.w,
-      8
-    );
-
-    ctx.strokeStyle="#111";
-
-    ctx.lineWidth=2;
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-      c.x+10,
-      c.y
-    );
-
-    ctx.lineTo(
-      c.x+20,
-      c.y+8
-    );
-
-    ctx.lineTo(
-      c.x+28,
-      c.y
-    );
-
-    ctx.lineTo(
-      c.x+40,
-      c.y+8
-    );
-
-    ctx.stroke();
-
+    ctx.fillStyle = c.active ? (level <= 15 ? "#00ff88" : "#ff2a5f") : "#444";
+    ctx.fillRect(c.x, c.y, c.w, 8);
   }
 
-  /*
-    SPIKES
-  */
-
-  for(
-    const h
-    of levelData.hazards
-  ){
-
-    ctx.fillStyle="#ef476f";
-
+  /* SPIKES (Only visible or harmless in 1-15) */
+  for(const h of levelData.hazards){
+    ctx.fillStyle = level <= 15 ? "rgba(0,255,136,0.3)" : "#ff1e56";
     ctx.beginPath();
-
-    ctx.moveTo(
-      h.x,
-      h.y+h.h
-    );
-
-    ctx.lineTo(
-      h.x+h.w/2,
-      h.y-10
-    );
-
-    ctx.lineTo(
-      h.x+h.w,
-      h.y+h.h
-    );
-
-    ctx.closePath();
-
-    ctx.fill();
-
-    ctx.fillStyle="#fff";
-
-    ctx.font="bold 9px system-ui";
-
-    ctx.fillText(
-      "!",
-      h.x+9,
-      h.y+10
-    );
-
-  }
-
-  /*
-    STARS
-  */
-
-  for(
-    const s
-    of levelData.stars
-  ){
-
-    if(s.taken)
-      continue;
-
-    ctx.save();
-
-    ctx.translate(
-      s.x,
-      s.y
-    );
-
-    ctx.rotate(
-      performance.now()/700
-    );
-
-    ctx.fillStyle="#ffd166";
-
-    ctx.beginPath();
-
-    for(
-      let i=0;
-      i<10;
-      i++
-    ){
-
-      const a=
-        i*Math.PI/5;
-
-      const r=
-        i%2===0
-        ?11
-        :5;
-
-      const xx=
-        Math.cos(a)*r;
-
-      const yy=
-        Math.sin(a)*r;
-
-      if(i===0)
-        ctx.moveTo(xx,yy);
-      else
-        ctx.lineTo(xx,yy);
-
-    }
-
+    ctx.moveTo(h.x, h.y + h.h);
+    ctx.lineTo(h.x + h.w/2, h.y - 10);
+    ctx.lineTo(h.x + h.w, h.y + h.h);
     ctx.closePath();
     ctx.fill();
-
-    ctx.restore();
-
   }
 
-  /*
-    BALLS
-  */
-
-  for(
-    const b
-    of levelData.balls
-  ){
-
+  /* STARS */
+  for(const s of levelData.stars){
+    if(s.taken) continue;
     ctx.save();
-
-    ctx.translate(
-      b.x,
-      b.y
-    );
-
-    ctx.fillStyle="#ff6b35";
-
+    ctx.translate(s.x, s.y);
+    ctx.rotate(performance.now()/600);
+    ctx.fillStyle = "#ffcc00";
     ctx.beginPath();
-
-    ctx.arc(
-      0,
-      0,
-      b.r,
-      0,
-      Math.PI*2
-    );
-
-    ctx.fill();
-
-    ctx.strokeStyle="#fff";
-
-    ctx.lineWidth=3;
-
-    ctx.beginPath();
-
-    ctx.arc(
-      0,
-      0,
-      b.r-5,
-      0,
-      Math.PI*1.5
-    );
-
-    ctx.stroke();
-
-    ctx.fillStyle="#222";
-
-    ctx.beginPath();
-
-    ctx.arc(
-      -5,
-      -3,
-      3,
-      0,
-      Math.PI*2
-    );
-
-    ctx.arc(
-      5,
-      -3,
-      3,
-      0,
-      Math.PI*2
-    );
-
-    ctx.fill();
-
-    ctx.restore();
-
-  }
-
-  /*
-    SAWS
-  */
-
-  for(
-    const s
-    of levelData.saws
-  ){
-
-    ctx.save();
-
-    ctx.translate(
-      s.x,
-      s.y
-    );
-
-    ctx.rotate(
-      performance.now()/120
-    );
-
-    ctx.fillStyle="#e5e5e5";
-
-    ctx.beginPath();
-
-    for(
-      let i=0;
-      i<16;
-      i++
-    ){
-
-      const a=
-        i*Math.PI/8;
-
-      const r=
-        i%2===0
-        ?s.r
-        :s.r*.65;
-
-      const xx=
-        Math.cos(a)*r;
-
-      const yy=
-        Math.sin(a)*r;
-
-      if(i===0)
-        ctx.moveTo(xx,yy);
-      else
-        ctx.lineTo(xx,yy);
-
+    for(let i=0; i<10; i++){
+      const a = i * Math.PI / 5;
+      const r = i % 2 === 0 ? 11 : 5;
+      const xx = Math.cos(a)*r;
+      const yy = Math.sin(a)*r;
+      if(i===0) ctx.moveTo(xx, yy); else ctx.lineTo(xx, yy);
     }
-
     ctx.closePath();
     ctx.fill();
-
-    ctx.fillStyle="#333";
-
-    ctx.beginPath();
-
-    ctx.arc(
-      0,
-      0,
-      6,
-      0,
-      Math.PI*2
-    );
-
-    ctx.fill();
-
     ctx.restore();
-
   }
 
-  /*
-    LASERS
-  */
-
-  for(
-    const l
-    of levelData.lasers
-  ){
-
-    const now=
-      performance.now()/1000;
-
-    const phase=
-      (
-        now+
-        l.phase
-      )%
-      l.period;
-
-    const active=
-      phase>
-      l.warning;
-
-    ctx.fillStyle=
-      active
-      ?"rgba(255,60,80,.9)"
-      :"rgba(255,220,80,.5)";
-
-    ctx.fillRect(
-      l.x,
-      l.y,
-      l.w,
-      active
-      ?l.h*2
-      :l.h
-    );
-
-  }
-
-  /*
-    BOMBS
-  */
-
-  for(
-    const b
-    of levelData.bombs
-  ){
-
-    const pulse=
-      Math.sin(
-        b.pulse*8
-      )*.2;
-
-    ctx.fillStyle="#222";
-
-    ctx.beginPath();
-
-    ctx.arc(
-      b.x,
-      b.y,
-      b.r*(1+pulse),
-      0,
-      Math.PI*2
-    );
-
-    ctx.fill();
-
-    ctx.fillStyle="#ff4d6d";
-
-    ctx.beginPath();
-
-    ctx.arc(
-      b.x-4,
-      b.y-4,
-      4,
-      0,
-      Math.PI*2
-    );
-
-    ctx.fill();
-
-  }
-
-  /*
-    FALLING BLOCKS
-  */
-
-  for(
-    const f
-    of levelData.fallers
-  ){
-
-    ctx.fillStyle="#7b61ff";
-
-    ctx.fillRect(
-      f.x,
-      f.y,
-      f.w,
-      f.h
-    );
-
-    ctx.fillStyle="#fff";
-
-    ctx.fillRect(
-      f.x+5,
-      f.y+5,
-      4,
-      4
-    );
-
-    ctx.fillRect(
-      f.x+12,
-      f.y+5,
-      4,
-      4
-    );
-
-  }
-
-  /*
-    WIND
-  */
-
-  for(
-    const w
-    of levelData.windZones
-  ){
-
-    ctx.fillStyle=
-      "rgba(120,220,255,.08)";
-
-    ctx.fillRect(
-      w.x,
-      w.y,
-      w.w,
-      w.h
-    );
-
-    ctx.strokeStyle=
-      "rgba(255,255,255,.22)";
-
-    ctx.lineWidth=2;
-
-    for(
-      let yy=w.y+20;
-      yy<w.y+w.h;
-      yy+=30
-    ){
-
+  if(level > 15){
+    /* BALLS */
+    for(const b of levelData.balls){
+      ctx.save();
+      ctx.translate(b.x, b.y);
+      ctx.fillStyle = "#ff2a5f";
       ctx.beginPath();
-
-      ctx.moveTo(
-        w.x+10,
-        yy
-      );
-
-      ctx.lineTo(
-        w.x+w.w-10,
-        yy
-      );
-
-      ctx.stroke();
-
-    }
-
-  }
-
-  /*
-    SPRINGS
-  */
-
-  for(
-    const s
-    of levelData.springs
-  ){
-
-    ctx.fillStyle="#ffd166";
-
-    ctx.fillRect(
-      s.x,
-      s.y,
-      s.w,
-      s.h
-    );
-
-    ctx.strokeStyle="#fff";
-
-    ctx.lineWidth=2;
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-      s.x+2,
-      s.y+10
-    );
-
-    ctx.lineTo(
-      s.x+8,
-      s.y+2
-    );
-
-    ctx.lineTo(
-      s.x+14,
-      s.y+10
-    );
-
-    ctx.stroke();
-
-  }
-
-  /*
-    PORTALS
-  */
-
-  for(
-    const p
-    of levelData.portals
-  ){
-
-    ctx.save();
-
-    ctx.translate(
-      p.x,
-      p.y
-    );
-
-    ctx.rotate(
-      performance.now()/500
-    );
-
-    ctx.strokeStyle=
-      p.used
-      ?"rgba(150,150,150,.3)"
-      :"#64d8ff";
-
-    ctx.lineWidth=5;
-
-    ctx.beginPath();
-
-    ctx.arc(
-      0,
-      0,
-      p.r,
-      0,
-      Math.PI*2
-    );
-
-    ctx.stroke();
-
-    ctx.restore();
-
-  }
-
-  /*
-    GRAVITY ZONES
-  */
-
-  for(
-    const g
-    of levelData.gravityZones
-  ){
-
-    ctx.fillStyle=
-      "rgba(130,80,255,.08)";
-
-    ctx.fillRect(
-      g.x,
-      g.y,
-      g.w,
-      g.h
-    );
-
-  }
-
-  /*
-    REVERSE ZONES
-  */
-
-  for(
-    const r
-    of levelData.reverseZones
-  ){
-
-    ctx.fillStyle=
-      "rgba(255,80,150,.07)";
-
-    ctx.fillRect(
-      r.x,
-      r.y,
-      r.w,
-      r.h
-    );
-
-  }
-
-  /*
-    MOVING WALLS
-  */
-
-  for(
-    const w
-    of levelData.walls
-  ){
-
-    ctx.fillStyle="#8e72ff";
-
-    ctx.fillRect(
-      w.x,
-      w.y,
-      w.w,
-      w.h
-    );
-
-  }
-
-  /*
-    LIGHTNING
-  */
-
-  for(
-    const l
-    of levelData.lightnings
-  ){
-
-    const phase=
-      l.timer/l.cool;
-
-    const warning=
-      l.warning/l.cool;
-
-    if(
-      phase<warning
-    ){
-
-      ctx.fillStyle=
-        "rgba(255,230,80,.8)";
-
-      ctx.beginPath();
-
-      ctx.arc(
-        l.x,
-        l.y,
-        10+
-        Math.sin(
-          performance.now()/90
-        )*4,
-        0,
-        Math.PI*2
-      );
-
+      ctx.arc(0, 0, b.r, 0, Math.PI*2);
       ctx.fill();
-
-    }else if(
-      phase<
-      warning+.14
-    ){
-
-      ctx.strokeStyle="#fff36b";
-
-      ctx.lineWidth=8;
-
+      ctx.strokeStyle = "#fff";
+      ctx.lineWidth = 3;
       ctx.beginPath();
-
-      ctx.moveTo(
-        l.x,
-        l.y
-      );
-
-      ctx.lineTo(
-        l.x-18,
-        l.y+45
-      );
-
-      ctx.lineTo(
-        l.x+10,
-        l.y+45
-      );
-
-      ctx.lineTo(
-        l.x-5,
-        l.y+105
-      );
-
+      ctx.arc(0, 0, b.r-4, 0, Math.PI*1.5);
       ctx.stroke();
-
+      ctx.restore();
     }
 
+    /* SAWS */
+    for(const s of levelData.saws){
+      ctx.save();
+      ctx.translate(s.x, s.y);
+      ctx.rotate(performance.now()/100);
+      ctx.fillStyle = "#ccc";
+      ctx.beginPath();
+      for(let i=0; i<16; i++){
+        const a = i * Math.PI / 8;
+        const r = i % 2 === 0 ? s.r : s.r * 0.6;
+        const xx = Math.cos(a)*r;
+        const yy = Math.sin(a)*r;
+        if(i===0) ctx.moveTo(xx, yy); else ctx.lineTo(xx, yy);
+      }
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    }
+
+    /* LASERS */
+    for(const l of levelData.lasers){
+      const phase = (now + l.phase) % l.period;
+      const active = phase > l.warning;
+      ctx.fillStyle = active ? "rgba(255,0,80,.95)" : "rgba(255,200,50,.4)";
+      ctx.fillRect(l.x, l.y, l.w, active ? l.h*2 : l.h);
+    }
+
+    /* BOMBS */
+    for(const b of levelData.bombs){
+      ctx.fillStyle = "#111";
+      ctx.beginPath();
+      ctx.arc(b.x, b.y, b.r, 0, Math.PI*2);
+      ctx.fill();
+      ctx.fillStyle = "#ff0055";
+      ctx.beginPath();
+      ctx.arc(b.x-3, b.y-3, 4, 0, Math.PI*2);
+      ctx.fill();
+    }
+
+    /* FALLERS */
+    for(const f of levelData.fallers){
+      ctx.fillStyle = "#b533ff";
+      ctx.fillRect(f.x, f.y, f.w, f.h);
+    }
+
+    /* CHAOS TRAPS */
+    for(const c of levelData.chaos){
+      ctx.fillStyle = "rgba(255,0,85,.6)";
+      ctx.beginPath();
+      ctx.arc(c.x, c.y, c.size, 0, Math.PI*2);
+      ctx.fill();
+    }
   }
 
-  /*
-    FINISH GATES
-  */
-
-  for(
-    const g
-    of levelData.finishGates
-  ){
-
-    const now=
-      performance.now()/1000;
-
-    const phase=
-      (
-        now+
-        g.phase
-      )%
-      g.period;
-
-    const active=
-      phase<
-      g.period*.55;
-
-    ctx.fillStyle=
-      active
-      ?"rgba(255,60,80,.9)"
-      :"rgba(100,255,160,.45)";
-
-    ctx.fillRect(
-      g.x,
-      g.y,
-      g.w,
-      g.h
-    );
-
+  /* WIND */
+  for(const w of levelData.windZones){
+    ctx.fillStyle = "rgba(255,42,95,.05)";
+    ctx.fillRect(w.x, w.y, w.w, w.h);
   }
 
-  /*
-    CHAOS
-  */
+  /* SPRINGS */
+  for(const s of levelData.springs){
+    ctx.fillStyle = "#ffcc00";
+    ctx.fillRect(s.x, s.y, s.w, s.h);
+  }
 
-  const now=
-    performance.now()/1000;
-
-  for(
-    const c
-    of levelData.chaos
-  ){
-
-    ctx.fillStyle=
-      "rgba(255,90,120,.55)";
-
-    let xx=c.x;
-    let yy=c.y;
-
-    if(c.type===0){
-
-      xx+=Math.sin(now*2+c.phase)*40;
-      yy+=Math.cos(now*1.5+c.phase)*30;
-
-    }
-
-    if(c.type===3){
-
-      xx+=Math.cos(now*2+c.phase)*55;
-      yy+=Math.sin(now*2+c.phase)*55;
-
-    }
-
-    if(c.type===7){
-
-      xx+=Math.cos(now+c.phase)*70;
-      yy+=Math.sin(now+c.phase)*70;
-
-    }
-
-    if(c.type===10){
-
-      xx+=Math.sin(now*3+c.phase)*90;
-
-    }
-
-    if(c.type===11){
-
-      xx+=Math.sin(now+c.phase)*50;
-      yy+=Math.cos(now+c.phase)*50;
-
-    }
-
+  /* PORTALS */
+  for(const p of levelData.portals){
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(performance.now()/400);
+    ctx.strokeStyle = p.used ? "rgba(100,100,100,.3)" : "#ff0055";
+    ctx.lineWidth = 5;
     ctx.beginPath();
-
-    ctx.arc(
-      xx,
-      yy,
-      c.size,
-      0,
-      Math.PI*2
-    );
-
-    ctx.fill();
-
+    ctx.arc(0, 0, p.r, 0, Math.PI*2);
+    ctx.stroke();
+    ctx.restore();
   }
 
-  /*
-    FINISH FLAG
-  */
+  /* GRAVITY & REVERSE ZONES */
+  for(const g of levelData.gravityZones){
+    ctx.fillStyle = "rgba(120,0,255,.06)";
+    ctx.fillRect(g.x, g.y, g.w, g.h);
+  }
+  for(const r of levelData.reverseZones){
+    ctx.fillStyle = "rgba(255,0,100,.06)";
+    ctx.fillRect(r.x, r.y, r.w, r.h);
+  }
 
-  const fx=
-    levelData.finishX;
+  /* WALLS */
+  for(const w of levelData.walls){
+    ctx.fillStyle = "#7b00ff";
+    ctx.fillRect(w.x, w.y, w.w, w.h);
+  }
 
-  ctx.fillStyle="#222";
+  /* LIGHTNINGNING */
+  if(level > 15){
+    for(const l of levelData.lightnings){
+      const phase = l.timer / l.cool;
+      const warning = l.warning / l.cool;
+      if(phase < warning){
+        ctx.fillStyle = "rgba(255,255,0,.85)";
+        ctx.beginPath();
+        ctx.arc(l.x, l.y, 8, 0, Math.PI*2);
+        ctx.fill();
+      } else if(phase < warning + 0.16){
+        ctx.strokeStyle = "#ff2a5f";
+        ctx.lineWidth = 8;
+        ctx.beginPath();
+        ctx.moveTo(l.x, l.y);
+        ctx.lineTo(l.x-15, l.y+40);
+        ctx.lineTo(l.x+10, l.y+40);
+        ctx.lineTo(l.x-5, l.y+95);
+        ctx.stroke();
+      }
+    }
+  }
 
-  ctx.fillRect(
-    fx,
-    levelData.groundY-120,
-    7,
-    120
-  );
+  /* FINISH GATES */
+  for(const g of levelData.finishGates){
+    const phase = (now + g.phase) % g.period;
+    const active = phase < g.period * 0.6;
+    ctx.fillStyle = active ? "rgba(255,0,80,.9)" : "rgba(0,255,150,.4)";
+    ctx.fillRect(g.x, g.y, g.w, g.h);
+  }
 
-  ctx.fillStyle="#ff4d6d";
-
+  /* FINISH FLAG */
+  const fx = levelData.finishX;
+  ctx.fillStyle = "#111";
+  ctx.fillRect(fx, levelData.groundY-120, 7, 120);
+  ctx.fillStyle = level <= 15 ? "#00ff88" : "#ff0055";
   ctx.beginPath();
-
-  ctx.moveTo(
-    fx+7,
-    levelData.groundY-120
-  );
-
-  ctx.lineTo(
-    fx+75,
-    levelData.groundY-94
-  );
-
-  ctx.lineTo(
-    fx+7,
-    levelData.groundY-68
-  );
-
+  ctx.moveTo(fx+7, levelData.groundY-120);
+  ctx.lineTo(fx+75, levelData.groundY-94);
+  ctx.lineTo(fx+7, levelData.groundY-68);
   ctx.closePath();
-
   ctx.fill();
 
-  /*
-    PLAYER
-  */
-
+  /* PLAYER */
   ctx.save();
-
-  ctx.translate(
-    player.x,
-    player.y
-  );
-
-  ctx.fillStyle="#684cff";
-
+  ctx.translate(player.x, player.y);
+  ctx.fillStyle = level <= 15 ? "#00ff88" : "#ff2a5f";
   ctx.beginPath();
-
-  ctx.roundRect(
-    0,
-    0,
-    player.w,
-    player.h,
-    8
-  );
-
+  ctx.roundRect(0, 0, player.w, player.h, 8);
   ctx.fill();
 
-  /*
-    DASH EFFECT
-  */
-
-  if(player.dashTime>0){
-
-    ctx.fillStyle=
-      "rgba(108,76,255,.3)";
-
-    ctx.fillRect(
-      -25,
-      5,
-      20,
-      30
-    );
-
+  if(player.dashTime > 0){
+    ctx.fillStyle = level <= 15 ? "rgba(0,255,136,.4)" : "rgba(255,42,95,.4)";
+    ctx.fillRect(-25, 5, 20, 30);
   }
 
-  /*
-    EYES
-  */
-
-  ctx.fillStyle="#fff";
-
+  /* EYES & SMILE */
+  ctx.fillStyle = "#fff";
   ctx.beginPath();
-
-  ctx.arc(
-    10,
-    12,
-    5,
-    0,
-    Math.PI*2
-  );
-
-  ctx.arc(
-    23,
-    12,
-    5,
-    0,
-    Math.PI*2
-  );
-
+  ctx.arc(10, 12, 5, 0, Math.PI*2);
+  ctx.arc(23, 12, 5, 0, Math.PI*2);
   ctx.fill();
 
-  ctx.fillStyle="#111";
-
+  ctx.fillStyle = "#111";
   ctx.beginPath();
-
-  ctx.arc(
-    11,
-    12,
-    2,
-    0,
-    Math.PI*2
-  );
-
-  ctx.arc(
-    24,
-    12,
-    2,
-    0,
-    Math.PI*2
-  );
-
+  ctx.arc(11, 12, 2, 0, Math.PI*2);
+  ctx.arc(24, 12, 2, 0, Math.PI*2);
   ctx.fill();
 
-  /*
-    SMILE
-  */
-
-  ctx.strokeStyle="#111";
-
-  ctx.lineWidth=3;
-
+  ctx.strokeStyle = "#111";
+  ctx.lineWidth = 3;
   ctx.beginPath();
-
-  ctx.arc(
-    17,
-    17,
-    9,
-    0,
-    Math.PI
-  );
-
+  ctx.arc(17, 17, 9, 0, Math.PI);
   ctx.stroke();
-
-  /*
-    LEGS
-  */
-
-  ctx.fillStyle="#222";
-
-  ctx.fillRect(
-    6,
-    38,
-    7,
-    5
-  );
-
-  ctx.fillRect(
-    21,
-    38,
-    7,
-    5
-  );
 
   ctx.restore();
 
-  /*
-    PARTICLES
-  */
-
-  for(
-    const p
-    of particles
-  ){
-
-    ctx.globalAlpha=
-      clamp(
-        p.life,
-        0,
-        1
-      );
-
-    ctx.fillStyle="#ffd166";
-
-    ctx.fillRect(
-      p.x,
-      p.y,
-      p.size,
-      p.size
-    );
-
+  /* PARTICLES */
+  for(const p of particles){
+    ctx.globalAlpha = clamp(p.life, 0, 1);
+    ctx.fillStyle = "#ffcc00";
+    ctx.fillRect(p.x, p.y, p.size, p.size);
   }
+  ctx.globalAlpha = 1;
 
-  ctx.globalAlpha=1;
-
-  /*
-    FUNNY TEXT
-  */
-
-  ctx.fillStyle=
-    "rgba(20,20,20,.35)";
-
-  ctx.font=
-    "900 15px system-ui";
-
-  ctx.fillText(
-    "هەموو شتێک باشە 😎",
-    player.x+100,
-    player.y-30
-  );
+  ctx.fillStyle = "rgba(255,255,255,.35)";
+  ctx.font = "900 15px system-ui";
+  ctx.fillText(level <= 15 ? "فێرکاری سان 😎" : "دۆزەخی سان 😎", player.x + 100, player.y - 30);
 
   ctx.restore();
 }
@@ -5588,78 +2475,40 @@ function drawWorld(){
 ========================================================= */
 
 function updateSanPosition(){
-
   const positions=[
-
     {right:18,top:110},
     {right:W*.28,top:90},
     {right:35,top:180},
     {right:W*.45,top:120},
     {right:20,top:250}
-
   ];
 
-  const p=
-    positions[
-      (level-1)%
-      positions.length
-    ];
+  const p = positions[(level-1)%positions.length];
+  san.style.right = p.right+"px";
+  san.style.top = p.top+"px";
 
-  san.style.right=
-    p.right+"px";
-
-  san.style.top=
-    p.top+"px";
-
-  const size=
-    Math.min(
-      86,
-      Math.max(
-        64,
-        W*.19
-      )
-    );
-
-  san.style.width=size+"px";
-  san.style.height=size+"px";
+  const size = Math.min(86, Math.max(64, W*.19));
+  san.style.width = size+"px";
+  san.style.height = size+"px";
 }
 
 /* =========================================================
-   DRAW
+   DRAW LOOP
 ========================================================= */
 
 function draw(){
-
   drawBackground();
-
   if(levelData){
-
     drawWorld();
-
   }
-
   updateSanPosition();
 }
 
-/* =========================================================
-   LOOP
-========================================================= */
-
 function loop(time){
+  if(!playing) return;
 
-  if(!playing)
-    return;
-
-  const dt=
-    Math.min(
-      .033,
-      Math.max(
-        .001,
-        (time-lastTime)/1000
-      )
-    );
-
-  lastTime=time;
+  const dt = Math.min(0.033, Math.max(0.001, (time - lastTime)/1000));
+  lastTime = time;
 
   update(dt);
   draw();
@@ -5667,20 +2516,9 @@ function loop(time){
   requestAnimationFrame(loop);
 }
 
-/* =========================================================
-   INITIAL
-========================================================= */
-
-levelData=
-  makeLevel(level);
-
-levelEl.textContent=
-  level;
-
-tierEl.textContent=
-  "• "+
-  levelData.tier.name;
-
+levelData = makeLevel(level);
+levelEl.textContent = level;
+tierEl.textContent = "• " + levelData.tier.name;
 draw();
 
 </script>
