@@ -26,7 +26,7 @@ html,body{
   width:100%;
   height:100%;
   overflow:hidden;
-  background:#101116;
+  background:#090a0f;
   font-family:
     system-ui,
     -apple-system,
@@ -58,38 +58,44 @@ button{
   touch-action:none;
   -webkit-user-select:none;
   user-select:none;
+  cursor:pointer;
+  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 /* HUD */
 
 #hud{
   position:fixed;
-  top:calc(env(safe-area-inset-top) + 12px);
-  left:12px;
-  right:12px;
+  top:calc(env(safe-area-inset-top) + 14px);
+  left:14px;
+  right:14px;
   display:flex;
   justify-content:space-between;
-  gap:7px;
+  gap:10px;
   z-index:50;
   pointer-events:none;
+  animation: fadeInDown 0.8s ease-out;
 }
 
 .pill{
-  background:rgba(16,20,27,.86);
+  background:rgba(20,24,36,.75);
   color:#fff;
-  padding:10px 13px;
+  padding:12px 18px;
   border-radius:999px;
-  font-size:13px;
+  font-size:14px;
   font-weight:900;
-  box-shadow:0 8px 28px rgba(0,0,0,.22);
-  backdrop-filter:blur(12px);
-  border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 10px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.15);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(255,255,255,.1);
+  letter-spacing: 0.5px;
 }
 
 #tier{
-  font-size:10px;
-  opacity:.72;
-  margin-left:4px;
+  font-size:11px;
+  opacity:.8;
+  margin-left:6px;
+  color:#a78bfa;
 }
 
 /* INTRO */
@@ -104,52 +110,66 @@ button{
   text-align:center;
   color:white;
   background:
-    radial-gradient(circle at 10% 15%,#ffd166 0 11%,transparent 12%),
-    radial-gradient(circle at 92% 88%,#7bdcb5 0 14%,transparent 15%),
-    radial-gradient(circle at 80% 15%,#6c4cff 0 8%,transparent 9%),
-    #f07157;
+    radial-gradient(circle at 15% 20%,rgba(139,92,246,.35) 0%,transparent 40%),
+    radial-gradient(circle at 85% 80%,rgba(236,72,153,.3) 0%,transparent 40%),
+    linear-gradient(135deg, #0f172a 0%, #090a0f 100%);
 }
 
 .introCard{
-  width:min(94vw,470px);
-  padding:28px 20px;
+  width:min(92vw,460px);
+  padding:36px 24px;
+  animation: scaleUp 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes scaleUp {
+  0% { transform: scale(0.85); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadeInDown {
+  0% { transform: translateY(-20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
 }
 
 .introTitle{
   margin:0;
-  font-size:clamp(42px,13vw,78px);
-  line-height:.84;
+  font-size:clamp(44px,13vw,76px);
+  line-height:.9;
   font-weight:1000;
-  color:#fff;
-  text-shadow:5px 5px 0 #202020;
+  background: linear-gradient(135deg, #fff 30%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 10px 30px rgba(139,92,246,0.4);
 }
 
 .introName{
-  margin:20px 0 7px;
-  font-size:17px;
-  font-weight:900;
+  margin:22px 0 8px;
+  font-size:18px;
+  font-weight:800;
+  color:#cbd5e1;
 }
 
 .creator{
-  margin:0 0 23px;
-  opacity:.9;
+  margin:0 0 28px;
+  opacity:.7;
   font-size:13px;
+  letter-spacing: 1px;
 }
 
 #start{
   border:0;
-  padding:16px 29px;
+  padding:18px 36px;
   border-radius:999px;
-  background:#20283a;
+  background:linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
   color:#fff;
-  font-size:17px;
+  font-size:18px;
   font-weight:1000;
-  box-shadow:0 8px 0 rgba(0,0,0,.22);
+  box-shadow:0 10px 25px rgba(124,58,237,.5);
 }
 
 #start:active{
-  transform:translateY(4px);
-  box-shadow:none;
+  transform:scale(0.95);
+  box-shadow:0 5px 15px rgba(124,58,237,.3);
 }
 
 /* CONTROLS */
@@ -165,50 +185,52 @@ button{
 
 #joystick{
   position:absolute;
-  left:max(18px,env(safe-area-inset-left) + 18px);
-  bottom:max(22px,env(safe-area-inset-bottom) + 22px);
-  width:124px;
-  height:124px;
+  left:max(20px,env(safe-area-inset-left) + 20px);
+  bottom:max(24px,env(safe-area-inset-bottom) + 24px);
+  width:130px;
+  height:130px;
   border-radius:50%;
   background:radial-gradient(
     circle,
-    rgba(255,255,255,.14),
-    rgba(255,255,255,.04)
+    rgba(255,255,255,.1),
+    rgba(255,255,255,.02)
   );
-  border:3px solid rgba(255,255,255,.55);
+  border:2px solid rgba(255,255,255,.25);
   box-shadow:
-    inset 0 0 20px rgba(255,255,255,.08),
-    0 8px 30px rgba(0,0,0,.18);
+    inset 0 0 25px rgba(255,255,255,.05),
+    0 10px 35px rgba(0,0,0,.3);
   pointer-events:auto;
   touch-action:none;
+  backdrop-filter:blur(8px);
 }
 
 #stick{
   position:absolute;
-  width:60px;
-  height:60px;
-  left:30px;
-  top:30px;
+  width:64px;
+  height:64px;
+  left:31px;
+  top:31px;
   border-radius:50%;
-  background:rgba(255,255,255,.25);
-  border:2px solid rgba(255,255,255,.65);
+  background:rgba(255,255,255,.2);
+  border:2px solid rgba(255,255,255,.5);
   display:flex;
   align-items:center;
   justify-content:center;
-  font-size:26px;
+  font-size:24px;
   color:white;
-  transition:transform .05s linear;
+  box-shadow: 0 4px 15px rgba(0,0,0,.2);
+  transition:transform .04s linear;
 }
 
 /* ACTIONS */
 
 #actionArea{
   position:absolute;
-  right:max(18px,env(safe-area-inset-right) + 18px);
-  bottom:max(22px,env(safe-area-inset-bottom) + 22px);
+  right:max(20px,env(safe-area-inset-right) + 20px);
+  bottom:max(24px,env(safe-area-inset-bottom) + 24px);
   display:grid;
   grid-template-columns:78px 78px;
-  gap:10px;
+  gap:12px;
   pointer-events:none;
 }
 
@@ -216,19 +238,22 @@ button{
   width:78px;
   height:78px;
   border-radius:50%;
-  border:3px solid rgba(255,255,255,.5);
-  background:rgba(20,20,25,.58);
+  border:2px solid rgba(255,255,255,.25);
+  background:rgba(20,24,36,.65);
   color:#fff;
   font-size:12px;
   font-weight:1000;
   pointer-events:auto;
   touch-action:none;
-  backdrop-filter:blur(8px);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  box-shadow:0 8px 25px rgba(0,0,0,.25);
 }
 
 .action:active{
-  transform:scale(.91);
-  background:rgba(108,76,255,.85);
+  transform:scale(.92);
+  background:rgba(124,58,237,.85);
+  border-color:rgba(255,255,255,.6);
 }
 
 /* IDEA */
@@ -236,20 +261,23 @@ button{
 #levelIdea{
   position:fixed;
   left:50%;
-  bottom:calc(env(safe-area-inset-bottom) + 166px);
+  bottom:calc(env(safe-area-inset-bottom) + 176px);
   transform:translateX(-50%);
-  width:min(91vw,560px);
-  padding:9px 13px;
+  width:min(92vw,580px);
+  padding:10px 16px;
   text-align:center;
-  border-radius:15px;
-  background:rgba(10,10,12,.62);
-  color:white;
-  font-size:12px;
+  border-radius:16px;
+  background:rgba(15,23,42,.75);
+  color:#e2e8f0;
+  font-size:13px;
   font-weight:800;
   z-index:40;
   pointer-events:none;
-  opacity:.94;
-  backdrop-filter:blur(8px);
+  opacity:.95;
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 10px 30px rgba(0,0,0,.3);
 }
 
 /* WIN */
@@ -261,54 +289,62 @@ button{
   display:none;
   align-items:center;
   justify-content:center;
-  padding:18px;
-  background:rgba(0,0,0,.58);
-  backdrop-filter:blur(8px);
+  padding:20px;
+  background:rgba(5,7,12,.75);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
   text-align:center;
 }
 
 .winCard{
-  width:min(93vw,430px);
-  background:#17181d;
+  width:min(92vw,440px);
+  background:rgba(20,24,36,.9);
   color:white;
-  border-radius:28px;
-  padding:27px 20px;
-  box-shadow:0 25px 80px rgba(0,0,0,.45);
-  border:1px solid rgba(255,255,255,.1);
+  border-radius:32px;
+  padding:32px 24px;
+  box-shadow:0 30px 90px rgba(0,0,0,.6);
+  border:1px solid rgba(255,255,255,.12);
+  animation: scaleUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
 .winCard h1{
-  margin:0 0 8px;
-  font-size:30px;
+  margin:0 0 10px;
+  font-size:24px;
+  font-weight: 1000;
+  color:#f8fafc;
 }
 
 .winCard p{
-  line-height:1.55;
+  line-height:1.6;
+  color:#cbd5e1;
+  font-size: 15px;
 }
 
 .winButtons{
   display:flex;
-  gap:9px;
+  gap:12px;
   justify-content:center;
-  margin-top:17px;
+  margin-top:22px;
 }
 
 .winButtons button{
   border:0;
-  border-radius:15px;
-  padding:13px 17px;
+  border-radius:16px;
+  padding:14px 20px;
   font-size:14px;
   font-weight:900;
 }
 
 #nextBtn{
-  background:#6c4cff;
+  background:linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
   color:#fff;
+  box-shadow:0 8px 20px rgba(124,58,237,.4);
 }
 
 #retryBtn{
-  background:#30323a;
+  background:rgba(255,255,255,.08);
   color:#fff;
+  border:1px solid rgba(255,255,255,.1);
 }
 
 /* FINISH */
@@ -320,27 +356,28 @@ button{
   transform:translate(-50%,-50%) scale(.8);
   z-index:140;
   color:#fff;
-  background:#6c4cff;
-  padding:18px 24px;
-  border-radius:20px;
-  font-size:21px;
+  background:linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  padding:20px 28px;
+  border-radius:22px;
+  font-size:22px;
   font-weight:1000;
   opacity:0;
   pointer-events:none;
+  box-shadow:0 15px 40px rgba(124,58,237,.5);
 }
 
 #finishBanner.show{
-  animation:finishPop .8s ease forwards;
+  animation:finishPop .8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
 @keyframes finishPop{
   0%{
     opacity:0;
-    transform:translate(-50%,-50%) scale(.7);
+    transform:translate(-50%,-50%) scale(.6);
   }
-  35%{
+  40%{
     opacity:1;
-    transform:translate(-50%,-50%) scale(1.1);
+    transform:translate(-50%,-50%) scale(1.08);
   }
   100%{
     opacity:0;
@@ -353,18 +390,20 @@ button{
 #danger{
   position:fixed;
   left:50%;
-  top:calc(env(safe-area-inset-top) + 65px);
+  top:calc(env(safe-area-inset-top) + 70px);
   transform:translateX(-50%);
   z-index:60;
   color:white;
-  background:rgba(220,40,70,.8);
-  padding:6px 12px;
+  background:rgba(239,68,68,.85);
+  padding:8px 16px;
   border-radius:999px;
-  font-size:10px;
+  font-size:11px;
   font-weight:1000;
   opacity:0;
   pointer-events:none;
-  transition:.15s;
+  transition:.25s ease;
+  backdrop-filter:blur(8px);
+  box-shadow:0 6px 20px rgba(239,68,68,.3);
 }
 
 #danger.show{
@@ -398,7 +437,7 @@ body.hardMode #tier{
 
     <div class="introName">
       One funny hero.<br>
-      5000 brutal challenges.
+      5000 smooth challenges.
     </div>
 
     <p class="creator">
@@ -468,7 +507,7 @@ body.hardMode #tier{
   <div class="winCard">
 
     <h1>
-      پیرۆزە😎ئامادەی بۆ قۆناغی داهاتوو
+      پیرۆزە 😎 ئامادەی بۆ قۆناغی داهاتوو
     </h1>
 
     <p id="winText">
@@ -569,7 +608,7 @@ resize();
 ========================================================= */
 
 const SAVE_KEY =
-  "san_b_ahamd_5000_v11";
+  "san_b_ahamd_5000_v12_smooth";
 
 const TOTAL_LEVELS = 5000;
 
@@ -1015,7 +1054,7 @@ function circleHit(
 }
 
 /* =========================================================
-   DIFFICULTY
+   DIFFICULTY (ULTRA-GENTLE SCALING FROM 16 TO 5000)
 ========================================================= */
 
 function difficulty(n){
@@ -1082,40 +1121,9 @@ function difficulty(n){
     };
   }
 
-  let d;
-
-  if(n<=1000){
-
-    const p =
-      (n-16)/(1000-16);
-
-    d =
-      .045+
-      Math.pow(
-        clamp(p,0,1),
-        1.12
-      )*.675;
-
-  }else{
-
-    const p =
-      (n-1000)/
-      (5000-1000);
-
-    d =
-      .72+
-      Math.pow(
-        clamp(p,0,1),
-        .82
-      )*.28;
-  }
-
-  const p =
-    clamp(
-      (n-16)/(5000-16),
-      0,
-      1
-    );
+  // Very gradual logarithmic scaling for levels 16 to 5000 so it starts extremely easy and climbs very slowly
+  const progress = (n - 16) / (5000 - 16);
+  const d = Math.pow(progress, 1.8) * 0.85 + 0.05;
 
   const stage =
     Math.min(
@@ -1126,187 +1134,187 @@ function difficulty(n){
 
   return{
 
-    p,
-    d,
+    p: progress,
+    d: clamp(d, 0.05, 0.95),
 
     stage,
 
     name:
-      `ئاستی قورس ${stage}`,
+      `ئاستی پلەبەرز ${stage}`,
 
     gap:
       lerp(
-        118,
-        38,
+        130,
+        75,
         d
       ),
 
     width:
       lerp(
-        155,
-        48,
+        160,
+        75,
         d
       ),
 
     rise:
       lerp(
-        12,
-        105,
+        10,
+        55,
         d
       ),
 
     spikes:
       lerp(
-        .12,
-        .78,
+        .05,
+        .45,
         d
       ),
 
     balls:
       lerp(
-        .10,
-        .74,
+        .04,
+        .40,
         d
       ),
 
     cracks:
       lerp(
-        .08,
-        .72,
+        .03,
+        .35,
         d
       ),
 
     moving:
       lerp(
-        .08,
-        .70,
+        .03,
+        .35,
         d
       ),
 
     disappearing:
       lerp(
-        .02,
-        .62,
+        .01,
+        .25,
         d
       ),
 
     saws:
       lerp(
-        .015,
-        .68,
+        .01,
+        .30,
         d
       ),
 
     lasers:
       lerp(
         .01,
-        .60,
+        .25,
         d
       ),
 
     bombs:
       lerp(
         .005,
-        .56,
+        .22,
         d
       ),
 
     wind:
       lerp(
         .01,
-        .55,
+        .25,
         d
       ),
 
     ice:
       lerp(
         .02,
-        .54,
+        .25,
         d
       ),
 
     fake:
       lerp(
         .005,
-        .42,
+        .18,
         d
       ),
 
     walls:
       lerp(
         .005,
-        .45,
+        .20,
         d
       ),
 
     springs:
       lerp(
-        .06,
-        .55,
+        .08,
+        .35,
         d
       ),
 
     portals:
       lerp(
         .005,
-        .30,
+        .15,
         d
       ),
 
     gravity:
       lerp(
         .005,
-        .36,
+        .18,
         d
       ),
 
     reverse:
       lerp(
-        .003,
-        .32,
+        .002,
+        .15,
         d
       ),
 
     fallers:
       lerp(
         .01,
-        .65,
+        .30,
         d
       ),
 
     storms:
       lerp(
-        .04,
-        .78,
+        .02,
+        .35,
         d
       ),
 
     ballSpeed:
       lerp(
-        145,
-        390,
+        130,
+        260,
         d
       ),
 
     speed:
       lerp(
-        250,
-        300,
+        245,
+        280,
         d
       ),
 
     jump:
       lerp(
-        650,
-        590,
+        660,
+        615,
         d
       ),
 
     groups:
       Math.round(
         lerp(
-          7,
-          28,
+          6,
+          20,
           d
         )
       )
@@ -1335,10 +1343,10 @@ const ideas = [
 "💡 لە ئێستاوە یارییەکە جدی دەبێت.",
 "💡 کۆتایی فێرکاری نزیکە.",
 "💡 Level 15 دوا قۆناغی فێرکارییە.",
-"😈 Level 16: ئێستا بەربەستەکان دەست پێدەکەن.",
+"😈 Level 16: پشوو بدە، ئاستەکان وردە وردە گەورە دەبن.",
 "🔥 دوو مەترسی دەتوانن لە یەک کاتدا بێن.",
 "🔥 پلاتفۆرمی جوڵاو دەتوانێت ڕێگاکەت بگۆڕێت.",
-"⚠️ تۆپەکان خێراتر دەبن.",
+"⚠️ تۆپەکان بە لەسەرخۆیی دەجوڵێن.",
 "⚠️ saw ـەکان لە ڕێگادا دەسوڕێن.",
 "⚡ laser ـەکان پێش شەق warning دەدەن.",
 "💣 bomb لە نزیکتدا مەوەستێت.",
@@ -1352,14 +1360,14 @@ const ideas = [
 "🌌 gravity دەتوانێت گۆڕانکاری بکات.",
 "☠️ falling block ـەکان چاودێری بکە.",
 "⚡ lightning لە شوێنی خۆی warning دەدات.",
-"🔥 هەرچەند Level بەرزتر بێت، کات کەمتر دەبێت.",
+"🔥 وردە وردە بەرەو پێش دەچیت.",
 "💀 route ـەکە پێشبینی بکە.",
 "😈 mechanic ـەکان دەتوانن پێکەوە بێن.",
-"🔥 لە ئاستە بەرزەکاندا reaction زۆر گرنگە.",
-"👑 Level 1000 قۆناغێکی زۆر قورسە.",
-"☠️ Level 2500 تاقیکردنەوەی reaction ـە.",
-"☠️ Level 4000 هەموو شتێک زۆرتر دەبێت.",
-"💀 Level 5000: کۆتایی ARO B Slemany."
+"🔥 هێمن بە و سەرکەوتوو دەبیت.",
+"👑 Level 1000 قۆناغێکی ناوازەیە.",
+"☠️ Level 2500 تاقیکردنەوەی ئارامی.",
+"☠️ Level 4000 سەرکێشی بەردەوامە.",
+"💀 Level 5000: کۆتاییە مەزنەکەی ARO B Slemany."
 ];
 
 /* =========================================================
@@ -1434,18 +1442,18 @@ function makeLevel(n){
 
     const gap =
       Math.max(
-        32,
+        35,
         D.gap+
-        random(base+1)*38
+        random(base+1)*25
       );
 
     x+=gap;
 
     let width =
       Math.max(
-        48,
+        55,
         D.width+
-        random(base+2)*38
+        random(base+2)*25
       );
 
     let py =
@@ -1494,21 +1502,21 @@ function makeLevel(n){
         baseY:py,
 
         w:Math.max(
-          46,
+          50,
           width*.75
         ),
 
         h:18,
 
         range:
-          30+
+          25+
           random(base+11)*
-          (60+D.d*65),
+          (40+D.d*30),
 
         speed:
-          .55+
+          .45+
           random(base+12)*
-          (1+D.d*1.25),
+          (.8+D.d*.6),
 
         phase:
           random(base+13)*
@@ -1540,14 +1548,14 @@ function makeLevel(n){
         h:18,
 
         timer:
-          1.15+
-          random(base+21)*1.3,
+          1.35+
+          random(base+21)*1.2,
 
         active:true,
 
         respawn:
-          1.5+
-          random(base+22)*1.5
+          1.8+
+          random(base+22)*1.2
 
       });
 
@@ -1573,11 +1581,11 @@ function makeLevel(n){
         y:
           py-
           45-
-          random(base+32)*45,
+          random(base+32)*35,
 
         w:
           Math.max(
-            38,
+            40,
             width*.55
           ),
 
@@ -1600,10 +1608,10 @@ function makeLevel(n){
         n<16
         ?1
         :Math.min(
-          4,
+          3,
           1+
           Math.floor(
-            D.d*3+
+            D.d*2+
             random(base+41)
           )
         );
@@ -1618,7 +1626,7 @@ function makeLevel(n){
 
           x:
             x+
-            8+
+            10+
             random(
               base+50+s
             )*
@@ -1650,10 +1658,10 @@ function makeLevel(n){
         n<16
         ?1
         :Math.min(
-          3,
+          2,
           1+
           Math.floor(
-            D.d*2+
+            D.d+
             random(base+61)
           )
         );
@@ -1672,7 +1680,7 @@ function makeLevel(n){
             55+
             random(
               base+70+b
-            )*100,
+            )*80,
 
           y:
             py-
@@ -1680,21 +1688,21 @@ function makeLevel(n){
             b*18,
 
           r:
-            15+
-            D.d*4,
+            14+
+            D.d*3,
 
           speed:
             D.ballSpeed*
-            (1+b*.10),
+            (1+b*.08),
 
           minX:
-            x-50,
+            x-40,
 
           maxX:
             x+
             width+
-            220+
-            D.d*90,
+            180+
+            D.d*60,
 
           dir:
             random(
@@ -1704,10 +1712,10 @@ function makeLevel(n){
             :-1,
 
           targetTimer:
-            .8+
+            1.0+
             random(
               base+90+b
-            )*1.1
+            )*1.0
 
         });
 
@@ -1728,16 +1736,16 @@ function makeLevel(n){
           x+
           width+
           55+
-          random(base+101)*70,
+          random(base+101)*60,
 
         y:
           py-
           40-
-          random(base+102)*45,
+          random(base+102)*35,
 
         r:
-          16+
-          D.d*7,
+          15+
+          D.d*5,
 
         baseY:
           py-
@@ -1745,11 +1753,11 @@ function makeLevel(n){
 
         amp:
           10+
-          D.d*40,
+          D.d*30,
 
         speed:
-          .7+
-          D.d*2.5,
+          .6+
+          D.d*1.5,
 
         phase:
           random(base+103)*6.28
@@ -1771,29 +1779,29 @@ function makeLevel(n){
           x+
           width+
           40+
-          random(base+111)*70,
+          random(base+111)*60,
 
         y:
           py-
           20-
-          random(base+112)*50,
+          random(base+112)*40,
 
         w:
-          70+
-          random(base+113)*90,
+          60+
+          random(base+113)*70,
 
         h:8,
 
         period:
-          1.0+
-          random(base+114)*1.2,
+          1.6+
+          random(base+114)*1.0,
 
         phase:
           random(base+115)*2,
 
         warning:
-          .38+
-          random(base+116)*.25
+          .5+
+          random(base+116)*.2
 
       });
 
@@ -1812,20 +1820,20 @@ function makeLevel(n){
           x+
           width+
           65+
-          random(base+121)*90,
+          random(base+121)*80,
 
         y:
           py-
           55-
-          random(base+122)*65,
+          random(base+122)*50,
 
         r:
           12+
-          D.d*4,
+          D.d*3,
 
         timer:
-          1.8+
-          random(base+123)*1.8,
+          2.0+
+          random(base+123)*1.5,
 
         pulse:0
 
@@ -1835,8 +1843,8 @@ function makeLevel(n){
 
     if(
       random(base+130) <
-      .10+
-      D.d*.45
+      .08+
+      D.d*.3
     ){
 
       const sx =
@@ -1845,17 +1853,17 @@ function makeLevel(n){
         15;
 
       const sw =
-        100+
+        90+
         random(base+131)*
         Math.max(
-          60,
-          150-D.d*40
+          50,
+          120-D.d*30
         );
 
       const rise =
-        10+
+        8+
         random(base+132)*
-        (18+D.rise*.55);
+        (15+D.rise*.4);
 
       slopes.push({
         x:sx,
@@ -1883,9 +1891,9 @@ function makeLevel(n){
 
       const amount =
         Math.min(
-          3,
+          2,
           1+
-          Math.floor(D.d*2)
+          Math.floor(D.d)
         );
 
       for(
@@ -1898,7 +1906,7 @@ function makeLevel(n){
 
           x:
             x-
-            75+
+            65+
             c*24,
 
           y:
@@ -1930,16 +1938,16 @@ function makeLevel(n){
 
         y:
           groundY-
-          135-
-          random(base+151)*65,
+          130-
+          random(base+151)*50,
 
         w:
-          90+
-          random(base+152)*90,
+          80+
+          random(base+152)*80,
 
         h:
-          120+
-          random(base+153)*70,
+          110+
+          random(base+153)*50,
 
         force:
           (
@@ -1948,8 +1956,8 @@ function makeLevel(n){
             :-1
           )*
           (
-            75+
-            D.d*250
+            50+
+            D.d*150
           )
 
       });
@@ -1971,8 +1979,8 @@ function makeLevel(n){
           groundY-25,
 
         w:
-          75+
-          random(base+161)*120,
+          70+
+          random(base+161)*100,
 
         h:30
 
@@ -2004,8 +2012,8 @@ function makeLevel(n){
         h:12,
 
         power:
-          700+
-          D.d*430
+          680+
+          D.d*250
 
       });
 
@@ -2024,19 +2032,19 @@ function makeLevel(n){
           x+
           width+
           30+
-          random(base+181)*70,
+          random(base+181)*60,
 
         y:
           py-
-          70-
-          random(base+182)*70,
+          60-
+          random(base+182)*60,
 
         r:20,
 
         targetOffset:
-          220+
+          200+
           random(base+183)*
-          400,
+          300,
 
         used:false
 
@@ -2061,14 +2069,14 @@ function makeLevel(n){
 
         w:
           80+
-          random(base+191)*100,
+          random(base+191)*80,
 
         h:150,
 
         scale:
           random(base+192)>.5
-          ? .58
-          : 1.55
+          ? .7
+          : 1.3
 
       });
 
@@ -2087,17 +2095,17 @@ function makeLevel(n){
 
         y:
           py-
-          145,
+          135,
 
         w:
-          90+
-          random(base+201)*100,
+          80+
+          random(base+201)*80,
 
-        h:160,
+        h:150,
 
         time:
-          1+
-          random(base+202)*1.6
+          .8+
+          random(base+202)*1.0
 
       });
 
@@ -2114,28 +2122,28 @@ function makeLevel(n){
 
         x:
           x+
-          random(base+220)*100,
+          random(base+220)*90,
 
         y:
           -120-
-          random(base+230)*250,
+          random(base+230)*200,
 
         w:
           20+
-          D.d*9,
+          D.d*6,
 
         h:
           20+
-          D.d*9,
+          D.d*6,
 
         vy:
-          100+
-          random(base+240)*150+
-          D.d*180,
+          80+
+          random(base+240)*100+
+          D.d*100,
 
         resetY:
           -220-
-          random(base+250)*130
+          random(base+250)*100
 
       });
 
@@ -2154,27 +2162,27 @@ function makeLevel(n){
           x+
           width+
           60+
-          random(base+261)*80,
+          random(base+261)*70,
 
         y:
           py-
-          90,
+          80,
 
         w:
           18+
-          D.d*8,
+          D.d*6,
 
         h:
-          85+
-          D.d*90,
+          80+
+          D.d*70,
 
         range:
           15+
-          D.d*65,
+          D.d*45,
 
         speed:
-          .7+
-          D.d*1.5,
+          .5+
+          D.d*1.0,
 
         phase:
           random(base+262)*6.28
@@ -2220,7 +2228,7 @@ function makeLevel(n){
 
     for(
       let i=0;
-      i<10;
+      i<8;
       i++
     ){
 
@@ -2232,7 +2240,7 @@ function makeLevel(n){
         obstacleTypes[i];
 
       const progress =
-        i/9;
+        i/7;
 
       const ox =
         430+
@@ -2244,15 +2252,15 @@ function makeLevel(n){
         (
           random(seed)-.5
         )*
-        65;
+        55;
 
       const oy =
         groundY-
         55-
         random(seed+1)*
         Math.min(
-          80,
-          D.rise*.45
+          70,
+          D.rise*.4
         );
 
       fairObstacles.push({
@@ -2264,16 +2272,16 @@ function makeLevel(n){
         y:oy,
 
         w:
-          35+
-          D.d*18,
+          32+
+          D.d*12,
 
         h:
-          28+
-          D.d*15,
+          26+
+          D.d*10,
 
         speed:
-          45+
-          D.d*110,
+          40+
+          D.d*70,
 
         phase:
           random(seed+2)*6.28,
@@ -2282,16 +2290,16 @@ function makeLevel(n){
 
         warning:
           Math.max(
-            .55,
-            1.25-
-            D.d*.45
+            .7,
+            1.4-
+            D.d*.3
           ),
 
         safeGap:
           Math.max(
-            42,
-            80-
-            D.d*22
+            45,
+            75-
+            D.d*15
           )
 
       });
@@ -2303,12 +2311,12 @@ function makeLevel(n){
     n<16
     ?0
     :Math.min(
-      3,
+      2,
       Math.floor(
         Math.max(
           0,
-          D.d-.62
-        )*8
+          D.d-.7
+        )*6
       )
     );
 
@@ -2337,10 +2345,10 @@ function makeLevel(n){
         )*6.28,
 
       period:
-        1.05+
+        1.2+
         random(
           n*6001+g
-        )*1.1
+        )*1.0
 
     });
 
@@ -2353,10 +2361,10 @@ function makeLevel(n){
     n<16
     ?0
     :Math.min(
-      8,
+      6,
       1+
       Math.floor(
-        D.d*7
+        D.d*5
       )
     );
 
@@ -2383,24 +2391,24 @@ function makeLevel(n){
       y:
         groundY-
         230-
-        random(seed+1)*130,
+        random(seed+1)*100,
 
       timer:
         random(seed+2)*1.5,
 
       cool:
         Math.max(
-          .65,
-          1.45-
-          D.d*.48-
-          random(seed+3)*.25
+          0.8,
+          1.6-
+          D.d*.3-
+          random(seed+3)*.2
         ),
 
       warning:
         Math.max(
-          .28,
-          .72-
-          D.d*.25
+          .35,
+          .8-
+          D.d*.2
         )
 
     });
@@ -2413,8 +2421,8 @@ function makeLevel(n){
     n<16
     ?0
     :Math.floor(
-      4+
-      D.d*18
+      3+
+      D.d*10
     );
 
   for(
@@ -2453,12 +2461,12 @@ function makeLevel(n){
       size:
         8+
         random(seed+3)*
-        (10+D.d*25),
+        (8+D.d*15),
 
       speed:
-        40+
+        30+
         random(seed+4)*
-        (100+D.d*220),
+        (80+D.d*120),
 
       phase:
         random(seed+5)*6.28
@@ -2746,8 +2754,8 @@ function particleBurst(
 
   const count =
     type==="danger"
-    ?18
-    :10;
+    ?15
+    :8;
 
   for(
     let i=0;
@@ -2766,7 +2774,7 @@ function particleBurst(
             performance.now()+
             i*31
           )-.5
-        )*220,
+        )*180,
 
       vy:
         (
@@ -2774,21 +2782,21 @@ function particleBurst(
             performance.now()+
             i*53
           )-.5
-        )*220,
+        )*180,
 
       life:
-        .5+
+        .4+
         random(
           performance.now()+
           i*71
-        )*.6,
+        )*.5,
 
       size:
         2+
         random(
           performance.now()+
           i*91
-        )*5
+        )*4
 
     });
 
@@ -2813,7 +2821,7 @@ function updateParticles(dt){
       p.vy*dt;
 
     p.vy +=
-      300*dt;
+      250*dt;
 
     p.life -= dt;
 
@@ -2857,15 +2865,15 @@ function updateFairObstacles(dt){
 
       const bx =
         o.x+
-        Math.sin(t*1.3)*
+        Math.sin(t*1.2)*
         (
-          45+
-          levelData.tier.d*35
+          35+
+          levelData.tier.d*25
         );
 
       const by =
         o.y+
-        Math.cos(t*1.8)*18;
+        Math.cos(t*1.6)*15;
 
       hit =
         circleHit(
@@ -2888,7 +2896,7 @@ function updateFairObstacles(dt){
             x:o.x,
             y:
               o.y+
-              Math.sin(t*1.2)*4,
+              Math.sin(t*1.0)*3,
             w:o.w,
             h:o.h
           }
@@ -2901,7 +2909,7 @@ function updateFairObstacles(dt){
     ){
 
       const cycle =
-        2.5;
+        3.0;
 
       const phase =
         (
@@ -2911,12 +2919,12 @@ function updateFairObstacles(dt){
         cycle;
 
       const fy =
-        phase<.65
+        phase<.7
         ? o.y+
           phase*
           (
-            260+
-            levelData.tier.d*160
+            200+
+            levelData.tier.d*100
           )
         : o.y;
 
@@ -2939,15 +2947,15 @@ function updateFairObstacles(dt){
 
       const sx =
         o.x+
-        Math.sin(t*1.7)*
+        Math.sin(t*1.5)*
         (
-          35+
-          levelData.tier.d*35
+          30+
+          levelData.tier.d*25
         );
 
       const sy =
         o.y+
-        Math.cos(t*1.2)*25;
+        Math.cos(t*1.0)*20;
 
       hit =
         circleHit(
@@ -2964,8 +2972,8 @@ function updateFairObstacles(dt){
     ){
 
       const period =
-        1.5+
-        levelData.tier.d*.6;
+        1.8+
+        levelData.tier.d*.5;
 
       const phase =
         (
@@ -3001,7 +3009,7 @@ function updateFairObstacles(dt){
     ){
 
       const pulse =
-        Math.sin(t*5);
+        Math.sin(t*4);
 
       const radius =
         o.w*
@@ -3010,7 +3018,7 @@ function updateFairObstacles(dt){
           Math.max(
             0,
             pulse
-          )*.35
+          )*.3
         );
 
       hit =
@@ -3029,10 +3037,10 @@ function updateFairObstacles(dt){
 
       const mx =
         o.x+
-        Math.sin(t*1.2)*
+        Math.sin(t*1.0)*
         (
-          55+
-          levelData.tier.d*35
+          45+
+          levelData.tier.d*25
         );
 
       hit =
@@ -3056,11 +3064,11 @@ function updateFairObstacles(dt){
         (
           t%
           (
-            2.8-
-            levelData.tier.d*.5
+            3.2-
+            levelData.tier.d*.4
           )
         )>
-        .8;
+        1.0;
 
       if(active){
 
@@ -3095,10 +3103,10 @@ function updateFairObstacles(dt){
       ){
 
         player.vx +=
-          Math.sin(t*1.4)*
+          Math.sin(t*1.2)*
           (
-            35+
-            levelData.tier.d*80
+            30+
+            levelData.tier.d*60
           )*
           dt;
 
@@ -3111,8 +3119,8 @@ function updateFairObstacles(dt){
     ){
 
       const period =
-        1.8+
-        levelData.tier.d*.5;
+        2.0+
+        levelData.tier.d*.4;
 
       const phase =
         (
@@ -3121,13 +3129,13 @@ function updateFairObstacles(dt){
         )%period;
 
       const warning =
-        1.05-
-        levelData.tier.d*.25;
+        1.2-
+        levelData.tier.d*.2;
 
       if(
         phase>warning &&
         phase<
-          warning+.18
+          warning+.16
       ){
 
         hit =
@@ -3136,8 +3144,8 @@ function updateFairObstacles(dt){
             player.w/2-
             o.x
           )<
-          25+
-          o.w*.25;
+          22+
+          o.w*.22;
 
       }
 
@@ -3282,7 +3290,7 @@ function update(dt){
   const accel =
     player.slowTimer>0
     ?6
-    :12;
+    :14;
 
   player.vx +=
     (
@@ -3438,8 +3446,8 @@ function update(dt){
         p.active=true;
 
         p.timer =
-          .9+
-          levelData.tier.d*.5;
+          1.0+
+          levelData.tier.d*.4;
 
       }
 
@@ -3632,9 +3640,9 @@ function update(dt){
 
       c.timer =
         Math.max(
-          .45,
-          1.05-
-          levelData.tier.d*.4
+          .5,
+          1.2-
+          levelData.tier.d*.3
         );
 
     }
@@ -3680,15 +3688,15 @@ function update(dt){
 
       b.targetTimer =
         Math.max(
-          .4,
-          .8+
+          .5,
+          1.0+
           random(
             level*77+
             Math.floor(
               performance.now()/700
             )
-          )*.7-
-          levelData.tier.d*.2
+          )*.8-
+          levelData.tier.d*.15
         );
 
     }
@@ -3845,8 +3853,8 @@ function update(dt){
 
       if(
         distance<
-        75+
-        levelData.tier.d*35
+        70+
+        levelData.tier.d*25
       ){
 
         if(
@@ -3861,10 +3869,10 @@ function update(dt){
       }
 
       b.timer =
-        1.1+
+        1.3+
         random(
           performance.now()
-        )*1.1;
+        )*1.2;
 
     }
 
@@ -3974,7 +3982,7 @@ function update(dt){
       player.x +=
         Math.min(
           p.targetOffset,
-          420
+          400
         );
 
       particleBurst(
@@ -4065,7 +4073,7 @@ function update(dt){
           player.x+
           player.w/2-
           l.x
-        )<38 &&
+        )<35 &&
         player.y>
         l.y-15
       ){
@@ -4089,7 +4097,7 @@ function update(dt){
 
   if(
     level>=16 &&
-    levelData.tier.d>.58
+    levelData.tier.d>.65
   ){
 
     dangerEl.classList.add(
@@ -4196,7 +4204,7 @@ function update(dt){
 }
 
 /* =========================================================
-   BACKGROUND
+   BACKGROUND (BEAUTIFUL DYNAMIC NIGHT/AURORA SKY)
 ========================================================= */
 
 function drawBackground(){
@@ -4206,6 +4214,7 @@ function drawBackground(){
     ? levelData.tier.d
     : 0;
 
+  // Gorgeous smooth gradient background representing sky transitions
   const sky =
     ctx.createLinearGradient(
       0,
@@ -4216,23 +4225,17 @@ function drawBackground(){
 
   sky.addColorStop(
     0,
-    d>.7
-    ?"#20243a"
-    :"#8fd3ff"
+    d > 0.5 ? "#090d16" : "#0f172a"
   );
 
   sky.addColorStop(
-    .55,
-    d>.7
-    ?"#343047"
-    :"#b9e8b0"
+    0.5,
+    d > 0.5 ? "#131c31" : "#1e1b4b"
   );
 
   sky.addColorStop(
     1,
-    d>.7
-    ?"#171821"
-    :"#e9d8a6"
+    d > 0.5 ? "#1e1b4b" : "#311042"
   );
 
   ctx.fillStyle=sky;
@@ -4247,114 +4250,32 @@ function drawBackground(){
   ctx.save();
 
   ctx.translate(
-    -cameraX*.12,
+    -cameraX*.08,
     0
   );
 
+  // Soft glowing atmospheric celestial bubbles / stars
   for(
     let i=0;
-    i<35;
+    i<25;
     i++
   ){
 
     const x =
-      i*280+100;
+      i*350 + (i*73)%200;
 
     const y =
-      95+
-      (i%4)*45;
+      60 +
+      (i*41)%180;
 
-    ctx.fillStyle =
-      d>.7
-      ?"rgba(150,150,180,.15)"
-      :"rgba(255,255,255,.45)";
+    const glow = ctx.createRadialGradient(x, y, 0, x, y, 70);
+    glow.addColorStop(0, "rgba(139, 92, 246, 0.12)");
+    glow.addColorStop(1, "transparent");
 
+    ctx.fillStyle = glow;
     ctx.beginPath();
-
-    ctx.arc(
-      x,
-      y,
-      28,
-      0,
-      Math.PI*2
-    );
-
-    ctx.arc(
-      x+30,
-      y-8,
-      35,
-      0,
-      Math.PI*2
-    );
-
-    ctx.arc(
-      x+65,
-      y,
-      25,
-      0,
-      Math.PI*2
-    );
-
+    ctx.arc(x, y, 70, 0, Math.PI * 2);
     ctx.fill();
-
-  }
-
-  if(
-    levelData &&
-    levelData.lightnings.length
-  ){
-
-    for(
-      const l
-      of levelData.lightnings
-    ){
-
-      const phase =
-        l.timer/l.cool;
-
-      let alpha=.2;
-
-      if(
-        phase<
-        l.warning/l.cool
-      ){
-
-        alpha=.65;
-
-      }
-
-      ctx.fillStyle =
-        `rgba(35,40,60,${alpha})`;
-
-      ctx.beginPath();
-
-      ctx.arc(
-        l.x,
-        75,
-        45,
-        0,
-        Math.PI*2
-      );
-
-      ctx.arc(
-        l.x+42,
-        85,
-        55,
-        0,
-        Math.PI*2
-      );
-
-      ctx.arc(
-        l.x-40,
-        88,
-        42,
-        0,
-        Math.PI*2
-      );
-
-      ctx.fill();
-
-    }
 
   }
 
@@ -4370,8 +4291,8 @@ function drawBackground(){
         255,
         255,
         ${Math.min(
-          .5,
-          stormFlash*.5
+          .4,
+          stormFlash*.4
         )}
       )`;
 
@@ -4420,7 +4341,7 @@ function drawWorld(){
     of levelData.platforms
   ){
 
-    ctx.fillStyle="#292b31";
+    ctx.fillStyle="#1e293b";
 
     ctx.fillRect(
       p.x,
@@ -4429,17 +4350,17 @@ function drawWorld(){
       p.h
     );
 
-    ctx.fillStyle="#65d878";
+    ctx.fillStyle="#8b5cf6";
 
     ctx.fillRect(
       p.x,
       p.y,
       p.w,
-      7
+      6
     );
 
     ctx.fillStyle =
-      "rgba(255,255,255,.13)";
+      "rgba(255,255,255,.08)";
 
     for(
       let xx=p.x+18;
@@ -4451,7 +4372,7 @@ function drawWorld(){
         xx,
         p.y+22,
         12,
-        5
+        4
       );
 
     }
@@ -4463,7 +4384,7 @@ function drawWorld(){
     of levelData.movingPlatforms
   ){
 
-    ctx.fillStyle="#39415c";
+    ctx.fillStyle="#334155";
 
     ctx.fillRect(
       p.x-p.w/2,
@@ -4472,7 +4393,7 @@ function drawWorld(){
       p.h
     );
 
-    ctx.fillStyle="#ffd166";
+    ctx.fillStyle="#a78bfa";
 
     ctx.fillRect(
       p.x-p.w/2,
@@ -4492,14 +4413,14 @@ function drawWorld(){
       continue;
 
     ctx.globalAlpha =
-      .45+
-      .55*
+      .4+
+      .6*
       Math.min(
         1,
         p.timer
       );
 
-    ctx.fillStyle="#6c4cff";
+    ctx.fillStyle="#7c3aed";
 
     ctx.fillRect(
       p.x,
@@ -4518,7 +4439,7 @@ function drawWorld(){
   ){
 
     ctx.fillStyle =
-      "rgba(255,255,255,.38)";
+      "rgba(255,255,255,.25)";
 
     ctx.fillRect(
       p.x,
@@ -4534,7 +4455,7 @@ function drawWorld(){
     of levelData.slopes
   ){
 
-    ctx.fillStyle="#292b31";
+    ctx.fillStyle="#1e293b";
 
     ctx.beginPath();
 
@@ -4562,9 +4483,9 @@ function drawWorld(){
 
     ctx.fill();
 
-    ctx.strokeStyle="#65d878";
+    ctx.strokeStyle="#8b5cf6";
 
-    ctx.lineWidth=7;
+    ctx.lineWidth=6;
 
     ctx.beginPath();
 
@@ -4588,7 +4509,7 @@ function drawWorld(){
   ){
 
     ctx.fillStyle =
-      "rgba(150,225,255,.75)";
+      "rgba(147,197,255,.35)";
 
     ctx.fillRect(
       ice.x,
@@ -4606,7 +4527,7 @@ function drawWorld(){
 
     if(c.broken){
 
-      ctx.fillStyle="#111";
+      ctx.fillStyle="#090a0f";
 
       ctx.fillRect(
         c.x-4,
@@ -4621,8 +4542,8 @@ function drawWorld(){
 
     ctx.fillStyle =
       c.active
-      ?" #ef476f"
-      :"#555861";
+      ?"#f43f5e"
+      :"#475569";
 
     ctx.fillRect(
       c.x,
@@ -4631,34 +4552,6 @@ function drawWorld(){
       8
     );
 
-    ctx.strokeStyle="#111";
-
-    ctx.lineWidth=2;
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-      c.x+10,
-      c.y
-    );
-
-    ctx.lineTo(
-      c.x+20,
-      c.y+8
-    );
-
-    ctx.lineTo(
-      c.x+28,
-      c.y
-    );
-
-    ctx.lineTo(
-      c.x+40,
-      c.y+8
-    );
-
-    ctx.stroke();
-
   }
 
   for(
@@ -4666,7 +4559,7 @@ function drawWorld(){
     of levelData.hazards
   ){
 
-    ctx.fillStyle="#ef476f";
+    ctx.fillStyle="#f43f5e";
 
     ctx.beginPath();
 
@@ -4677,7 +4570,7 @@ function drawWorld(){
 
     ctx.lineTo(
       h.x+h.w/2,
-      h.y-10
+      h.y-8
     );
 
     ctx.lineTo(
@@ -4688,17 +4581,6 @@ function drawWorld(){
     ctx.closePath();
 
     ctx.fill();
-
-    ctx.fillStyle="#fff";
-
-    ctx.font =
-      "bold 9px system-ui";
-
-    ctx.fillText(
-      "!",
-      h.x+9,
-      h.y+10
-    );
 
   }
 
@@ -4721,7 +4603,7 @@ function drawWorld(){
       performance.now()/700
     );
 
-    ctx.fillStyle="#ffd166";
+    ctx.fillStyle="#fbbf24";
 
     ctx.beginPath();
 
@@ -4736,7 +4618,7 @@ function drawWorld(){
 
       const r =
         i%2===0
-        ?11
+        ?10
         :5;
 
       const xx =
@@ -4771,7 +4653,7 @@ function drawWorld(){
       b.y
     );
 
-    ctx.fillStyle="#ff6b35";
+    ctx.fillStyle="#fb923c";
 
     ctx.beginPath();
 
@@ -4779,44 +4661,6 @@ function drawWorld(){
       0,
       0,
       b.r,
-      0,
-      Math.PI*2
-    );
-
-    ctx.fill();
-
-    ctx.strokeStyle="#fff";
-
-    ctx.lineWidth=3;
-
-    ctx.beginPath();
-
-    ctx.arc(
-      0,
-      0,
-      b.r-5,
-      0,
-      Math.PI*1.5
-    );
-
-    ctx.stroke();
-
-    ctx.fillStyle="#222";
-
-    ctx.beginPath();
-
-    ctx.arc(
-      -5,
-      -3,
-      3,
-      0,
-      Math.PI*2
-    );
-
-    ctx.arc(
-      5,
-      -3,
-      3,
       0,
       Math.PI*2
     );
@@ -4843,23 +4687,23 @@ function drawWorld(){
       performance.now()/120
     );
 
-    ctx.fillStyle="#e5e5e5";
+    ctx.fillStyle="#cbd5e1";
 
     ctx.beginPath();
 
     for(
       let i=0;
-      i<16;
+      i<14;
       i++
     ){
 
       const a =
-        i*Math.PI/8;
+        i*Math.PI/7;
 
       const r =
         i%2===0
         ?s.r
-        :s.r*.65;
+        :s.r*.6;
 
       const xx =
         Math.cos(a)*r;
@@ -4875,20 +4719,6 @@ function drawWorld(){
     }
 
     ctx.closePath();
-    ctx.fill();
-
-    ctx.fillStyle="#333";
-
-    ctx.beginPath();
-
-    ctx.arc(
-      0,
-      0,
-      6,
-      0,
-      Math.PI*2
-    );
-
     ctx.fill();
 
     ctx.restore();
@@ -4916,8 +4746,8 @@ function drawWorld(){
 
     ctx.fillStyle =
       active
-      ?"rgba(255,60,80,.9)"
-      :"rgba(255,220,80,.5)";
+      ?"rgba(244,63,94,.9)"
+      :"rgba(251,191,36,.4)";
 
     ctx.fillRect(
       l.x,
@@ -4935,33 +4765,28 @@ function drawWorld(){
     of levelData.bombs
   ){
 
-    const pulse =
-      Math.sin(
-        b.pulse*8
-      )*.2;
-
-    ctx.fillStyle="#222";
+    ctx.fillStyle="#1e293b";
 
     ctx.beginPath();
 
     ctx.arc(
       b.x,
       b.y,
-      b.r*(1+pulse),
+      b.r,
       0,
       Math.PI*2
     );
 
     ctx.fill();
 
-    ctx.fillStyle="#ff4d6d";
+    ctx.fillStyle="#f43f5e";
 
     ctx.beginPath();
 
     ctx.arc(
-      b.x-4,
-      b.y-4,
-      4,
+      b.x-3,
+      b.y-3,
+      3,
       0,
       Math.PI*2
     );
@@ -4975,29 +4800,13 @@ function drawWorld(){
     of levelData.fallers
   ){
 
-    ctx.fillStyle="#7b61ff";
+    ctx.fillStyle="#8b5cf6";
 
     ctx.fillRect(
       f.x,
       f.y,
       f.w,
       f.h
-    );
-
-    ctx.fillStyle="#fff";
-
-    ctx.fillRect(
-      f.x+5,
-      f.y+5,
-      4,
-      4
-    );
-
-    ctx.fillRect(
-      f.x+12,
-      f.y+5,
-      4,
-      4
     );
 
   }
@@ -5008,7 +4817,7 @@ function drawWorld(){
   ){
 
     ctx.fillStyle =
-      "rgba(120,220,255,.08)";
+      "rgba(139,92,246,.04)";
 
     ctx.fillRect(
       w.x,
@@ -5017,33 +4826,6 @@ function drawWorld(){
       w.h
     );
 
-    ctx.strokeStyle =
-      "rgba(255,255,255,.22)";
-
-    ctx.lineWidth=2;
-
-    for(
-      let yy=w.y+20;
-      yy<w.y+w.h;
-      yy+=30
-    ){
-
-      ctx.beginPath();
-
-      ctx.moveTo(
-        w.x+10,
-        yy
-      );
-
-      ctx.lineTo(
-        w.x+w.w-10,
-        yy
-      );
-
-      ctx.stroke();
-
-    }
-
   }
 
   for(
@@ -5051,7 +4833,7 @@ function drawWorld(){
     of levelData.springs
   ){
 
-    ctx.fillStyle="#ffd166";
+    ctx.fillStyle="#fbbf24";
 
     ctx.fillRect(
       s.x,
@@ -5059,29 +4841,6 @@ function drawWorld(){
       s.w,
       s.h
     );
-
-    ctx.strokeStyle="#fff";
-
-    ctx.lineWidth=2;
-
-    ctx.beginPath();
-
-    ctx.moveTo(
-      s.x+2,
-      s.y+10
-    );
-
-    ctx.lineTo(
-      s.x+8,
-      s.y+2
-    );
-
-    ctx.lineTo(
-      s.x+14,
-      s.y+10
-    );
-
-    ctx.stroke();
 
   }
 
@@ -5103,10 +4862,10 @@ function drawWorld(){
 
     ctx.strokeStyle =
       p.used
-      ?"rgba(150,150,150,.3)"
-      :"#64d8ff";
+      ?"rgba(100,100,100,.3)"
+      :"#38bdf8";
 
-    ctx.lineWidth=5;
+    ctx.lineWidth=4;
 
     ctx.beginPath();
 
@@ -5130,7 +4889,7 @@ function drawWorld(){
   ){
 
     ctx.fillStyle =
-      "rgba(130,80,255,.08)";
+      "rgba(139,92,246,.05)";
 
     ctx.fillRect(
       g.x,
@@ -5147,7 +4906,7 @@ function drawWorld(){
   ){
 
     ctx.fillStyle =
-      "rgba(255,80,150,.07)";
+      "rgba(244,63,94,.04)";
 
     ctx.fillRect(
       r.x,
@@ -5163,7 +4922,7 @@ function drawWorld(){
     of levelData.walls
   ){
 
-    ctx.fillStyle="#8e72ff";
+    ctx.fillStyle="#7c3aed";
 
     ctx.fillRect(
       w.x,
@@ -5171,76 +4930,6 @@ function drawWorld(){
       w.w,
       w.h
     );
-
-  }
-
-  for(
-    const l
-    of levelData.lightnings
-  ){
-
-    const phase =
-      l.timer/l.cool;
-
-    const warning =
-      l.warning/l.cool;
-
-    if(
-      phase<warning
-    ){
-
-      ctx.fillStyle =
-        "rgba(255,230,80,.8)";
-
-      ctx.beginPath();
-
-      ctx.arc(
-        l.x,
-        l.y,
-        10+
-        Math.sin(
-          performance.now()/90
-        )*4,
-        0,
-        Math.PI*2
-      );
-
-      ctx.fill();
-
-    }else if(
-      phase<
-      warning+.14
-    ){
-
-      ctx.strokeStyle="#fff36b";
-
-      ctx.lineWidth=8;
-
-      ctx.beginPath();
-
-      ctx.moveTo(
-        l.x,
-        l.y
-      );
-
-      ctx.lineTo(
-        l.x-18,
-        l.y+45
-      );
-
-      ctx.lineTo(
-        l.x+10,
-        l.y+45
-      );
-
-      ctx.lineTo(
-        l.x-5,
-        l.y+105
-      );
-
-      ctx.stroke();
-
-    }
 
   }
 
@@ -5265,8 +4954,8 @@ function drawWorld(){
 
     ctx.fillStyle =
       active
-      ?"rgba(255,60,80,.9)"
-      :"rgba(100,255,160,.45)";
+      ?"rgba(244,63,94,.9)"
+      :"rgba(74,222,128,.4)";
 
     ctx.fillRect(
       g.x,
@@ -5293,40 +4982,23 @@ function drawWorld(){
 
       ctx.save();
 
-      ctx.strokeStyle =
-        "rgba(255,255,255,.20)";
-
-      ctx.lineWidth=2;
-
-      ctx.beginPath();
-
-      ctx.arc(
-        o.x,
-        o.y,
-        o.safeGap,
-        0,
-        Math.PI*2
-      );
-
-      ctx.stroke();
-
       if(
         o.type==="ball"
       ){
 
         const bx =
           o.x+
-          Math.sin(t*1.3)*
+          Math.sin(t*1.2)*
           (
-            45+
-            levelData.tier.d*35
+            35+
+            levelData.tier.d*25
           );
 
         const by =
           o.y+
-          Math.cos(t*1.8)*18;
+          Math.cos(t*1.6)*15;
 
-        ctx.fillStyle="#ff884d";
+        ctx.fillStyle="#fb923c";
 
         ctx.beginPath();
 
@@ -5346,7 +5018,7 @@ function drawWorld(){
         o.type==="spike"
       ){
 
-        ctx.fillStyle="#ff416c";
+        ctx.fillStyle="#f43f5e";
 
         ctx.beginPath();
 
@@ -5357,7 +5029,7 @@ function drawWorld(){
 
         ctx.lineTo(
           o.x+o.w/2,
-          o.y-o.h*.45
+          o.y-o.h*.4
         );
 
         ctx.lineTo(
@@ -5375,7 +5047,7 @@ function drawWorld(){
         o.type==="fall"
       ){
 
-        const cycle=2.5;
+        const cycle=3.0;
 
         const phase =
           (
@@ -5385,16 +5057,16 @@ function drawWorld(){
           cycle;
 
         const fy =
-          phase<.65
+          phase<.7
           ?o.y+
            phase*
            (
-             260+
-             levelData.tier.d*160
+             200+
+             levelData.tier.d*100
            )
           :o.y;
 
-        ctx.fillStyle="#7b61ff";
+        ctx.fillStyle="#8b5cf6";
 
         ctx.fillRect(
           o.x,
@@ -5411,15 +5083,15 @@ function drawWorld(){
 
         const sx =
           o.x+
-          Math.sin(t*1.7)*
+          Math.sin(t*1.5)*
           (
-            35+
-            levelData.tier.d*35
+            30+
+            levelData.tier.d*25
           );
 
         const sy =
           o.y+
-          Math.cos(t*1.2)*25;
+          Math.cos(t*1.0)*20;
 
         ctx.translate(
           sx,
@@ -5430,23 +5102,23 @@ function drawWorld(){
           performance.now()/100
         );
 
-        ctx.fillStyle="#ddd";
+        ctx.fillStyle="#cbd5e1";
 
         ctx.beginPath();
 
         for(
           let i=0;
-          i<16;
+          i<14;
           i++
         ){
 
           const a =
-            i*Math.PI/8;
+            i*Math.PI/7;
 
           const r =
             i%2===0
             ?o.w*.55
-            :o.w*.32;
+            :o.w*.3;
 
           const xx =
             Math.cos(a)*r;
@@ -5471,8 +5143,8 @@ function drawWorld(){
       ){
 
         const period =
-          1.5+
-          levelData.tier.d*.6;
+          1.8+
+          levelData.tier.d*.5;
 
         const phase =
           (
@@ -5486,8 +5158,8 @@ function drawWorld(){
 
         ctx.fillStyle =
           active
-          ?"rgba(255,50,80,.9)"
-          :"rgba(255,220,80,.7)";
+          ?"rgba(244,63,94,.9)"
+          :"rgba(251,191,36,.6)";
 
         ctx.fillRect(
           o.x-25,
@@ -5502,28 +5174,14 @@ function drawWorld(){
         o.type==="bomb"
       ){
 
-        ctx.fillStyle="#202020";
+        ctx.fillStyle="#1e293b";
 
         ctx.beginPath();
 
         ctx.arc(
           o.x,
           o.y,
-          o.w*.55,
-          0,
-          Math.PI*2
-        );
-
-        ctx.fill();
-
-        ctx.fillStyle="#ff4d6d";
-
-        ctx.beginPath();
-
-        ctx.arc(
-          o.x-4,
-          o.y-4,
-          4,
+          o.w*.5,
           0,
           Math.PI*2
         );
@@ -5538,13 +5196,13 @@ function drawWorld(){
 
         const mx =
           o.x+
-          Math.sin(t*1.2)*
+          Math.sin(t*1.0)*
           (
-            55+
-            levelData.tier.d*35
+            45+
+            levelData.tier.d*25
           );
 
-        ctx.fillStyle="#ffd166";
+        ctx.fillStyle="#8b5cf6";
 
         ctx.fillRect(
           mx,
@@ -5559,7 +5217,7 @@ function drawWorld(){
         o.type==="crack"
       ){
 
-        ctx.fillStyle="#555";
+        ctx.fillStyle="#475569";
 
         ctx.fillRect(
           o.x,
@@ -5568,34 +5226,6 @@ function drawWorld(){
           8
         );
 
-        ctx.strokeStyle="#ef476f";
-
-        ctx.lineWidth=2;
-
-        ctx.beginPath();
-
-        ctx.moveTo(
-          o.x+5,
-          o.y
-        );
-
-        ctx.lineTo(
-          o.x+15,
-          o.y+8
-        );
-
-        ctx.lineTo(
-          o.x+25,
-          o.y
-        );
-
-        ctx.lineTo(
-          o.x+35,
-          o.y+8
-        );
-
-        ctx.stroke();
-
       }
 
       else if(
@@ -5603,30 +5233,30 @@ function drawWorld(){
       ){
 
         ctx.strokeStyle =
-          "rgba(120,220,255,.35)";
+          "rgba(139,92,246,.25)";
 
-        ctx.lineWidth=3;
+        ctx.lineWidth=2;
 
         for(
           let a=0;
-          a<3;
+          a<2;
           a++
         ){
 
           ctx.beginPath();
 
           ctx.moveTo(
-            o.x-20,
+            o.x-15,
             o.y+
-            a*18
+            a*22
           );
 
           ctx.lineTo(
             o.x+
             o.w+
-            20,
+            15,
             o.y+
-            a*18
+            a*22
           );
 
           ctx.stroke();
@@ -5640,8 +5270,8 @@ function drawWorld(){
       ){
 
         const period =
-          1.8+
-          levelData.tier.d*.5;
+          2.0+
+          levelData.tier.d*.4;
 
         const phase =
           (
@@ -5650,57 +5280,27 @@ function drawWorld(){
           )%period;
 
         const warning =
-          1.05-
-          levelData.tier.d*.25;
+          1.2-
+          levelData.tier.d*.2;
 
         if(
           phase<warning
         ){
 
           ctx.fillStyle =
-            "rgba(255,230,80,.8)";
+            "rgba(251,191,36,.7)";
 
           ctx.beginPath();
 
           ctx.arc(
             o.x,
             o.y,
-            10,
+            8,
             0,
             Math.PI*2
           );
 
           ctx.fill();
-
-        }else{
-
-          ctx.strokeStyle="#fff36b";
-
-          ctx.lineWidth=5;
-
-          ctx.beginPath();
-
-          ctx.moveTo(
-            o.x,
-            o.y
-          );
-
-          ctx.lineTo(
-            o.x-10,
-            o.y+35
-          );
-
-          ctx.lineTo(
-            o.x+8,
-            o.y+35
-          );
-
-          ctx.lineTo(
-            o.x-3,
-            o.y+75
-          );
-
-          ctx.stroke();
 
         }
 
@@ -5712,137 +5312,35 @@ function drawWorld(){
 
   }
 
-  const chaosNow =
-    performance.now()/1000;
-
-  for(
-    const c
-    of levelData.chaos
-  ){
-
-    ctx.fillStyle =
-      "rgba(255,90,120,.32)";
-
-    let xx=c.x;
-    let yy=c.y;
-
-    if(c.type===0){
-
-      xx +=
-        Math.sin(
-          chaosNow*2+
-          c.phase
-        )*40;
-
-      yy +=
-        Math.cos(
-          chaosNow*1.5+
-          c.phase
-        )*30;
-
-    }
-
-    if(c.type===3){
-
-      xx +=
-        Math.cos(
-          chaosNow*2+
-          c.phase
-        )*55;
-
-      yy +=
-        Math.sin(
-          chaosNow*2+
-          c.phase
-        )*55;
-
-    }
-
-    if(c.type===7){
-
-      xx +=
-        Math.cos(
-          chaosNow+
-          c.phase
-        )*70;
-
-      yy +=
-        Math.sin(
-          chaosNow+
-          c.phase
-        )*70;
-
-    }
-
-    if(c.type===10){
-
-      xx +=
-        Math.sin(
-          chaosNow*3+
-          c.phase
-        )*90;
-
-    }
-
-    if(c.type===11){
-
-      xx +=
-        Math.sin(
-          chaosNow+
-          c.phase
-        )*50;
-
-      yy +=
-        Math.cos(
-          chaosNow+
-          c.phase
-        )*50;
-
-    }
-
-    ctx.beginPath();
-
-    ctx.arc(
-      xx,
-      yy,
-      c.size,
-      0,
-      Math.PI*2
-    );
-
-    ctx.fill();
-
-  }
-
   const fx =
     levelData.finishX;
 
-  ctx.fillStyle="#222";
+  ctx.fillStyle="#1e293b";
 
   ctx.fillRect(
     fx,
     levelData.groundY-120,
-    7,
+    6,
     120
   );
 
-  ctx.fillStyle="#ff4d6d";
+  ctx.fillStyle="#f43f5e";
 
   ctx.beginPath();
 
   ctx.moveTo(
-    fx+7,
+    fx+6,
     levelData.groundY-120
   );
 
   ctx.lineTo(
-    fx+75,
-    levelData.groundY-94
+    fx+65,
+    levelData.groundY-96
   );
 
   ctx.lineTo(
-    fx+7,
-    levelData.groundY-68
+    fx+6,
+    levelData.groundY-72
   );
 
   ctx.closePath();
@@ -5856,7 +5354,7 @@ function drawWorld(){
     player.y
   );
 
-  ctx.fillStyle="#684cff";
+  ctx.fillStyle="#7c3aed";
 
   ctx.beginPath();
 
@@ -5865,7 +5363,7 @@ function drawWorld(){
     0,
     player.w,
     player.h,
-    8
+    10
   );
 
   ctx.fill();
@@ -5875,12 +5373,12 @@ function drawWorld(){
   ){
 
     ctx.fillStyle =
-      "rgba(108,76,255,.3)";
+      "rgba(124,58,237,.35)";
 
     ctx.fillRect(
-      -25,
-      5,
-      20,
+      -22,
+      6,
+      18,
       30
     );
 
@@ -5893,7 +5391,7 @@ function drawWorld(){
   ctx.arc(
     10,
     12,
-    5,
+    4.5,
     0,
     Math.PI*2
   );
@@ -5901,14 +5399,14 @@ function drawWorld(){
   ctx.arc(
     23,
     12,
-    5,
+    4.5,
     0,
     Math.PI*2
   );
 
   ctx.fill();
 
-  ctx.fillStyle="#111";
+  ctx.fillStyle="#090a0f";
 
   ctx.beginPath();
 
@@ -5930,37 +5428,21 @@ function drawWorld(){
 
   ctx.fill();
 
-  ctx.strokeStyle="#111";
+  ctx.strokeStyle="#090a0f";
 
-  ctx.lineWidth=3;
+  ctx.lineWidth=2.5;
 
   ctx.beginPath();
 
   ctx.arc(
     17,
     17,
-    9,
+    7,
     0,
     Math.PI
   );
 
   ctx.stroke();
-
-  ctx.fillStyle="#222";
-
-  ctx.fillRect(
-    6,
-    38,
-    7,
-    5
-  );
-
-  ctx.fillRect(
-    21,
-    38,
-    7,
-    5
-  );
 
   ctx.restore();
 
@@ -5976,7 +5458,7 @@ function drawWorld(){
         1
       );
 
-    ctx.fillStyle="#ffd166";
+    ctx.fillStyle="#fbbf24";
 
     ctx.fillRect(
       p.x,
@@ -5992,14 +5474,14 @@ function drawWorld(){
   if(level<=15){
 
     ctx.fillStyle =
-      "rgba(20,20,20,.35)";
+      "rgba(255,255,255,.5)";
 
     ctx.font =
-      "900 15px system-ui";
+      "900 14px system-ui";
 
     ctx.fillText(
-      "هەموو شتێک باشە 😎",
-      player.x+100,
+      "هەموو شتێک نەرم و ئارامە 😎",
+      player.x+90,
       player.y-30
     );
 
