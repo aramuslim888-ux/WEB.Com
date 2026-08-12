@@ -59,7 +59,7 @@ button{
   -webkit-user-select:none;
   user-select:none;
   cursor:pointer;
-  transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition:all .25s cubic-bezier(.175,.885,.32,1.275);
 }
 
 /* HUD */
@@ -74,7 +74,7 @@ button{
   gap:10px;
   z-index:50;
   pointer-events:none;
-  animation: fadeInDown 0.8s ease-out;
+  animation:fadeInDown .8s ease-out;
 }
 
 .pill{
@@ -84,11 +84,13 @@ button{
   border-radius:999px;
   font-size:14px;
   font-weight:900;
-  box-shadow:0 10px 30px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.15);
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.15);
   backdrop-filter:blur(16px);
   -webkit-backdrop-filter:blur(16px);
   border:1px solid rgba(255,255,255,.1);
-  letter-spacing: 0.5px;
+  letter-spacing:.5px;
 }
 
 #tier{
@@ -112,23 +114,23 @@ button{
   background:
     radial-gradient(circle at 15% 20%,rgba(139,92,246,.35) 0%,transparent 40%),
     radial-gradient(circle at 85% 80%,rgba(236,72,153,.3) 0%,transparent 40%),
-    linear-gradient(135deg, #0f172a 0%, #090a0f 100%);
+    linear-gradient(135deg,#0f172a 0%,#090a0f 100%);
 }
 
 .introCard{
   width:min(92vw,460px);
   padding:36px 24px;
-  animation: scaleUp 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation:scaleUp .9s cubic-bezier(.175,.885,.32,1.275) forwards;
 }
 
-@keyframes scaleUp {
-  0% { transform: scale(0.85); opacity: 0; }
-  100% { transform: scale(1); opacity: 1; }
+@keyframes scaleUp{
+  0%{transform:scale(.85);opacity:0}
+  100%{transform:scale(1);opacity:1}
 }
 
-@keyframes fadeInDown {
-  0% { transform: translateY(-20px); opacity: 0; }
-  100% { transform: translateY(0); opacity: 1; }
+@keyframes fadeInDown{
+  0%{transform:translateY(-20px);opacity:0}
+  100%{transform:translateY(0);opacity:1}
 }
 
 .introTitle{
@@ -136,10 +138,10 @@ button{
   font-size:clamp(44px,13vw,76px);
   line-height:.9;
   font-weight:1000;
-  background: linear-gradient(135deg, #fff 30%, #a78bfa 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 10px 30px rgba(139,92,246,0.4);
+  background:linear-gradient(135deg,#fff 30%,#a78bfa 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 10px 30px rgba(139,92,246,.4);
 }
 
 .introName{
@@ -153,14 +155,14 @@ button{
   margin:0 0 28px;
   opacity:.7;
   font-size:13px;
-  letter-spacing: 1px;
+  letter-spacing:1px;
 }
 
 #start{
   border:0;
   padding:18px 36px;
   border-radius:999px;
-  background:linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  background:linear-gradient(135deg,#7c3aed 0%,#6d28d9 100%);
   color:#fff;
   font-size:18px;
   font-weight:1000;
@@ -168,7 +170,7 @@ button{
 }
 
 #start:active{
-  transform:scale(0.95);
+  transform:scale(.95);
   box-shadow:0 5px 15px rgba(124,58,237,.3);
 }
 
@@ -218,7 +220,7 @@ button{
   justify-content:center;
   font-size:24px;
   color:white;
-  box-shadow: 0 4px 15px rgba(0,0,0,.2);
+  box-shadow:0 4px 15px rgba(0,0,0,.2);
   transition:transform .04s linear;
 }
 
@@ -304,20 +306,20 @@ button{
   padding:32px 24px;
   box-shadow:0 30px 90px rgba(0,0,0,.6);
   border:1px solid rgba(255,255,255,.12);
-  animation: scaleUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation:scaleUp .5s cubic-bezier(.175,.885,.32,1.275) forwards;
 }
 
 .winCard h1{
   margin:0 0 10px;
   font-size:24px;
-  font-weight: 1000;
+  font-weight:1000;
   color:#f8fafc;
 }
 
 .winCard p{
   line-height:1.6;
   color:#cbd5e1;
-  font-size: 15px;
+  font-size:15px;
 }
 
 .winButtons{
@@ -336,7 +338,7 @@ button{
 }
 
 #nextBtn{
-  background:linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  background:linear-gradient(135deg,#7c3aed 0%,#6d28d9 100%);
   color:#fff;
   box-shadow:0 8px 20px rgba(124,58,237,.4);
 }
@@ -356,7 +358,7 @@ button{
   transform:translate(-50%,-50%) scale(.8);
   z-index:140;
   color:#fff;
-  background:linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  background:linear-gradient(135deg,#7c3aed 0%,#6d28d9 100%);
   padding:20px 28px;
   border-radius:22px;
   font-size:22px;
@@ -367,7 +369,7 @@ button{
 }
 
 #finishBanner.show{
-  animation:finishPop .8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  animation:finishPop .8s cubic-bezier(.175,.885,.32,1.275) forwards;
 }
 
 @keyframes finishPop{
@@ -419,7 +421,6 @@ body.hardMode #levelIdea{
 body.hardMode #tier{
   display:none;
 }
-
 </style>
 </head>
 
@@ -541,58 +542,47 @@ body.hardMode #tier{
    SETUP
 ========================================================= */
 
-const canvas = document.getElementById("game");
-const ctx = canvas.getContext("2d");
+const canvas=document.getElementById("game");
+const ctx=canvas.getContext("2d");
 
-const intro = document.getElementById("intro");
-const startBtn = document.getElementById("start");
+const intro=document.getElementById("intro");
+const startBtn=document.getElementById("start");
 
-const levelEl = document.getElementById("level");
-const tierEl = document.getElementById("tier");
-const levelIdea = document.getElementById("levelIdea");
+const levelEl=document.getElementById("level");
+const tierEl=document.getElementById("tier");
+const levelIdea=document.getElementById("levelIdea");
 
-const win = document.getElementById("win");
-const winText = document.getElementById("winText");
-const finishBanner = document.getElementById("finishBanner");
-const dangerEl = document.getElementById("danger");
+const win=document.getElementById("win");
+const winText=document.getElementById("winText");
+const finishBanner=document.getElementById("finishBanner");
+const dangerEl=document.getElementById("danger");
 
-let W = innerWidth;
-let H = innerHeight;
+let W=innerWidth;
+let H=innerHeight;
 
-let DPR = Math.min(
-  window.devicePixelRatio || 1,
+let DPR=Math.min(
+  window.devicePixelRatio||1,
   2
 );
 
 function resize(){
 
-  W = innerWidth;
-  H = innerHeight;
+  W=innerWidth;
+  H=innerHeight;
 
-  DPR = Math.min(
-    window.devicePixelRatio || 1,
+  DPR=Math.min(
+    window.devicePixelRatio||1,
     2
   );
 
-  canvas.width =
-    Math.floor(W * DPR);
+  canvas.width=Math.floor(W*DPR);
+  canvas.height=Math.floor(H*DPR);
 
-  canvas.height =
-    Math.floor(H * DPR);
-
-  canvas.style.width =
-    W + "px";
-
-  canvas.style.height =
-    H + "px";
+  canvas.style.width=W+"px";
+  canvas.style.height=H+"px";
 
   ctx.setTransform(
-    DPR,
-    0,
-    0,
-    DPR,
-    0,
-    0
+    DPR,0,0,DPR,0,0
   );
 }
 
@@ -607,49 +597,45 @@ resize();
    SAVE
 ========================================================= */
 
-const SAVE_KEY =
-  "san_b_ahamd_5000_v12_smooth";
+const SAVE_KEY="san_b_ahamd_5000_v12_smooth";
+const TOTAL_LEVELS=5000;
 
-const TOTAL_LEVELS = 5000;
-
-let level =
-  parseInt(
-    localStorage.getItem(SAVE_KEY) || "1",
-    10
-  );
+let level=parseInt(
+  localStorage.getItem(SAVE_KEY)||"1",
+  10
+);
 
 if(
-  !Number.isFinite(level) ||
-  level < 1 ||
-  level > TOTAL_LEVELS
+  !Number.isFinite(level)||
+  level<1||
+  level>TOTAL_LEVELS
 ){
-  level = 1;
+  level=1;
 }
 
 /* =========================================================
    STATE
 ========================================================= */
 
-let playing = false;
-let paused = false;
+let playing=false;
+let paused=false;
 
-let cameraX = 0;
-let lastTime = 0;
+let cameraX=0;
+let lastTime=0;
 
-let levelData = null;
-let levelWon = false;
+let levelData=null;
+let levelWon=false;
 
-let stormFlash = 0;
-let screenShake = 0;
+let stormFlash=0;
+let screenShake=0;
 
-let particles = [];
+let particles=[];
 
 /* =========================================================
    PLAYER
 ========================================================= */
 
-const player = {
-
+const player={
   x:80,
   y:0,
 
@@ -674,14 +660,13 @@ const player = {
   reverseTimer:0,
 
   invincible:0
-
 };
 
 /* =========================================================
    INPUT
 ========================================================= */
 
-const input = {
+const input={
   x:0
 };
 
@@ -689,48 +674,39 @@ const input = {
    JOYSTICK
 ========================================================= */
 
-const joystick =
-  document.getElementById("joystick");
+const joystick=document.getElementById("joystick");
+const stick=document.getElementById("stick");
 
-const stick =
-  document.getElementById("stick");
-
-let joystickPointer = null;
+let joystickPointer=null;
 
 function setJoystick(e){
 
-  const r =
-    joystick.getBoundingClientRect();
+  const r=joystick.getBoundingClientRect();
 
-  const cx =
-    r.left +
-    r.width / 2;
+  const cx=r.left+r.width/2;
 
-  let dx =
-    e.clientX - cx;
+  let dx=e.clientX-cx;
 
-  const max = 42;
+  const max=42;
 
-  dx =
-    Math.max(
-      -max,
-      Math.min(max,dx)
-    );
+  dx=Math.max(
+    -max,
+    Math.min(max,dx)
+  );
 
-  input.x =
-    dx / max;
+  input.x=dx/max;
 
-  stick.style.transform =
+  stick.style.transform=
     `translateX(${dx}px)`;
 }
 
 function resetJoystick(){
 
-  joystickPointer = null;
+  joystickPointer=null;
 
-  input.x = 0;
+  input.x=0;
 
-  stick.style.transform =
+  stick.style.transform=
     "translateX(0)";
 }
 
@@ -739,8 +715,7 @@ joystick.addEventListener(
   e=>{
     e.preventDefault();
 
-    joystickPointer =
-      e.pointerId;
+    joystickPointer=e.pointerId;
 
     joystick.setPointerCapture(
       e.pointerId
@@ -753,10 +728,7 @@ joystick.addEventListener(
 joystick.addEventListener(
   "pointermove",
   e=>{
-    if(
-      e.pointerId ===
-      joystickPointer
-    ){
+    if(e.pointerId===joystickPointer){
       e.preventDefault();
       setJoystick(e);
     }
@@ -766,10 +738,7 @@ joystick.addEventListener(
 joystick.addEventListener(
   "pointerup",
   e=>{
-    if(
-      e.pointerId ===
-      joystickPointer
-    ){
+    if(e.pointerId===joystickPointer){
       resetJoystick();
     }
   }
@@ -784,63 +753,51 @@ joystick.addEventListener(
    BUTTONS
 ========================================================= */
 
-const jumpBtn =
-  document.getElementById("jumpBtn");
-
-const dashBtn =
-  document.getElementById("dashBtn");
-
-const resetBtn =
-  document.getElementById("resetBtn");
-
-const nextQuickBtn =
-  document.getElementById("nextQuickBtn");
+const jumpBtn=document.getElementById("jumpBtn");
+const dashBtn=document.getElementById("dashBtn");
+const resetBtn=document.getElementById("resetBtn");
+const nextQuickBtn=document.getElementById("nextQuickBtn");
 
 function jump(){
 
   if(
-    player.grounded ||
-    player.coyote > 0
+    player.grounded||
+    player.coyote>0
   ){
 
-    player.vy =
-      -player.jumpPower;
-
-    player.grounded = false;
-
-    player.coyote = 0;
+    player.vy=-player.jumpPower;
+    player.grounded=false;
+    player.coyote=0;
   }
 }
 
 function dash(){
 
   if(
-    player.dashCooldown > 0 ||
+    player.dashCooldown>0||
     !levelData
   ){
     return;
   }
 
-  let dir =
-    Math.abs(input.x) > .1
-    ? input.x
-    : 1;
+  let dir=
+    Math.abs(input.x)>.1
+    ?input.x
+    :1;
 
-  player.vx =
-    dir * 760;
+  player.vx=dir*760;
 
-  player.dashTime = .17;
+  player.dashTime=.17;
 
-  player.dashCooldown =
+  player.dashCooldown=
     Math.max(
       .32,
-      .82 -
-      levelData.tier.d * .22
+      .82-levelData.tier.d*.22
     );
 
-  player.invincible = .16;
+  player.invincible=.16;
 
-  screenShake = 5;
+  screenShake=5;
 }
 
 jumpBtn.addEventListener(
@@ -887,39 +844,38 @@ window.addEventListener(
   e=>{
 
     if(
-      e.key === "ArrowLeft" ||
-      e.key.toLowerCase() === "a"
+      e.key==="ArrowLeft"||
+      e.key.toLowerCase()==="a"
     ){
-      input.x = -1;
+      input.x=-1;
     }
 
     if(
-      e.key === "ArrowRight" ||
-      e.key.toLowerCase() === "d"
+      e.key==="ArrowRight"||
+      e.key.toLowerCase()==="d"
     ){
-      input.x = 1;
+      input.x=1;
     }
 
     if(
-      e.key === " " ||
-      e.key === "ArrowUp"
+      e.key===" "||
+      e.key==="ArrowUp"
     ){
       e.preventDefault();
       jump();
     }
 
     if(
-      e.key.toLowerCase() === "shift"
+      e.key.toLowerCase()==="shift"
     ){
       dash();
     }
 
     if(
-      e.key.toLowerCase() === "r"
+      e.key.toLowerCase()==="r"
     ){
       resetLevel();
     }
-
   }
 );
 
@@ -935,11 +891,8 @@ window.addEventListener(
         "d"
       ].includes(e.key)
     ){
-
-      input.x = 0;
-
+      input.x=0;
     }
-
   }
 );
 
@@ -977,25 +930,18 @@ document.addEventListener(
 
 function random(n){
 
-  const x =
-    Math.sin(
-      n * 12.9898
-    ) *
+  const x=
+    Math.sin(n*12.9898)*
     43758.5453123;
 
-  return x -
-    Math.floor(x);
+  return x-Math.floor(x);
 }
 
 /* =========================================================
    HELPERS
 ========================================================= */
 
-function clamp(
-  value,
-  min,
-  max
-){
+function clamp(value,min,max){
 
   return Math.max(
     min,
@@ -1005,22 +951,21 @@ function clamp(
 
 function lerp(a,b,t){
 
-  return a +
-    (b-a)*t;
+  return a+(b-a)*t;
 }
 
 function chance(seed,p){
 
-  return random(seed) < p;
+  return random(seed)<p;
 }
 
 function rectHit(a,b){
 
   return(
-    a.x < b.x+b.w &&
-    a.x+a.w > b.x &&
-    a.y < b.y+b.h &&
-    a.y+a.h > b.y
+    a.x<b.x+b.w&&
+    a.x+a.w>b.x&&
+    a.y<b.y+b.h&&
+    a.y+a.h>b.y
   );
 }
 
@@ -1031,38 +976,37 @@ function circleHit(
   box
 ){
 
-  const cx =
-    clamp(
-      px,
-      box.x,
-      box.x+box.w
-    );
+  const cx=clamp(
+    px,
+    box.x,
+    box.x+box.w
+  );
 
-  const cy =
-    clamp(
-      py,
-      box.y,
-      box.y+box.h
-    );
+  const cy=clamp(
+    py,
+    box.y,
+    box.y+box.h
+  );
 
   return(
     Math.hypot(
       px-cx,
       py-cy
-    ) < pr
+    )<pr
   );
 }
 
 /* =========================================================
-   DIFFICULTY (ULTRA-GENTLE SCALING FROM 16 TO 5000)
+   DIFFICULTY
+   LEVEL 1-15 = TUTORIAL
+   LEVEL 16-5000 = VERY GRADUAL
 ========================================================= */
 
 function difficulty(n){
 
-  if(n <= 15){
+  if(n<=15){
 
-    const p =
-      (n-1)/14;
+    const p=(n-1)/14;
 
     return{
 
@@ -1084,13 +1028,13 @@ function difficulty(n){
         5+p*18,
 
       spikes:
-        n>=8 ? p*.18 : 0,
+        n>=8?p*.18:0,
 
       balls:
-        n>=10 ? p*.15 : 0,
+        n>=10?p*.15:0,
 
       cracks:
-        n>=12 ? p*.12 : 0,
+        n>=12?p*.12:0,
 
       moving:0,
       disappearing:0,
@@ -1101,7 +1045,7 @@ function difficulty(n){
       ice:0,
       fake:0,
       walls:0,
-      springs:n>=5 ? p*.12 : 0,
+      springs:n>=5?p*.12:0,
       portals:0,
       gravity:0,
       reverse:0,
@@ -1115,210 +1059,256 @@ function difficulty(n){
       jump:665,
 
       groups:
-        4+
-        Math.floor(p*3)
-
+        4+Math.floor(p*3)
     };
   }
 
-  // Very gradual logarithmic scaling for levels 16 to 5000 so it starts extremely easy and climbs very slowly
-  const progress = (n - 16) / (5000 - 16);
-  const d = Math.pow(progress, 1.8) * 0.85 + 0.05;
+  /*
+    NEW ULTRA-GENTLE CURVE
 
-  const stage =
+    Level 16:
+      d ≈ 0.02
+
+    Level 100:
+      still very easy
+
+    Level 500:
+      still comfortable
+
+    Level 1000:
+      begins to become noticeable
+
+    Level 2500:
+      medium difficulty
+
+    Level 4000:
+      hard
+
+    Level 5000:
+      very hard
+
+    The power curve is intentionally slow at first.
+  */
+
+  const progress=
+    (n-16)/(5000-16);
+
+  const d=
+    .02+
+    Math.pow(progress,2.6)*.93;
+
+  const safeD=
+    clamp(
+      d,
+      .02,
+      .95
+    );
+
+  const stage=
     Math.min(
       20,
       1+
-      Math.floor(d*20)
+      Math.floor(
+        safeD*20
+      )
     );
 
   return{
 
-    p: progress,
-    d: clamp(d, 0.05, 0.95),
+    p:progress,
+    d:safeD,
 
     stage,
 
     name:
       `ئاستی پلەبەرز ${stage}`,
 
+    /*
+      Bigger gaps at the beginning.
+      They shrink only slowly.
+    */
+
     gap:
       lerp(
-        130,
+        145,
         75,
-        d
+        safeD
       ),
 
     width:
       lerp(
-        160,
+        175,
         75,
-        d
+        safeD
       ),
 
     rise:
       lerp(
-        10,
+        7,
         55,
-        d
+        safeD
       ),
 
     spikes:
       lerp(
-        .05,
+        .02,
         .45,
-        d
+        safeD
       ),
 
     balls:
       lerp(
-        .04,
+        .015,
         .40,
-        d
+        safeD
       ),
 
     cracks:
       lerp(
-        .03,
+        .01,
         .35,
-        d
+        safeD
       ),
 
     moving:
       lerp(
-        .03,
+        .01,
         .35,
-        d
+        safeD
       ),
 
     disappearing:
       lerp(
-        .01,
+        .005,
         .25,
-        d
+        safeD
       ),
 
     saws:
       lerp(
-        .01,
+        .002,
         .30,
-        d
+        safeD
       ),
 
     lasers:
       lerp(
-        .01,
+        .001,
         .25,
-        d
+        safeD
       ),
 
     bombs:
       lerp(
-        .005,
+        .001,
         .22,
-        d
+        safeD
       ),
 
     wind:
       lerp(
-        .01,
+        .005,
         .25,
-        d
+        safeD
       ),
 
     ice:
       lerp(
-        .02,
+        .005,
         .25,
-        d
+        safeD
       ),
 
     fake:
       lerp(
-        .005,
+        .001,
         .18,
-        d
+        safeD
       ),
 
     walls:
       lerp(
-        .005,
+        .001,
         .20,
-        d
+        safeD
       ),
 
     springs:
       lerp(
-        .08,
+        .06,
         .35,
-        d
+        safeD
       ),
 
     portals:
       lerp(
-        .005,
+        .001,
         .15,
-        d
+        safeD
       ),
 
     gravity:
       lerp(
-        .005,
+        .001,
         .18,
-        d
+        safeD
       ),
 
     reverse:
       lerp(
-        .002,
+        .001,
         .15,
-        d
+        safeD
       ),
 
     fallers:
       lerp(
-        .01,
+        .002,
         .30,
-        d
+        safeD
       ),
 
     storms:
       lerp(
-        .02,
+        .005,
         .35,
-        d
+        safeD
       ),
 
     ballSpeed:
       lerp(
-        130,
+        120,
         260,
-        d
+        safeD
       ),
 
     speed:
       lerp(
         245,
         280,
-        d
+        safeD
       ),
 
     jump:
       lerp(
-        660,
+        665,
         615,
-        d
+        safeD
       ),
+
+    /*
+      Keep level length comfortable early.
+      Only becomes longer later.
+    */
 
     groups:
       Math.round(
         lerp(
-          6,
+          5,
           20,
-          d
+          safeD
         )
       )
-
   };
 }
 
@@ -1326,7 +1316,7 @@ function difficulty(n){
    IDEAS
 ========================================================= */
 
-const ideas = [
+const ideas=[
 
 "💡 بە joystick بڕۆ بۆ ڕاست.",
 "💡 JUMP بۆ بازدان بەکاربهێنە.",
@@ -1343,7 +1333,7 @@ const ideas = [
 "💡 لە ئێستاوە یارییەکە جدی دەبێت.",
 "💡 کۆتایی فێرکاری نزیکە.",
 "💡 Level 15 دوا قۆناغی فێرکارییە.",
-"😈 Level 16: پشوو بدە، ئاستەکان وردە وردە گەورە دەبن.",
+"😎 Level 16: هێواش هێواش دەست بە قورسی دەکات.",
 "🔥 دوو مەترسی دەتوانن لە یەک کاتدا بێن.",
 "🔥 پلاتفۆرمی جوڵاو دەتوانێت ڕێگاکەت بگۆڕێت.",
 "⚠️ تۆپەکان بە لەسەرخۆیی دەجوڵێن.",
@@ -1376,11 +1366,10 @@ const ideas = [
 
 function makeLevel(n){
 
-  const D =
-    difficulty(n);
+  const D=difficulty(n);
 
-  const groundY =
-    H -
+  const groundY=
+    H-
     Math.max(
       125,
       Math.min(
@@ -1416,19 +1405,16 @@ function makeLevel(n){
   const fairObstacles=[];
 
   platforms.push({
-
     x:-300,
     y:groundY,
     w:520,
     h:80,
     safe:true
-
   });
 
   let x=230;
 
-  const count =
-    D.groups;
+  const count=D.groups;
 
   for(
     let i=0;
@@ -1436,11 +1422,11 @@ function makeLevel(n){
     i++
   ){
 
-    const base =
+    const base=
       n*100000+
       i*997;
 
-    const gap =
+    const gap=
       Math.max(
         35,
         D.gap+
@@ -1449,14 +1435,14 @@ function makeLevel(n){
 
     x+=gap;
 
-    let width =
+    let width=
       Math.max(
         55,
         D.width+
         random(base+2)*25
       );
 
-    let py =
+    let py=
       groundY-
       random(base+3)*D.rise;
 
@@ -1471,26 +1457,21 @@ function makeLevel(n){
     platforms.push(platform);
 
     if(
-      i%2===0 ||
+      i%2===0||
       random(base+4)>.45
     ){
 
       stars.push({
-
         x:x+width*.5,
         y:py-38,
         r:9,
         taken:false
-
       });
 
     }
 
     if(
-      chance(
-        base+10,
-        D.moving
-      )
+      chance(base+10,D.moving)
     ){
 
       movingPlatforms.push({
@@ -1528,16 +1509,11 @@ function makeLevel(n){
           :"y",
 
         safe:true
-
       });
-
     }
 
     if(
-      chance(
-        base+20,
-        D.disappearing
-      )
+      chance(base+20,D.disappearing)
     ){
 
       disappearingPlatforms.push({
@@ -1556,16 +1532,11 @@ function makeLevel(n){
         respawn:
           1.8+
           random(base+22)*1.2
-
       });
-
     }
 
     if(
-      chance(
-        base+30,
-        D.fake
-      )
+      chance(base+30,D.fake)
     ){
 
       fakePlatforms.push({
@@ -1592,19 +1563,14 @@ function makeLevel(n){
         h:14,
 
         fake:true
-
       });
-
     }
 
     if(
-      chance(
-        base+40,
-        D.spikes
-      )
+      chance(base+40,D.spikes)
     ){
 
-      const amount =
+      const amount=
         n<16
         ?1
         :Math.min(
@@ -1627,34 +1593,25 @@ function makeLevel(n){
           x:
             x+
             10+
-            random(
-              base+50+s
-            )*
+            random(base+50+s)*
             Math.max(
               12,
               width-28
             ),
 
-          y:
-            py-22,
+          y:py-22,
 
           w:22,
           h:22
-
         });
-
       }
-
     }
 
     if(
-      chance(
-        base+60,
-        D.balls
-      )
+      chance(base+60,D.balls)
     ){
 
-      const amount =
+      const amount=
         n<16
         ?1
         :Math.min(
@@ -1678,9 +1635,7 @@ function makeLevel(n){
             x+
             width+
             55+
-            random(
-              base+70+b
-            )*80,
+            random(base+70+b)*80,
 
           y:
             py-
@@ -1695,8 +1650,7 @@ function makeLevel(n){
             D.ballSpeed*
             (1+b*.08),
 
-          minX:
-            x-40,
+          minX:x-40,
 
           maxX:
             x+
@@ -1705,29 +1659,19 @@ function makeLevel(n){
             D.d*60,
 
           dir:
-            random(
-              base+80+b
-            )>.5
+            random(base+80+b)>.5
             ?1
             :-1,
 
           targetTimer:
             1.0+
-            random(
-              base+90+b
-            )*1.0
-
+            random(base+90+b)*1.0
         });
-
       }
-
     }
 
     if(
-      chance(
-        base+100,
-        D.saws
-      )
+      chance(base+100,D.saws)
     ){
 
       saws.push({
@@ -1748,8 +1692,7 @@ function makeLevel(n){
           D.d*5,
 
         baseY:
-          py-
-          40,
+          py-40,
 
         amp:
           10+
@@ -1761,16 +1704,11 @@ function makeLevel(n){
 
         phase:
           random(base+103)*6.28
-
       });
-
     }
 
     if(
-      chance(
-        base+110,
-        D.lasers
-      )
+      chance(base+110,D.lasers)
     ){
 
       lasers.push({
@@ -1802,16 +1740,11 @@ function makeLevel(n){
         warning:
           .5+
           random(base+116)*.2
-
       });
-
     }
 
     if(
-      chance(
-        base+120,
-        D.bombs
-      )
+      chance(base+120,D.bombs)
     ){
 
       bombs.push({
@@ -1836,23 +1769,17 @@ function makeLevel(n){
           random(base+123)*1.5,
 
         pulse:0
-
       });
-
     }
 
     if(
-      random(base+130) <
-      .08+
-      D.d*.3
+      random(base+130)<
+      .08+D.d*.3
     ){
 
-      const sx =
-        x+
-        width+
-        15;
+      const sx=x+width+15;
 
-      const sw =
+      const sw=
         90+
         random(base+131)*
         Math.max(
@@ -1860,7 +1787,7 @@ function makeLevel(n){
           120-D.d*30
         );
 
-      const rise =
+      const rise=
         8+
         random(base+132)*
         (15+D.rise*.4);
@@ -1872,28 +1799,21 @@ function makeLevel(n){
         rise
       });
 
-      x =
-        sx+
-        sw;
+      x=sx+sw;
 
     }else{
 
       x+=width;
-
     }
 
     if(
-      chance(
-        base+140,
-        D.cracks
-      )
+      chance(base+140,D.cracks)
     ){
 
-      const amount =
+      const amount=
         Math.min(
           2,
-          1+
-          Math.floor(D.d)
+          1+Math.floor(D.d)
         );
 
       for(
@@ -1918,18 +1838,12 @@ function makeLevel(n){
           timer:0,
           active:false,
           broken:false
-
         });
-
       }
-
     }
 
     if(
-      chance(
-        base+150,
-        D.wind
-      )
+      chance(base+150,D.wind)
     ){
 
       windZones.push({
@@ -1959,16 +1873,11 @@ function makeLevel(n){
             50+
             D.d*150
           )
-
       });
-
     }
 
     if(
-      chance(
-        base+160,
-        D.ice
-      )
+      chance(base+160,D.ice)
     ){
 
       iceZones.push({
@@ -1983,16 +1892,11 @@ function makeLevel(n){
           random(base+161)*100,
 
         h:30
-
       });
-
     }
 
     if(
-      chance(
-        base+170,
-        D.springs
-      )
+      chance(base+170,D.springs)
     ){
 
       springs.push({
@@ -2005,8 +1909,7 @@ function makeLevel(n){
             width-25
           ),
 
-        y:
-          py-12,
+        y:py-12,
 
         w:22,
         h:12,
@@ -2014,16 +1917,11 @@ function makeLevel(n){
         power:
           680+
           D.d*250
-
       });
-
     }
 
     if(
-      chance(
-        base+180,
-        D.portals
-      )
+      chance(base+180,D.portals)
     ){
 
       portals.push({
@@ -2043,20 +1941,14 @@ function makeLevel(n){
 
         targetOffset:
           200+
-          random(base+183)*
-          300,
+          random(base+183)*300,
 
         used:false
-
       });
-
     }
 
     if(
-      chance(
-        base+190,
-        D.gravity
-      )
+      chance(base+190,D.gravity)
     ){
 
       gravityZones.push({
@@ -2075,18 +1967,13 @@ function makeLevel(n){
 
         scale:
           random(base+192)>.5
-          ? .7
-          : 1.3
-
+          ?.7
+          :1.3
       });
-
     }
 
     if(
-      chance(
-        base+200,
-        D.reverse
-      )
+      chance(base+200,D.reverse)
     ){
 
       reverseZones.push({
@@ -2106,16 +1993,11 @@ function makeLevel(n){
         time:
           .8+
           random(base+202)*1.0
-
       });
-
     }
 
     if(
-      chance(
-        base+210,
-        D.fallers
-      )
+      chance(base+210,D.fallers)
     ){
 
       fallers.push({
@@ -2144,16 +2026,11 @@ function makeLevel(n){
         resetY:
           -220-
           random(base+250)*100
-
       });
-
     }
 
     if(
-      chance(
-        base+260,
-        D.walls
-      )
+      chance(base+260,D.walls)
     ){
 
       walls.push({
@@ -2165,8 +2042,7 @@ function makeLevel(n){
           random(base+261)*70,
 
         y:
-          py-
-          80,
+          py-80,
 
         w:
           18+
@@ -2186,14 +2062,11 @@ function makeLevel(n){
 
         phase:
           random(base+262)*6.28
-
       });
-
     }
   }
 
-  const finalStart =
-    x+60;
+  const finalStart=x+60;
 
   platforms.push({
 
@@ -2202,12 +2075,25 @@ function makeLevel(n){
     w:500,
     h:80,
     safe:true
-
   });
+
+  /* =======================================================
+     FAIR OBSTACLES
+     ALSO MADE MUCH GENTLER AT EARLY LEVELS
+  ======================================================= */
 
   if(n>=16){
 
-    const obstacleTypes = [
+    /*
+      Before:
+        always 8 obstacles.
+
+      Now:
+        Level 16 starts with only 2.
+        They slowly increase toward 8.
+    */
+
+    const obstacleTypes=[
       "ball",
       "spike",
       "fall",
@@ -2220,29 +2106,63 @@ function makeLevel(n){
       "lightning"
     ];
 
-    const routeLength =
+    const routeLength=
       Math.max(
         1200,
         x-250
       );
 
+    const obstacleCount=
+      Math.min(
+        8,
+        2+
+        Math.floor(
+          D.d*7
+        )
+      );
+
+    /*
+      Early levels use only the easier obstacle types.
+      Harder mechanics are unlocked gradually.
+    */
+
+    const availableTypes=
+      D.d<.08
+      ?["ball","spike"]
+      :D.d<.18
+      ?["ball","spike","moving","crack"]
+      :D.d<.32
+      ?["ball","spike","moving","crack","fall","wind"]
+      :D.d<.50
+      ?["ball","spike","moving","crack","fall","wind","saw","laser"]
+      :obstacleTypes;
+
     for(
       let i=0;
-      i<8;
+      i<obstacleCount;
       i++
     ){
 
-      const seed =
+      const seed=
         n*70000+
         i*811;
 
-      const type =
-        obstacleTypes[i];
+      const type=
+        availableTypes[
+          Math.floor(
+            random(seed)*
+            availableTypes.length
+          )
+        ];
 
-      const progress =
-        i/7;
+      const progress=
+        i/
+        Math.max(
+          1,
+          obstacleCount-1
+        );
 
-      const ox =
+      const ox=
         430+
         progress*
         Math.max(
@@ -2251,10 +2171,9 @@ function makeLevel(n){
         )+
         (
           random(seed)-.5
-        )*
-        55;
+        )*55;
 
-      const oy =
+      const oy=
         groundY-
         55-
         random(seed+1)*
@@ -2272,15 +2191,15 @@ function makeLevel(n){
         y:oy,
 
         w:
-          32+
+          30+
           D.d*12,
 
         h:
-          26+
+          24+
           D.d*10,
 
         speed:
-          40+
+          35+
           D.d*70,
 
         phase:
@@ -2290,24 +2209,22 @@ function makeLevel(n){
 
         warning:
           Math.max(
-            .7,
-            1.4-
-            D.d*.3
+            1.0,
+            1.5-
+            D.d*.25
           ),
 
         safeGap:
           Math.max(
-            45,
-            75-
+            55,
+            80-
             D.d*15
           )
-
       });
-
     }
   }
 
-  const gateCount =
+  const gateCount=
     n<16
     ?0
     :Math.min(
@@ -2349,23 +2266,19 @@ function makeLevel(n){
         random(
           n*6001+g
         )*1.0
-
     });
-
   }
 
-  const finishX =
+  const finishX=
     finalStart+430;
 
-  const stormCount =
+  const stormCount=
     n<16
     ?0
     :Math.min(
       6,
       1+
-      Math.floor(
-        D.d*5
-      )
+      Math.floor(D.d*5)
     );
 
   for(
@@ -2374,9 +2287,8 @@ function makeLevel(n){
     i++
   ){
 
-    const seed =
-      n*8000+
-      i*31;
+    const seed=
+      n*8000+i*31;
 
     lightnings.push({
 
@@ -2410,18 +2322,20 @@ function makeLevel(n){
           .8-
           D.d*.2
         )
-
     });
-
   }
 
   const chaos=[];
 
-  const chaosCount =
+  /*
+    Chaos is also reduced early.
+  */
+
+  const chaosCount=
     n<16
     ?0
     :Math.floor(
-      3+
+      1+
       D.d*10
     );
 
@@ -2431,7 +2345,7 @@ function makeLevel(n){
     i++
   ){
 
-    const seed =
+    const seed=
       n*90000+
       i*719;
 
@@ -2470,9 +2384,7 @@ function makeLevel(n){
 
       phase:
         random(seed+5)*6.28
-
     });
-
   }
 
   let ideaIndex;
@@ -2483,14 +2395,14 @@ function makeLevel(n){
 
   }else{
 
-    ideaIndex =
+    ideaIndex=
       15+
       Math.floor(
         D.d*
         (ideas.length-16)
       );
 
-    ideaIndex =
+    ideaIndex=
       Math.min(
         ideas.length-1,
         ideaIndex
@@ -2559,12 +2471,12 @@ function resetLevel(){
   levelWon=false;
   paused=false;
 
-  levelData =
+  levelData=
     makeLevel(level);
 
   player.x=70;
 
-  player.y =
+  player.y=
     levelData.groundY-
     player.h;
 
@@ -2589,8 +2501,7 @@ function resetLevel(){
   stormFlash=0;
   screenShake=0;
 
-  levelEl.textContent =
-    level;
+  levelEl.textContent=level;
 
   if(level>=16){
 
@@ -2606,18 +2517,18 @@ function resetLevel(){
       "hardMode"
     );
 
-    tierEl.textContent =
+    tierEl.textContent=
       "• "+
       levelData.tier.name;
 
-    levelIdea.textContent =
+    levelIdea.textContent=
       `LEVEL ${level}: ${levelData.idea}`;
   }
 
-  player.speed =
+  player.speed=
     levelData.tier.speed;
 
-  player.jumpPower =
+  player.jumpPower=
     levelData.tier.jump;
 
   win.style.display="none";
@@ -2641,11 +2552,10 @@ startBtn.addEventListener(
 
     resetLevel();
 
-    lastTime =
+    lastTime=
       performance.now();
 
     requestAnimationFrame(loop);
-
   }
 );
 
@@ -2673,7 +2583,7 @@ function winLevel(){
     "show"
   );
 
-  winText.textContent =
+  winText.textContent=
     `تۆ مەرحەلەی ${level} ـت بە سەرکەوتوویی بردەوە.`;
 
   win.style.display="flex";
@@ -2692,7 +2602,6 @@ function nextLevel(){
   }else{
 
     level++;
-
   }
 
   saveLevel();
@@ -2724,19 +2633,16 @@ document
    SLOPE
 ========================================================= */
 
-function slopeSurfaceY(
-  s,
-  x
-){
+function slopeSurfaceY(s,x){
 
-  const t =
+  const t=
     clamp(
       (x-s.x)/s.w,
       0,
       1
     );
 
-  return (
+  return(
     s.y-
     s.rise*t
   );
@@ -2752,7 +2658,7 @@ function particleBurst(
   type="normal"
 ){
 
-  const count =
+  const count=
     type==="danger"
     ?15
     :8;
@@ -2771,35 +2677,29 @@ function particleBurst(
       vx:
         (
           random(
-            performance.now()+
-            i*31
+            performance.now()+i*31
           )-.5
         )*180,
 
       vy:
         (
           random(
-            performance.now()+
-            i*53
+            performance.now()+i*53
           )-.5
         )*180,
 
       life:
         .4+
         random(
-          performance.now()+
-          i*71
+          performance.now()+i*71
         )*.5,
 
       size:
         2+
         random(
-          performance.now()+
-          i*91
+          performance.now()+i*91
         )*4
-
     });
-
   }
 }
 
@@ -2811,26 +2711,18 @@ function updateParticles(dt){
     i--
   ){
 
-    const p =
-      particles[i];
+    const p=particles[i];
 
-    p.x +=
-      p.vx*dt;
+    p.x+=p.vx*dt;
+    p.y+=p.vy*dt;
 
-    p.y +=
-      p.vy*dt;
+    p.vy+=250*dt;
 
-    p.vy +=
-      250*dt;
-
-    p.life -= dt;
+    p.life-=dt;
 
     if(p.life<=0){
-
       particles.splice(i,1);
-
     }
-
   }
 }
 
@@ -2841,13 +2733,13 @@ function updateParticles(dt){
 function updateFairObstacles(dt){
 
   if(
-    !levelData ||
-    level < 16
+    !levelData||
+    level<16
   ){
     return;
   }
 
-  const now =
+  const now=
     performance.now()/1000;
 
   for(
@@ -2855,7 +2747,7 @@ function updateFairObstacles(dt){
     of levelData.fairObstacles
   ){
 
-    const t =
+    const t=
       now+
       o.phase;
 
@@ -2863,7 +2755,7 @@ function updateFairObstacles(dt){
 
     if(o.type==="ball"){
 
-      const bx =
+      const bx=
         o.x+
         Math.sin(t*1.2)*
         (
@@ -2871,64 +2763,53 @@ function updateFairObstacles(dt){
           levelData.tier.d*25
         );
 
-      const by =
+      const by=
         o.y+
         Math.cos(t*1.6)*15;
 
-      hit =
+      hit=
         circleHit(
           bx,
           by,
           o.w*.5,
           player
         );
-
     }
 
-    else if(
-      o.type==="spike"
-    ){
+    else if(o.type==="spike"){
 
-      hit =
+      hit=
         rectHit(
           player,
           {
             x:o.x,
             y:
               o.y+
-              Math.sin(t*1.0)*3,
+              Math.sin(t)*3,
             w:o.w,
             h:o.h
           }
         );
-
     }
 
-    else if(
-      o.type==="fall"
-    ){
+    else if(o.type==="fall"){
 
-      const cycle =
-        3.0;
+      const cycle=3;
 
-      const phase =
-        (
-          t+
-          o.phase
-        )%
-        cycle;
+      const phase=
+        (t+o.phase)%cycle;
 
-      const fy =
+      const fy=
         phase<.7
-        ? o.y+
-          phase*
-          (
-            200+
-            levelData.tier.d*100
-          )
-        : o.y;
+        ?o.y+
+         phase*
+         (
+           200+
+           levelData.tier.d*100
+         )
+        :o.y;
 
-      hit =
+      hit=
         rectHit(
           player,
           {
@@ -2938,14 +2819,11 @@ function updateFairObstacles(dt){
             h:o.h
           }
         );
-
     }
 
-    else if(
-      o.type==="saw"
-    ){
+    else if(o.type==="saw"){
 
-      const sx =
+      const sx=
         o.x+
         Math.sin(t*1.5)*
         (
@@ -2953,65 +2831,51 @@ function updateFairObstacles(dt){
           levelData.tier.d*25
         );
 
-      const sy =
+      const sy=
         o.y+
-        Math.cos(t*1.0)*20;
+        Math.cos(t)*20;
 
-      hit =
+      hit=
         circleHit(
           sx,
           sy,
           o.w*.55,
           player
         );
-
     }
 
-    else if(
-      o.type==="laser"
-    ){
+    else if(o.type==="laser"){
 
-      const period =
+      const period=
         1.8+
         levelData.tier.d*.5;
 
-      const phase =
-        (
-          t+
-          o.phase
-        )%period;
+      const phase=
+        (t+o.phase)%period;
 
-      const active =
-        phase>
-        o.warning;
+      const active=
+        phase>o.warning;
 
       if(active){
 
-        hit =
+        hit=
           rectHit(
             player,
             {
               x:o.x-25,
               y:o.y,
-              w:
-                o.w+
-                50,
+              w:o.w+50,
               h:7
             }
           );
-
       }
-
     }
 
-    else if(
-      o.type==="bomb"
-    ){
+    else if(o.type==="bomb"){
 
-      const pulse =
-        Math.sin(t*4);
+      const pulse=Math.sin(t*4);
 
-      const radius =
+      const radius=
         o.w*
         (
           1+
@@ -3021,29 +2885,26 @@ function updateFairObstacles(dt){
           )*.3
         );
 
-      hit =
+      hit=
         circleHit(
           o.x,
           o.y,
           radius,
           player
         );
-
     }
 
-    else if(
-      o.type==="moving"
-    ){
+    else if(o.type==="moving"){
 
-      const mx =
+      const mx=
         o.x+
-        Math.sin(t*1.0)*
+        Math.sin(t)*
         (
           45+
           levelData.tier.d*25
         );
 
-      hit =
+      hit=
         rectHit(
           player,
           {
@@ -3053,26 +2914,22 @@ function updateFairObstacles(dt){
             h:o.h
           }
         );
-
     }
 
-    else if(
-      o.type==="crack"
-    ){
+    else if(o.type==="crack"){
 
-      const active =
+      const active=
         (
           t%
           (
             3.2-
             levelData.tier.d*.4
           )
-        )>
-        1.0;
+        )>1;
 
       if(active){
 
-        hit =
+        hit=
           rectHit(
             player,
             {
@@ -3082,63 +2939,51 @@ function updateFairObstacles(dt){
               h:18
             }
           );
-
       }
-
     }
 
-    else if(
-      o.type==="wind"
-    ){
+    else if(o.type==="wind"){
 
       if(
         player.x+player.w>
-          o.x-o.safeGap &&
+          o.x-o.safeGap&&
         player.x<
-          o.x+o.w+o.safeGap &&
+          o.x+o.w+o.safeGap&&
         player.y+player.h>
-          o.y-o.safeGap &&
+          o.y-o.safeGap&&
         player.y<
           o.y+o.h+o.safeGap
       ){
 
-        player.vx +=
+        player.vx+=
           Math.sin(t*1.2)*
           (
             30+
             levelData.tier.d*60
           )*
           dt;
-
       }
-
     }
 
-    else if(
-      o.type==="lightning"
-    ){
+    else if(o.type==="lightning"){
 
-      const period =
-        2.0+
+      const period=
+        2+
         levelData.tier.d*.4;
 
-      const phase =
-        (
-          t+
-          o.phase
-        )%period;
+      const phase=
+        (t+o.phase)%period;
 
-      const warning =
+      const warning=
         1.2-
         levelData.tier.d*.2;
 
       if(
-        phase>warning &&
-        phase<
-          warning+.16
+        phase>warning&&
+        phase<warning+.16
       ){
 
-        hit =
+        hit=
           Math.abs(
             player.x+
             player.w/2-
@@ -3146,19 +2991,16 @@ function updateFairObstacles(dt){
           )<
           22+
           o.w*.22;
-
       }
-
     }
 
     if(
-      hit &&
+      hit&&
       player.invincible<=0
     ){
 
       resetLevel();
       return;
-
     }
   }
 }
@@ -3170,7 +3012,7 @@ function updateFairObstacles(dt){
 function update(dt){
 
   if(
-    paused ||
+    paused||
     !levelData
   ){
     return;
@@ -3178,56 +3020,48 @@ function update(dt){
 
   updateParticles(dt);
 
-  player.dashCooldown =
+  player.dashCooldown=
     Math.max(
       0,
       player.dashCooldown-dt
     );
 
-  player.dashTime =
+  player.dashTime=
     Math.max(
       0,
       player.dashTime-dt
     );
 
-  player.slowTimer =
+  player.slowTimer=
     Math.max(
       0,
       player.slowTimer-dt
     );
 
-  player.reverseTimer =
+  player.reverseTimer=
     Math.max(
       0,
       player.reverseTimer-dt
     );
 
-  player.invincible =
+  player.invincible=
     Math.max(
       0,
       player.invincible-dt
     );
 
-  const oldY =
-    player.y;
-
-  const oldBottom =
-    oldY+
-    player.h;
+  const oldY=player.y;
+  const oldBottom=oldY+player.h;
 
   let gravityScale=1;
 
-  let speedMultiplier =
+  let speedMultiplier=
     player.slowTimer>0
-    ? .58
-    : 1;
+    ?.58
+    :1;
 
-  if(
-    player.reverseTimer>0
-  ){
-
+  if(player.reverseTimer>0){
     speedMultiplier*=.9;
-
   }
 
   for(
@@ -3236,17 +3070,13 @@ function update(dt){
   ){
 
     if(
-      player.x+player.w>g.x &&
-      player.x<g.x+g.w &&
-      player.y+player.h>g.y &&
+      player.x+player.w>g.x&&
+      player.x<g.x+g.w&&
+      player.y+player.h>g.y&&
       player.y<g.y+g.h
     ){
-
-      gravityScale =
-        g.scale;
-
+      gravityScale=g.scale;
     }
-
   }
 
   let windForce=0;
@@ -3257,42 +3087,32 @@ function update(dt){
   ){
 
     if(
-      player.x+player.w>w.x &&
-      player.x<w.x+w.w &&
-      player.y+player.h>w.y &&
+      player.x+player.w>w.x&&
+      player.x<w.x+w.w&&
+      player.y+player.h>w.y&&
       player.y<w.y+w.h
     ){
-
-      windForce +=
-        w.force;
-
+      windForce+=w.force;
     }
-
   }
 
-  let controlX =
-    input.x;
+  let controlX=input.x;
 
-  if(
-    player.reverseTimer>0
-  ){
-
-    controlX =
-      -controlX;
-
+  if(player.reverseTimer>0){
+    controlX=-controlX;
   }
 
-  const targetVX =
+  const targetVX=
     controlX*
     player.speed*
     speedMultiplier;
 
-  const accel =
+  const accel=
     player.slowTimer>0
     ?6
     :14;
 
-  player.vx +=
+  player.vx+=
     (
       targetVX-
       player.vx
@@ -3302,32 +3122,23 @@ function update(dt){
       dt*accel
     );
 
-  player.vx +=
-    windForce*dt;
+  player.vx+=windForce*dt;
 
-  if(
-    player.dashTime>0
-  ){
-
-    player.vx *=
-      1.015;
-
+  if(player.dashTime>0){
+    player.vx*=1.015;
   }
 
-  player.vy +=
+  player.vy+=
     1550*
     gravityScale*
     dt;
 
-  player.x +=
-    player.vx*dt;
-
-  player.y +=
-    player.vy*dt;
+  player.x+=player.vx*dt;
+  player.y+=player.vy*dt;
 
   player.grounded=false;
 
-  const now =
+  const now=
     performance.now()/1000;
 
   for(
@@ -3337,7 +3148,7 @@ function update(dt){
 
     if(m.axis==="x"){
 
-      m.x =
+      m.x=
         m.baseX+
         Math.sin(
           now*m.speed+
@@ -3347,46 +3158,42 @@ function update(dt){
 
     }else{
 
-      m.y =
+      m.y=
         m.baseY+
         Math.sin(
           now*m.speed+
           m.phase
         )*
         m.range;
-
     }
 
     const p=m;
 
-    const horizontal =
+    const horizontal=
       player.x+player.w>
-        p.x-p.w/2 &&
+        p.x-p.w/2&&
       player.x<
         p.x+p.w/2;
 
-    const top =
-      p.y;
+    const top=p.y;
 
-    const newBottom =
+    const newBottom=
       player.y+
       player.h;
 
     if(
-      horizontal &&
-      player.vy>=0 &&
-      oldBottom<=top+10 &&
+      horizontal&&
+      player.vy>=0&&
+      oldBottom<=top+10&&
       newBottom>=top
     ){
 
-      player.y =
+      player.y=
         top-player.h;
 
       player.vy=0;
       player.grounded=true;
-
     }
-
   }
 
   for(
@@ -3394,29 +3201,27 @@ function update(dt){
     of levelData.platforms
   ){
 
-    const horizontal =
-      player.x+player.w>p.x &&
+    const horizontal=
+      player.x+player.w>p.x&&
       player.x<p.x+p.w;
 
-    const newBottom =
+    const newBottom=
       player.y+
       player.h;
 
     if(
-      horizontal &&
-      player.vy>=0 &&
-      oldBottom<=p.y+10 &&
+      horizontal&&
+      player.vy>=0&&
+      oldBottom<=p.y+10&&
       newBottom>=p.y
     ){
 
-      player.y =
+      player.y=
         p.y-player.h;
 
       player.vy=0;
       player.grounded=true;
-
     }
-
   }
 
   for(
@@ -3431,10 +3236,7 @@ function update(dt){
       if(p.timer<=0){
 
         p.active=false;
-
-        p.timer =
-          p.respawn;
-
+        p.timer=p.respawn;
       }
 
     }else{
@@ -3445,40 +3247,35 @@ function update(dt){
 
         p.active=true;
 
-        p.timer =
-          1.0+
+        p.timer=
+          1+
           levelData.tier.d*.4;
-
       }
-
     }
 
-    if(!p.active)
-      continue;
+    if(!p.active)continue;
 
-    const horizontal =
-      player.x+player.w>p.x &&
+    const horizontal=
+      player.x+player.w>p.x&&
       player.x<p.x+p.w;
 
-    const newBottom =
+    const newBottom=
       player.y+
       player.h;
 
     if(
-      horizontal &&
-      player.vy>=0 &&
-      oldBottom<=p.y+10 &&
+      horizontal&&
+      player.vy>=0&&
+      oldBottom<=p.y+10&&
       newBottom>=p.y
     ){
 
-      player.y =
+      player.y=
         p.y-player.h;
 
       player.vy=0;
       player.grounded=true;
-
     }
-
   }
 
   for(
@@ -3487,53 +3284,47 @@ function update(dt){
   ){
 
     if(
-      player.x+player.w>s.x &&
+      player.x+player.w>s.x&&
       player.x<s.x+s.w
     ){
 
-      const surface =
+      const surface=
         slopeSurfaceY(
           s,
           player.x+
           player.w*.5
         );
 
-      const bottom =
+      const bottom=
         player.y+
         player.h;
 
       if(
-        player.vy>=0 &&
-        bottom>=surface &&
+        player.vy>=0&&
+        bottom>=surface&&
         oldBottom<=surface+15
       ){
 
-        player.y =
+        player.y=
           surface-player.h;
 
         player.vy=0;
         player.grounded=true;
-
       }
-
     }
-
   }
 
-  if(
-    player.grounded
-  ){
+  if(player.grounded){
 
     player.coyote=.12;
 
   }else{
 
-    player.coyote =
+    player.coyote=
       Math.max(
         0,
         player.coyote-dt
       );
-
   }
 
   for(
@@ -3542,18 +3333,15 @@ function update(dt){
   ){
 
     if(
-      player.x+player.w>ice.x &&
-      player.x<ice.x+ice.w &&
-      player.y+player.h>ice.y &&
+      player.x+player.w>ice.x&&
+      player.x<ice.x+ice.w&&
+      player.y+player.h>ice.y&&
       player.y<ice.y+ice.h
     ){
 
       player.slowTimer=.25;
-
       player.vx*=.985;
-
     }
-
   }
 
   for(
@@ -3562,16 +3350,11 @@ function update(dt){
   ){
 
     if(
-      rectHit(
-        player,
-        s
-      ) &&
+      rectHit(player,s)&&
       player.vy>=0
     ){
 
-      player.vy =
-        -s.power;
-
+      player.vy=-s.power;
       player.grounded=false;
 
       particleBurst(
@@ -3579,9 +3362,7 @@ function update(dt){
         s.y,
         "normal"
       );
-
     }
-
   }
 
   for(
@@ -3589,24 +3370,20 @@ function update(dt){
     of levelData.stars
   ){
 
-    if(s.taken)
-      continue;
+    if(s.taken)continue;
 
-    const dx =
+    const dx=
       player.x+
       player.w/2-
       s.x;
 
-    const dy =
+    const dy=
       player.y+
       player.h/2-
       s.y;
 
     if(
-      Math.hypot(
-        dx,
-        dy
-      )<30
+      Math.hypot(dx,dy)<30
     ){
 
       s.taken=true;
@@ -3615,9 +3392,7 @@ function update(dt){
         s.x,
         s.y
       );
-
     }
-
   }
 
   for(
@@ -3625,31 +3400,28 @@ function update(dt){
     of levelData.cracks
   ){
 
-    const hit =
-      player.x+player.w>c.x &&
-      player.x<c.x+c.w &&
-      player.y+player.h>=c.y-12 &&
+    const hit=
+      player.x+player.w>c.x&&
+      player.x<c.x+c.w&&
+      player.y+player.h>=c.y-12&&
       player.y+player.h<=c.y+25;
 
     if(
-      hit &&
-      !c.active
+      hit&&!c.active
     ){
 
       c.active=true;
 
-      c.timer =
+      c.timer=
         Math.max(
           .5,
           1.2-
           levelData.tier.d*.3
         );
-
     }
 
     if(
-      c.active &&
-      !c.broken
+      c.active&&!c.broken
     ){
 
       c.timer-=dt;
@@ -3663,11 +3435,8 @@ function update(dt){
           c.y,
           "danger"
         );
-
       }
-
     }
-
   }
 
   for(
@@ -3677,19 +3446,17 @@ function update(dt){
 
     b.targetTimer-=dt;
 
-    if(
-      b.targetTimer<=0
-    ){
+    if(b.targetTimer<=0){
 
-      b.dir =
+      b.dir=
         player.x>b.x
         ?1
         :-1;
 
-      b.targetTimer =
+      b.targetTimer=
         Math.max(
           .5,
-          1.0+
+          1+
           random(
             level*77+
             Math.floor(
@@ -3698,30 +3465,23 @@ function update(dt){
           )*.8-
           levelData.tier.d*.15
         );
-
     }
 
-    b.x +=
+    b.x+=
       b.dir*
       b.speed*
       dt;
 
-    if(
-      b.x<=b.minX
-    ){
+    if(b.x<=b.minX){
 
       b.x=b.minX;
       b.dir=1;
-
     }
 
-    if(
-      b.x>=b.maxX
-    ){
+    if(b.x>=b.maxX){
 
       b.x=b.maxX;
       b.dir=-1;
-
     }
 
     if(
@@ -3733,17 +3493,12 @@ function update(dt){
       )
     ){
 
-      if(
-        player.invincible<=0
-      ){
+      if(player.invincible<=0){
 
         resetLevel();
         return;
-
       }
-
     }
-
   }
 
   for(
@@ -3751,7 +3506,7 @@ function update(dt){
     of levelData.saws
   ){
 
-    s.y =
+    s.y=
       s.baseY+
       Math.sin(
         now*s.speed+
@@ -3768,17 +3523,12 @@ function update(dt){
       )
     ){
 
-      if(
-        player.invincible<=0
-      ){
+      if(player.invincible<=0){
 
         resetLevel();
         return;
-
       }
-
     }
-
   }
 
   for(
@@ -3786,19 +3536,18 @@ function update(dt){
     of levelData.lasers
   ){
 
-    const phase =
+    const phase=
       (
         now+
         l.phase
       )%
       l.period;
 
-    const active =
-      phase>
-      l.warning;
+    const active=
+      phase>l.warning;
 
     if(
-      active &&
+      active&&
       rectHit(
         player,
         {
@@ -3810,17 +3559,12 @@ function update(dt){
       )
     ){
 
-      if(
-        player.invincible<=0
-      ){
+      if(player.invincible<=0){
 
         resetLevel();
         return;
-
       }
-
     }
-
   }
 
   for(
@@ -3831,25 +3575,20 @@ function update(dt){
     b.timer-=dt;
     b.pulse+=dt;
 
-    if(
-      b.timer<=0
-    ){
+    if(b.timer<=0){
 
-      const dx =
+      const dx=
         player.x+
         player.w/2-
         b.x;
 
-      const dy =
+      const dy=
         player.y+
         player.h/2-
         b.y;
 
-      const distance =
-        Math.hypot(
-          dx,
-          dy
-        );
+      const distance=
+        Math.hypot(dx,dy);
 
       if(
         distance<
@@ -3857,25 +3596,18 @@ function update(dt){
         levelData.tier.d*25
       ){
 
-        if(
-          player.invincible<=0
-        ){
+        if(player.invincible<=0){
 
           resetLevel();
           return;
-
         }
-
       }
 
-      b.timer =
+      b.timer=
         1.3+
-        random(
-          performance.now()
-        )*1.2;
-
+        random(performance.now())*
+        1.2;
     }
-
   }
 
   for(
@@ -3883,17 +3615,13 @@ function update(dt){
     of levelData.fallers
   ){
 
-    f.y +=
-      f.vy*dt;
+    f.y+=f.vy*dt;
 
     if(
       f.y>
       levelData.groundY+40
     ){
-
-      f.y =
-        f.resetY;
-
+      f.y=f.resetY;
     }
 
     const box={
@@ -3904,23 +3632,15 @@ function update(dt){
     };
 
     if(
-      rectHit(
-        player,
-        box
-      )
+      rectHit(player,box)
     ){
 
-      if(
-        player.invincible<=0
-      ){
+      if(player.invincible<=0){
 
         resetLevel();
         return;
-
       }
-
     }
-
   }
 
   for(
@@ -3928,7 +3648,7 @@ function update(dt){
     of levelData.walls
   ){
 
-    w.x +=
+    w.x+=
       Math.sin(
         now*w.speed+
         w.phase
@@ -3937,23 +3657,15 @@ function update(dt){
       dt;
 
     if(
-      rectHit(
-        player,
-        w
-      )
+      rectHit(player,w)
     ){
 
-      if(
-        player.invincible<=0
-      ){
+      if(player.invincible<=0){
 
         resetLevel();
         return;
-
       }
-
     }
-
   }
 
   for(
@@ -3961,8 +3673,7 @@ function update(dt){
     of levelData.portals
   ){
 
-    if(p.used)
-      continue;
+    if(p.used)continue;
 
     if(
       Math.hypot(
@@ -3979,7 +3690,7 @@ function update(dt){
 
       p.used=true;
 
-      player.x +=
+      player.x+=
         Math.min(
           p.targetOffset,
           400
@@ -3991,9 +3702,7 @@ function update(dt){
       );
 
       screenShake=8;
-
     }
-
   }
 
   for(
@@ -4002,17 +3711,14 @@ function update(dt){
   ){
 
     if(
-      player.x+player.w>r.x &&
-      player.x<r.x+r.w &&
-      player.y+player.h>r.y &&
+      player.x+player.w>r.x&&
+      player.x<r.x+r.w&&
+      player.y+player.h>r.y&&
       player.y<r.y+r.h
     ){
 
-      player.reverseTimer =
-        r.time;
-
+      player.reverseTimer=r.time;
     }
-
   }
 
   for(
@@ -4021,23 +3727,15 @@ function update(dt){
   ){
 
     if(
-      rectHit(
-        player,
-        h
-      )
+      rectHit(player,h)
     ){
 
-      if(
-        player.invincible<=0
-      ){
+      if(player.invincible<=0){
 
         resetLevel();
         return;
-
       }
-
     }
-
   }
 
   for(
@@ -4047,22 +3745,18 @@ function update(dt){
 
     l.timer+=dt;
 
-    if(
-      l.timer>l.cool
-    ){
-
+    if(l.timer>l.cool){
       l.timer=0;
-
     }
 
-    const phase =
+    const phase=
       l.timer/l.cool;
 
-    const strikeStart =
+    const strikeStart=
       l.warning/l.cool;
 
     if(
-      phase>=strikeStart &&
+      phase>=strikeStart&&
       phase<strikeStart+.12
     ){
 
@@ -4073,57 +3767,48 @@ function update(dt){
           player.x+
           player.w/2-
           l.x
-        )<35 &&
+        )<35&&
         player.y>
         l.y-15
       ){
 
-        if(
-          player.invincible<=0
-        ){
+        if(player.invincible<=0){
 
           resetLevel();
           return;
-
         }
-
       }
-
     }
-
   }
 
   updateFairObstacles(dt);
 
+  /*
+    Danger warning now appears much later.
+  */
+
   if(
-    level>=16 &&
+    level>=16&&
     levelData.tier.d>.65
   ){
 
-    dangerEl.classList.add(
-      "show"
-    );
+    dangerEl.classList.add("show");
 
   }else{
 
-    dangerEl.classList.remove(
-      "show"
-    );
-
+    dangerEl.classList.remove("show");
   }
 
-  stormFlash =
+  stormFlash=
     Math.max(
       0,
-      stormFlash-
-      dt*5
+      stormFlash-dt*5
     );
 
-  screenShake =
+  screenShake=
     Math.max(
       0,
-      screenShake-
-      dt*18
+      screenShake-dt*18
     );
 
   if(
@@ -4133,7 +3818,6 @@ function update(dt){
 
     resetLevel();
     return;
-
   }
 
   let gateBlocked=false;
@@ -4143,19 +3827,19 @@ function update(dt){
     of levelData.finishGates
   ){
 
-    const phase =
+    const phase=
       (
         now+
         g.phase
       )%
       g.period;
 
-    const active =
+    const active=
       phase<
       g.period*.55;
 
     if(
-      active &&
+      active&&
       rectHit(
         player,
         {
@@ -4168,13 +3852,11 @@ function update(dt){
     ){
 
       gateBlocked=true;
-
     }
-
   }
 
   if(
-    !gateBlocked &&
+    !gateBlocked&&
     player.x+
     player.w>=
     levelData.finishX
@@ -4182,17 +3864,16 @@ function update(dt){
 
     winLevel();
     return;
-
   }
 
-  const targetCamera =
+  const targetCamera=
     Math.max(
       0,
       player.x-
       W*.32
     );
 
-  cameraX +=
+  cameraX+=
     (
       targetCamera-
       cameraX
@@ -4204,18 +3885,17 @@ function update(dt){
 }
 
 /* =========================================================
-   BACKGROUND (BEAUTIFUL DYNAMIC NIGHT/AURORA SKY)
+   BACKGROUND
 ========================================================= */
 
 function drawBackground(){
 
-  const d =
+  const d=
     levelData
-    ? levelData.tier.d
-    : 0;
+    ?levelData.tier.d
+    :0;
 
-  // Gorgeous smooth gradient background representing sky transitions
-  const sky =
+  const sky=
     ctx.createLinearGradient(
       0,
       0,
@@ -4225,17 +3905,23 @@ function drawBackground(){
 
   sky.addColorStop(
     0,
-    d > 0.5 ? "#090d16" : "#0f172a"
+    d>.5
+    ?" #090d16".trim()
+    :"#0f172a"
   );
 
   sky.addColorStop(
-    0.5,
-    d > 0.5 ? "#131c31" : "#1e1b4b"
+    .5,
+    d>.5
+    ?" #131c31".trim()
+    :"#1e1b4b"
   );
 
   sky.addColorStop(
     1,
-    d > 0.5 ? "#1e1b4b" : "#311042"
+    d>.5
+    ?" #1e1b4b".trim()
+    :"#311042"
   );
 
   ctx.fillStyle=sky;
@@ -4254,38 +3940,56 @@ function drawBackground(){
     0
   );
 
-  // Soft glowing atmospheric celestial bubbles / stars
   for(
     let i=0;
     i<25;
     i++
   ){
 
-    const x =
-      i*350 + (i*73)%200;
+    const x=
+      i*350+
+      (i*73)%200;
 
-    const y =
-      60 +
+    const y=
+      60+
       (i*41)%180;
 
-    const glow = ctx.createRadialGradient(x, y, 0, x, y, 70);
-    glow.addColorStop(0, "rgba(139, 92, 246, 0.12)");
-    glow.addColorStop(1, "transparent");
+    const glow=
+      ctx.createRadialGradient(
+        x,y,0,
+        x,y,70
+      );
 
-    ctx.fillStyle = glow;
+    glow.addColorStop(
+      0,
+      "rgba(139,92,246,.12)"
+    );
+
+    glow.addColorStop(
+      1,
+      "transparent"
+    );
+
+    ctx.fillStyle=glow;
+
     ctx.beginPath();
-    ctx.arc(x, y, 70, 0, Math.PI * 2);
-    ctx.fill();
 
+    ctx.arc(
+      x,
+      y,
+      70,
+      0,
+      Math.PI*2
+    );
+
+    ctx.fill();
   }
 
   ctx.restore();
 
-  if(
-    stormFlash>0
-  ){
+  if(stormFlash>0){
 
-    ctx.fillStyle =
+    ctx.fillStyle=
       `rgba(
         255,
         255,
@@ -4302,7 +4006,6 @@ function drawBackground(){
       W,
       H
     );
-
   }
 }
 
@@ -4317,18 +4020,15 @@ function drawWorld(){
   let sx=0;
   let sy=0;
 
-  if(
-    screenShake>0
-  ){
+  if(screenShake>0){
 
-    sx =
+    sx=
       (Math.random()-.5)*
       screenShake;
 
-    sy =
+    sy=
       (Math.random()-.5)*
       screenShake;
-
   }
 
   ctx.translate(
@@ -4359,7 +4059,7 @@ function drawWorld(){
       6
     );
 
-    ctx.fillStyle =
+    ctx.fillStyle=
       "rgba(255,255,255,.08)";
 
     for(
@@ -4374,9 +4074,7 @@ function drawWorld(){
         12,
         4
       );
-
     }
-
   }
 
   for(
@@ -4401,7 +4099,6 @@ function drawWorld(){
       p.w,
       6
     );
-
   }
 
   for(
@@ -4409,10 +4106,9 @@ function drawWorld(){
     of levelData.disappearingPlatforms
   ){
 
-    if(!p.active)
-      continue;
+    if(!p.active)continue;
 
-    ctx.globalAlpha =
+    ctx.globalAlpha=
       .4+
       .6*
       Math.min(
@@ -4430,7 +4126,6 @@ function drawWorld(){
     );
 
     ctx.globalAlpha=1;
-
   }
 
   for(
@@ -4438,7 +4133,7 @@ function drawWorld(){
     of levelData.fakePlatforms
   ){
 
-    ctx.fillStyle =
+    ctx.fillStyle=
       "rgba(255,255,255,.25)";
 
     ctx.fillRect(
@@ -4447,7 +4142,6 @@ function drawWorld(){
       p.w,
       p.h
     );
-
   }
 
   for(
@@ -4500,7 +4194,6 @@ function drawWorld(){
     );
 
     ctx.stroke();
-
   }
 
   for(
@@ -4508,7 +4201,7 @@ function drawWorld(){
     of levelData.iceZones
   ){
 
-    ctx.fillStyle =
+    ctx.fillStyle=
       "rgba(147,197,255,.35)";
 
     ctx.fillRect(
@@ -4517,7 +4210,6 @@ function drawWorld(){
       ice.w,
       ice.h
     );
-
   }
 
   for(
@@ -4537,10 +4229,9 @@ function drawWorld(){
       );
 
       continue;
-
     }
 
-    ctx.fillStyle =
+    ctx.fillStyle=
       c.active
       ?"#f43f5e"
       :"#475569";
@@ -4551,7 +4242,6 @@ function drawWorld(){
       c.w,
       8
     );
-
   }
 
   for(
@@ -4581,7 +4271,6 @@ function drawWorld(){
     ctx.closePath();
 
     ctx.fill();
-
   }
 
   for(
@@ -4589,8 +4278,7 @@ function drawWorld(){
     of levelData.stars
   ){
 
-    if(s.taken)
-      continue;
+    if(s.taken)continue;
 
     ctx.save();
 
@@ -4613,32 +4301,26 @@ function drawWorld(){
       i++
     ){
 
-      const a =
-        i*Math.PI/5;
+      const a=i*Math.PI/5;
 
-      const r =
+      const r=
         i%2===0
         ?10
         :5;
 
-      const xx =
-        Math.cos(a)*r;
-
-      const yy =
-        Math.sin(a)*r;
+      const xx=Math.cos(a)*r;
+      const yy=Math.sin(a)*r;
 
       if(i===0)
         ctx.moveTo(xx,yy);
       else
         ctx.lineTo(xx,yy);
-
     }
 
     ctx.closePath();
     ctx.fill();
 
     ctx.restore();
-
   }
 
   for(
@@ -4668,7 +4350,6 @@ function drawWorld(){
     ctx.fill();
 
     ctx.restore();
-
   }
 
   for(
@@ -4697,32 +4378,26 @@ function drawWorld(){
       i++
     ){
 
-      const a =
-        i*Math.PI/7;
+      const a=i*Math.PI/7;
 
-      const r =
+      const r=
         i%2===0
         ?s.r
         :s.r*.6;
 
-      const xx =
-        Math.cos(a)*r;
-
-      const yy =
-        Math.sin(a)*r;
+      const xx=Math.cos(a)*r;
+      const yy=Math.sin(a)*r;
 
       if(i===0)
         ctx.moveTo(xx,yy);
       else
         ctx.lineTo(xx,yy);
-
     }
 
     ctx.closePath();
     ctx.fill();
 
     ctx.restore();
-
   }
 
   for(
@@ -4730,21 +4405,20 @@ function drawWorld(){
     of levelData.lasers
   ){
 
-    const now =
+    const now=
       performance.now()/1000;
 
-    const phase =
+    const phase=
       (
         now+
         l.phase
       )%
       l.period;
 
-    const active =
-      phase>
-      l.warning;
+    const active=
+      phase>l.warning;
 
-    ctx.fillStyle =
+    ctx.fillStyle=
       active
       ?"rgba(244,63,94,.9)"
       :"rgba(251,191,36,.4)";
@@ -4757,7 +4431,6 @@ function drawWorld(){
       ?l.h*2
       :l.h
     );
-
   }
 
   for(
@@ -4792,7 +4465,6 @@ function drawWorld(){
     );
 
     ctx.fill();
-
   }
 
   for(
@@ -4808,7 +4480,6 @@ function drawWorld(){
       f.w,
       f.h
     );
-
   }
 
   for(
@@ -4816,7 +4487,7 @@ function drawWorld(){
     of levelData.windZones
   ){
 
-    ctx.fillStyle =
+    ctx.fillStyle=
       "rgba(139,92,246,.04)";
 
     ctx.fillRect(
@@ -4825,7 +4496,6 @@ function drawWorld(){
       w.w,
       w.h
     );
-
   }
 
   for(
@@ -4841,7 +4511,6 @@ function drawWorld(){
       s.w,
       s.h
     );
-
   }
 
   for(
@@ -4860,7 +4529,7 @@ function drawWorld(){
       performance.now()/500
     );
 
-    ctx.strokeStyle =
+    ctx.strokeStyle=
       p.used
       ?"rgba(100,100,100,.3)"
       :"#38bdf8";
@@ -4880,7 +4549,6 @@ function drawWorld(){
     ctx.stroke();
 
     ctx.restore();
-
   }
 
   for(
@@ -4888,7 +4556,7 @@ function drawWorld(){
     of levelData.gravityZones
   ){
 
-    ctx.fillStyle =
+    ctx.fillStyle=
       "rgba(139,92,246,.05)";
 
     ctx.fillRect(
@@ -4897,7 +4565,6 @@ function drawWorld(){
       g.w,
       g.h
     );
-
   }
 
   for(
@@ -4905,7 +4572,7 @@ function drawWorld(){
     of levelData.reverseZones
   ){
 
-    ctx.fillStyle =
+    ctx.fillStyle=
       "rgba(244,63,94,.04)";
 
     ctx.fillRect(
@@ -4914,7 +4581,6 @@ function drawWorld(){
       r.w,
       r.h
     );
-
   }
 
   for(
@@ -4930,7 +4596,6 @@ function drawWorld(){
       w.w,
       w.h
     );
-
   }
 
   for(
@@ -4938,21 +4603,21 @@ function drawWorld(){
     of levelData.finishGates
   ){
 
-    const now =
+    const now=
       performance.now()/1000;
 
-    const phase =
+    const phase=
       (
         now+
         g.phase
       )%
       g.period;
 
-    const active =
+    const active=
       phase<
       g.period*.55;
 
-    ctx.fillStyle =
+    ctx.fillStyle=
       active
       ?"rgba(244,63,94,.9)"
       :"rgba(74,222,128,.4)";
@@ -4963,12 +4628,11 @@ function drawWorld(){
       g.w,
       g.h
     );
-
   }
 
   if(level>=16){
 
-    const now =
+    const now=
       performance.now()/1000;
 
     for(
@@ -4976,17 +4640,15 @@ function drawWorld(){
       of levelData.fairObstacles
     ){
 
-      const t =
+      const t=
         now+
         o.phase;
 
       ctx.save();
 
-      if(
-        o.type==="ball"
-      ){
+      if(o.type==="ball"){
 
-        const bx =
+        const bx=
           o.x+
           Math.sin(t*1.2)*
           (
@@ -4994,7 +4656,7 @@ function drawWorld(){
             levelData.tier.d*25
           );
 
-        const by =
+        const by=
           o.y+
           Math.cos(t*1.6)*15;
 
@@ -5014,9 +4676,7 @@ function drawWorld(){
 
       }
 
-      else if(
-        o.type==="spike"
-      ){
+      else if(o.type==="spike"){
 
         ctx.fillStyle="#f43f5e";
 
@@ -5043,20 +4703,14 @@ function drawWorld(){
 
       }
 
-      else if(
-        o.type==="fall"
-      ){
+      else if(o.type==="fall"){
 
-        const cycle=3.0;
+        const cycle=3;
 
-        const phase =
-          (
-            t+
-            o.phase
-          )%
-          cycle;
+        const phase=
+          (t+o.phase)%cycle;
 
-        const fy =
+        const fy=
           phase<.7
           ?o.y+
            phase*
@@ -5077,11 +4731,9 @@ function drawWorld(){
 
       }
 
-      else if(
-        o.type==="saw"
-      ){
+      else if(o.type==="saw"){
 
-        const sx =
+        const sx=
           o.x+
           Math.sin(t*1.5)*
           (
@@ -5089,9 +4741,9 @@ function drawWorld(){
             levelData.tier.d*25
           );
 
-        const sy =
+        const sy=
           o.y+
-          Math.cos(t*1.0)*20;
+          Math.cos(t)*20;
 
         ctx.translate(
           sx,
@@ -5112,25 +4764,20 @@ function drawWorld(){
           i++
         ){
 
-          const a =
-            i*Math.PI/7;
+          const a=i*Math.PI/7;
 
-          const r =
+          const r=
             i%2===0
             ?o.w*.55
             :o.w*.3;
 
-          const xx =
-            Math.cos(a)*r;
-
-          const yy =
-            Math.sin(a)*r;
+          const xx=Math.cos(a)*r;
+          const yy=Math.sin(a)*r;
 
           if(i===0)
             ctx.moveTo(xx,yy);
           else
             ctx.lineTo(xx,yy);
-
         }
 
         ctx.closePath();
@@ -5138,25 +4785,19 @@ function drawWorld(){
 
       }
 
-      else if(
-        o.type==="laser"
-      ){
+      else if(o.type==="laser"){
 
-        const period =
+        const period=
           1.8+
           levelData.tier.d*.5;
 
-        const phase =
-          (
-            t+
-            o.phase
-          )%period;
+        const phase=
+          (t+o.phase)%period;
 
-        const active =
-          phase>
-          o.warning;
+        const active=
+          phase>o.warning;
 
-        ctx.fillStyle =
+        ctx.fillStyle=
           active
           ?"rgba(244,63,94,.9)"
           :"rgba(251,191,36,.6)";
@@ -5170,9 +4811,7 @@ function drawWorld(){
 
       }
 
-      else if(
-        o.type==="bomb"
-      ){
+      else if(o.type==="bomb"){
 
         ctx.fillStyle="#1e293b";
 
@@ -5190,13 +4829,11 @@ function drawWorld(){
 
       }
 
-      else if(
-        o.type==="moving"
-      ){
+      else if(o.type==="moving"){
 
-        const mx =
+        const mx=
           o.x+
-          Math.sin(t*1.0)*
+          Math.sin(t)*
           (
             45+
             levelData.tier.d*25
@@ -5213,9 +4850,7 @@ function drawWorld(){
 
       }
 
-      else if(
-        o.type==="crack"
-      ){
+      else if(o.type==="crack"){
 
         ctx.fillStyle="#475569";
 
@@ -5228,11 +4863,9 @@ function drawWorld(){
 
       }
 
-      else if(
-        o.type==="wind"
-      ){
+      else if(o.type==="wind"){
 
-        ctx.strokeStyle =
+        ctx.strokeStyle=
           "rgba(139,92,246,.25)";
 
         ctx.lineWidth=2;
@@ -5247,47 +4880,35 @@ function drawWorld(){
 
           ctx.moveTo(
             o.x-15,
-            o.y+
-            a*22
+            o.y+a*22
           );
 
           ctx.lineTo(
-            o.x+
-            o.w+
-            15,
-            o.y+
-            a*22
+            o.x+o.w+15,
+            o.y+a*22
           );
 
           ctx.stroke();
-
         }
 
       }
 
-      else if(
-        o.type==="lightning"
-      ){
+      else if(o.type==="lightning"){
 
-        const period =
-          2.0+
+        const period=
+          2+
           levelData.tier.d*.4;
 
-        const phase =
-          (
-            t+
-            o.phase
-          )%period;
+        const phase=
+          (t+o.phase)%period;
 
-        const warning =
+        const warning=
           1.2-
           levelData.tier.d*.2;
 
-        if(
-          phase<warning
-        ){
+        if(phase<warning){
 
-          ctx.fillStyle =
+          ctx.fillStyle=
             "rgba(251,191,36,.7)";
 
           ctx.beginPath();
@@ -5301,18 +4922,14 @@ function drawWorld(){
           );
 
           ctx.fill();
-
         }
-
       }
 
       ctx.restore();
-
     }
-
   }
 
-  const fx =
+  const fx=
     levelData.finishX;
 
   ctx.fillStyle="#1e293b";
@@ -5347,6 +4964,8 @@ function drawWorld(){
 
   ctx.fill();
 
+  /* PLAYER */
+
   ctx.save();
 
   ctx.translate(
@@ -5368,11 +4987,9 @@ function drawWorld(){
 
   ctx.fill();
 
-  if(
-    player.dashTime>0
-  ){
+  if(player.dashTime>0){
 
-    ctx.fillStyle =
+    ctx.fillStyle=
       "rgba(124,58,237,.35)";
 
     ctx.fillRect(
@@ -5381,7 +4998,6 @@ function drawWorld(){
       18,
       30
     );
-
   }
 
   ctx.fillStyle="#fff";
@@ -5451,7 +5067,7 @@ function drawWorld(){
     of particles
   ){
 
-    ctx.globalAlpha =
+    ctx.globalAlpha=
       clamp(
         p.life,
         0,
@@ -5466,17 +5082,16 @@ function drawWorld(){
       p.size,
       p.size
     );
-
   }
 
   ctx.globalAlpha=1;
 
   if(level<=15){
 
-    ctx.fillStyle =
+    ctx.fillStyle=
       "rgba(255,255,255,.5)";
 
-    ctx.font =
+    ctx.font=
       "900 14px system-ui";
 
     ctx.fillText(
@@ -5484,7 +5099,6 @@ function drawWorld(){
       player.x+90,
       player.y-30
     );
-
   }
 
   ctx.restore();
@@ -5499,9 +5113,7 @@ function draw(){
   drawBackground();
 
   if(levelData){
-
     drawWorld();
-
   }
 }
 
@@ -5514,7 +5126,7 @@ function loop(time){
   if(!playing)
     return;
 
-  const dt =
+  const dt=
     Math.min(
       .033,
       Math.max(
@@ -5535,10 +5147,10 @@ function loop(time){
    INITIAL
 ========================================================= */
 
-levelData =
+levelData=
   makeLevel(level);
 
-levelEl.textContent =
+levelEl.textContent=
   level;
 
 if(level>=16){
@@ -5549,11 +5161,11 @@ if(level>=16){
 
 }else{
 
-  tierEl.textContent =
+  tierEl.textContent=
     "• "+
     levelData.tier.name;
 
-  levelIdea.textContent =
+  levelIdea.textContent=
     `LEVEL ${level}: ${levelData.idea}`;
 }
 
