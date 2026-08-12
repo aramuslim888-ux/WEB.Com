@@ -1,67 +1,324 @@
 <!doctype html>
-<html lang="ku"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><title>SAN B AHAMD — 5000 HARD LEVELS</title>
+<html lang="ku">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>SAN B AHAMD — 5000 HARD LEVELS</title>
+
 <style>
-*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#101116;font-family:system-ui,-apple-system,sans-serif;touch-action:none;user-select:none}canvas{position:fixed;inset:0;width:100%;height:100%}button{font:inherit}
-#hud{position:fixed;top:calc(env(safe-area-inset-top) + 10px);left:10px;right:10px;display:flex;justify-content:space-between;z-index:20;pointer-events:none}.pill{background:#151923dd;color:#fff;padding:9px 12px;border-radius:20px;font-weight:900;font-size:12px}
-#intro{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:radial-gradient(circle at 10% 15%,#ffd166 0 10%,transparent 11%),radial-gradient(circle at 90% 85%,#7bdcb5 0 13%,transparent 14%),#f07157;color:#fff;text-align:center}.card{width:min(94vw,460px);padding:25px}.title{font-size:clamp(42px,13vw,78px);line-height:.84;font-weight:1000;text-shadow:5px 5px #222}.card button,.win button{border:0;border-radius:999px;padding:15px 25px;background:#20283a;color:#fff;font-weight:1000}
-#controls{position:fixed;inset:0;z-index:15;pointer-events:none}.joy{position:absolute;left:18px;bottom:22px;width:124px;height:124px;border:3px solid #ffffff88;border-radius:50%;background:#ffffff0c;pointer-events:auto}.stick{position:absolute;left:30px;top:30px;width:60px;height:60px;border-radius:50%;background:#ffffff40;border:2px solid #fff9;display:grid;place-items:center;color:#fff;font-size:24px}.acts{position:absolute;right:18px;bottom:22px;display:grid;grid-template-columns:78px 78px;gap:9px;pointer-events:none}.act{width:78px;height:78px;border-radius:50%;border:3px solid #fff8;background:#14151acc;color:#fff;font-weight:1000;font-size:11px;pointer-events:auto}.act:active{transform:scale(.9);background:#6c4cff}
-#idea{position:fixed;left:50%;bottom:166px;transform:translateX(-50%);width:min(92vw,600px);padding:9px 12px;border-radius:15px;background:#08090acc;color:#fff;text-align:center;font-size:11px;font-weight:900;z-index:16}
-#danger{position:fixed;top:70px;left:50%;transform:translateX(-50%);z-index:19;background:#d92846dd;color:#fff;border-radius:20px;padding:6px 12px;font-size:10px;font-weight:1000;opacity:0}#danger.on{opacity:1}
-#win{position:fixed;inset:0;z-index:90;display:none;place-items:center;background:#0009;backdrop-filter:blur(7px)}.win{width:min(92vw,430px);padding:25px;border-radius:25px;background:#17181d;color:#fff;text-align:center}.win button{border-radius:14px;margin:4px}.next{background:#6c4cff!important}.retry{background:#30323a!important}
-#banner{position:fixed;z-index:80;left:50%;top:50%;transform:translate(-50%,-50%) scale(.8);padding:18px 25px;background:#6c4cff;color:#fff;border-radius:20px;font-weight:1000;opacity:0;pointer-events:none}.show{animation:pop .8s forwards}@keyframes pop{35%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}100%{opacity:0;transform:translate(-50%,-50%) scale(1)}}
-</style></head><body>
+*{
+ box-sizing:border-box;
+ -webkit-tap-highlight-color:transparent
+}
+html,body{
+ margin:0;
+ width:100%;
+ height:100%;
+ overflow:hidden;
+ background:#101116;
+ font-family:system-ui,-apple-system,sans-serif;
+ touch-action:none;
+ user-select:none
+}
+canvas{
+ position:fixed;
+ inset:0;
+ width:100%;
+ height:100%
+}
+button{font:inherit}
+
+#hud{
+ position:fixed;
+ top:calc(env(safe-area-inset-top) + 10px);
+ left:10px;
+ right:10px;
+ display:flex;
+ justify-content:space-between;
+ z-index:20;
+ pointer-events:none
+}
+.pill{
+ background:#151923dd;
+ color:#fff;
+ padding:9px 12px;
+ border-radius:20px;
+ font-weight:900;
+ font-size:12px
+}
+
+#intro{
+ position:fixed;
+ inset:0;
+ z-index:100;
+ display:grid;
+ place-items:center;
+ background:
+ radial-gradient(circle at 10% 15%,#ffd166 0 10%,transparent 11%),
+ radial-gradient(circle at 90% 85%,#7bdcb5 0 13%,transparent 14%),
+ #f07157;
+ color:#fff;
+ text-align:center
+}
+.card{
+ width:min(94vw,460px);
+ padding:25px
+}
+.title{
+ font-size:clamp(42px,13vw,78px);
+ line-height:.84;
+ font-weight:1000;
+ text-shadow:5px 5px #222
+}
+.card button,.win button{
+ border:0;
+ border-radius:999px;
+ padding:15px 25px;
+ background:#20283a;
+ color:#fff;
+ font-weight:1000
+}
+
+#controls{
+ position:fixed;
+ inset:0;
+ z-index:15;
+ pointer-events:none
+}
+.joy{
+ position:absolute;
+ left:18px;
+ bottom:22px;
+ width:124px;
+ height:124px;
+ border:3px solid #ffffff88;
+ border-radius:50%;
+ background:#ffffff0c;
+ pointer-events:auto
+}
+.stick{
+ position:absolute;
+ left:30px;
+ top:30px;
+ width:60px;
+ height:60px;
+ border-radius:50%;
+ background:#ffffff40;
+ border:2px solid #fff9;
+ display:grid;
+ place-items:center;
+ color:#fff;
+ font-size:24px
+}
+.acts{
+ position:absolute;
+ right:18px;
+ bottom:22px;
+ display:grid;
+ grid-template-columns:78px 78px;
+ gap:9px;
+ pointer-events:none
+}
+.act{
+ width:78px;
+ height:78px;
+ border-radius:50%;
+ border:3px solid #fff8;
+ background:#14151acc;
+ color:#fff;
+ font-weight:1000;
+ font-size:11px;
+ pointer-events:auto
+}
+.act:active{
+ transform:scale(.9);
+ background:#6c4cff
+}
+
+#idea{
+ position:fixed;
+ left:50%;
+ bottom:166px;
+ transform:translateX(-50%);
+ width:min(92vw,600px);
+ padding:9px 12px;
+ border-radius:15px;
+ background:#08090acc;
+ color:#fff;
+ text-align:center;
+ font-size:11px;
+ font-weight:900;
+ z-index:16
+}
+
+#danger{
+ position:fixed;
+ top:70px;
+ left:50%;
+ transform:translateX(-50%);
+ z-index:19;
+ background:#d92846dd;
+ color:#fff;
+ border-radius:20px;
+ padding:6px 12px;
+ font-size:10px;
+ font-weight:1000;
+ opacity:0
+}
+#danger.on{opacity:1}
+
+#win{
+ position:fixed;
+ inset:0;
+ z-index:90;
+ display:none;
+ place-items:center;
+ background:#0009;
+ backdrop-filter:blur(7px)
+}
+.win{
+ width:min(92vw,430px);
+ padding:25px;
+ border-radius:25px;
+ background:#17181d;
+ color:#fff;
+ text-align:center
+}
+.win button{border-radius:14px;margin:4px}
+.next{background:#6c4cff!important}
+.retry{background:#30323a!important}
+
+#banner{
+ position:fixed;
+ z-index:80;
+ left:50%;
+ top:50%;
+ transform:translate(-50%,-50%) scale(.8);
+ padding:18px 25px;
+ background:#6c4cff;
+ color:#fff;
+ border-radius:20px;
+ font-weight:1000;
+ opacity:0;
+ pointer-events:none
+}
+.show{
+ animation:pop .8s forwards
+}
+@keyframes pop{
+ 35%{
+  opacity:1;
+  transform:translate(-50%,-50%) scale(1.1)
+ }
+ 100%{
+  opacity:0;
+  transform:translate(-50%,-50%) scale(1)
+ }
+}
+</style>
+</head>
+
+<body>
+
 <canvas id="game"></canvas>
-<div id="intro"><div class="card"><div class="title">SAN<br>B AHAMD</div><p><b>5000 HARD CHALLENGES</b></p><p>لە Level 16 ـەوە هیچ ئاستێک ئاسان نییە.</p><button id="start">TAP TO BEGIN</button></div></div>
-<div id="hud"><div class="pill">SAN B AHAMD</div><div class="pill">LEVEL <span id="level">1</span> / 5000 <span id="tier"></span></div></div>
-<div id="danger">⚠️ مەترسیی زۆر بەرزە</div><div id="idea">💡 ئامادە بە...</div>
-<div id="controls"><div class="joy" id="joy"><div class="stick" id="stick">↔</div></div><div class="acts"><button class="act" id="jump">JUMP</button><button class="act" id="dash">DASH</button><button class="act" id="reset">RESET</button><button class="act" id="next">NEXT</button></div></div>
-<div id="win"><div class="win"><h1>پیرۆزە! 🎉</h1><p id="winText"></p><p>ئامادەی مەرحەلەی داهاتوویت؟ 😈</p><button class="retry" id="retry">دووبارە</button><button class="next" id="nextBtn">مەرحەلەی داهاتوو →</button></div></div>
+
+<div id="intro">
+ <div class="card">
+  <div class="title">SAN<br>B AHAMD</div>
+  <p><b>5000 HARD CHALLENGES</b></p>
+  <p>لە Level 16 ـەوە هیچ ئاستێک ئاسان نییە.</p>
+  <button id="start">TAP TO BEGIN</button>
+ </div>
+</div>
+
+<div id="hud">
+ <div class="pill">SAN B AHAMD</div>
+ <div class="pill">
+  LEVEL <span id="level">1</span> / 5000
+  <span id="tier"></span>
+ </div>
+</div>
+
+<div id="danger">⚠️ مەترسیی زۆر بەرزە</div>
+<div id="idea">💡 ئامادە بە...</div>
+
+<div id="controls">
+ <div class="joy" id="joy">
+  <div class="stick" id="stick">↔</div>
+ </div>
+
+ <div class="acts">
+  <button class="act" id="jump">JUMP</button>
+  <button class="act" id="dash">DASH</button>
+  <button class="act" id="reset">RESET</button>
+  <button class="act" id="next">NEXT</button>
+ </div>
+</div>
+
+<div id="win">
+ <div class="win">
+  <h1>پیرۆزە! 🎉</h1>
+  <p id="winText"></p>
+  <p>ئامادەی مەرحەلەی داهاتوویت؟ 😈</p>
+  <button class="retry" id="retry">دووبارە</button>
+  <button class="next" id="nextBtn">مەرحەلەی داهاتوو →</button>
+ </div>
+</div>
+
 <div id="banner">🎉 LEVEL COMPLETE!</div>
+
 <script>
 "use strict";
 
-const C=document.getElementById("game"),X=C.getContext("2d"),
-intro=document.getElementById("intro"),
-lvlEl=document.getElementById("level"),
-tierEl=document.getElementById("tier"),
-ideaEl=document.getElementById("idea"),
-win=document.getElementById("win"),
-winText=document.getElementById("winText"),
-danger=document.getElementById("danger"),
-banner=document.getElementById("banner");
+const C=document.getElementById("game");
+const X=C.getContext("2d");
 
-let W=innerWidth,H=innerHeight,DPR=1;
+const intro=document.getElementById("intro");
+const lvlEl=document.getElementById("level");
+const tierEl=document.getElementById("tier");
+const ideaEl=document.getElementById("idea");
+const win=document.getElementById("win");
+const winText=document.getElementById("winText");
+const danger=document.getElementById("danger");
+const banner=document.getElementById("banner");
+
+let W=innerWidth;
+let H=innerHeight;
+let DPR=1;
 
 function resize(){
  W=innerWidth;
  H=innerHeight;
  DPR=Math.min(devicePixelRatio||1,2);
+
  C.width=W*DPR;
  C.height=H*DPR;
  C.style.width=W+"px";
  C.style.height=H+"px";
+
  X.setTransform(DPR,0,0,DPR,0,0);
 }
 
 addEventListener("resize",resize);
 resize();
 
-const KEY="san_b_ahamd_5000_hard_v20";
+const KEY="san_b_ahamd_5000_hard_v21";
 const TOTAL=5000;
 
 let level=+localStorage.getItem(KEY)||1;
 
-if(level<1||level>TOTAL)level=1;
+if(level<1||level>TOTAL)
+ level=1;
 
-let playing=false,
-paused=false,
-won=false,
-last=0,
-cam=0,
-shake=0,
-flash=0,
-parts=[],
-LD;
+let playing=false;
+let paused=false;
+let won=false;
+let last=0;
+let cam=0;
+let shake=0;
+let flash=0;
+let parts=[];
+let LD;
 
 const P={
  x:70,
@@ -92,7 +349,7 @@ const ideas=[
  "DASH بۆ ڕزگاربوون لە کاتێکی قورس.",
  "هەموو شتێک دەتوانێت لەگەڵ شتێکی تر کۆببێتەوە.",
  "لە Level 16 ـەوە قورسایی بەردەوام زیاد دەکات.",
- "1000 جۆری challenge هەن و دەتوانن تێکەڵ ببن.",
+ "1000 جۆری challenge هەن و دەتوانن تێکەڵ ببنەوە.",
  "Level 5000 کۆتاییەکەیە. 😈"
 ];
 
@@ -129,39 +386,21 @@ function difficulty(n){
  }
 
  let p=(n-16)/4984;
- let d=Math.pow(p,.62);
+
+ /* تەنها کەمێک ئاسانتر */
+ let d=Math.pow(p,.70);
 
  return{
   d,
-  gap:cl(120-88*d,25,120),
-  width:cl(155-115*d,38,155),
-  rise:12+145*d,
-  speed:270+50*d,
-  jump:650-70*d,
+  gap:cl(120-82*d,28,120),
+  width:cl(155-108*d,42,155),
+  rise:12+135*d,
+  speed:270+45*d,
+  jump:650-60*d,
   types:1000,
   hard:true
  };
-
 }
-
-/*
-==========================================================
-1000 UNIQUE CHALLENGE FAMILIES
-==========================================================
-
-ID 0 → 999
-
-هەر ID ـێک seed و شێوازی جیاواز هەیە.
-لەگەڵ زیادبوونی difficulty:
-- قەبارە گۆڕانکاری دەکات
-- خێرایی زیاد دەکات
-- شوێن گۆڕانکاری دەکات
-- timing جیاواز دەبێت
-- چەند trap دەتوانن پێکەوە کۆببنەوە
-
-لە ناوخۆدا 24 mechanic ـی سەرەکی هەیە
-کە بە 1000 ID ـی جیاواز دەکرێنە challenge ـی جیاواز.
-*/
 
 function challenge(seed,id,d){
 
@@ -187,10 +426,7 @@ function challenge(seed,id,d){
  q.y=
   80+
   r(seed+id*5)*
-  Math.max(
-   80,
-   H-240
-  );
+  Math.max(80,H-240);
 
  q.w=
   12+
@@ -245,7 +481,6 @@ function makeLevel(n){
  let gates=[];
 
  let x=230;
-
  let seed=n*99991;
 
  world.push({
@@ -259,19 +494,12 @@ function makeLevel(n){
   n<=15
   ?5
   :Math.floor(
-    9+
-    D.d*28
+   9+D.d*25
   );
 
- for(
-  let i=0;
-  i<count;
-  i++
- ){
+ for(let i=0;i<count;i++){
 
-  let s=
-   seed+
-   i*7919;
+  let s=seed+i*7919;
 
   let gap=
    D.gap+
@@ -313,15 +541,10 @@ function makeLevel(n){
    25+
    r(s+3)*80;
 
-  /*
-   SPIKES
-  */
-
   if(
    n>7 &&
    r(s+4)<
-   .18+
-   D.d*.72
+   .18+D.d*.72
   ){
 
    haz.push({
@@ -332,7 +555,6 @@ function makeLevel(n){
       10,
       w-20
      ),
-
     y:y-22,
     w:22,
     h:22
@@ -340,15 +562,10 @@ function makeLevel(n){
 
   }
 
-  /*
-   BALLS
-  */
-
   if(
    n>9 &&
    r(s+6)<
-   .2+
-   D.d*.8
+   .2+D.d*.8
   ){
 
    balls.push({
@@ -357,19 +574,15 @@ function makeLevel(n){
      y-
      30-
      r(s+7)*100,
-
     r:
      15+
      D.d*7,
-
     min:x-60,
-
     max:
      x+
      w+
      240+
      D.d*300,
-
     v:
      (
       r(s+8)>.5
@@ -384,10 +597,6 @@ function makeLevel(n){
 
   }
 
-  /*
-   1000 CHALLENGE SYSTEM
-  */
-
   if(n>15){
 
    let amount=
@@ -396,15 +605,11 @@ function makeLevel(n){
      r(s+9)*
      (
       1+
-      D.d*3
+      D.d*2.7
      )
     );
 
-   for(
-    let k=0;
-    k<amount;
-    k++
-   ){
+   for(let k=0;k<amount;k++){
 
     special.push(
      challenge(
@@ -415,19 +620,13 @@ function makeLevel(n){
     );
 
    }
-
   }
 
   x+=w;
 
-  /*
-   EXTRA PLATFORM
-  */
-
   if(
    r(s+10)<
-   .35+
-   D.d*.6
+   .35+D.d*.6
   ){
 
    world.push({
@@ -435,13 +634,11 @@ function makeLevel(n){
     y:
      gY-
      r(s+11)*D.rise,
-
     w:
      Math.max(
       40,
       D.width*.75
      ),
-
     h:18
    });
 
@@ -449,9 +646,7 @@ function makeLevel(n){
     40,
     D.width*.75
    );
-
   }
-
  }
 
  let finish=x+300;
@@ -463,10 +658,6 @@ function makeLevel(n){
   h:80
  });
 
- /*
-  FINAL GATES
- */
-
  for(
   let i=0;
   i<Math.floor(D.d*5);
@@ -474,23 +665,17 @@ function makeLevel(n){
  ){
 
   gates.push({
-
    x:
     x+
     100+
     i*65,
-
    y:gY-140,
-
    w:10,
    h:140,
-
    p:r(seed+700+i),
-
    t:
     1+
     r(seed+710+i)*1.2
-
   });
 
  }
@@ -505,20 +690,16 @@ function makeLevel(n){
   special,
   gates,
   finish,
-
   idea:
    ideas[
     n<=15
     ?n-1
     :Math.min(
-      9,
-      Math.floor(
-       D.d*10
-      )
+     9,
+     Math.floor(D.d*10)
     )
    ]
  };
-
 }
 
 function reset(){
@@ -542,7 +723,10 @@ function reset(){
 
  P.dash=0;
  P.cd=0;
- P.inv=0;
+
+ /* spawn protection */
+ P.inv=.55;
+
  P.reverse=0;
  P.slow=0;
 
@@ -575,54 +759,37 @@ function reset(){
   KEY,
   level
  );
-
 }
 
 function burst(x,y){
 
- for(
-  let i=0;
-  i<12;
-  i++
- ){
+ for(let i=0;i<12;i++){
 
   parts.push({
-
    x,
    y,
-
    vx:
     (
-     r(
-      performance.now()+i
-     )-.5
+     r(performance.now()+i)-.5
     )*250,
-
    vy:
     (
-     r(
-      performance.now()+i*2
-     )-.5
+     r(performance.now()+i*2)-.5
     )*250,
-
    l:
     .4+
-    r(
-     i+
-     performance.now()
-    )*.5
-
+    r(i+performance.now())*.5
   });
 
  }
-
 }
 
 function die(){
 
- if(P.inv<=0)
-  reset();
+ if(P.inv>0)
+  return;
 
+ reset();
 }
 
 function jump(){
@@ -633,12 +800,9 @@ function jump(){
  ){
 
   P.vy=-P.jump;
-
   P.ground=false;
   P.coyote=0;
-
  }
-
 }
 
 function dash(){
@@ -652,20 +816,16 @@ function dash(){
   :1;
 
  P.vx=d*780;
-
  P.dash=.16;
 
  P.cd=
   Math.max(
    .28,
-   .75-
-   LD.D.d*.25
+   .75-LD.D.d*.25
   );
 
  P.inv=.18;
-
  shake=6;
-
 }
 
 function update(dt){
@@ -674,44 +834,13 @@ function update(dt){
   return;
 
  let oldY=P.y;
+ let oldB=oldY+P.h;
 
- let oldB=
-  oldY+
-  P.h;
-
- P.cd=
-  Math.max(
-   0,
-   P.cd-dt
-  );
-
- P.dash=
-  Math.max(
-   0,
-   P.dash-dt
-  );
-
- P.inv=
-  Math.max(
-   0,
-   P.inv-dt
-  );
-
- P.reverse=
-  Math.max(
-   0,
-   P.reverse-dt
-  );
-
- P.slow=
-  Math.max(
-   0,
-   P.slow-dt
-  );
-
- /*
-  CONTROL
- */
+ P.cd=Math.max(0,P.cd-dt);
+ P.dash=Math.max(0,P.dash-dt);
+ P.inv=Math.max(0,P.inv-dt);
+ P.reverse=Math.max(0,P.reverse-dt);
+ P.slow=Math.max(0,P.slow-dt);
 
  let ctrl=
   P.reverse>0
@@ -720,46 +849,21 @@ function update(dt){
 
  P.vx+=
   (
-   ctrl*
-   P.speed-
-   P.vx
+   ctrl*P.speed-P.vx
   )*
   Math.min(
    1,
-   dt*
-   (
-    P.slow>0
-    ?5
-    :12
-   )
+   dt*(P.slow>0?5:12)
   );
 
- /*
-  GRAVITY
- */
+ P.vy+=1550*dt;
 
- P.vy+=
-  1550*
-  dt;
-
- P.x+=
-  P.vx*
-  dt;
-
- P.y+=
-  P.vy*
-  dt;
+ P.x+=P.vx*dt;
+ P.y+=P.vy*dt;
 
  P.ground=false;
 
- /*
-  PLATFORMS
- */
-
- for(
-  let q
-  of LD.world
- ){
+ for(let q of LD.world){
 
   if(
    P.x+P.w>q.x &&
@@ -769,48 +873,21 @@ function update(dt){
    P.y+P.h>=q.y
   ){
 
-   P.y=
-    q.y-
-    P.h;
-
+   P.y=q.y-P.h;
    P.vy=0;
    P.ground=true;
-
   }
-
  }
 
- /*
-  SPIKES
- */
+ for(let q of LD.haz){
 
- for(
-  let q
-  of LD.haz
- ){
-
-  if(
-   hit(P,q)
-  ){
-
+  if(hit(P,q))
    return die();
-
-  }
-
  }
 
- /*
-  BALLS
- */
+ for(let b of LD.balls){
 
- for(
-  let b
-  of LD.balls
- ){
-
-  b.x+=
-   b.v*
-   dt;
+  b.x+=b.v*dt;
 
   if(
    b.x<b.min||
@@ -819,49 +896,30 @@ function update(dt){
 
    b.v*=-1;
 
-   b.x=
-    cl(
-     b.x,
-     b.min,
-     b.max
-    );
-
+   b.x=cl(
+    b.x,
+    b.min,
+    b.max
+   );
   }
 
   if(
    Math.hypot(
-    P.x+
-    P.w/2-
-    b.x,
-
-    P.y+
-    P.h/2-
-    b.y
+    P.x+P.w/2-b.x,
+    P.y+P.h/2-b.y
    )<
    b.r+18
   ){
 
    return die();
-
   }
-
  }
 
- /*
-  1000 CHALLENGE MECHANICS
- */
+ let now=performance.now()/1000;
 
- let now=
-  performance.now()/1000;
+ for(let s of LD.special){
 
- for(
-  let s
-  of LD.special
- ){
-
-  let t=
-   now+
-   s.a;
+  let t=now+s.a;
 
   let q={
    x:s.x,
@@ -873,513 +931,282 @@ function update(dt){
   let cx=s.x;
   let cy=s.y;
 
-  switch(
-   s.kind
-  ){
-
-   /*
-    0
-    Moving circle
-   */
+  switch(s.kind){
 
    case 0:
-
-    cx+=
-     Math.sin(
-      t*s.s
-     )*
-     s.b;
-
-    cy+=
-     Math.cos(
-      t*s.s
-     )*
-     s.c;
-
+    cx+=Math.sin(t*s.s)*s.b;
+    cy+=Math.cos(t*s.s)*s.c;
    break;
-
-   /*
-    1
-    Horizontal hunter
-   */
 
    case 1:
-
-    cx+=
-     Math.sin(
-      t*s.s
-     )*
-     s.b;
-
+    cx+=Math.sin(t*s.s)*s.b;
    break;
-
-   /*
-    2
-    Vertical hunter
-   */
 
    case 2:
-
-    cy+=
-     Math.sin(
-      t*s.s
-     )*
-     s.c;
-
+    cy+=Math.sin(t*s.s)*s.c;
    break;
-
-   /*
-    3
-    Moving wall
-   */
 
    case 3:
-
-    q.x+=
-     Math.sin(
-      t*s.s
-     )*
-     s.b;
-
+    q.x+=Math.sin(t*s.s)*s.b;
    break;
-
-   /*
-    4
-    Falling wall
-   */
 
    case 4:
-
-    q.y+=
-     Math.cos(
-      t*s.s
-     )*
-     s.c;
-
+    q.y+=Math.cos(t*s.s)*s.c;
    break;
 
-   /*
-    5
-    Expanding trap
-   */
-
    case 5:
-
     q.w*=
      1+
      Math.abs(
-      Math.sin(
-       t*s.s
-      )
-     )*
-     3;
-
+      Math.sin(t*s.s)
+     )*3;
    break;
 
-   /*
-    6
-    Expanding vertical trap
-   */
-
    case 6:
-
     q.h*=
      1+
      Math.abs(
-      Math.cos(
-       t*s.s
-      )
-     )*
-     3;
-
+      Math.cos(t*s.s)
+     )*3;
    break;
-
-   /*
-    7
-    Invisible/visible trap
-   */
 
    case 7:
 
     if(
-     Math.sin(
-      t*s.s
-     )<0
-    ){
-
+     Math.sin(t*s.s)<0
+    )
      q.x=-99999;
 
-    }
-
    break;
-
-   /*
-    8
-    Wind
-   */
 
    case 8:
 
     P.vx+=
-     Math.sin(
-      t*s.s
-     )*
+     Math.sin(t*s.s)*
      s.b*
      .015;
 
    break;
 
-   /*
-    9
-    Bounce trap
-   */
-
    case 9:
 
-    if(
-     hit(P,q)
-    ){
-
-     P.vy-=
-      350*
-      dt;
-
+    if(hit(P,q)){
+     P.vy-=350*dt;
     }
 
    break;
-
-   /*
-    10
-    Reverse controls
-   */
 
    case 10:
 
-    if(
-     hit(P,q)
-    ){
-
+    if(hit(P,q)){
      P.reverse=1.5;
-
     }
 
    break;
-
-   /*
-    11
-    Slow zone
-   */
 
    case 11:
 
-    if(
-     hit(P,q)
-    ){
-
+    if(hit(P,q)){
      P.slow=.35;
-
     }
 
    break;
 
-   /*
-    12
-    Orbiting danger
-   */
-
    case 12:
 
-    q.x+=
-     Math.cos(
-      t*s.s
-     )*
-     s.b;
+    q.x=
+     s.x+
+     Math.cos(t*s.s)*s.b;
 
-    q.y+=
-     Math.sin(
-      t*s.s
-     )*
-     s.c;
+    q.y=
+     s.y+
+     Math.sin(t*s.s)*s.c;
+
+    cx=q.x;
+    cy=q.y;
 
    break;
-
-   /*
-    13
-    Pulse wall
-   */
 
    case 13:
 
     if(
-     Math.sin(
-      t*s.s
-     )>.75
-    ){
-
+     Math.sin(t*s.s)>.75
+    )
      q.h*=4;
 
-    }
-
    break;
-
-   /*
-    14
-    Falling spike
-   */
 
    case 14:
 
     q.y+=
      Math.abs(
-      Math.sin(
-       t*s.s
-      )
-     )*
-     s.c;
+      Math.sin(t*s.s)
+     )*s.c;
 
    break;
-
-   /*
-    15
-    Sliding spike
-   */
 
    case 15:
 
     q.x+=
      Math.abs(
-      Math.sin(
-       t*s.s
-      )
-     )*
-     s.b;
+      Math.sin(t*s.s)
+     )*s.b;
 
    break;
-
-   /*
-    16
-    Circle orbit
-   */
 
    case 16:
 
     cx+=
-     Math.cos(
-      t*s.s
-     )*
-     s.b;
+     Math.cos(t*s.s)*s.b;
 
     cy+=
-     Math.sin(
-      t*s.s
-     )*
-     s.b;
+     Math.sin(t*s.s)*s.b;
 
    break;
-
-   /*
-    17
-    Violent shaking
-   */
 
    case 17:
 
     q.x+=
-     Math.sin(
-      t*s.s*2
-     )*
-     s.b;
+     Math.sin(t*s.s*2)*s.b;
 
     q.y+=
-     Math.cos(
-      t*s.s*2
-     )*
-     s.c;
+     Math.cos(t*s.s*2)*s.c;
 
    break;
-
-   /*
-    18
-    Huge pulse
-   */
 
    case 18:
 
     if(
-     Math.sin(
-      t*s.s
-     )>.65
-    ){
-
+     Math.sin(t*s.s)>.65
+    )
      q.w*=4;
 
-    }
-
    break;
-
-   /*
-    19
-    Random teleport movement
-   */
 
    case 19:
 
     if(
-     Math.sin(
-      t*s.s
-     )>.9
+     Math.sin(t*s.s)>.9
     ){
 
-     q.x+=
-      Math.sin(t*9)*
-      100;
-
-     q.y+=
-      Math.cos(t*7)*
-      80;
+     q.x+=Math.sin(t*9)*100;
+     q.y+=Math.cos(t*7)*80;
 
     }
 
    break;
-
-   /*
-    20
-    Giant horizontal wall
-   */
 
    case 20:
 
     if(
-     Math.sin(
-      t*s.s
-     )>.72
-    ){
-
+     Math.sin(t*s.s)>.72
+    )
      q.w*=5;
 
-    }
-
    break;
-
-   /*
-    21
-    LIGHTNING
-   */
 
    case 21:
 
     if(
-     Math.sin(
-      t*s.s
-     )>.82
+     Math.sin(t*s.s)>.82
     ){
 
      P.vy-=500*dt;
      flash=1;
-
     }
 
    break;
-
-   /*
-    22
-    GROUND CRACK
-   */
 
    case 22:
 
     if(
-     Math.sin(
-      t*s.s
-     )>.9
+     Math.sin(t*s.s)>.9
     ){
 
      P.y+=35;
      P.vy+=220;
-
     }
 
    break;
-
-   /*
-    23
-    Shock wave
-   */
 
    case 23:
 
-    if(
-     Math.sin(
-      t*s.s
-     )>.86
-    ){
+    q.x=
+     s.x+
+     Math.sin(t*s.s)*s.b;
 
-     P.vx+=
-      Math.sign(
-       P.x-s.x
-      )*
-      350;
+    q.y=
+     s.y+
+     Math.cos(t*s.s)*s.c;
 
-     shake=8;
-
-    }
+    cx=q.x;
+    cy=q.y;
 
    break;
-
   }
 
   /*
-   COLLISION
+   IMPORTANT:
+   8 = wind
+   9 = bounce
+   11 = slow zone
+
+   ئەمانە نابێت بە collision بکوژن.
   */
 
-  if(
-   Math.hypot(
-    P.x+
-    P.w/2-
-    cx,
+  let harmless=
+   s.kind===8||
+   s.kind===9||
+   s.kind===11;
 
-    P.y+
-    P.h/2-
-    cy
-   )<
-   Math.max(
-    s.w,
-    s.h
-   )/2+
-   20
-  ){
+  /*
+   moving circle hazards
+  */
 
-   return die();
+  let circleHazard=
+   [
+    0,
+    1,
+    2,
+    12,
+    16,
+    17,
+    23
+   ].includes(s.kind);
 
+  if(!harmless){
+
+   if(circleHazard){
+
+    if(
+     Math.hypot(
+      P.x+P.w/2-cx,
+      P.y+P.h/2-cy
+     )<
+     Math.max(
+      8,
+      Math.max(s.w,s.h)/2
+     )+14
+    ){
+
+     return die();
+
+    }
+
+   }else if(hit(P,q)){
+
+    return die();
+
+   }
   }
-
-  if(
-   hit(P,q)&&
-   s.kind!==8&&
-   s.kind!==9&&
-   s.kind!==11
-  ){
-
-   return die();
-
-  }
-
  }
 
- /*
-  FINAL GATES
- */
-
- for(
-  let g
-  of LD.gates
- ){
+ for(let g of LD.gates){
 
   let active=
    (
     (
-     now+
-     g.p
+     now+g.p
     )%
     g.t
    )/
@@ -1393,32 +1220,18 @@ function update(dt){
   ){
 
    return die();
-
   }
-
  }
 
- /*
-  STARS
- */
-
- for(
-  let s
-  of LD.stars
- ){
+ for(let s of LD.stars){
 
   if(s.t)
    continue;
 
   if(
    Math.hypot(
-    P.x+
-    P.w/2-
-    s.x,
-
-    P.y+
-    P.h/2-
-    s.y
+    P.x+P.w/2-s.x,
+    P.y+P.h/2-s.y
    )<28
   ){
 
@@ -1428,32 +1241,14 @@ function update(dt){
     s.x,
     s.y
    );
-
   }
-
  }
 
- /*
-  FALL
- */
-
- if(
-  P.y>
-  H+180
- ){
-
+ if(P.y>H+180)
   return die();
 
- }
-
- /*
-  FINISH
- */
-
  if(
-  P.x+
-  P.w>=
-  LD.finish
+  P.x+P.w>=LD.finish
  ){
 
   let blocked=
@@ -1461,8 +1256,7 @@ function update(dt){
     g=>
      (
       (
-       now+
-       g.p
+       now+g.p
       )%
       g.t
      )/
@@ -1473,17 +1267,9 @@ function update(dt){
      hit(P,g)
    );
 
-  if(!blocked){
-
+  if(!blocked)
    winLevel();
-
-  }
-
  }
-
- /*
-  COYOTE
- */
 
  P.coyote=
   P.ground
@@ -1493,39 +1279,24 @@ function update(dt){
    P.coyote-dt
   );
 
- /*
-  CAMERA
- */
-
  cam+=
   (
    Math.max(
     0,
-    P.x-
-    W*.32
-   )-
-   cam
+    P.x-W*.32
+   )-cam
   )*
-  Math.min(
-   1,
-   dt*7
-  );
+  Math.min(1,dt*7);
 
- shake=
-  Math.max(
-   0,
-   shake-dt*18
-  );
+ shake=Math.max(
+  0,
+  shake-dt*18
+ );
 
- flash=
-  Math.max(
-   0,
-   flash-dt*5
-  );
-
- /*
-  PARTICLES
- */
+ flash=Math.max(
+  0,
+  flash-dt*5
+ );
 
  for(
   let i=parts.length-1;
@@ -1535,33 +1306,14 @@ function update(dt){
 
   let a=parts[i];
 
-  a.x+=
-   a.vx*
-   dt;
-
-  a.y+=
-   a.vy*
-   dt;
-
-  a.vy+=
-   400*
-   dt;
-
+  a.x+=a.vx*dt;
+  a.y+=a.vy*dt;
+  a.vy+=400*dt;
   a.l-=dt;
 
-  if(
-   a.l<=0
-  ){
-
-   parts.splice(
-    i,
-    1
-   );
-
-  }
-
+  if(a.l<=0)
+   parts.splice(i,1);
  }
-
 }
 
 function winLevel(){
@@ -1582,16 +1334,11 @@ function winLevel(){
 
  win.style.display="grid";
 
- banner.classList.remove(
-  "show"
- );
+ banner.classList.remove("show");
 
  void banner.offsetWidth;
 
- banner.classList.add(
-  "show"
- );
-
+ banner.classList.add("show");
 }
 
 function next(){
@@ -1602,24 +1349,15 @@ function next(){
   :level+1;
 
  reset();
-
 }
-
-/* =========================================================
-   DRAW
-========================================================= */
 
 function draw(){
 
- let d=
-  LD?.D.d||0;
+ let d=LD?.D.d||0;
 
  let gr=
   X.createLinearGradient(
-   0,
-   0,
-   0,
-   H
+   0,0,0,H
   );
 
  gr.addColorStop(
@@ -1637,13 +1375,7 @@ function draw(){
  );
 
  X.fillStyle=gr;
-
- X.fillRect(
-  0,
-  0,
-  W,
-  H
- );
+ X.fillRect(0,0,W,H);
 
  if(!LD)
   return;
@@ -1652,50 +1384,26 @@ function draw(){
 
  X.translate(
   -cam+
-  (Math.random()-.5)*
-  shake,
-
-  (Math.random()-.5)*
-  shake
+  (Math.random()-.5)*shake,
+  (Math.random()-.5)*shake
  );
 
- /*
-  PLATFORMS
- */
-
- for(
-  let q
-  of LD.world
- ){
+ for(let q of LD.world){
 
   X.fillStyle="#292b31";
 
   X.fillRect(
-   q.x,
-   q.y,
-   q.w,
-   q.h
+   q.x,q.y,q.w,q.h
   );
 
   X.fillStyle="#65d878";
 
   X.fillRect(
-   q.x,
-   q.y,
-   q.w,
-   7
+   q.x,q.y,q.w,7
   );
-
  }
 
- /*
-  SPIKES
- */
-
- for(
-  let q
-  of LD.haz
- ){
+ for(let q of LD.haz){
 
   X.fillStyle="#ef476f";
 
@@ -1717,17 +1425,9 @@ function draw(){
   );
 
   X.fill();
-
  }
 
- /*
-  STARS
- */
-
- for(
-  let s
-  of LD.stars
- ){
+ for(let s of LD.stars){
 
   if(s.t)
    continue;
@@ -1745,17 +1445,9 @@ function draw(){
   );
 
   X.fill();
-
  }
 
- /*
-  BALLS
- */
-
- for(
-  let b
-  of LD.balls
- ){
+ for(let b of LD.balls){
 
   X.fillStyle="#ff6b35";
 
@@ -1792,20 +1484,11 @@ function draw(){
   );
 
   X.fill();
-
  }
 
- /*
-  CHALLENGES
- */
+ let now=performance.now()/1000;
 
- let now=
-  performance.now()/1000;
-
- for(
-  let s
-  of LD.special
- ){
+ for(let s of LD.special){
 
   let q={
    x:s.x,
@@ -1817,76 +1500,72 @@ function draw(){
   let xx=s.x;
   let yy=s.y;
 
-  let t=
-   now+
-   s.a;
+  let t=now+s.a;
 
-  switch(
-   s.kind
-  ){
+  switch(s.kind){
 
    case 0:
 
     xx+=
-     Math.sin(
-      t*s.s
-     )*
-     s.b;
+     Math.sin(t*s.s)*s.b;
 
     yy+=
-     Math.cos(
-      t*s.s
-     )*
-     s.c;
+     Math.cos(t*s.s)*s.c;
 
    break;
 
    case 1:
 
     xx+=
-     Math.sin(
-      t*s.s
-     )*
-     s.b;
+     Math.sin(t*s.s)*s.b;
 
    break;
 
    case 2:
 
     yy+=
-     Math.sin(
-      t*s.s
-     )*
-     s.c;
+     Math.sin(t*s.s)*s.c;
 
    break;
 
    case 3:
 
     q.x+=
-     Math.sin(
-      t*s.s
-     )*
-     s.b;
+     Math.sin(t*s.s)*s.b;
 
    break;
 
    case 4:
 
     q.y+=
-     Math.cos(
-      t*s.s
-     )*
-     s.c;
+     Math.cos(t*s.s)*s.c;
+
+   break;
+
+   case 5:
+
+    q.w*=
+     1+
+     Math.abs(
+      Math.sin(t*s.s)
+     )*3;
+
+   break;
+
+   case 6:
+
+    q.h*=
+     1+
+     Math.abs(
+      Math.cos(t*s.s)
+     )*3;
 
    break;
 
    case 7:
 
     if(
-     Math.sin(
-      t*s.s
-     )<0
+     Math.sin(t*s.s)<0
     )
      continue;
 
@@ -1894,62 +1573,100 @@ function draw(){
 
    case 12:
 
-    xx+=
-     Math.cos(
-      t*s.s
-     )*
-     s.b;
+    xx=
+     s.x+
+     Math.cos(t*s.s)*s.b;
 
-    yy+=
-     Math.sin(
-      t*s.s
-     )*
-     s.c;
+    yy=
+     s.y+
+     Math.sin(t*s.s)*s.c;
+
+   break;
+
+   case 13:
+
+    if(
+     Math.sin(t*s.s)>.75
+    )
+     q.h*=4;
+
+   break;
+
+   case 14:
+
+    q.y+=
+     Math.abs(
+      Math.sin(t*s.s)
+     )*s.c;
+
+   break;
+
+   case 15:
+
+    q.x+=
+     Math.abs(
+      Math.sin(t*s.s)
+     )*s.b;
 
    break;
 
    case 16:
 
-    xx+=
-     Math.cos(
-      t*s.s
-     )*
-     s.b;
+    xx=
+     s.x+
+     Math.cos(t*s.s)*s.b;
 
-    yy+=
-     Math.sin(
-      t*s.s
-     )*
-     s.b;
+    yy=
+     s.y+
+     Math.sin(t*s.s)*s.b;
 
    break;
 
    case 17:
 
     q.x+=
-     Math.sin(
-      t*s.s*2
-     )*
-     s.b;
+     Math.sin(t*s.s*2)*s.b;
 
     q.y+=
-     Math.cos(
-      t*s.s*2
-     )*
-     s.c;
+     Math.cos(t*s.s*2)*s.c;
 
    break;
 
-   /*
-    LIGHTNING VISUAL
-   */
+   case 18:
+
+    if(
+     Math.sin(t*s.s)>.65
+    )
+     q.w*=4;
+
+   break;
+
+   case 19:
+
+    if(
+     Math.sin(t*s.s)>.9
+    ){
+
+     q.x+=Math.sin(t*9)*100;
+     q.y+=Math.cos(t*7)*80;
+
+    }
+
+   break;
+
+   case 20:
+
+    if(
+     Math.sin(t*s.s)>.72
+    )
+     q.w*=5;
+
+   break;
 
    case 21:
 
     if(
-     Math.sin(
-      t*s.s
-     )>.72
+     Math.sin(t*s.s)>.72
     ){
 
      X.strokeStyle="#fff36b";
@@ -1978,14 +1695,9 @@ function draw(){
      );
 
      X.stroke();
-
     }
 
    break;
-
-   /*
-    GROUND CRACK VISUAL
-   */
 
    case 22:
 
@@ -2020,29 +1732,20 @@ function draw(){
 
    case 23:
 
-    q.x+=
-     Math.sin(
-      t*s.s
-     )*
-     s.b;
+    xx=
+     s.x+
+     Math.sin(t*s.s)*s.b;
 
-    q.y+=
-     Math.cos(
-      t*s.s
-     )*
-     s.c;
+    yy=
+     s.y+
+     Math.cos(t*s.s)*s.c;
 
    break;
-
   }
-
-  /*
-   COLORS
-  */
 
   X.fillStyle=
    s.id%3===0
-   ?" #ff4d6d"
+   ?"#ff4d6d"
    :"#9b7cff";
 
   X.beginPath();
@@ -2050,33 +1753,19 @@ function draw(){
   X.arc(
    xx,
    yy,
-   Math.max(
-    7,
-    s.w/2
-   ),
+   Math.max(7,s.w/2),
    0,
    7
   );
 
   X.fill();
 
-  /*
-   WALL VISUAL
-  */
-
   if(
    [
-    3,
-    4,
-    5,
-    6,
-    13,
-    18,
-    19,
-    20
-   ].includes(
-    s.kind
-   )
+    3,4,5,6,
+    13,14,15,
+    18,19,20
+   ].includes(s.kind)
   ){
 
    X.strokeStyle="#fff8";
@@ -2087,25 +1776,15 @@ function draw(){
     q.w,
     q.h
    );
-
   }
-
  }
 
- /*
-  GATES
- */
-
- for(
-  let g
-  of LD.gates
- ){
+ for(let g of LD.gates){
 
   let active=
    (
     (
-     now+
-     g.p
+     now+g.p
     )%
     g.t
    )/
@@ -2124,12 +1803,7 @@ function draw(){
    g.w,
    g.h
   );
-
  }
-
- /*
-  FINISH FLAG
- */
 
  X.fillStyle="#222";
 
@@ -2153,7 +1827,10 @@ function draw(){
   PLAYER
  */
 
- X.fillStyle="#684cff";
+ X.fillStyle=
+  P.inv>0
+  ?"#8c78ff"
+  :"#684cff";
 
  X.fillRect(
   P.x,
@@ -2161,10 +1838,6 @@ function draw(){
   P.w,
   P.h
  );
-
- /*
-  EYES
- */
 
  X.fillStyle="#fff";
 
@@ -2210,21 +1883,10 @@ function draw(){
 
  X.fill();
 
- /*
-  PARTICLES
- */
-
- for(
-  let p
-  of parts
- ){
+ for(let p of parts){
 
   X.globalAlpha=
-   cl(
-    p.l,
-    0,
-    1
-   );
+   cl(p.l,0,1);
 
   X.fillStyle="#ffd166";
 
@@ -2234,41 +1896,27 @@ function draw(){
    4,
    4
   );
-
  }
 
  X.globalAlpha=1;
 
  X.restore();
 
- /*
-  LIGHTNING FLASH
- */
-
  if(flash){
 
   X.fillStyle=
    `rgba(
-     255,
-     255,
-     255,
-     ${flash*.5}
+    255,
+    255,
+    255,
+    ${flash*.5}
    )`;
 
   X.fillRect(
-   0,
-   0,
-   W,
-   H
+   0,0,W,H
   );
-
  }
-
 }
-
-/* =========================================================
-   LOOP
-========================================================= */
 
 function loop(t){
 
@@ -2287,15 +1935,8 @@ function loop(t){
  update(dt);
  draw();
 
- requestAnimationFrame(
-  loop
- );
-
+ requestAnimationFrame(loop);
 }
-
-/* =========================================================
-   JOYSTICK
-========================================================= */
 
 const joy=
  document.getElementById("joy");
@@ -2321,55 +1962,38 @@ function joySet(e){
    42
   );
 
- I.x=
-  dx/42;
+ I.x=dx/42;
 
  stick.style.transform=
   `translateX(${dx}px)`;
-
 }
 
 function joyReset(){
 
  jp=null;
-
  I.x=0;
 
  stick.style.transform=
   "translateX(0)";
-
 }
 
 joy.onpointerdown=e=>{
 
  jp=e.pointerId;
 
- joy.setPointerCapture(
-  jp
- );
+ joy.setPointerCapture(jp);
 
  joySet(e);
-
 };
 
 joy.onpointermove=e=>{
 
- if(
-  e.pointerId===jp
- )
+ if(e.pointerId===jp)
   joySet(e);
-
 };
 
-joy.onpointerup=
- joyReset;
-
-joy.onpointercancel=
- joyReset;
-
-/* =========================================================
-   BUTTONS
-========================================================= */
+joy.onpointerup=joyReset;
+joy.onpointercancel=joyReset;
 
 document
  .getElementById("jump")
@@ -2377,7 +2001,6 @@ document
 
   e.preventDefault();
   jump();
-
  };
 
 document
@@ -2386,7 +2009,6 @@ document
 
   e.preventDefault();
   dash();
-
  };
 
 document
@@ -2395,7 +2017,6 @@ document
 
   e.preventDefault();
   reset();
-
  };
 
 document
@@ -2406,7 +2027,6 @@ document
 
   if(won)
    next();
-
  };
 
 document
@@ -2419,10 +2039,6 @@ document
  .onclick=
  next;
 
-/* =========================================================
-   START
-========================================================= */
-
 document
  .getElementById("start")
  .onclick=()=>{
@@ -2433,18 +2049,10 @@ document
 
   reset();
 
-  last=
-   performance.now();
+  last=performance.now();
 
-  requestAnimationFrame(
-   loop
-  );
-
+  requestAnimationFrame(loop);
  };
-
-/* =========================================================
-   KEYBOARD
-========================================================= */
 
 addEventListener(
  "keydown",
@@ -2453,20 +2061,14 @@ addEventListener(
   if(
    e.key==="ArrowLeft"||
    e.key.toLowerCase()==="a"
-  ){
-
+  )
    I.x=-1;
-
-  }
 
   if(
    e.key==="ArrowRight"||
    e.key.toLowerCase()==="d"
-  ){
-
+  )
    I.x=1;
-
-  }
 
   if(
    e.key===" "||
@@ -2475,27 +2077,18 @@ addEventListener(
 
    e.preventDefault();
    jump();
-
   }
 
   if(
    e.key.toLowerCase()==="shift"
-  ){
-
+  )
    dash();
-
-  }
 
   if(
    e.key.toLowerCase()==="r"
-  ){
-
+  )
    reset();
-
-  }
-
- }
-);
+ });
 
 addEventListener(
  "keyup",
@@ -2508,32 +2101,19 @@ addEventListener(
     "a",
     "d"
    ].includes(e.key)
-  ){
-
+  )
    I.x=0;
-
-  }
-
- }
-);
+ });
 
 document.addEventListener(
  "touchmove",
  e=>e.preventDefault(),
- {
-  passive:false
- }
+ {passive:false}
 );
 
-/* =========================================================
-   INITIAL
-========================================================= */
+LD=makeLevel(level);
 
-LD=
- makeLevel(level);
-
-lvlEl.textContent=
- level;
+lvlEl.textContent=level;
 
 tierEl.textContent=
  " • "+
