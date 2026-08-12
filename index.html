@@ -1,715 +1,96 @@
-<!doctype html>
-<html lang="ku">
-<head>
-<meta charset="utf-8">
-
-<meta name="viewport"
-content="width=device-width,
-initial-scale=1,
-maximum-scale=1,
-minimum-scale=1,
-user-scalable=no,
-viewport-fit=cover">
-
-<title>SAN B AHAMD — 5000 Levels</title>
-
-<style>
-*{
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
-  -webkit-touch-callout:none;
-}
-
-html,body{
-  margin:0;
-  padding:0;
-  width:100%;
-  height:100%;
-  overflow:hidden;
-  background:#101116;
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-  touch-action:none;
-  overscroll-behavior:none;
-  -webkit-user-select:none;
-  user-select:none;
-}
-
-body{
-  position:fixed;
-  inset:0;
-}
-
-canvas{
-  position:fixed;
-  inset:0;
-  width:100%;
-  height:100%;
-  display:block;
-  touch-action:none;
-}
-
-button{
-  font-family:inherit;
-  touch-action:none;
-  -webkit-user-select:none;
-  user-select:none;
-}
-
-#hud{
-  position:fixed;
-  top:calc(env(safe-area-inset-top) + 12px);
-  left:14px;
-  right:14px;
-  display:flex;
-  justify-content:space-between;
-  z-index:20;
-  pointer-events:none;
-}
-
-.pill{
-  background:rgba(20,30,24,.88);
-  color:white;
-  padding:12px 17px;
-  border-radius:999px;
-  font-size:15px;
-  font-weight:900;
-  box-shadow:0 8px 25px rgba(0,0,0,.18);
-  backdrop-filter:blur(10px);
-}
-
-#intro{
-  position:fixed;
-  inset:0;
-  z-index:100;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  color:white;
-
-  background:
-    radial-gradient(
-      circle at 15% 20%,
-      #ffd166 0 12%,
-      transparent 13%
-    ),
-    radial-gradient(
-      circle at 90% 90%,
-      #7bdcb5 0 15%,
-      transparent 16%
-    ),
-    #f07157;
-}
-
-.introCard{
-  width:min(92vw,460px);
-  padding:30px 24px;
-}
-
-.introTitle{
-  margin:0;
-  font-size:clamp(42px,12vw,76px);
-  line-height:.88;
-  font-weight:1000;
-  text-transform:uppercase;
-  color:#fff;
-  text-shadow:4px 4px 0 #202020;
-}
-
-.introName{
-  margin:18px 0 6px;
-  font-size:18px;
-  font-weight:900;
-}
-
-.creator{
-  margin:0 0 24px;
-  opacity:.9;
-  font-size:14px;
-}
-
-#start{
-  border:0;
-  padding:15px 28px;
-  border-radius:999px;
-  background:#20283a;
-  color:white;
-  font-size:17px;
-  font-weight:900;
-  box-shadow:0 8px 0 rgba(0,0,0,.2);
-}
-
-#start:active{
-  transform:translateY(4px);
-  box-shadow:none;
-}
-
-#san{
-  position:fixed;
-  width:82px;
-  height:82px;
-  object-fit:contain;
-  z-index:12;
-  pointer-events:none;
-
-  filter:
-    drop-shadow(
-      0 8px 8px rgba(0,0,0,.25)
-    );
-
-  animation:
-    sanFunny 2.1s ease-in-out infinite;
-}
-
-@keyframes sanFunny{
-  0%,100%{
-    transform:
-      rotate(-7deg)
-      translateY(0)
-      scale(1);
-  }
-
-  50%{
-    transform:
-      rotate(8deg)
-      translateY(-8px)
-      scale(1.04);
-  }
-}
-
-#controls{
-  position:fixed;
-  inset:0;
-  z-index:30;
-  pointer-events:none;
-}
-
-#joystick{
-  position:absolute;
-
-  left:
-    max(20px, env(safe-area-inset-left) + 20px);
-
-  bottom:
-    max(24px, env(safe-area-inset-bottom) + 24px);
-
-  width:126px;
-  height:126px;
-
-  border-radius:50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(255,255,255,.14),
-      rgba(255,255,255,.05)
-    );
-
-  border:3px solid rgba(255,255,255,.55);
-
-  box-shadow:
-    inset 0 0 20px rgba(255,255,255,.08),
-    0 8px 30px rgba(0,0,0,.18);
-
-  pointer-events:auto;
-  touch-action:none;
-}
-
-#stick{
-  position:absolute;
-
-  width:60px;
-  height:60px;
-
-  left:30px;
-  top:30px;
-
-  border-radius:50%;
-
-  background:rgba(255,255,255,.25);
-
-  border:2px solid rgba(255,255,255,.65);
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  font-size:28px;
-  color:white;
-
-  transition:transform .06s linear;
-}
-
-#actionArea{
-  position:absolute;
-
-  right:
-    max(20px, env(safe-area-inset-right) + 20px);
-
-  bottom:
-    max(24px, env(safe-area-inset-bottom) + 24px);
-
-  display:grid;
-
-  grid-template-columns:82px 82px;
-
-  gap:12px;
-
-  pointer-events:none;
-}
-
-.action{
-  width:82px;
-  height:82px;
-
-  border-radius:50%;
-
-  border:3px solid rgba(255,255,255,.5);
-
-  background:rgba(25,25,25,.55);
-
-  color:white;
-
-  font-size:14px;
-  font-weight:1000;
-
-  pointer-events:auto;
-  touch-action:none;
-
-  backdrop-filter:blur(8px);
-}
-
-.action:active{
-  transform:scale(.93);
-  background:rgba(108,76,255,.8);
-}
-
-#win{
-  position:fixed;
-  inset:0;
-
-  z-index:90;
-
-  display:none;
-
-  align-items:center;
-  justify-content:center;
-
-  padding:20px;
-
-  background:rgba(0,0,0,.55);
-
-  backdrop-filter:blur(7px);
-
-  text-align:center;
-}
-
-.winCard{
-  width:min(92vw,430px);
-
-  background:#17181d;
-  color:white;
-
-  border-radius:28px;
-
-  padding:28px 22px;
-
-  box-shadow:
-    0 25px 80px rgba(0,0,0,.4);
-
-  border:1px solid rgba(255,255,255,.1);
-}
-
-.winCard h1{
-  margin:0 0 10px;
-  font-size:30px;
-}
-
-.winCard p{
-  line-height:1.6;
-}
-
-.winButtons{
-  display:flex;
-  gap:10px;
-  justify-content:center;
-  margin-top:18px;
-}
-
-.winButtons button{
-  border:0;
-  border-radius:15px;
-  padding:13px 18px;
-  font-size:15px;
-  font-weight:900;
-}
-
-#nextBtn{
-  background:#6c4cff;
-  color:white;
-}
-
-#retryBtn{
-  background:#30323a;
-  color:white;
-}
-
-#levelIdea{
-  position:fixed;
-
-  left:50%;
-
-  bottom:
-    calc(env(safe-area-inset-bottom) + 170px);
-
-  transform:translateX(-50%);
-
-  width:min(90vw,480px);
-
-  padding:10px 15px;
-
-  text-align:center;
-
-  border-radius:15px;
-
-  background:rgba(10,10,12,.58);
-
-  color:white;
-
-  font-size:13px;
-  font-weight:800;
-
-  z-index:15;
-
-  pointer-events:none;
-
-  opacity:.9;
-}
-
-#finishBanner{
-  position:fixed;
-
-  top:50%;
-  left:50%;
-
-  transform:
-    translate(-50%,-50%)
-    scale(.8);
-
-  z-index:60;
-
-  color:white;
-
-  background:#6c4cff;
-
-  padding:18px 24px;
-
-  border-radius:20px;
-
-  font-size:22px;
-  font-weight:1000;
-
-  opacity:0;
-  pointer-events:none;
-}
-
-#finishBanner.show{
-  animation:finishPop .8s ease forwards;
-}
-
-@keyframes finishPop{
-  0%{
-    opacity:0;
-    transform:
-      translate(-50%,-50%)
-      scale(.7);
-  }
-
-  35%{
-    opacity:1;
-    transform:
-      translate(-50%,-50%)
-      scale(1.1);
-  }
-
-  100%{
-    opacity:0;
-    transform:
-      translate(-50%,-50%)
-      scale(1);
-  }
-}
-</style>
-</head>
-
-<body>
-
-<canvas id="game"></canvas>
-
-<div id="intro">
-
-  <div class="introCard">
-
-    <h1 class="introTitle">
-      SAN<br>B AHAMD
-    </h1>
-
-    <div class="introName">
-      One funny hero.<br>
-      5000 tiny challenges.
-    </div>
-
-    <p class="creator">
-      Created by aro bestun
-    </p>
-
-    <button id="start">
-      TAP TO BEGIN
-    </button>
-
-  </div>
-
-</div>
-
-<div id="hud">
-
-  <div class="pill">
-    SAN B AHAMD
-  </div>
-
-  <div class="pill">
-    LEVEL
-    <span id="level">1</span>
-    / 5000
-  </div>
-
-</div>
-
-<img
-  id="san"
-  src="san.PNG"
-  alt=""
->
-
-<div id="levelIdea">
-  💡 Get ready...
-</div>
-
-<div id="controls">
-
-  <div id="joystick">
-
-    <div id="stick">
-      ↔
-    </div>
-
-  </div>
-
-  <div id="actionArea">
-
-    <button
-      class="action"
-      id="jumpBtn">
-      JUMP
-    </button>
-
-    <button
-      class="action"
-      id="dashBtn">
-      DASH
-    </button>
-
-    <button
-      class="action"
-      id="resetBtn">
-      RESET
-    </button>
-
-    <button
-      class="action"
-      id="nextQuickBtn">
-      NEXT
-    </button>
-
-  </div>
-
-</div>
-
-<div id="win">
-
-  <div class="winCard">
-
-    <h1>
-      پیرۆزە! 🎉
-    </h1>
-
-    <p id="winText">
-      تۆ مەرحەلەکەت بردەوە!
-    </p>
-
-    <p>
-      تۆ دیار جۆینی گروپی سان FX ـت کردووە 😎
-    </p>
-
-    <div class="winButtons">
-
-      <button id="retryBtn">
-        دووبارە
-      </button>
-
-      <button id="nextBtn">
-        مەرحەلەی داهاتوو →
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-
-<div id="finishBanner">
-  🎉 LEVEL COMPLETE!
-</div>
-
-
 <script>
 
 "use strict";
-
 
 /* =========================================================
    SETUP
 ========================================================= */
 
-const canvas =
-  document.getElementById("game");
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
 
-const ctx =
-  canvas.getContext("2d");
+const intro = document.getElementById("intro");
+const startBtn = document.getElementById("start");
+const levelEl = document.getElementById("level");
+const levelIdea = document.getElementById("levelIdea");
+const san = document.getElementById("san");
+const win = document.getElementById("win");
+const winText = document.getElementById("winText");
+const finishBanner = document.getElementById("finishBanner");
 
-const intro =
-  document.getElementById("intro");
+let W = innerWidth;
+let H = innerHeight;
 
-const startBtn =
-  document.getElementById("start");
+let DPR = Math.min(window.devicePixelRatio || 1, 2);
 
-const levelEl =
-  document.getElementById("level");
+function resize(){
 
-const levelIdea =
-  document.getElementById("levelIdea");
+  W = innerWidth;
+  H = innerHeight;
 
-const san =
-  document.getElementById("san");
-
-const win =
-  document.getElementById("win");
-
-const winText =
-  document.getElementById("winText");
-
-const finishBanner =
-  document.getElementById("finishBanner");
-
-
-let W=innerWidth;
-let H=innerHeight;
-
-let DPR=
-  Math.min(
+  DPR = Math.min(
     window.devicePixelRatio || 1,
     2
   );
 
+  canvas.width = Math.floor(W * DPR);
+  canvas.height = Math.floor(H * DPR);
 
-function resize(){
-
-  W=innerWidth;
-  H=innerHeight;
-
-  DPR=
-    Math.min(
-      window.devicePixelRatio || 1,
-      2
-    );
-
-  canvas.width=
-    Math.floor(W*DPR);
-
-  canvas.height=
-    Math.floor(H*DPR);
-
-  canvas.style.width=
-    W+"px";
-
-  canvas.style.height=
-    H+"px";
+  canvas.style.width = W + "px";
+  canvas.style.height = H + "px";
 
   ctx.setTransform(
-    DPR,0,0,DPR,0,0
+    DPR, 0, 0, DPR, 0, 0
   );
-
 }
 
-window.addEventListener(
-  "resize",
-  resize
-);
-
+window.addEventListener("resize", resize);
 resize();
 
 
 /* =========================================================
-   SAVE PROGRESS
-   Refresh -> same level
+   SAVE
 ========================================================= */
 
-const SAVE_KEY =
-  "san_b_ahamd_saved_level_v3";
+const SAVE_KEY = "san_b_ahamd_saved_level_v4";
+const TOTAL_LEVELS = 5000;
 
-const TOTAL_LEVELS=5000;
-
-let savedLevel =
-  parseInt(
-    localStorage.getItem(
-      SAVE_KEY
-    ) || "1",
-    10
-  );
+let savedLevel = parseInt(
+  localStorage.getItem(SAVE_KEY) || "1",
+  10
+);
 
 if(
   !Number.isFinite(savedLevel) ||
-  savedLevel<1 ||
-  savedLevel>TOTAL_LEVELS
+  savedLevel < 1 ||
+  savedLevel > TOTAL_LEVELS
 ){
-  savedLevel=1;
+  savedLevel = 1;
 }
 
-let level=savedLevel;
+let level = savedLevel;
 
 
 /* =========================================================
    GAME STATE
 ========================================================= */
 
-let playing=false;
-let paused=false;
-let cameraX=0;
-let lastTime=0;
-let levelData=null;
-let levelWon=false;
+let playing = false;
+let paused = false;
+let cameraX = 0;
+let lastTime = 0;
+
+let levelData = null;
+let levelWon = false;
+
+let gameTime = 0;
 
 
 /* =========================================================
    PLAYER
 ========================================================= */
 
-const player={
+const player = {
 
   x:80,
   y:0,
@@ -726,7 +107,11 @@ const player={
   grounded:false,
   coyote:0,
 
-  previousY:0
+  previousY:0,
+
+  invincible:0,
+
+  dashCooldown:0
 
 };
 
@@ -735,7 +120,7 @@ const player={
    INPUT
 ========================================================= */
 
-const input={
+const input = {
   x:0
 };
 
@@ -745,65 +130,54 @@ const input={
 ========================================================= */
 
 const joystick =
-  document.getElementById(
-    "joystick"
-  );
+  document.getElementById("joystick");
 
 const stick =
-  document.getElementById(
-    "stick"
-  );
+  document.getElementById("stick");
 
-let joystickPointer=null;
-
+let joystickPointer = null;
 
 function setJoystick(e){
 
-  const r=
+  const r =
     joystick.getBoundingClientRect();
 
-  const cx=
-    r.left+r.width/2;
+  const cx =
+    r.left + r.width / 2;
 
-  let dx=
-    e.clientX-cx;
+  let dx =
+    e.clientX - cx;
 
-  const max=42;
+  const max = 42;
 
-  dx=
-    Math.max(
-      -max,
-      Math.min(max,dx)
-    );
+  dx = Math.max(
+    -max,
+    Math.min(max, dx)
+  );
 
-  input.x=dx/max;
+  input.x = dx / max;
 
-  stick.style.transform=
+  stick.style.transform =
     `translateX(${dx}px)`;
-
 }
-
 
 function resetJoystick(){
 
-  joystickPointer=null;
+  joystickPointer = null;
 
-  input.x=0;
+  input.x = 0;
 
-  stick.style.transform=
+  stick.style.transform =
     "translateX(0)";
-
 }
-
 
 joystick.addEventListener(
   "pointerdown",
-  e=>{
+  e => {
 
     e.preventDefault();
 
-    joystickPointer=
-      e.pointerId;
+    joystickPointer = e.pointerId;
 
     joystick.setPointerCapture(
       e.pointerId
@@ -814,13 +188,12 @@ joystick.addEventListener(
   }
 );
 
-
 joystick.addEventListener(
   "pointermove",
-  e=>{
+  e => {
 
     if(
-      e.pointerId===
+      e.pointerId ===
       joystickPointer
     ){
 
@@ -833,13 +206,12 @@ joystick.addEventListener(
   }
 );
 
-
 joystick.addEventListener(
   "pointerup",
-  e=>{
+  e => {
 
     if(
-      e.pointerId===
+      e.pointerId ===
       joystickPointer
     ){
 
@@ -849,7 +221,6 @@ joystick.addEventListener(
 
   }
 );
-
 
 joystick.addEventListener(
   "pointercancel",
@@ -861,49 +232,40 @@ joystick.addEventListener(
    BUTTONS
 ========================================================= */
 
-const jumpBtn=
-  document.getElementById(
-    "jumpBtn"
-  );
+const jumpBtn =
+  document.getElementById("jumpBtn");
 
-const dashBtn=
-  document.getElementById(
-    "dashBtn"
-  );
+const dashBtn =
+  document.getElementById("dashBtn");
 
-const resetBtn=
-  document.getElementById(
-    "resetBtn"
-  );
+const resetBtn =
+  document.getElementById("resetBtn");
 
-const nextQuickBtn=
-  document.getElementById(
-    "nextQuickBtn"
-  );
+const nextQuickBtn =
+  document.getElementById("nextQuickBtn");
 
 
 function jump(){
 
   if(
     player.grounded ||
-    player.coyote>0
+    player.coyote > 0
   ){
 
-    player.vy=
+    player.vy =
       -player.jumpPower;
 
-    player.grounded=false;
+    player.grounded = false;
 
-    player.coyote=0;
+    player.coyote = 0;
 
   }
-
 }
 
 
 jumpBtn.addEventListener(
   "pointerdown",
-  e=>{
+  e => {
 
     e.preventDefault();
 
@@ -915,22 +277,21 @@ jumpBtn.addEventListener(
 
 dashBtn.addEventListener(
   "pointerdown",
-  e=>{
+  e => {
 
     e.preventDefault();
 
-    if(
-      Math.abs(input.x)>.1
-    ){
+    if(player.dashCooldown > 0)
+      return;
 
-      player.vx=
-        input.x*620;
+    let dir = input.x;
 
-    }else{
+    if(Math.abs(dir) < .1)
+      dir = 1;
 
-      player.vx=620;
+    player.vx = dir * 680;
 
-    }
+    player.dashCooldown = .75;
 
   }
 );
@@ -938,7 +299,7 @@ dashBtn.addEventListener(
 
 resetBtn.addEventListener(
   "pointerdown",
-  e=>{
+  e => {
 
     e.preventDefault();
 
@@ -950,15 +311,12 @@ resetBtn.addEventListener(
 
 nextQuickBtn.addEventListener(
   "pointerdown",
-  e=>{
+  e => {
 
     e.preventDefault();
 
-    if(levelWon){
-
+    if(levelWon)
       nextLevel();
-
-    }
 
   }
 );
@@ -970,29 +328,29 @@ nextQuickBtn.addEventListener(
 
 window.addEventListener(
   "keydown",
-  e=>{
+  e => {
 
     if(
-      e.key==="ArrowLeft" ||
-      e.key.toLowerCase()==="a"
+      e.key === "ArrowLeft" ||
+      e.key.toLowerCase() === "a"
     ){
 
-      input.x=-1;
+      input.x = -1;
 
     }
 
     if(
-      e.key==="ArrowRight" ||
-      e.key.toLowerCase()==="d"
+      e.key === "ArrowRight" ||
+      e.key.toLowerCase() === "d"
     ){
 
-      input.x=1;
+      input.x = 1;
 
     }
 
     if(
-      e.key===" " ||
-      e.key==="ArrowUp"
+      e.key === " " ||
+      e.key === "ArrowUp"
     ){
 
       e.preventDefault();
@@ -1007,7 +365,7 @@ window.addEventListener(
 
 window.addEventListener(
   "keyup",
-  e=>{
+  e => {
 
     if(
       [
@@ -1018,7 +376,7 @@ window.addEventListener(
       ].includes(e.key)
     ){
 
-      input.x=0;
+      input.x = 0;
 
     }
 
@@ -1027,30 +385,30 @@ window.addEventListener(
 
 
 /* =========================================================
-   IPHONE PREVENT ZOOM
+   IPHONE
 ========================================================= */
 
 document.addEventListener(
   "gesturestart",
-  e=>e.preventDefault(),
+  e => e.preventDefault(),
   {passive:false}
 );
 
 document.addEventListener(
   "gesturechange",
-  e=>e.preventDefault(),
+  e => e.preventDefault(),
   {passive:false}
 );
 
 document.addEventListener(
   "gestureend",
-  e=>e.preventDefault(),
+  e => e.preventDefault(),
   {passive:false}
 );
 
 document.addEventListener(
   "touchmove",
-  e=>e.preventDefault(),
+  e => e.preventDefault(),
   {passive:false}
 );
 
@@ -1061,11 +419,66 @@ document.addEventListener(
 
 function random(n){
 
-  const x=
-    Math.sin(n*12.9898)
-    *43758.5453123;
+  const x =
+    Math.sin(n * 12.9898) *
+    43758.5453123;
 
-  return x-Math.floor(x);
+  return x - Math.floor(x);
+
+}
+
+
+/* =========================================================
+   DIFFICULTY
+========================================================= */
+
+function getDifficulty(n){
+
+  if(n <= 1666){
+
+    return {
+      tier:"سەرەتایی",
+      value:n / 1666,
+      obstacle:1,
+      gap:1,
+      speed:1,
+      storm:.35,
+      crack:.25,
+      falling:.20
+    };
+
+  }
+
+  if(n <= 3332){
+
+    return {
+      tier:"ناوەند",
+      value:(n - 1666) / 1666,
+      obstacle:1.35,
+      gap:1.25,
+      speed:1.25,
+      storm:.65,
+      crack:.65,
+      falling:.60
+    };
+
+  }
+
+  return {
+
+    tier:"پڕۆفیشناڵ",
+
+    value:
+      (n - 3332) / 1668,
+
+    obstacle:1.8,
+    gap:1.55,
+    speed:1.55,
+    storm:1,
+    crack:1,
+    falling:1
+
+  };
 
 }
 
@@ -1074,7 +487,7 @@ function random(n){
    IDEAS
 ========================================================= */
 
-const ideas=[
+const ideas = [
 
   "💡 Jump the tiny wall.",
   "💡 The gap looks scary. It isn't.",
@@ -1089,75 +502,72 @@ const ideas=[
   "💡 Dash across the gap.",
   "💡 Look before you jump.",
   "💡 One obstacle at a time.",
-  "💡 The funny block hides the shortcut.",
-  "💡 Keep calm and jump.",
-  "💡 The finish is closer than it looks.",
-  "💡 Don't overthink it.",
   "💡 Watch the ball!",
   "💡 The road is tilted.",
-  "💡 Think before you jump."
-
+  "💡 Think before you jump.",
+  "⚡ Watch the sky!",
+  "🕳️ The ground may crack!",
+  "⚽ Don't let the ball hit you!",
+  "☄️ Something is falling from above!",
+  "💡 Sometimes waiting is smarter than running.",
+  "💡 Professional levels need timing.",
+  "💡 Jump first, dash second.",
+  "💡 The safest road is not always the fastest."
 ];
 
 
 /* =========================================================
    LEVEL GENERATOR
-   5000 SOLVABLE LEVELS
+   5000 DIFFERENT LEVELS
 ========================================================= */
 
 function makeLevel(n){
 
-  const difficulty=
-    Math.min(
-      1,
-      (n-1)/4999
-    );
+  const d = getDifficulty(n);
 
-
-  const groundY=
-    H-
+  const groundY =
+    H -
     Math.max(
       125,
-      Math.min(
-        165,
-        H*.18
-      )
+      Math.min(165, H * .18)
     );
 
-
-  const platforms=[];
-  const hazards=[];
-  const stars=[];
-  const balls=[];
-  const slopes=[];
-
+  const platforms = [];
+  const hazards = [];
+  const stars = [];
+  const balls = [];
+  const slopes = [];
+  const cracks = [];
+  const fallingObjects = [];
+  const lightning = [];
 
   /*
-    START
+    START AREA
+    Always safe.
   */
 
   platforms.push({
 
-    x:-250,
+    x:-300,
     y:groundY,
-    w:470,
+    w:500,
     h:75
 
   });
 
 
-  let x=270;
+  let x = 270;
 
 
   /*
-    More obstacles later,
-    but jumps stay reachable.
+    OBSTACLE COUNT
   */
 
-  const obstacleCount=
-    5+
+  const obstacleCount =
+    6 +
     Math.floor(
-      difficulty*8
+      d.obstacle * 7 +
+      d.value * 4
     );
 
 
@@ -1167,58 +577,58 @@ function makeLevel(n){
     i++
   ){
 
-    const r=
-      random(
-        n*100+i*19
-      );
+    const r =
+      random(n * 100 + i * 19);
 
 
     /*
       GAP
-      Never becomes impossible.
+      Increased gradually,
+      but always reachable by jump/dash.
     */
 
-    const gap=
-      70+
+    const gap =
+      65 +
       Math.floor(
-        r*45+
-        difficulty*20
+        r * 40 * d.gap +
+        d.value * 25
       );
 
 
-    x+=gap;
+    x += gap;
 
 
-    const width=
-      105+
+    /*
+      PLATFORM
+    */
+
+    const width =
+      115 +
       Math.floor(
-        random(
-          n*200+i*31
-        )*80
+        random(n * 200 + i * 31) *
+        Math.max(
+          45,
+          100 - d.value * 20
+        )
       );
 
 
     /*
-      PLATFORM HEIGHT
+      HEIGHT
     */
 
-    const maxRise=
-      20+
-      difficulty*55;
+    const maxRise =
+      20 +
+      d.value * 60;
 
 
-    const py=
-      groundY-
+    const py =
+      groundY -
       Math.floor(
-        random(
-          n*300+i*17
-        )*maxRise
+        random(n * 300 + i * 17) *
+        maxRise
       );
 
-
-    /*
-      Normal platform
-    */
 
     platforms.push({
 
@@ -1235,15 +645,18 @@ function makeLevel(n){
     */
 
     if(
-      i%2===0 ||
-      r>.6
+      i % 2 === 0 ||
+      r > .55
     ){
 
       stars.push({
 
-        x:x+width*.5,
-        y:py-38,
+        x:x + width * .5,
+
+        y:py - 38,
+
         r:9,
+
         taken:false
 
       });
@@ -1252,24 +665,28 @@ function makeLevel(n){
 
 
     /*
-      SPIKE
+      SPIKES
     */
 
+    const spikeChance =
+      .28 +
+      d.value * .35;
+
+
     if(
-      i%3===1 &&
-      width>125
+      random(n * 500 + i) <
+      spikeChance &&
+      width > 125
     ){
 
-      const spikeX=
-        x+
-        28+
+      const spikeX =
+        x +
+        30 +
         Math.floor(
-          random(
-            n*500+i
-          )*
+          random(n * 510 + i) *
           Math.max(
             20,
-            width-70
+            width - 70
           )
         );
 
@@ -1277,8 +694,11 @@ function makeLevel(n){
       hazards.push({
 
         x:spikeX,
-        y:py-22,
+
+        y:py - 22,
+
         w:24,
+
         h:22
 
       });
@@ -1287,33 +707,49 @@ function makeLevel(n){
 
 
     /*
-      BALL
-      Some levels have a ball.
+      EARTH CRACK
     */
 
+    const crackChance =
+      .12 +
+      d.crack * .35;
+
+
     if(
-      (n%7===0 && i===2) ||
-      (n%13===0 && i===4) ||
-      (n%29===0 && i===3)
+      random(n * 600 + i) <
+      crackChance &&
+      width > 120
     ){
 
-      balls.push({
+      const crackX =
+        x +
+        25 +
+        Math.floor(
+          random(n * 610 + i) *
+          Math.max(
+            30,
+            width - 70
+          )
+        );
 
-        x:x+width+100,
 
-        y:py-20,
+      cracks.push({
 
-        r:17,
+        x:crackX,
 
-        speed:
-          130+
-          difficulty*80,
+        y:py,
 
-        minX:x-20,
+        w:
+          28 +
+          Math.floor(
+            random(n * 620 + i) * 28
+          ),
 
-        maxX:x+width+190,
+        timer:0,
 
-        dir:-1
+        triggered:false,
+
+        collapsed:false
 
       });
 
@@ -1321,31 +757,69 @@ function makeLevel(n){
 
 
     /*
-      SLOPED ROAD
+      SIDE BALL
+    */
+
+    const ballChance =
+      .10 +
+      d.value * .32;
+
+
+    if(
+      random(n * 700 + i) <
+      ballChance
+    ){
+
+      balls.push({
+
+        x:x + width + 90,
+
+        y:py - 22,
+
+        r:17,
+
+        speed:
+          120 +
+          d.speed * 75,
+
+        minX:x - 30,
+
+        maxX:x + width + 200,
+
+        dir:
+          random(n * 710 + i) > .5
+          ? 1
+          : -1
+
+      });
+
+    }
+
+
+    /*
+      SLOPE
     */
 
     if(
-      i%5===2 ||
-      (n%11===0 && i===3)
+      i % 5 === 2 ||
+      random(n * 800 + i) <
+      .15 + d.value * .25
     ){
 
-      const sx=
-        x+width+35;
+      const sx =
+        x + width + 35;
 
-      const sw=
-        170+
+      const sw =
+        170 +
         Math.floor(
-          random(
-            n*700+i
-          )*90
+          random(n * 810 + i) * 90
         );
 
-      const rise=
-        25+
+      const rise =
+        25 +
         Math.floor(
-          random(
-            n*800+i
-          )*45
+          random(n * 820 + i) *
+          (35 + d.value * 35)
         );
 
 
@@ -1362,17 +836,88 @@ function makeLevel(n){
       });
 
 
-      /*
-        Put a safe platform after slope.
-      */
-
-      x=
-        sx+
-        sw;
+      x = sx + sw;
 
     }else{
 
-      x+=width;
+      x += width;
+
+    }
+
+
+    /*
+      FALLING BALLS
+      These fall from above.
+    */
+
+    const fallingChance =
+      .08 +
+      d.falling * .35;
+
+
+    if(
+      random(n * 900 + i) <
+      fallingChance
+    ){
+
+      fallingObjects.push({
+
+        x:
+          x -
+          width * .5,
+
+        y:
+          groundY -
+          360,
+
+        r:
+          12 +
+          Math.floor(
+            random(n * 910 + i) * 7
+          ),
+
+        vy:0,
+
+        active:false,
+
+        delay:
+          .5 +
+          random(n * 920 + i) * 2
+
+      });
+
+    }
+
+
+    /*
+      LIGHTNING
+    */
+
+    const lightningChance =
+      .04 +
+      d.storm * .22;
+
+
+    if(
+      random(n * 1000 + i) <
+      lightningChance
+    ){
+
+      lightning.push({
+
+        x:
+          x -
+          width * .25,
+
+        warning:0,
+
+        strike:false,
+
+        cooldown:
+          1 +
+          random(n * 1010 + i) * 2
+
+      });
 
     }
 
@@ -1380,44 +925,61 @@ function makeLevel(n){
 
 
   /*
-    EASY FINAL AREA
-
-    Always reachable.
+    FINAL SAFE AREA
   */
 
-  const finalStart=
-    x+50;
+  const finalStart =
+    x + 50;
 
 
   platforms.push({
 
     x:finalStart,
+
     y:groundY,
-    w:330,
+
+    w:360,
+
     h:75
 
   });
 
 
-  const finishX=
-    finalStart+110;
+  /*
+    FINAL FLAG
+  */
+
+  const finishX =
+    finalStart + 110;
 
 
-  return{
+  return {
 
     groundY,
 
     platforms,
+
     hazards,
+
     stars,
+
     balls,
+
     slopes,
+
+    cracks,
+
+    fallingObjects,
+
+    lightning,
 
     finishX,
 
+    difficulty:d,
+
     idea:
       ideas[
-        (n-1)%
+        (n - 1) %
         ideas.length
       ]
 
@@ -1441,45 +1003,50 @@ function saveLevel(){
 
 
 /* =========================================================
-   RESET LEVEL
+   RESET
 ========================================================= */
 
 function resetLevel(){
 
-  levelWon=false;
-  paused=false;
+  levelWon = false;
+  paused = false;
 
-  levelData=
+  gameTime = 0;
+
+  levelData =
     makeLevel(level);
 
 
-  player.x=70;
+  player.x = 70;
 
-  player.y=
-    levelData.groundY-
+  player.y =
+    levelData.groundY -
     player.h;
 
-  player.previousY=
+  player.previousY =
     player.y;
 
-  player.vx=0;
-  player.vy=0;
+  player.vx = 0;
+  player.vy = 0;
 
-  player.grounded=true;
-  player.coyote=0;
+  player.grounded = true;
+  player.coyote = 0;
 
-  cameraX=0;
+  player.invincible = 0;
+  player.dashCooldown = 0;
+
+  cameraX = 0;
 
 
-  levelEl.textContent=
+  levelEl.textContent =
     level;
 
 
-  levelIdea.textContent=
-    `LEVEL ${level}: ${levelData.idea}`;
+  levelIdea.textContent =
+    `LEVEL ${level} — ${levelData.difficulty.tier}: ${levelData.idea}`;
 
 
-  win.style.display="none";
+  win.style.display = "none";
 
   saveLevel();
 
@@ -1492,23 +1059,17 @@ function resetLevel(){
 
 startBtn.addEventListener(
   "pointerdown",
-  e=>{
+  e => {
 
     e.preventDefault();
 
-    intro.style.display="none";
+    intro.style.display = "none";
 
-    playing=true;
-
-    /*
-      IMPORTANT:
-      Start from saved level,
-      NOT level 1.
-    */
+    playing = true;
 
     resetLevel();
 
-    lastTime=
+    lastTime =
       performance.now();
 
     requestAnimationFrame(loop);
@@ -1526,18 +1087,32 @@ function intersects(a,b){
   return(
 
     a.x <
-      b.x+b.w &&
+      b.x + b.w &&
 
-    a.x+a.w >
+    a.x + a.w >
       b.x &&
 
     a.y <
-      b.y+b.h &&
+      b.y + b.h &&
 
-    a.y+a.h >
+    a.y + a.h >
       b.y
 
   );
+
+}
+
+
+/* =========================================================
+   PLAYER HIT
+========================================================= */
+
+function playerHit(){
+
+  if(player.invincible > 0)
+    return;
+
+  resetLevel();
 
 }
 
@@ -1548,15 +1123,12 @@ function intersects(a,b){
 
 function winLevel(){
 
-  if(levelWon)return;
+  if(levelWon)
+    return;
 
-  levelWon=true;
-  paused=true;
+  levelWon = true;
 
-  /*
-    Save CURRENT completed level.
-    Refresh stays here.
-  */
+  paused = true;
 
   saveLevel();
 
@@ -1572,37 +1144,29 @@ function winLevel(){
   );
 
 
-  winText.textContent=
+  winText.textContent =
     `تۆ مەرحەلەی ${level} ـت بە سەرکەوتوویی بردەوە.`;
 
-  win.style.display="flex";
+  win.style.display = "flex";
 
 }
 
 
 /* =========================================================
-   NEXT LEVEL
+   NEXT
 ========================================================= */
 
 function nextLevel(){
 
-  if(
-    level>=TOTAL_LEVELS
-  ){
+  if(level >= TOTAL_LEVELS){
 
-    /*
-      Finished all 5000.
-      Start again from 1.
-    */
-
-    level=1;
+    level = 1;
 
   }else{
 
     level++;
 
   }
-
 
   saveLevel();
 
@@ -1619,7 +1183,7 @@ document
   .getElementById("retryBtn")
   .addEventListener(
     "pointerdown",
-    e=>{
+    e => {
 
       e.preventDefault();
 
@@ -1633,7 +1197,7 @@ document
   .getElementById("nextBtn")
   .addEventListener(
     "pointerdown",
-    e=>{
+    e => {
 
       e.preventDefault();
 
@@ -1644,21 +1208,21 @@ document
 
 
 /* =========================================================
-   SLOPE HEIGHT
+   SLOPE
 ========================================================= */
 
 function slopeSurfaceY(s,x){
 
-  const t=
+  const t =
     Math.max(
       0,
       Math.min(
         1,
-        (x-s.x)/s.w
+        (x - s.x) / s.w
       )
     );
 
-  return s.y-s.rise*t;
+  return s.y - s.rise * t;
 
 }
 
@@ -1672,61 +1236,69 @@ function update(dt){
   if(
     paused ||
     !levelData
-  )return;
+  )
+    return;
 
 
-  /*
-    SAVE OLD POSITION
-    This fixes falling through platforms.
-  */
+  gameTime += dt;
 
-  const oldY=
+
+  player.previousY =
     player.y;
 
-  const oldBottom=
-    oldY+
-    player.h;
+
+  if(player.invincible > 0)
+    player.invincible -= dt;
+
+
+  if(player.dashCooldown > 0)
+    player.dashCooldown -= dt;
+
+
+  const oldY =
+    player.y;
+
+  const oldBottom =
+    oldY + player.h;
 
 
   /*
     MOVEMENT
   */
 
-  const targetVX=
-    input.x*
+  const targetVX =
+    input.x *
     player.speed;
 
 
   player.vx +=
     (
-      targetVX-
+      targetVX -
       player.vx
-    )*
+    ) *
     Math.min(
       1,
-      dt*12
+      dt * 12
     );
 
 
   player.vy +=
-    1550*dt;
+    1550 * dt;
 
 
   player.x +=
-    player.vx*dt;
+    player.vx * dt;
 
 
   player.y +=
-    player.vy*dt;
+    player.vy * dt;
 
 
-  player.grounded=false;
+  player.grounded = false;
 
 
   /*
-    NORMAL PLATFORM LANDING
-
-    More reliable than before.
+    NORMAL PLATFORMS
   */
 
   for(
@@ -1734,23 +1306,22 @@ function update(dt){
     of levelData.platforms
   ){
 
-    const horizontal=
-      player.x+player.w>p.x &&
-      player.x<p.x+p.w;
+    const horizontal =
+      player.x + player.w > p.x &&
+      player.x < p.x + p.w;
 
 
-    const newBottom=
-      player.y+
-      player.h;
+    const newBottom =
+      player.y + player.h;
 
 
-    const descending=
-      player.vy>=0;
+    const descending =
+      player.vy >= 0;
 
 
-    const crossedTop=
-      oldBottom<=p.y+8 &&
-      newBottom>=p.y;
+    const crossedTop =
+      oldBottom <= p.y + 8 &&
+      newBottom >= p.y;
 
 
     if(
@@ -1759,12 +1330,12 @@ function update(dt){
       crossedTop
     ){
 
-      player.y=
-        p.y-player.h;
+      player.y =
+        p.y - player.h;
 
-      player.vy=0;
+      player.vy = 0;
 
-      player.grounded=true;
+      player.grounded = true;
 
     }
 
@@ -1772,9 +1343,7 @@ function update(dt){
 
 
   /*
-    SLOPED ROADS
-
-    Safe walkable tilted surface.
+    SLOPES
   */
 
   for(
@@ -1783,36 +1352,36 @@ function update(dt){
   ){
 
     if(
-      player.x+player.w>s.x &&
-      player.x<s.x+s.w
+      player.x + player.w > s.x &&
+      player.x < s.x + s.w
     ){
 
-      const surface=
+      const surface =
         slopeSurfaceY(
           s,
-          player.x+
-          player.w*.5
+          player.x +
+          player.w * .5
         );
 
 
-      const bottom=
-        player.y+
+      const bottom =
+        player.y +
         player.h;
 
 
       if(
-        player.vy>=0 &&
-        bottom>=surface &&
-        oldBottom<=surface+12
+        player.vy >= 0 &&
+        bottom >= surface &&
+        oldBottom <= surface + 14
       ){
 
-        player.y=
-          surface-
+        player.y =
+          surface -
           player.h;
 
-        player.vy=0;
+        player.vy = 0;
 
-        player.grounded=true;
+        player.grounded = true;
 
       }
 
@@ -1827,15 +1396,91 @@ function update(dt){
 
   if(player.grounded){
 
-    player.coyote=.12;
+    player.coyote = .12;
 
   }else{
 
-    player.coyote=
+    player.coyote =
       Math.max(
         0,
-        player.coyote-dt
+        player.coyote - dt
       );
+
+  }
+
+
+  /*
+    EARTH CRACKS
+  */
+
+  for(
+    const c
+    of levelData.cracks
+  ){
+
+    if(c.collapsed)
+      continue;
+
+
+    const crackRect = {
+
+      x:c.x,
+
+      y:c.y - 9,
+
+      w:c.w,
+
+      h:18
+
+    };
+
+
+    if(
+      !c.triggered &&
+      intersects(player, crackRect)
+    ){
+
+      c.triggered = true;
+
+      c.timer = .55;
+
+    }
+
+
+    if(c.triggered){
+
+      c.timer -= dt;
+
+
+      if(c.timer <= 0){
+
+        c.collapsed = true;
+
+      }
+
+    }
+
+
+    if(
+      c.collapsed &&
+      intersects(player, {
+
+        x:c.x,
+
+        y:c.y - 12,
+
+        w:c.w,
+
+        h:40
+
+      })
+    ){
+
+      playerHit();
+
+      return;
+
+    }
 
   }
 
@@ -1849,25 +1494,27 @@ function update(dt){
     of levelData.stars
   ){
 
-    if(s.taken)continue;
+    if(s.taken)
+      continue;
 
 
-    const dx=
-      player.x+
-      player.w/2-
+    const dx =
+      player.x +
+      player.w / 2 -
       s.x;
 
-    const dy=
-      player.y+
-      player.h/2-
+
+    const dy =
+      player.y +
+      player.h / 2 -
       s.y;
 
 
     if(
-      Math.hypot(dx,dy)<30
+      Math.hypot(dx,dy) < 30
     ){
 
-      s.taken=true;
+      s.taken = true;
 
     }
 
@@ -1875,9 +1522,7 @@ function update(dt){
 
 
   /*
-    BALLS
-
-    Ball travels toward player.
+    SIDE BALLS
   */
 
   for(
@@ -1885,51 +1530,211 @@ function update(dt){
     of levelData.balls
   ){
 
-    b.x+=
-      b.dir*
-      b.speed*
+    b.x +=
+      b.dir *
+      b.speed *
       dt;
 
 
-    if(
-      b.x<=b.minX
-    ){
+    if(b.x <= b.minX){
 
-      b.x=b.minX;
-      b.dir=1;
+      b.x = b.minX;
+      b.dir = 1;
 
     }
 
 
-    if(
-      b.x>=b.maxX
-    ){
+    if(b.x >= b.maxX){
 
-      b.x=b.maxX;
-      b.dir=-1;
+      b.x = b.maxX;
+      b.dir = -1;
 
     }
 
 
-    const dx=
-      player.x+
-      player.w/2-
+    const dx =
+      player.x +
+      player.w / 2 -
       b.x;
 
-    const dy=
-      player.y+
-      player.h/2-
+
+    const dy =
+      player.y +
+      player.h / 2 -
       b.y;
 
 
     if(
-      Math.hypot(dx,dy)<
-      b.r+18
+      Math.hypot(dx,dy) <
+      b.r + 18
     ){
 
-      resetLevel();
+      playerHit();
 
       return;
+
+    }
+
+  }
+
+
+  /*
+    FALLING OBJECTS
+  */
+
+  for(
+    const b
+    of levelData.fallingObjects
+  ){
+
+    if(!b.active){
+
+      b.delay -= dt;
+
+      if(b.delay <= 0){
+
+        b.active = true;
+
+        b.vy = 80;
+
+      }
+
+    }else{
+
+      b.vy += 1450 * dt;
+
+      b.y += b.vy * dt;
+
+
+      /*
+        Small horizontal movement
+        makes it harder to predict.
+      */
+
+      b.x +=
+        Math.sin(
+          gameTime * 3 +
+          b.r
+        ) *
+        30 *
+        dt;
+
+
+      const hit = {
+
+        x:b.x - b.r,
+
+        y:b.y - b.r,
+
+        w:b.r * 2,
+
+        h:b.r * 2
+
+      };
+
+
+      if(
+        intersects(player,hit)
+      ){
+
+        playerHit();
+
+        return;
+
+      }
+
+
+      /*
+        Reset object after falling.
+      */
+
+      if(b.y > H + 200){
+
+        b.y =
+          levelData.groundY -
+          360;
+
+        b.vy = 0;
+
+        b.active = false;
+
+        b.delay =
+          .7 +
+          Math.random() * 1.5;
+
+      }
+
+    }
+
+  }
+
+
+  /*
+    LIGHTNING
+  */
+
+  for(
+    const l
+    of levelData.lightning
+  ){
+
+    if(l.strike){
+
+      l.cooldown -= dt;
+
+
+      const strikeRect = {
+
+        x:l.x - 17,
+
+        y:0,
+
+        w:34,
+
+        h:H
+
+      };
+
+
+      if(
+        intersects(player,strikeRect)
+      ){
+
+        playerHit();
+
+        return;
+
+      }
+
+
+      if(l.cooldown <= 0){
+
+        l.strike = false;
+
+        l.warning = 0;
+
+        l.cooldown =
+          1.5 +
+          Math.random() * 2;
+
+      }
+
+    }else{
+
+      l.cooldown -= dt;
+
+
+      if(l.cooldown <= 0){
+
+        /*
+          WARNING BEFORE LIGHTNING
+        */
+
+        l.warning = .65;
+
+        l.strike = true;
+
+      }
 
     }
 
@@ -1952,7 +1757,7 @@ function update(dt){
       )
     ){
 
-      resetLevel();
+      playerHit();
 
       return;
 
@@ -1966,11 +1771,11 @@ function update(dt){
   */
 
   if(
-    player.y>
-    H+150
+    player.y >
+    H + 150
   ){
 
-    resetLevel();
+    playerHit();
 
     return;
 
@@ -1982,8 +1787,8 @@ function update(dt){
   */
 
   if(
-    player.x+
-    player.w>=
+    player.x +
+    player.w >=
     levelData.finishX
   ){
 
@@ -1998,22 +1803,22 @@ function update(dt){
     CAMERA
   */
 
-  const targetCamera=
+  const targetCamera =
     Math.max(
       0,
-      player.x-
-      W*.32
+      player.x -
+      W * .32
     );
 
 
   cameraX +=
     (
-      targetCamera-
+      targetCamera -
       cameraX
-    )*
+    ) *
     Math.min(
       1,
-      dt*7
+      dt * 7
     );
 
 }
@@ -2025,7 +1830,7 @@ function update(dt){
 
 function drawBackground(){
 
-  const sky=
+  const sky =
     ctx.createLinearGradient(
       0,0,0,H
     );
@@ -2047,17 +1852,20 @@ function drawBackground(){
   );
 
 
-  ctx.fillStyle=sky;
+  ctx.fillStyle = sky;
 
   ctx.fillRect(
-    0,0,W,H
+    0,
+    0,
+    W,
+    H
   );
 
 
   ctx.save();
 
   ctx.translate(
-    -cameraX*.12,
+    -cameraX * .12,
     0
   );
 
@@ -2068,15 +1876,15 @@ function drawBackground(){
     i++
   ){
 
-    const x=
-      i*280+100;
+    const x =
+      i * 280 + 100;
 
-    const y=
-      95+
-      (i%4)*45;
+    const y =
+      95 +
+      (i % 4) * 45;
 
 
-    ctx.fillStyle=
+    ctx.fillStyle =
       "rgba(255,255,255,.45)";
 
 
@@ -2087,23 +1895,23 @@ function drawBackground(){
       y,
       28,
       0,
-      Math.PI*2
+      Math.PI * 2
     );
 
     ctx.arc(
-      x+30,
-      y-8,
+      x + 30,
+      y - 8,
       35,
       0,
-      Math.PI*2
+      Math.PI * 2
     );
 
     ctx.arc(
-      x+65,
+      x + 65,
       y,
       25,
       0,
-      Math.PI*2
+      Math.PI * 2
     );
 
     ctx.fill();
@@ -2139,7 +1947,7 @@ function drawWorld(){
     of levelData.platforms
   ){
 
-    ctx.fillStyle=
+    ctx.fillStyle =
       "#292b31";
 
     ctx.fillRect(
@@ -2150,7 +1958,7 @@ function drawWorld(){
     );
 
 
-    ctx.fillStyle=
+    ctx.fillStyle =
       "#65d878";
 
     ctx.fillRect(
@@ -2161,7 +1969,7 @@ function drawWorld(){
     );
 
 
-    ctx.fillStyle=
+    ctx.fillStyle =
       "rgba(255,255,255,.13)";
 
 
@@ -2184,7 +1992,7 @@ function drawWorld(){
 
 
   /*
-    SLOPED ROADS
+    SLOPES
   */
 
   for(
@@ -2192,7 +2000,8 @@ function drawWorld(){
     of levelData.slopes
   ){
 
-    ctx.fillStyle="#292b31";
+    ctx.fillStyle =
+      "#292b31";
 
     ctx.beginPath();
 
@@ -2221,10 +2030,10 @@ function drawWorld(){
     ctx.fill();
 
 
-    ctx.strokeStyle=
+    ctx.strokeStyle =
       "#65d878";
 
-    ctx.lineWidth=7;
+    ctx.lineWidth = 7;
 
     ctx.beginPath();
 
@@ -2244,6 +2053,78 @@ function drawWorld(){
 
 
   /*
+    EARTH CRACKS
+  */
+
+  for(
+    const c
+    of levelData.cracks
+  ){
+
+    ctx.save();
+
+    if(c.collapsed){
+
+      ctx.fillStyle =
+        "#090909";
+
+      ctx.fillRect(
+        c.x,
+        c.y - 3,
+        c.w,
+        32
+      );
+
+    }else{
+
+      ctx.strokeStyle =
+        c.triggered
+        ? "#ff4d6d"
+        : "#111";
+
+      ctx.lineWidth =
+        c.triggered
+        ? 4
+        : 3;
+
+
+      ctx.beginPath();
+
+      ctx.moveTo(
+        c.x,
+        c.y
+      );
+
+      ctx.lineTo(
+        c.x + c.w*.25,
+        c.y + 8
+      );
+
+      ctx.lineTo(
+        c.x + c.w*.45,
+        c.y - 5
+      );
+
+      ctx.lineTo(
+        c.x + c.w*.7,
+        c.y + 7
+      );
+
+      ctx.lineTo(
+        c.x + c.w,
+        c.y
+      );
+
+      ctx.stroke();
+
+    }
+
+    ctx.restore();
+
+  }
+
+
+  /*
     SPIKES
   */
 
@@ -2252,7 +2133,7 @@ function drawWorld(){
     of levelData.hazards
   ){
 
-    ctx.fillStyle=
+    ctx.fillStyle =
       "#ef476f";
 
     ctx.beginPath();
@@ -2277,9 +2158,10 @@ function drawWorld(){
     ctx.fill();
 
 
-    ctx.fillStyle="#fff";
+    ctx.fillStyle =
+      "#fff";
 
-    ctx.font=
+    ctx.font =
       "bold 9px system-ui";
 
     ctx.fillText(
@@ -2300,7 +2182,8 @@ function drawWorld(){
     of levelData.stars
   ){
 
-    if(s.taken)continue;
+    if(s.taken)
+      continue;
 
 
     ctx.save();
@@ -2311,10 +2194,10 @@ function drawWorld(){
     );
 
     ctx.rotate(
-      performance.now()/700
+      performance.now() / 700
     );
 
-    ctx.fillStyle=
+    ctx.fillStyle =
       "#ffd166";
 
     ctx.beginPath();
@@ -2326,19 +2209,20 @@ function drawWorld(){
       i++
     ){
 
-      const a=
-        i*Math.PI/5;
+      const a =
+        i * Math.PI / 5;
 
-      const r=
-        i%2===0
-        ?11
-        :5;
+      const r =
+        i % 2 === 0
+        ? 11
+        : 5;
 
-      const sx=
-        Math.cos(a)*r;
 
-      const sy=
-        Math.sin(a)*r;
+      const sx =
+        Math.cos(a) * r;
+
+      const sy =
+        Math.sin(a) * r;
 
 
       if(i===0){
@@ -2370,7 +2254,7 @@ function drawWorld(){
 
 
   /*
-    BALLS
+    SIDE BALLS
   */
 
   for(
@@ -2378,72 +2262,125 @@ function drawWorld(){
     of levelData.balls
   ){
 
-    ctx.save();
-
-    ctx.translate(
+    drawBall(
       b.x,
-      b.y
+      b.y,
+      b.r
     );
 
+  }
 
-    ctx.fillStyle=
-      "#ff6b35";
 
-    ctx.beginPath();
+  /*
+    FALLING BALLS
+  */
 
-    ctx.arc(
-      0,
-      0,
-      b.r,
-      0,
-      Math.PI*2
+  for(
+    const b
+    of levelData.fallingObjects
+  ){
+
+    if(!b.active)
+      continue;
+
+
+    drawBall(
+      b.x,
+      b.y,
+      b.r
     );
 
-    ctx.fill();
+  }
 
 
-    ctx.strokeStyle=
-      "#fff";
+  /*
+    LIGHTNING WARNING + STRIKE
+  */
 
-    ctx.lineWidth=3;
+  for(
+    const l
+    of levelData.lightning
+  ){
 
-    ctx.beginPath();
+    if(l.strike){
 
-    ctx.arc(
-      0,
-      0,
-      b.r-5,
-      0,
-      Math.PI*1.5
-    );
+      /*
+        Warning flash
+      */
 
-    ctx.stroke();
+      if(l.warning > 0){
 
+        ctx.fillStyle =
+          "rgba(255,255,0,.13)";
 
-    ctx.fillStyle="#222";
+        ctx.fillRect(
+          l.x - 28,
+          0,
+          56,
+          H
+        );
 
-    ctx.beginPath();
+        ctx.fillStyle =
+          "#fff";
 
-    ctx.arc(
-      -5,
-      -3,
-      3,
-      0,
-      Math.PI*2
-    );
+        ctx.font =
+          "900 18px system-ui";
 
-    ctx.arc(
-      5,
-      -3,
-      3,
-      0,
-      Math.PI*2
-    );
+        ctx.fillText(
+          "⚡",
+          l.x - 10,
+          70
+        );
 
-    ctx.fill();
+      }
 
 
-    ctx.restore();
+      /*
+        Actual lightning
+      */
+
+      if(l.warning <= 0){
+
+        ctx.strokeStyle =
+          "#fff";
+
+        ctx.lineWidth = 6;
+
+        ctx.beginPath();
+
+        ctx.moveTo(
+          l.x,
+          0
+        );
+
+        ctx.lineTo(
+          l.x - 12,
+          H*.25
+        );
+
+        ctx.lineTo(
+          l.x + 10,
+          H*.48
+        );
+
+        ctx.lineTo(
+          l.x - 7,
+          H*.72
+        );
+
+        ctx.lineTo(
+          l.x,
+          H
+        );
+
+        ctx.stroke();
+
+      }
+
+      l.warning -=
+        1 / 60;
+
+    }
 
   }
 
@@ -2452,21 +2389,23 @@ function drawWorld(){
     FINISH FLAG
   */
 
-  const fx=
+  const fx =
     levelData.finishX;
 
 
-  ctx.fillStyle="#222";
+  ctx.fillStyle =
+    "#222";
 
   ctx.fillRect(
     fx,
-    levelData.groundY-120,
+    levelData.groundY - 120,
     7,
     120
   );
 
 
-  ctx.fillStyle="#ff4d6d";
+  ctx.fillStyle =
+    "#ff4d6d";
 
   ctx.beginPath();
 
@@ -2502,7 +2441,7 @@ function drawWorld(){
   );
 
 
-  ctx.fillStyle=
+  ctx.fillStyle =
     "#684cff";
 
   ctx.beginPath();
@@ -2522,7 +2461,8 @@ function drawWorld(){
     EYES
   */
 
-  ctx.fillStyle="#fff";
+  ctx.fillStyle =
+    "#fff";
 
   ctx.beginPath();
 
@@ -2545,7 +2485,8 @@ function drawWorld(){
   ctx.fill();
 
 
-  ctx.fillStyle="#111";
+  ctx.fillStyle =
+    "#111";
 
   ctx.beginPath();
 
@@ -2572,8 +2513,10 @@ function drawWorld(){
     SMILE
   */
 
-  ctx.strokeStyle="#111";
-  ctx.lineWidth=3;
+  ctx.strokeStyle =
+    "#111";
+
+  ctx.lineWidth = 3;
 
   ctx.beginPath();
 
@@ -2592,7 +2535,8 @@ function drawWorld(){
     LEGS
   */
 
-  ctx.fillStyle="#222";
+  ctx.fillStyle =
+    "#222";
 
   ctx.fillRect(
     6,
@@ -2616,18 +2560,99 @@ function drawWorld(){
     FUNNY TEXT
   */
 
-  ctx.fillStyle=
+  ctx.fillStyle =
     "rgba(20,20,20,.35)";
 
-  ctx.font=
+  ctx.font =
     "900 15px system-ui";
 
 
   ctx.fillText(
     "هەموو شتێک باشە 😎",
-    player.x+100,
-    player.y-30
+    player.x + 100,
+    player.y - 30
   );
+
+
+  ctx.restore();
+
+}
+
+
+/* =========================================================
+   BALL DRAW
+========================================================= */
+
+function drawBall(x,y,r){
+
+  ctx.save();
+
+  ctx.translate(
+    x,
+    y
+  );
+
+
+  ctx.fillStyle =
+    "#ff6b35";
+
+  ctx.beginPath();
+
+  ctx.arc(
+    0,
+    0,
+    r,
+    0,
+    Math.PI*2
+  );
+
+  ctx.fill();
+
+
+  ctx.strokeStyle =
+    "#fff";
+
+  ctx.lineWidth = 3;
+
+  ctx.beginPath();
+
+  ctx.arc(
+    0,
+    0,
+    r - 5,
+    0,
+    Math.PI * 1.5
+  );
+
+  ctx.stroke();
+
+
+  /*
+    Funny face
+  */
+
+  ctx.fillStyle =
+    "#222";
+
+  ctx.beginPath();
+
+  ctx.arc(
+    -5,
+    -3,
+    3,
+    0,
+    Math.PI*2
+  );
+
+  ctx.arc(
+    5,
+    -3,
+    3,
+    0,
+    Math.PI*2
+  );
+
+  ctx.fill();
 
 
   ctx.restore();
@@ -2641,7 +2666,7 @@ function drawWorld(){
 
 function updateSanPosition(){
 
-  const positions=[
+  const positions = [
 
     {
       right:18,
@@ -2671,35 +2696,35 @@ function updateSanPosition(){
   ];
 
 
-  const p=
+  const p =
     positions[
-      (level-1)%
+      (level - 1) %
       positions.length
     ];
 
 
-  san.style.right=
-    p.right+"px";
+  san.style.right =
+    p.right + "px";
 
-  san.style.top=
-    p.top+"px";
+  san.style.top =
+    p.top + "px";
 
 
-  const size=
+  const size =
     Math.min(
       86,
       Math.max(
         64,
-        W*.19
+        W * .19
       )
     );
 
 
-  san.style.width=
-    size+"px";
+  san.style.width =
+    size + "px";
 
-  san.style.height=
-    size+"px";
+  san.style.height =
+    size + "px";
 
 }
 
@@ -2712,11 +2737,8 @@ function draw(){
 
   drawBackground();
 
-  if(levelData){
-
+  if(levelData)
     drawWorld();
-
-  }
 
   updateSanPosition();
 
@@ -2729,28 +2751,27 @@ function draw(){
 
 function loop(time){
 
-  if(!playing)return;
+  if(!playing)
+    return;
 
 
-  const dt=
+  const dt =
     Math.min(
       .033,
       Math.max(
         .001,
-        (time-lastTime)/1000
+        (time - lastTime) / 1000
       )
     );
 
 
-  lastTime=time;
+  lastTime = time;
 
   update(dt);
 
   draw();
 
-  requestAnimationFrame(
-    loop
-  );
+  requestAnimationFrame(loop);
 
 }
 
@@ -2759,15 +2780,12 @@ function loop(time){
    INITIAL
 ========================================================= */
 
-levelData=
+levelData =
   makeLevel(level);
 
-levelEl.textContent=
+levelEl.textContent =
   level;
 
 draw();
 
 </script>
-
-</body>
-</html>
