@@ -11,7 +11,7 @@ minimum-scale=1,
 user-scalable=no,
 viewport-fit=cover">
 
-<title>ARO B Slemani   — 5000 Levels</title>
+<title>ARO B Slemany — 5000 Levels</title>
 
 <style>
 *{
@@ -150,28 +150,6 @@ button{
 #start:active{
   transform:translateY(4px);
   box-shadow:none;
-}
-
-/* ARO */
-
-#aro{
-  position:fixed;
-  width:82px;
-  height:82px;
-  object-fit:contain;
-  z-index:35;
-  pointer-events:none;
-  filter:drop-shadow(0 8px 8px rgba(0,0,0,.25));
-  animation:sanFunny 2.1s ease-in-out infinite;
-}
-
-@keyframes sanFunny{
-  0%,100%{
-    transform:rotate(-7deg) translateY(0) scale(1);
-  }
-  50%{
-    transform:rotate(8deg) translateY(-8px) scale(1.04);
-  }
 }
 
 /* CONTROLS */
@@ -414,8 +392,8 @@ body.hardMode #tier{
   <div class="introCard">
 
     <h1 class="introTitle">
-      SAN<br>
-      B AHAMD
+      ARO<br>
+      B SLEMANY
     </h1>
 
     <div class="introName">
@@ -437,7 +415,7 @@ body.hardMode #tier{
 <div id="hud">
 
   <div class="pill">
-    SAN B AHAMD
+    ARO B Slemany
   </div>
 
   <div class="pill">
@@ -448,7 +426,6 @@ body.hardMode #tier{
   </div>
 
 </div>
-
 
 <div id="danger">
   ⚠️ مەترسیی زۆر بەرزە
@@ -491,15 +468,11 @@ body.hardMode #tier{
   <div class="winCard">
 
     <h1>
-      پیرۆزە! 🎉
+      پیرۆزە😎ئامادەی بۆ قۆناغی داهاتوو
     </h1>
 
     <p id="winText">
       تۆ مەرحەلەکەت بردەوە!
-    </p>
-
-    <p>
-پیرۆزە😎ئامادەی بۆ قۆناغی داهاتوو 
     </p>
 
     <div class="winButtons">
@@ -538,8 +511,6 @@ const startBtn = document.getElementById("start");
 const levelEl = document.getElementById("level");
 const tierEl = document.getElementById("tier");
 const levelIdea = document.getElementById("levelIdea");
-
-const san = document.getElementById("san");
 
 const win = document.getElementById("win");
 const winText = document.getElementById("winText");
@@ -1049,19 +1020,6 @@ function circleHit(
 
 function difficulty(n){
 
-  /*
-    LEVEL 1–15
-    ORIGINAL TUTORIAL.
-
-    LEVEL 16–1000
-    Difficulty increases slowly and fairly.
-
-    LEVEL 1001–5000
-    Difficulty continues increasing,
-    but never becomes mathematically
-    impossible.
-  */
-
   if(n <= 15){
 
     const p =
@@ -1123,21 +1081,6 @@ function difficulty(n){
 
     };
   }
-
-  /*
-    IMPORTANT:
-
-    16 starts gently hard.
-
-    16 -> 1000:
-    gradual increase.
-
-    1000 -> 5000:
-    continues from 0.72 to 1.00.
-
-    This prevents Level 16 from suddenly
-    becoming impossible.
-  */
 
   let d;
 
@@ -1416,7 +1359,7 @@ const ideas = [
 "👑 Level 1000 قۆناغێکی زۆر قورسە.",
 "☠️ Level 2500 تاقیکردنەوەی reaction ـە.",
 "☠️ Level 4000 هەموو شتێک زۆرتر دەبێت.",
-"💀 Level 5000: کۆتایی SAN."
+"💀 Level 5000: کۆتایی ARO B Slemany."
 ];
 
 /* =========================================================
@@ -1461,15 +1404,6 @@ function makeLevel(n){
   const gravityZones=[];
   const reverseZones=[];
   const finishGates=[];
-
-  /*
-    NEW:
-    Ten guaranteed, fair obstacle slots
-    from Level 16 onward.
-
-    Each obstacle has a safe gap,
-    warning time and predictable movement.
-  */
 
   const fairObstacles=[];
 
@@ -1544,10 +1478,6 @@ function makeLevel(n){
 
     }
 
-    /*
-      MOVING PLATFORM
-    */
-
     if(
       chance(
         base+10,
@@ -1595,10 +1525,6 @@ function makeLevel(n){
 
     }
 
-    /*
-      DISAPPEARING PLATFORM
-    */
-
     if(
       chance(
         base+20,
@@ -1626,10 +1552,6 @@ function makeLevel(n){
       });
 
     }
-
-    /*
-      FAKE PLATFORM
-    */
 
     if(
       chance(
@@ -1666,10 +1588,6 @@ function makeLevel(n){
       });
 
     }
-
-    /*
-      SPIKES
-    */
 
     if(
       chance(
@@ -1720,10 +1638,6 @@ function makeLevel(n){
       }
 
     }
-
-    /*
-      BALLS
-    */
 
     if(
       chance(
@@ -1801,10 +1715,6 @@ function makeLevel(n){
 
     }
 
-    /*
-      SAW
-    */
-
     if(
       chance(
         base+100,
@@ -1848,10 +1758,6 @@ function makeLevel(n){
 
     }
 
-    /*
-      LASER
-    */
-
     if(
       chance(
         base+110,
@@ -1893,10 +1799,6 @@ function makeLevel(n){
 
     }
 
-    /*
-      BOMB
-    */
-
     if(
       chance(
         base+120,
@@ -1930,10 +1832,6 @@ function makeLevel(n){
       });
 
     }
-
-    /*
-      SLOPE
-    */
 
     if(
       random(base+130) <
@@ -1975,10 +1873,6 @@ function makeLevel(n){
       x+=width;
 
     }
-
-    /*
-      CRACK
-    */
 
     if(
       chance(
@@ -2023,10 +1917,6 @@ function makeLevel(n){
 
     }
 
-    /*
-      WIND
-    */
-
     if(
       chance(
         base+150,
@@ -2066,10 +1956,6 @@ function makeLevel(n){
 
     }
 
-    /*
-      ICE
-    */
-
     if(
       chance(
         base+160,
@@ -2093,10 +1979,6 @@ function makeLevel(n){
       });
 
     }
-
-    /*
-      SPRING
-    */
 
     if(
       chance(
@@ -2128,10 +2010,6 @@ function makeLevel(n){
       });
 
     }
-
-    /*
-      PORTAL
-    */
 
     if(
       chance(
@@ -2166,10 +2044,6 @@ function makeLevel(n){
 
     }
 
-    /*
-      GRAVITY
-    */
-
     if(
       chance(
         base+190,
@@ -2200,10 +2074,6 @@ function makeLevel(n){
 
     }
 
-    /*
-      REVERSE
-    */
-
     if(
       chance(
         base+200,
@@ -2232,10 +2102,6 @@ function makeLevel(n){
       });
 
     }
-
-    /*
-      FALLING OBJECT
-    */
 
     if(
       chance(
@@ -2274,10 +2140,6 @@ function makeLevel(n){
       });
 
     }
-
-    /*
-      MOVING WALL
-    */
 
     if(
       chance(
@@ -2322,10 +2184,6 @@ function makeLevel(n){
     }
   }
 
-  /*
-    FINAL SAFE PLATFORM
-  */
-
   const finalStart =
     x+60;
 
@@ -2338,15 +2196,6 @@ function makeLevel(n){
     safe:true
 
   });
-
-  /*
-    GUARANTEED 10 FAIR OBSTACLES
-
-    These are intentionally spaced across
-    the route. They never spawn directly
-    on the starting point and always leave
-    a possible jump/dash route.
-  */
 
   if(n>=16){
 
@@ -2381,11 +2230,6 @@ function makeLevel(n){
 
       const type =
         obstacleTypes[i];
-
-      /*
-        The first obstacle starts farther away.
-        Later ones move gradually closer together.
-      */
 
       const progress =
         i/9;
@@ -2443,11 +2287,6 @@ function makeLevel(n){
             D.d*.45
           ),
 
-        /*
-          Every obstacle has a clear safe
-          radius/space around it.
-        */
-
         safeGap:
           Math.max(
             42,
@@ -2459,10 +2298,6 @@ function makeLevel(n){
 
     }
   }
-
-  /*
-    FINISH GATES
-  */
 
   const gateCount =
     n<16
@@ -2513,10 +2348,6 @@ function makeLevel(n){
 
   const finishX =
     finalStart+430;
-
-  /*
-    LIGHTNING
-  */
 
   const stormCount =
     n<16
@@ -2575,14 +2406,6 @@ function makeLevel(n){
     });
 
   }
-
-  /*
-    VISUAL CHAOS ONLY
-
-    These objects are decorative.
-    They no longer kill the player.
-    This removes unfair random deaths.
-  */
 
   const chaos=[];
 
@@ -2704,7 +2527,6 @@ function makeLevel(n){
       ideas[ideaIndex],
 
     tier:D
-
   };
 }
 
@@ -2761,10 +2583,6 @@ function resetLevel(){
 
   levelEl.textContent =
     level;
-
-  /*
-    Remove all guide text from 16 -> 5000.
-  */
 
   if(level>=16){
 
@@ -2860,11 +2678,6 @@ function winLevel(){
 function nextLevel(){
 
   if(level>=TOTAL_LEVELS){
-
-    /*
-      Keep the game at 5000.
-      It does NOT reset to Level 1.
-    */
 
     level=TOTAL_LEVELS;
 
@@ -3160,10 +2973,6 @@ function updateFairObstacles(dt){
           o.phase
         )%period;
 
-      /*
-        Warning period is deliberately long.
-      */
-
       const active =
         phase>
         o.warning;
@@ -3203,10 +3012,6 @@ function updateFairObstacles(dt){
             pulse
           )*.35
         );
-
-      /*
-        Only dangerous close to the bomb.
-      */
 
       hit =
         circleHit(
@@ -3278,11 +3083,6 @@ function updateFairObstacles(dt){
       o.type==="wind"
     ){
 
-      /*
-        Wind never directly kills.
-        It only pushes the player.
-      */
-
       if(
         player.x+player.w>
           o.x-o.safeGap &&
@@ -3320,10 +3120,6 @@ function updateFairObstacles(dt){
           o.phase
         )%period;
 
-      /*
-        Long warning.
-      */
-
       const warning =
         1.05-
         levelData.tier.d*.25;
@@ -3346,15 +3142,6 @@ function updateFairObstacles(dt){
       }
 
     }
-
-    /*
-      IMPORTANT:
-
-      Obstacles only kill if the player is
-      genuinely inside them.
-
-      No distance-based random death.
-    */
 
     if(
       hit &&
@@ -3382,10 +3169,6 @@ function update(dt){
   }
 
   updateParticles(dt);
-
-  /*
-    TIMERS
-  */
 
   player.dashCooldown =
     Math.max(
@@ -3417,20 +3200,12 @@ function update(dt){
       player.invincible-dt
     );
 
-  /*
-    OLD POSITION
-  */
-
   const oldY =
     player.y;
 
   const oldBottom =
     oldY+
     player.h;
-
-  /*
-    DIFFICULTY PHYSICS
-  */
 
   let gravityScale=1;
 
@@ -3446,10 +3221,6 @@ function update(dt){
     speedMultiplier*=.9;
 
   }
-
-  /*
-    GRAVITY ZONES
-  */
 
   for(
     const g
@@ -3469,10 +3240,6 @@ function update(dt){
     }
 
   }
-
-  /*
-    WIND
-  */
 
   let windForce=0;
 
@@ -3495,10 +3262,6 @@ function update(dt){
 
   }
 
-  /*
-    REVERSE
-  */
-
   let controlX =
     input.x;
 
@@ -3510,10 +3273,6 @@ function update(dt){
       -controlX;
 
   }
-
-  /*
-    MOVEMENT
-  */
 
   const targetVX =
     controlX*
@@ -3538,10 +3297,6 @@ function update(dt){
   player.vx +=
     windForce*dt;
 
-  /*
-    DASH
-  */
-
   if(
     player.dashTime>0
   ){
@@ -3550,10 +3305,6 @@ function update(dt){
       1.015;
 
   }
-
-  /*
-    GRAVITY
-  */
 
   player.vy +=
     1550*
@@ -3567,10 +3318,6 @@ function update(dt){
     player.vy*dt;
 
   player.grounded=false;
-
-  /*
-    MOVING PLATFORMS
-  */
 
   const now =
     performance.now()/1000;
@@ -3634,10 +3381,6 @@ function update(dt){
 
   }
 
-  /*
-    NORMAL PLATFORMS
-  */
-
   for(
     const p
     of levelData.platforms
@@ -3667,10 +3410,6 @@ function update(dt){
     }
 
   }
-
-  /*
-    DISAPPEARING PLATFORMS
-  */
 
   for(
     const p
@@ -3734,18 +3473,6 @@ function update(dt){
 
   }
 
-  /*
-    FAKE PLATFORMS
-
-    Fake floors no longer cause a sudden
-    invisible death. They simply stop
-    supporting the player.
-  */
-
-  /*
-    SLOPES
-  */
-
   for(
     const s
     of levelData.slopes
@@ -3785,10 +3512,6 @@ function update(dt){
 
   }
 
-  /*
-    COYOTE
-  */
-
   if(
     player.grounded
   ){
@@ -3804,10 +3527,6 @@ function update(dt){
       );
 
   }
-
-  /*
-    ICE
-  */
 
   for(
     const ice
@@ -3828,10 +3547,6 @@ function update(dt){
     }
 
   }
-
-  /*
-    SPRINGS
-  */
 
   for(
     const s
@@ -3860,10 +3575,6 @@ function update(dt){
     }
 
   }
-
-  /*
-    STARS
-  */
 
   for(
     const s
@@ -3900,10 +3611,6 @@ function update(dt){
     }
 
   }
-
-  /*
-    CRACKS
-  */
 
   for(
     const c
@@ -3954,10 +3661,6 @@ function update(dt){
     }
 
   }
-
-  /*
-    BALLS
-  */
 
   for(
     const b
@@ -4035,10 +3738,6 @@ function update(dt){
 
   }
 
-  /*
-    SAWS
-  */
-
   for(
     const s
     of levelData.saws
@@ -4073,10 +3772,6 @@ function update(dt){
     }
 
   }
-
-  /*
-    LASERS
-  */
 
   for(
     const l
@@ -4120,10 +3815,6 @@ function update(dt){
 
   }
 
-  /*
-    BOMBS
-  */
-
   for(
     const b
     of levelData.bombs
@@ -4152,10 +3843,6 @@ function update(dt){
           dy
         );
 
-      /*
-        Smaller, fair blast radius.
-      */
-
       if(
         distance<
         75+
@@ -4182,10 +3869,6 @@ function update(dt){
     }
 
   }
-
-  /*
-    FALLING OBJECTS
-  */
 
   for(
     const f
@@ -4232,10 +3915,6 @@ function update(dt){
 
   }
 
-  /*
-    MOVING WALLS
-  */
-
   for(
     const w
     of levelData.walls
@@ -4269,10 +3948,6 @@ function update(dt){
 
   }
 
-  /*
-    PORTALS
-  */
-
   for(
     const p
     of levelData.portals
@@ -4296,11 +3971,6 @@ function update(dt){
 
       p.used=true;
 
-      /*
-        Keep portal destination
-        inside playable route.
-      */
-
       player.x +=
         Math.min(
           p.targetOffset,
@@ -4317,10 +3987,6 @@ function update(dt){
     }
 
   }
-
-  /*
-    REVERSE ZONES
-  */
 
   for(
     const r
@@ -4340,10 +4006,6 @@ function update(dt){
     }
 
   }
-
-  /*
-    SPIKES
-  */
 
   for(
     const h
@@ -4369,10 +4031,6 @@ function update(dt){
     }
 
   }
-
-  /*
-    LIGHTNING
-  */
 
   for(
     const l
@@ -4427,21 +4085,7 @@ function update(dt){
 
   }
 
-  /*
-    FAIR 10 OBSTACLES
-
-    Added separately so every hard level
-    has exactly 10 extra challenge events.
-  */
-
   updateFairObstacles(dt);
-
-  /*
-    DANGER INDICATOR
-
-    It is only shown in harder levels.
-    It does not affect gameplay.
-  */
 
   if(
     level>=16 &&
@@ -4460,10 +4104,6 @@ function update(dt){
 
   }
 
-  /*
-    FLASH
-  */
-
   stormFlash =
     Math.max(
       0,
@@ -4471,20 +4111,12 @@ function update(dt){
       dt*5
     );
 
-  /*
-    SCREEN SHAKE
-  */
-
   screenShake =
     Math.max(
       0,
       screenShake-
       dt*18
     );
-
-  /*
-    FALL
-  */
 
   if(
     player.y>
@@ -4495,10 +4127,6 @@ function update(dt){
     return;
 
   }
-
-  /*
-    FINISH GATES
-  */
 
   let gateBlocked=false;
 
@@ -4537,10 +4165,6 @@ function update(dt){
 
   }
 
-  /*
-    FINISH
-  */
-
   if(
     !gateBlocked &&
     player.x+
@@ -4552,10 +4176,6 @@ function update(dt){
     return;
 
   }
-
-  /*
-    CAMERA
-  */
 
   const targetCamera =
     Math.max(
@@ -4631,10 +4251,6 @@ function drawBackground(){
     0
   );
 
-  /*
-    CLOUDS
-  */
-
   for(
     let i=0;
     i<35;
@@ -4682,10 +4298,6 @@ function drawBackground(){
     ctx.fill();
 
   }
-
-  /*
-    STORM CLOUDS
-  */
 
   if(
     levelData &&
@@ -4748,10 +4360,6 @@ function drawBackground(){
 
   ctx.restore();
 
-  /*
-    FLASH
-  */
-
   if(
     stormFlash>0
   ){
@@ -4807,10 +4415,6 @@ function drawWorld(){
     sy
   );
 
-  /*
-    PLATFORMS
-  */
-
   for(
     const p
     of levelData.platforms
@@ -4854,10 +4458,6 @@ function drawWorld(){
 
   }
 
-  /*
-    MOVING PLATFORMS
-  */
-
   for(
     const p
     of levelData.movingPlatforms
@@ -4882,10 +4482,6 @@ function drawWorld(){
     );
 
   }
-
-  /*
-    DISAPPEARING
-  */
 
   for(
     const p
@@ -4916,10 +4512,6 @@ function drawWorld(){
 
   }
 
-  /*
-    FAKE
-  */
-
   for(
     const p
     of levelData.fakePlatforms
@@ -4936,10 +4528,6 @@ function drawWorld(){
     );
 
   }
-
-  /*
-    SLOPES
-  */
 
   for(
     const s
@@ -4994,10 +4582,6 @@ function drawWorld(){
 
   }
 
-  /*
-    ICE
-  */
-
   for(
     const ice
     of levelData.iceZones
@@ -5014,10 +4598,6 @@ function drawWorld(){
     );
 
   }
-
-  /*
-    CRACKS
-  */
 
   for(
     const c
@@ -5081,10 +4661,6 @@ function drawWorld(){
 
   }
 
-  /*
-    SPIKES
-  */
-
   for(
     const h
     of levelData.hazards
@@ -5125,10 +4701,6 @@ function drawWorld(){
     );
 
   }
-
-  /*
-    STARS
-  */
 
   for(
     const s
@@ -5186,10 +4758,6 @@ function drawWorld(){
     ctx.restore();
 
   }
-
-  /*
-    BALLS
-  */
 
   for(
     const b
@@ -5259,10 +4827,6 @@ function drawWorld(){
 
   }
 
-  /*
-    SAWS
-  */
-
   for(
     const s
     of levelData.saws
@@ -5331,10 +4895,6 @@ function drawWorld(){
 
   }
 
-  /*
-    LASERS
-  */
-
   for(
     const l
     of levelData.lasers
@@ -5369,10 +4929,6 @@ function drawWorld(){
     );
 
   }
-
-  /*
-    BOMBS
-  */
 
   for(
     const b
@@ -5414,10 +4970,6 @@ function drawWorld(){
 
   }
 
-  /*
-    FALLING BLOCKS
-  */
-
   for(
     const f
     of levelData.fallers
@@ -5449,10 +5001,6 @@ function drawWorld(){
     );
 
   }
-
-  /*
-    WIND
-  */
 
   for(
     const w
@@ -5498,10 +5046,6 @@ function drawWorld(){
 
   }
 
-  /*
-    SPRINGS
-  */
-
   for(
     const s
     of levelData.springs
@@ -5540,10 +5084,6 @@ function drawWorld(){
     ctx.stroke();
 
   }
-
-  /*
-    PORTALS
-  */
 
   for(
     const p
@@ -5584,10 +5124,6 @@ function drawWorld(){
 
   }
 
-  /*
-    GRAVITY
-  */
-
   for(
     const g
     of levelData.gravityZones
@@ -5604,10 +5140,6 @@ function drawWorld(){
     );
 
   }
-
-  /*
-    REVERSE
-  */
 
   for(
     const r
@@ -5626,10 +5158,6 @@ function drawWorld(){
 
   }
 
-  /*
-    MOVING WALLS
-  */
-
   for(
     const w
     of levelData.walls
@@ -5645,10 +5173,6 @@ function drawWorld(){
     );
 
   }
-
-  /*
-    LIGHTNING
-  */
 
   for(
     const l
@@ -5720,10 +5244,6 @@ function drawWorld(){
 
   }
 
-  /*
-    FINISH GATES
-  */
-
   for(
     const g
     of levelData.finishGates
@@ -5757,10 +5277,6 @@ function drawWorld(){
 
   }
 
-  /*
-    FAIR 10 OBSTACLES
-  */
-
   if(level>=16){
 
     const now =
@@ -5776,10 +5292,6 @@ function drawWorld(){
         o.phase;
 
       ctx.save();
-
-      /*
-        Warning ring
-      */
 
       ctx.strokeStyle =
         "rgba(255,255,255,.20)";
@@ -6200,10 +5712,6 @@ function drawWorld(){
 
   }
 
-  /*
-    CHAOS VISUALS ONLY
-  */
-
   const chaosNow =
     performance.now()/1000;
 
@@ -6306,10 +5814,6 @@ function drawWorld(){
 
   }
 
-  /*
-    FINISH FLAG
-  */
-
   const fx =
     levelData.finishX;
 
@@ -6345,10 +5849,6 @@ function drawWorld(){
 
   ctx.fill();
 
-  /*
-    PLAYER
-  */
-
   ctx.save();
 
   ctx.translate(
@@ -6370,10 +5870,6 @@ function drawWorld(){
 
   ctx.fill();
 
-  /*
-    DASH
-  */
-
   if(
     player.dashTime>0
   ){
@@ -6389,10 +5885,6 @@ function drawWorld(){
     );
 
   }
-
-  /*
-    EYES
-  */
 
   ctx.fillStyle="#fff";
 
@@ -6438,10 +5930,6 @@ function drawWorld(){
 
   ctx.fill();
 
-  /*
-    SMILE
-  */
-
   ctx.strokeStyle="#111";
 
   ctx.lineWidth=3;
@@ -6457,10 +5945,6 @@ function drawWorld(){
   );
 
   ctx.stroke();
-
-  /*
-    LEGS
-  */
 
   ctx.fillStyle="#222";
 
@@ -6479,10 +5963,6 @@ function drawWorld(){
   );
 
   ctx.restore();
-
-  /*
-    PARTICLES
-  */
 
   for(
     const p
@@ -6509,11 +5989,6 @@ function drawWorld(){
 
   ctx.globalAlpha=1;
 
-  /*
-    OLD FUNNY TEXT:
-    Removed from Level 16 onward.
-  */
-
   if(level<=15){
 
     ctx.fillStyle =
@@ -6534,50 +6009,6 @@ function drawWorld(){
 }
 
 /* =========================================================
-   SAN POSITION
-========================================================= */
-
-function updateSanPosition(){
-
-  const positions=[
-
-    {right:18,top:110},
-    {right:W*.28,top:90},
-    {right:35,top:180},
-    {right:W*.45,top:120},
-    {right:20,top:250}
-
-  ];
-
-  const p =
-    positions[
-      (level-1)%
-      positions.length
-    ];
-
-  san.style.right =
-    p.right+"px";
-
-  san.style.top =
-    p.top+"px";
-
-  const size =
-    Math.min(
-      86,
-      Math.max(
-        64,
-        W*.19
-      )
-    );
-
-  san.style.width =
-    size+"px";
-
-  san.style.height =
-    size+"px";
-}
-
-/* =========================================================
    DRAW
 ========================================================= */
 
@@ -6590,8 +6021,6 @@ function draw(){
     drawWorld();
 
   }
-
-  updateSanPosition();
 }
 
 /* =========================================================
