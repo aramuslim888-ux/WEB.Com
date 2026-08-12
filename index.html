@@ -1,148 +1,1067 @@
-<!DOCTYPE html>
-<html lang="ckb" dir="rtl">
+<!doctype html>
+<html lang="ku">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GTA San Andreas - 3D Edition 🌴</title>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- هێنانی Three.js بۆ دروستکردنی دنیای 3D -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <style>
-        body {
-            font-family: 'Vazirmatn', sans-serif;
-            background-color: #050508;
-            color: #fff;
-            margin: 0;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-        #webgl-container {
-            width: 380px;
-            height: 380px;
-            border: 3px solid #eab308;
-            border-radius: 16px;
-            box-shadow: 0 0 30px rgba(234, 179, 8, 0.4);
-            overflow: hidden;
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>San b ahamd — 1000 Levels</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+  margin:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:#111;
+  font-family:system-ui,-apple-system,Segoe UI,sans-serif;
+  touch-action:none;
+}
+
+canvas{
+  display:block;
+  width:100%;
+  height:100%;
+}
+
+#hud{
+  position:fixed;
+  top:10px;
+  left:10px;
+  right:10px;
+  display:flex;
+  justify-content:space-between;
+  color:white;
+  z-index:5;
+  pointer-events:none;
+}
+
+.pill{
+  background:#111b;
+  backdrop-filter:blur(8px);
+  padding:8px 12px;
+  border-radius:14px;
+  font-weight:800;
+  font-size:14px;
+}
+
+#message{
+  position:fixed;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  z-index:10;
+  display:none;
+  text-align:center;
+  color:white;
+  background:#111e;
+  padding:24px;
+  border-radius:22px;
+  max-width:88%;
+}
+
+#message h1{
+  margin:0 0 8px;
+  font-size:28px;
+}
+
+#message p{
+  margin:6px 0 14px;
+}
+
+button{
+  border:0;
+  border-radius:14px;
+  padding:12px 18px;
+  font-weight:800;
+  font-size:16px;
+}
+
+#intro{
+  position:fixed;
+  inset:0;
+  background:#f06f55;
+  z-index:20;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:white;
+}
+
+#intro .card{
+  padding:30px;
+  max-width:90%;
+}
+
+#intro h1{
+  font-size:44px;
+  line-height:.95;
+  margin:0 0 10px;
+  text-transform:uppercase;
+  text-shadow:3px 3px 0 #222;
+}
+
+#start{
+  background:#20283a;
+  color:white;
+}
+
+#joy{
+  position:fixed;
+  left:22px;
+  bottom:28px;
+  width:128px;
+  height:128px;
+  border-radius:50%;
+  background:#fff2;
+  border:2px solid #fff6;
+  z-index:6;
+}
+
+#knob{
+  position:absolute;
+  width:54px;
+  height:54px;
+  left:35px;
+  top:35px;
+  border-radius:50%;
+  background:#fff8;
+}
+
+#jump{
+  position:fixed;
+  right:24px;
+  bottom:38px;
+  width:82px;
+  height:82px;
+  border-radius:50%;
+  background:#ffcf3a;
+  color:#222;
+  z-index:6;
+}
+
+#san{
+  position:fixed;
+  right:18px;
+  top:70px;
+  width:82px;
+  height:82px;
+  object-fit:contain;
+  z-index:4;
+  pointer-events:none;
+  animation:wobble 2.2s ease-in-out infinite;
+}
+
+@keyframes wobble{
+  0%,100%{
+    transform:rotate(-6deg) translateY(0);
+  }
+  50%{
+    transform:rotate(7deg) translateY(5px);
+  }
+}
+
+#hint{
+  position:fixed;
+  left:50%;
+  bottom:10px;
+  transform:translateX(-50%);
+  color:#fff9;
+  font-size:12px;
+  z-index:5;
+  pointer-events:none;
+}
+</style>
 </head>
+
 <body>
 
-    <div class="text-center mb-1">
-        <h1 class="text-base font-black text-yellow-400">GTA: San Andreas 3D 🚗💨</h1>
-        <p class="text-[11px] text-gray-300" id="infoText">ستایلی ڕاستەقینەی 3D</p>
-    </div>
+<canvas id="game"></canvas>
 
-    <!-- شوێنی پیشاندانی گرافیکی 3D -->
-    <div id="webgl-container"></div>
+<div id="intro">
+  <div class="card">
+    <h1>San b ahamd</h1>
+    <p>One tiny hero. 1000 funny challenges.</p>
+    <p>Created by aro bestun</p>
+    <button id="start">Tap to begin</button>
+  </div>
+</div>
 
-    <!-- کۆنتڕۆڵی جووڵە و سەیارە -->
-    <div class="mt-2 flex justify-between w-[380px] px-2">
-        <div class="flex flex-col gap-1">
-            <button onclick="movePlayer(-1)" class="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg text-xs">◀️ چەپ</button>
-            <button onclick="toggleCar()" class="px-4 py-2 bg-yellow-500 text-black font-black rounded-lg text-xs">🚗 سواری سەیارە</button>
-        </div>
-        <div class="flex flex-col gap-1">
-            <button onclick="movePlayer(1)" class="px-4 py-2 bg-blue-600 text-white font-bold rounded-lg text-xs">ڕاست ▶️</button>
-            <button onclick="movePlayerForward()" class="px-4 py-2 bg-emerald-600 text-white font-bold rounded-lg text-xs">⬆️ پێشەوە</button>
-        </div>
-    </div>
+<div id="hud">
+  <div class="pill">
+    LEVEL <span id="level">1</span> / 1000
+  </div>
 
-    <script>
-        // دروستکردنی دنیای 3D بە Three.js
-        const container = document.getElementById('webgl-container');
-        
-        const scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x1a202c);
+  <div class="pill">
+    ⭐ <span id="score">0</span>
+  </div>
+</div>
 
-        const camera = new THREE.PerspectiveCamera(60, 380 / 380, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setSize(380, 380);
-        container.appendChild(renderer.domElement);
+<img id="san" src="san.PNG" alt="">
 
-        // ڕووناکی بۆ بینینی شتەکان بە ٣ ڕەهەندی
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
-        scene.add(ambientLight);
-        const dirLight = new THREE.DirectionalLight(0xffffff, 0.8);
-        dirLight.position.set(10, 20, 10);
-        scene.add(dirLight);
+<div id="joy">
+  <div id="knob"></div>
+</div>
 
-        // دروستکردنی شەقامی ٣D
-        const roadGeo = new THREE.PlaneGeometry(10, 100);
-        const roadMat = new THREE.MeshStandardMaterial({ color: 0x334155 });
-        const road = new THREE.Mesh(roadGeo, roadMat);
-        road.rotation.x = -Math.PI / 2;
-        scene.add(road);
+<button id="jump">JUMP</button>
 
-        // دروستکردنی خانووەکان بە ٣D لە لای راست و چەپ
-        const buildingMat = new THREE.MeshStandardMaterial({ color: 0x78716c });
-        
-        function createBuilding(x, z) {
-            const geo = new THREE.BoxGeometry(4, 8, 6);
-            const mesh = new THREE.Mesh(geo, buildingMat);
-            mesh.position.set(x, 4, z);
-            scene.add(mesh);
-        }
+<div id="hint">
+  Joystick = move • JUMP = jump
+</div>
 
-        // دانانی چەند خانوویەک لە هەردوولا
-        for(let z = -40; z <= 40; z += 10) {
-            createBuilding(-7, z);
-            createBuilding(7, z);
-        }
+<div id="message">
+  <h1>پیرۆزە! 🎉</h1>
+  <p id="msgText"></p>
+  <button id="next">NEXT LEVEL</button>
+</div>
 
-        // دروستکردنی کەسایەتی San (یاخود سەیارەکەی) بە 3D Box / Mesh
-        const playerMat = new THREE.MeshStandardMaterial({ color: 0x3b82f6 });
-        const playerGeo = new THREE.BoxGeometry(1.2, 1.8, 1.2);
-        const player = new THREE.Mesh(playerGeo, playerMat);
-        player.position.set(0, 1, 5);
-        scene.add(player);
+<script>
 
-        // شوێنی دوربین (لە پشتی San ـەوە وەک GTA)
-        camera.position.set(0, 5, 12);
-        camera.lookAt(player.position);
+const canvas=document.getElementById('game');
+const ctx=canvas.getContext('2d');
 
-        let inCar = false;
+const levelEl=document.getElementById('level');
+const scoreEl=document.getElementById('score');
 
-        function movePlayer(dir) {
-            player.position.x += dir * 1.5;
-            if(player.position.x < -3) player.position.x = -3;
-            if(player.position.x > 3) player.position.x = 3;
-        }
+const intro=document.getElementById('intro');
+const start=document.getElementById('start');
 
-        function movePlayerForward() {
-            player.position.z -= 2;
-            camera.position.z -= 2;
-        }
+const message=document.getElementById('message');
+const msgText=document.getElementById('msgText');
+const next=document.getElementById('next');
 
-        function toggleCar() {
-            inCar = !inCar;
-            if(inCar) {
-                player.material.color.set(0xeab308); // ڕەنگی سەیارە
-                player.scale.set(1.5, 0.8, 2);
-                document.getElementById('infoText').innerText = "سواری سەیارە بوو 🏎️ (3D)";
-            } else {
-                player.material.color.set(0x3b82f6); // گەڕانەوە بۆ San
-                player.scale.set(1, 1, 1);
-                document.getElementById('infoText').innerText = "بە پێ دەڕوات 🚶‍♂️ (3D)";
-            }
-        }
+const joy=document.getElementById('joy');
+const knob=document.getElementById('knob');
+const jumpBtn=document.getElementById('jump');
 
-        // جووڵەی بەردەوامی دوربین و صحنەکە
-        function animate() {
-            requestAnimationFrame(animate);
+let W=innerWidth;
+let H=innerHeight;
 
-            // جووڵەی دوربین بەدوای کەسایەتییەکەدا
-            camera.position.x = player.position.x * 0.5;
-            
-            renderer.render(scene, camera);
-        }
+let DPR=Math.min(devicePixelRatio||1,2);
 
-        animate();
-    </script>
+function resize(){
+
+  W=innerWidth;
+  H=innerHeight;
+
+  canvas.width=W*DPR;
+  canvas.height=H*DPR;
+
+  ctx.setTransform(DPR,0,0,DPR,0,0);
+}
+
+addEventListener('resize',resize);
+resize();
+
+const TOTAL=1000;
+
+let currentLevel=1;
+let score=0;
+let running=false;
+let last=0;
+let cameraX=0;
+
+let levelData;
+
+const player={
+  x:70,
+  y:0,
+  w:28,
+  h:36,
+  vx:0,
+  vy:0,
+  onGround:false
+};
+
+const input={
+  x:0
+};
+
+let joyId=null;
+
+function seeded(n){
+
+  let x=Math.sin(n*999.91)*43758.5453;
+
+  return x-Math.floor(x);
+}
+
+function makeLevel(n){
+
+  const type=(n-1)%20;
+
+  const difficulty=Math.min(1,(n-1)/999);
+
+  const ground=H-92;
+
+  const platforms=[
+    {
+      x:-100,
+      y:ground,
+      w:W+250,
+      h:92
+    }
+  ];
+
+  const hazards=[];
+  const coins=[];
+
+  let x=250;
+
+  const count=
+    5+
+    Math.floor(difficulty*7)+
+    (type%4);
+
+  const gapBase=
+    100+
+    Math.floor(difficulty*55);
+
+  for(let i=0;i<count;i++){
+
+    const r=seeded(n*31+i*7);
+
+    const w=
+      70+
+      Math.floor(r*75);
+
+    const gap=
+      gapBase+
+      Math.floor(
+        seeded(n*17+i*13)*70
+      );
+
+    x+=gap;
+
+    const py=
+      ground-
+      (
+        type===2||
+        type===8||
+        type===15
+        ?
+        60+Math.floor(r*70)
+        :
+        0
+      );
+
+    platforms.push({
+      x:x,
+      y:py,
+      w:w,
+      h:18
+    });
+
+    if(type%5===0||i%3===0){
+
+      coins.push({
+        x:x+w/2,
+        y:py-28,
+        r:9,
+        got:false
+      });
+
+    }
+
+    if(
+      type===1||
+      type===6||
+      type===11||
+      type===16
+    ){
+
+      hazards.push({
+        x:x+w+25,
+        y:ground-18,
+        w:30,
+        h:18
+      });
+
+    }
+
+    if(type===3||type===13){
+
+      hazards.push({
+        x:x+w/2-15,
+        y:py-24,
+        w:30,
+        h:24
+      });
+
+    }
+
+    x+=w;
+  }
+
+  const ideas=[
+
+    "Collect stars and reach the flag.",
+    "Jump over the silly spikes.",
+    "Use the raised platforms.",
+    "Time your jumps between gaps.",
+    "Grab the floating stars.",
+    "Dodge the funny blockers.",
+    "Cross the obstacle lane.",
+    "Climb the small platforms.",
+    "Keep moving and don't fall.",
+    "Reach the finish before the traps.",
+    "Jump, land, repeat.",
+    "Avoid the surprise blockers.",
+    "Use the high route.",
+    "Thread the narrow path.",
+    "Collect the stars safely.",
+    "Master the short jumps.",
+    "Dodge and continue.",
+    "Find the safest route.",
+    "One more funny obstacle!",
+    "Finish the challenge!"
+
+  ];
+
+  return{
+
+    n,
+    type,
+    ground,
+    platforms,
+    hazards,
+    coins,
+    finishX:x+80,
+    idea:ideas[type]
+
+  };
+}
+
+function resetLevel(){
+
+  levelData=makeLevel(currentLevel);
+
+  player.x=70;
+
+  player.y=
+    levelData.ground-
+    player.h;
+
+  player.vx=0;
+  player.vy=0;
+
+  cameraX=0;
+
+  message.style.display='none';
+
+  levelEl.textContent=currentLevel;
+}
+
+function startGame(){
+
+  intro.style.display='none';
+
+  running=true;
+
+  currentLevel=1;
+
+  score=0;
+
+  scoreEl.textContent=0;
+
+  resetLevel();
+
+  last=performance.now();
+
+  requestAnimationFrame(loop);
+}
+
+start.onclick=startGame;
+
+next.onclick=()=>{
+
+  currentLevel=
+    currentLevel<TOTAL
+    ?
+    currentLevel+1
+    :
+    1;
+
+  if(currentLevel===1){
+
+    score=0;
+
+  }
+
+  resetLevel();
+
+};
+
+function jump(){
+
+  if(player.onGround){
+
+    player.vy=-560;
+
+    player.onGround=false;
+
+  }
+
+}
+
+jumpBtn.addEventListener(
+  'pointerdown',
+  e=>{
+
+    e.preventDefault();
+
+    jump();
+
+  }
+);
+
+joy.addEventListener(
+  'pointerdown',
+  e=>{
+
+    e.preventDefault();
+
+    joyId=e.pointerId;
+
+    joy.setPointerCapture(joyId);
+
+    updateJoy(e);
+
+  }
+);
+
+joy.addEventListener(
+  'pointermove',
+  e=>{
+
+    if(e.pointerId===joyId){
+
+      updateJoy(e);
+
+    }
+
+  }
+);
+
+joy.addEventListener(
+  'pointerup',
+  releaseJoy
+);
+
+joy.addEventListener(
+  'pointercancel',
+  releaseJoy
+);
+
+function updateJoy(e){
+
+  const r=
+    joy.getBoundingClientRect();
+
+  const cx=
+    r.left+r.width/2;
+
+  const cy=
+    r.top+r.height/2;
+
+  let dx=
+    e.clientX-cx;
+
+  const max=45;
+
+  let len=Math.abs(dx);
+
+  if(len>max){
+
+    dx=
+      Math.sign(dx)*max;
+
+  }
+
+  knob.style.transform=
+    `translate(${dx}px,0)`;
+
+  input.x=dx/max;
+
+}
+
+function releaseJoy(e){
+
+  if(e.pointerId===joyId){
+
+    joyId=null;
+
+    input.x=0;
+
+    knob.style.transform=
+      'translate(0,0)';
+
+  }
+
+}
+
+addEventListener(
+  'keydown',
+  e=>{
+
+    if(
+      e.key==='ArrowLeft'||
+      e.key==='a'
+    ){
+
+      input.x=-1;
+
+    }
+
+    if(
+      e.key==='ArrowRight'||
+      e.key==='d'
+    ){
+
+      input.x=1;
+
+    }
+
+    if(
+      e.key===' '||
+      e.key==='ArrowUp'
+    ){
+
+      jump();
+
+    }
+
+  }
+);
+
+addEventListener(
+  'keyup',
+  e=>{
+
+    if(
+      [
+        'ArrowLeft',
+        'a',
+        'ArrowRight',
+        'd'
+      ].includes(e.key)
+    ){
+
+      input.x=0;
+
+    }
+
+  }
+);
+
+function hit(a,b){
+
+  return(
+    a.x<b.x+b.w&&
+    a.x+a.w>b.x&&
+    a.y<b.y+b.h&&
+    a.y+a.h>b.y
+  );
+
+}
+
+function win(){
+
+  score+=10;
+
+  scoreEl.textContent=score;
+
+  msgText.textContent=
+    `پیرۆزە! تۆ مەرحەلەی ${currentLevel} ـت بردەوە و جۆینی گروپی سان FX ـت کردووە 🎉`;
+
+  message.style.display='block';
+
+}
+
+function fail(){
+
+  resetLevel();
+
+}
+
+function update(dt){
+
+  player.vx=
+    input.x*230;
+
+  player.vy+=1500*dt;
+
+  player.x+=player.vx*dt;
+
+  player.y+=player.vy*dt;
+
+  player.onGround=false;
+
+  for(
+    const p of levelData.platforms
+  ){
+
+    if(
+      player.vy>=0&&
+      player.x+player.w>p.x&&
+      player.x<p.x+p.w&&
+      player.y+player.h>=p.y&&
+      player.y+player.h<=p.y+28
+    ){
+
+      player.y=
+        p.y-player.h;
+
+      player.vy=0;
+
+      player.onGround=true;
+
+    }
+
+  }
+
+  for(
+    const c of levelData.coins
+  ){
+
+    if(
+      !c.got&&
+      Math.hypot(
+        player.x+14-c.x,
+        player.y+18-c.y
+      )<28
+    ){
+
+      c.got=true;
+
+      score++;
+
+      scoreEl.textContent=score;
+
+    }
+
+  }
+
+  for(
+    const h of levelData.hazards
+  ){
+
+    if(hit(player,h)){
+
+      fail();
+
+      return;
+
+    }
+
+  }
+
+  if(player.y>H+100){
+
+    fail();
+
+    return;
+
+  }
+
+  if(
+    player.x+player.w>=
+    levelData.finishX
+  ){
+
+    win();
+
+    return;
+
+  }
+
+  cameraX=
+    Math.max(
+      0,
+      player.x-W*.32
+    );
+
+}
+
+function draw(){
+
+  ctx.clearRect(
+    0,
+    0,
+    W,
+    H
+  );
+
+  const g=
+    ctx.createLinearGradient(
+      0,
+      0,
+      0,
+      H
+    );
+
+  g.addColorStop(
+    0,
+    '#7dd3fc'
+  );
+
+  g.addColorStop(
+    1,
+    '#dff7c7'
+  );
+
+  ctx.fillStyle=g;
+
+  ctx.fillRect(
+    0,
+    0,
+    W,
+    H
+  );
+
+  ctx.save();
+
+  ctx.translate(
+    -cameraX*.18,
+    0
+  );
+
+  for(let i=0;i<20;i++){
+
+    let bx=
+      i*260+120;
+
+    let by=
+      130+(i%3)*35;
+
+    ctx.fillStyle=
+      i%2
+      ?
+      '#ffffff88'
+      :
+      '#ffd16688';
+
+    ctx.beginPath();
+
+    ctx.arc(
+      bx,
+      by,
+      28+(i%4)*5,
+      0,
+      Math.PI*2
+    );
+
+    ctx.fill();
+
+  }
+
+  ctx.restore();
+
+  ctx.save();
+
+  ctx.translate(
+    -cameraX,
+    0
+  );
+
+  for(
+    const p of levelData.platforms
+  ){
+
+    ctx.fillStyle='#34495e';
+
+    ctx.fillRect(
+      p.x,
+      p.y,
+      p.w,
+      p.h
+    );
+
+    ctx.fillStyle='#65d36e';
+
+    ctx.fillRect(
+      p.x,
+      p.y,
+      p.w,
+      7
+    );
+
+  }
+
+  for(
+    const h of levelData.hazards
+  ){
+
+    ctx.fillStyle='#ef476f';
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+      h.x,
+      h.y+h.h
+    );
+
+    ctx.lineTo(
+      h.x+h.w/2,
+      h.y-10
+    );
+
+    ctx.lineTo(
+      h.x+h.w,
+      h.y+h.h
+    );
+
+    ctx.closePath();
+
+    ctx.fill();
+
+  }
+
+  for(
+    const c of levelData.coins
+  ){
+
+    if(!c.got){
+
+      ctx.fillStyle='#ffd166';
+
+      ctx.beginPath();
+
+      ctx.arc(
+        c.x,
+        c.y,
+        c.r,
+        0,
+        Math.PI*2
+      );
+
+      ctx.fill();
+
+    }
+
+  }
+
+  ctx.fillStyle='#222';
+
+  ctx.fillRect(
+    levelData.finishX,
+    levelData.ground-100,
+    6,
+    100
+  );
+
+  ctx.fillStyle='#ff4d6d';
+
+  ctx.beginPath();
+
+  ctx.moveTo(
+    levelData.finishX+6,
+    levelData.ground-100
+  );
+
+  ctx.lineTo(
+    levelData.finishX+65,
+    levelData.ground-78
+  );
+
+  ctx.lineTo(
+    levelData.finishX+6,
+    levelData.ground-56
+  );
+
+  ctx.fill();
+
+  ctx.fillStyle='#6c4cff';
+
+  ctx.beginPath();
+
+  ctx.roundRect(
+    player.x,
+    player.y,
+    player.w,
+    player.h,
+    8
+  );
+
+  ctx.fill();
+
+  ctx.fillStyle='#fff';
+
+  ctx.beginPath();
+
+  ctx.arc(
+    player.x+9,
+    player.y+11,
+    4,
+    0,
+    7
+  );
+
+  ctx.arc(
+    player.x+20,
+    player.y+11,
+    4,
+    0,
+    7
+  );
+
+  ctx.fill();
+
+  ctx.restore();
+
+  ctx.fillStyle='#111b';
+
+  ctx.fillRect(
+    10,
+    H-160,
+    Math.min(W-20,430),
+    42
+  );
+
+  ctx.fillStyle='#fff';
+
+  ctx.font=
+    '700 14px system-ui';
+
+  ctx.fillText(
+    '💡 '+levelData.idea,
+    20,
+    H-133
+  );
+
+}
+
+function loop(t){
+
+  if(!running)return;
+
+  const dt=
+    Math.min(
+      .033,
+      (t-last)/1000
+    );
+
+  last=t;
+
+  if(
+    message.style.display!=='block'
+  ){
+
+    update(dt);
+
+  }
+
+  draw();
+
+  requestAnimationFrame(loop);
+
+}
+
+</script>
+
 </body>
 </html>
