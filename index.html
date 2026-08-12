@@ -514,7 +514,7 @@ const finishBanner = document.getElementById("finishBanner");
 const dangerEl = document.getElementById("danger");
 
 const bgMusic = document.getElementById("bgMusic");
-bgMusic.volume = 0.4;
+bgMusic.volume = 0.4; // دەتوانیت دەنگەکە کەم و زیاد بکەیت لە 0.0 بۆ 1.0
 
 let W = innerWidth;
 let H = innerHeight;
@@ -928,6 +928,10 @@ function circleHit(px,py,pr,box){
   );
 }
 
+/* =========================================================
+   DIFFICULTY
+========================================================= */
+
 function difficulty(n){
 
   if(n <= 15){
@@ -1086,6 +1090,7 @@ function difficulty(n){
 }
 
 const ideas = [
+
 "💡 بە joystick بڕۆ بۆ ڕاست.",
 "💡 JUMP بۆ بازدان بەکاربهێنە.",
 "💡 لە پلاتفۆرمەکان نەکەویت.",
@@ -1130,51 +1135,173 @@ const ideas = [
 "👑 Level 5000: کۆتایی SAN."
 ];
 
+/* =========================================================
+   1000 ADVANCED OBSTACLE TYPES
+========================================================= */
+
 const ADVANCED_OBSTACLE_TYPES = 1000;
 
 function makeAdvancedObstacles(n,groundY,finishX,D){
+
   const result=[];
+
   if(n<16){
     return result;
   }
-  const count = Math.min(92, 10+Math.floor(D.d*82));
-  const worldLength = Math.max(1200, finishX-520);
+
+  const count =
+    Math.min(
+      92,
+      10+
+      Math.floor(D.d*82)
+    );
+
+  const worldLength =
+    Math.max(
+      1200,
+      finishX-520
+    );
 
   for(let i=0;i<count;i++){
-    const seed = n*1000003 + i*7919;
-    const id = Math.floor(random(seed)*ADVANCED_OBSTACLE_TYPES);
-    const type = id%20;
-    const progress = count===1 ? 0 : i/(count-1);
-    const baseX = 520 + progress*worldLength;
-    const variant = id;
-    const size = 12 + random(seed+1)*(10+D.d*30);
-    const speed = 80 + random(seed+2)*(100+D.d*430);
-    const phase = random(seed+3)*Math.PI*2;
-    const width = 35 + random(seed+4)*(45+D.d*70);
+
+    const seed =
+      n*1000003+
+      i*7919;
+
+    const id =
+      Math.floor(
+        random(seed)*
+        ADVANCED_OBSTACLE_TYPES
+      );
+
+    const type =
+      id%20;
+
+    const progress =
+      count===1
+      ?0
+      :i/(count-1);
+
+    const baseX =
+      520+
+      progress*
+      worldLength;
+
+    const variant =
+      id;
+
+    const size =
+      12+
+      random(seed+1)*
+      (10+D.d*30);
+
+    const speed =
+      80+
+      random(seed+2)*
+      (100+D.d*430);
+
+    const phase =
+      random(seed+3)*
+      Math.PI*2;
+
+    const width =
+      35+
+      random(seed+4)*
+      (45+D.d*70);
 
     result.push({
-      id, type, variant, baseX, x:baseX,
-      baseY: groundY-40-random(seed+5)*Math.max(20,150+D.rise),
-      y: groundY-40-random(seed+5)*Math.max(20,150+D.rise),
-      w: width,
-      h: 18+random(seed+6)*(25+D.d*50),
-      size, speed, phase,
-      range: 25+random(seed+7)*(45+D.d*150),
-      delay: random(seed+8)*1.5,
-      timer: random(seed+9)*2,
-      active: true,
-      triggered: false,
-      vy: 80+random(seed+10)*200,
-      targetX: baseX+(random(seed+11)-.5)*(160+D.d*260),
-      dir: random(seed+12)>.5?1:-1
+
+      id,
+      type,
+      variant,
+
+      baseX,
+      x:baseX,
+
+      baseY:
+        groundY-
+        40-
+        random(seed+5)*
+        Math.max(
+          20,
+          150+D.rise
+        ),
+
+      y:
+        groundY-
+        40-
+        random(seed+5)*
+        Math.max(
+          20,
+          150+D.rise
+        ),
+
+      w:width,
+      h:
+        18+
+        random(seed+6)*
+        (25+D.d*50),
+
+      size,
+
+      speed,
+
+      phase,
+
+      range:
+        25+
+        random(seed+7)*
+        (45+D.d*150),
+
+      delay:
+        random(seed+8)*
+        1.5,
+
+      timer:
+        random(seed+9)*
+        2,
+
+      active:true,
+
+      triggered:false,
+
+      vy:
+        80+
+        random(seed+10)*
+        200,
+
+      targetX:
+        baseX+
+        (
+          random(seed+11)-.5
+        )*
+        (160+D.d*260),
+
+      dir:
+        random(seed+12)>.5
+        ?1
+        :-1
+
     });
   }
+
   return result;
 }
 
+/* =========================================================
+   LEVEL GENERATOR
+========================================================= */
+
 function makeLevel(n){
+
   const D = difficulty(n);
-  const groundY = H - Math.max(125, Math.min(165,H*.18));
+
+  const groundY =
+    H -
+    Math.max(
+      125,
+      Math.min(165,H*.18)
+    );
 
   const platforms=[];
   const hazards=[];
@@ -1184,6 +1311,7 @@ function makeLevel(n){
   const cracks=[];
   const lightnings=[];
   const fallers=[];
+
   const movingPlatforms=[];
   const disappearingPlatforms=[];
   const saws=[];
@@ -1199,280 +1327,991 @@ function makeLevel(n){
   const reverseZones=[];
   const finishGates=[];
 
-  platforms.push({x:-300, y:groundY, w:520, h:80, safe:true});
+  platforms.push({
+    x:-300,
+    y:groundY,
+    w:520,
+    h:80,
+    safe:true
+  });
 
   let x=230;
+
   const count=D.groups;
 
   for(let i=0;i<count;i++){
-    const base=n*100000+i*997;
-    const gap=Math.max(25, D.gap+random(base+1)*45);
+
+    const base=
+      n*100000+
+      i*997;
+
+    const gap=
+      Math.max(
+        25,
+        D.gap+
+        random(base+1)*45
+      );
+
     x+=gap;
 
-    let width=Math.max(36, D.width+random(base+2)*42);
-    let py=groundY-random(base+3)*D.rise;
+    let width=
+      Math.max(
+        36,
+        D.width+
+        random(base+2)*42
+      );
 
-    const platform={x, y:py, w:width, h:18, safe:true};
+    let py=
+      groundY-
+      random(base+3)*D.rise;
+
+    const platform={
+      x,
+      y:py,
+      w:width,
+      h:18,
+      safe:true
+    };
+
     platforms.push(platform);
 
-    if(i%2===0 || random(base+4)>.45){
-      stars.push({x:x+width*.5, y:py-38, r:9, taken:false});
+    if(
+      i%2===0 ||
+      random(base+4)>.45
+    ){
+
+      stars.push({
+        x:x+width*.5,
+        y:py-38,
+        r:9,
+        taken:false
+      });
+
     }
 
-    if(chance(base+10,D.moving)){
+    if(
+      chance(base+10,D.moving)
+    ){
+
       movingPlatforms.push({
-        x:x+width*.5, y:py,
-        baseX:x+width*.5, baseY:py,
-        w:Math.max(42,width*.75), h:18,
-        range:35+random(base+11)*(70+D.d*90),
-        speed:.6+random(base+12)*(1.2+D.d*1.6),
-        phase:random(base+13)*Math.PI*2,
-        axis:random(base+14)>.5?"x":"y",
+
+        x:x+width*.5,
+        y:py,
+
+        baseX:x+width*.5,
+        baseY:py,
+
+        w:Math.max(42,width*.75),
+        h:18,
+
+        range:
+          35+
+          random(base+11)*
+          (70+D.d*90),
+
+        speed:
+          .6+
+          random(base+12)*
+          (1.2+D.d*1.6),
+
+        phase:
+          random(base+13)*Math.PI*2,
+
+        axis:
+          random(base+14)>.5
+          ?"x"
+          :"y",
+
         safe:true
+
       });
+
     }
 
-    if(chance(base+20,D.disappearing)){
+    if(
+      chance(base+20,D.disappearing)
+    ){
+
       disappearingPlatforms.push({
-        x, y:py, w:width, h:18,
-        timer:.8+random(base+21)*1.5,
+
+        x:x,
+        y:py,
+        w:width,
+        h:18,
+
+        timer:
+          .8+
+          random(base+21)*1.5,
+
         active:true,
-        respawn:1.2+random(base+22)*2
+
+        respawn:
+          1.2+
+          random(base+22)*2
+
       });
+
     }
 
-    if(chance(base+30,D.fake)){
+    if(
+      chance(base+30,D.fake)
+    ){
+
       fakePlatforms.push({
-        x:x+random(base+31)*Math.max(10,width-30),
-        y:py-40-random(base+32)*70,
-        w:Math.max(35,width*.6), h:14,
+
+        x:
+          x+
+          random(base+31)*
+          Math.max(10,width-30),
+
+        y:
+          py-
+          40-
+          random(base+32)*70,
+
+        w:
+          Math.max(
+            35,
+            width*.6
+          ),
+
+        h:14,
+
         fake:true
+
       });
+
     }
 
-    if(chance(base+40,D.spikes)){
-      const amount = n<16 ? 1 : Math.min(5, 1+Math.floor(D.d*4+random(base+41)*2));
-      for(let s=0; s<amount; s++){
+    if(
+      chance(base+40,D.spikes)
+    ){
+
+      const amount =
+        n<16
+        ?1
+        :Math.min(
+          5,
+          1+
+          Math.floor(
+            D.d*4+
+            random(base+41)*2
+          )
+        );
+
+      for(
+        let s=0;
+        s<amount;
+        s++
+      ){
+
         hazards.push({
-          x:x+8+random(base+50+s)*Math.max(12,width-28),
-          y:py-22, w:22, h:22
+
+          x:
+            x+
+            8+
+            random(base+50+s)*
+            Math.max(
+              12,
+              width-28
+            ),
+
+          y:
+            py-22,
+
+          w:22,
+          h:22
+
         });
+
       }
+
     }
 
-    if(chance(base+60,D.balls)){
-      const amount= n<16 ? 1 : Math.min(4, 1+Math.floor(D.d*3+random(base+61)*2));
-      for(let b=0; b<amount; b++){
+    if(
+      chance(base+60,D.balls)
+    ){
+
+      const amount=
+        n<16
+        ?1
+        :Math.min(
+          4,
+          1+
+          Math.floor(
+            D.d*3+
+            random(base+61)*2
+          )
+        );
+
+      for(
+        let b=0;
+        b<amount;
+        b++
+      ){
+
         balls.push({
-          x:x+width+50+random(base+70+b)*120,
-          y:py-20-b*18,
-          r:16+D.d*5,
-          speed:D.ballSpeed*(1+b*.12),
+
+          x:
+            x+
+            width+
+            50+
+            random(base+70+b)*120,
+
+          y:
+            py-
+            20-
+            b*18,
+
+          r:
+            16+
+            D.d*5,
+
+          speed:
+            D.ballSpeed*
+            (1+b*.12),
+
           minX:x-65,
-          maxX:x+width+260+D.d*130,
-          dir:random(base+80+b)>.5?1:-1,
-          targetTimer:.5+random(base+90+b)*1.3
+
+          maxX:
+            x+
+            width+
+            260+
+            D.d*130,
+
+          dir:
+            random(base+80+b)>.5
+            ?1
+            :-1,
+
+          targetTimer:
+            .5+
+            random(base+90+b)*1.3
+
         });
+
       }
+
     }
 
-    if(chance(base+100,D.saws)){
+    if(
+      chance(base+100,D.saws)
+    ){
+
       saws.push({
-        x:x+width+45+random(base+101)*80,
-        y:py-35-random(base+102)*60,
-        r:17+D.d*10,
-        baseY:py-35,
-        amp:15+D.d*60,
-        speed:1+D.d*4,
-        phase:random(base+103)*6.28
+
+        x:
+          x+
+          width+
+          45+
+          random(base+101)*80,
+
+        y:
+          py-
+          35-
+          random(base+102)*60,
+
+        r:
+          17+
+          D.d*10,
+
+        baseY:
+          py-
+          35,
+
+        amp:
+          15+
+          D.d*60,
+
+        speed:
+          1+
+          D.d*4,
+
+        phase:
+          random(base+103)*6.28
+
       });
+
     }
 
-    if(chance(base+110,D.lasers)){
+    if(
+      chance(base+110,D.lasers)
+    ){
+
       lasers.push({
-        x:x+width+35+random(base+111)*100,
-        y:py-15-random(base+112)*70,
-        w:80+random(base+113)*120,
+
+        x:
+          x+
+          width+
+          35+
+          random(base+111)*100,
+
+        y:
+          py-
+          15-
+          random(base+112)*70,
+
+        w:
+          80+
+          random(base+113)*120,
+
         h:8,
-        period:.65+random(base+114)*1.4,
-        phase:random(base+115)*2,
-        warning:.25+random(base+116)*.25
+
+        period:
+          .65+
+          random(base+114)*1.4,
+
+        phase:
+          random(base+115)*2,
+
+        warning:
+          .25+
+          random(base+116)*.25
+
       });
+
     }
 
-    if(chance(base+120,D.bombs)){
+    if(
+      chance(base+120,D.bombs)
+    ){
+
       bombs.push({
-        x:x+width+70+random(base+121)*120,
-        y:py-40-random(base+122)*100,
-        r:13+D.d*5,
-        timer:1+random(base+123)*2,
+
+        x:
+          x+
+          width+
+          70+
+          random(base+121)*120,
+
+        y:
+          py-
+          40-
+          random(base+122)*100,
+
+        r:
+          13+
+          D.d*5,
+
+        timer:
+          1+
+          random(base+123)*2,
+
         pulse:0
+
       });
+
     }
 
-    if(random(base+130)<.12+D.d*.70){
+    if(
+      random(base+130)<
+      .12+
+      D.d*.70
+    ){
+
       const sx=x+width+15;
-      const sw=100+random(base+131)*Math.max(70,180-D.d*60);
-      const rise=12+random(base+132)*(20+D.rise*.8);
-      slopes.push({x:sx, y:groundY, w:sw, rise});
+
+      const sw=
+        100+
+        random(base+131)*
+        Math.max(
+          70,
+          180-D.d*60
+        );
+
+      const rise=
+        12+
+        random(base+132)*
+        (20+D.rise*.8);
+
+      slopes.push({
+        x:sx,
+        y:groundY,
+        w:sw,
+        rise
+      });
+
       x=sx+sw;
+
     }else{
+
       x+=width;
+
     }
 
-    if(chance(base+140,D.cracks)){
-      const amount=Math.min(4, 1+Math.floor(D.d*3));
-      for(let c=0;c<amount;c++){
+    if(
+      chance(base+140,D.cracks)
+    ){
+
+      const amount=
+        Math.min(
+          4,
+          1+
+          Math.floor(
+            D.d*3
+          )
+        );
+
+      for(
+        let c=0;c<amount;c++
+      ){
+
         cracks.push({
-          x:x-75+c*24, y:groundY-3, w:48, h:10,
-          timer:0, active:false, broken:false
+
+          x:
+            x-
+            75+
+            c*24,
+
+          y:
+            groundY-3,
+
+          w:48,
+          h:10,
+
+          timer:0,
+          active:false,
+          broken:false
+
         });
+
       }
+
     }
 
-    if(chance(base+150,D.wind)){
+    if(
+      chance(base+150,D.wind)
+    ){
+
       windZones.push({
-        x:x+20, y:groundY-150-random(base+151)*100,
-        w:100+random(base+152)*120,
-        h:130+random(base+153)*100,
-        force:(random(base+154)>.5?1:-1)*(100+D.d*400)
+
+        x:x+20,
+
+        y:
+          groundY-
+          150-
+          random(base+151)*100,
+
+        w:
+          100+
+          random(base+152)*120,
+
+        h:
+          130+
+          random(base+153)*100,
+
+        force:
+          (
+            random(base+154)>.5
+            ?1
+            :-1
+          )*
+          (
+            100+
+            D.d*400
+          )
+
       });
+
     }
 
-    if(chance(base+160,D.ice)){
-      iceZones.push({x:x-20, y:groundY-25, w:80+random(base+161)*150, h:30});
+    if(
+      chance(base+160,D.ice)
+    ){
+
+      iceZones.push({
+
+        x:x-20,
+        y:groundY-25,
+
+        w:
+          80+
+          random(base+161)*150,
+
+        h:30
+
+      });
+
     }
 
-    if(chance(base+170,D.springs)){
+    if(
+      chance(base+170,D.springs)
+    ){
+
       springs.push({
-        x:x+random(base+171)*Math.max(10,width-25),
-        y:py-12, w:22, h:12,
-        power:720+D.d*520
+
+        x:
+          x+
+          random(base+171)*
+          Math.max(
+            10,
+            width-25
+          ),
+
+        y:
+          py-12,
+
+        w:22,
+        h:12,
+
+        power:
+          720+
+          D.d*520
+
       });
+
     }
 
-    if(chance(base+180,D.portals)){
+    if(
+      chance(base+180,D.portals)
+    ){
+
       portals.push({
-        x:x+width+30+random(base+181)*80,
-        y:py-80-random(base+182)*100,
-        r:20, targetOffset:260+random(base+183)*600, used:false
+
+        x:
+          x+
+          width+
+          30+
+          random(base+181)*80,
+
+        y:
+          py-
+          80-
+          random(base+182)*100,
+
+        r:20,
+
+        targetOffset:
+          260+
+          random(base+183)*
+          600,
+
+        used:false
+
       });
+
     }
 
-    if(chance(base+190,D.gravity)){
+    if(
+      chance(base+190,D.gravity)
+    ){
+
       gravityZones.push({
-        x:x+10, y:py-130,
-        w:90+random(base+191)*130, h:170,
-        scale:random(base+192)>.5?.48:1.75
+
+        x:x+10,
+
+        y:
+          py-
+          130,
+
+        w:
+          90+
+          random(base+191)*130,
+
+        h:
+          170,
+
+        scale:
+          random(base+192)>.5
+          ? .48
+          : 1.75
+
       });
+
     }
 
-    if(chance(base+200,D.reverse)){
+    if(
+      chance(base+200,D.reverse)
+    ){
+
       reverseZones.push({
-        x:x+10, y:py-160,
-        w:100+random(base+201)*140, h:180,
-        time:1.2+random(base+202)*2.2
+
+        x:x+10,
+
+        y:
+          py-
+          160,
+
+        w:
+          100+
+          random(base+201)*140,
+
+        h:
+          180,
+
+        time:
+          1.2+
+          random(base+202)*2.2
+
       });
+
     }
 
-    if(chance(base+210,D.fallers)){
-      const amount=Math.min(4, 1+Math.floor(D.d*3));
-      for(let f=0; f<amount; f++){
+    if(
+      chance(base+210,D.fallers)
+    ){
+
+      const amount=
+        Math.min(
+          4,
+          1+
+          Math.floor(D.d*3)
+        );
+
+      for(
+        let f=0;
+        f<amount;
+        f++
+      ){
+
         fallers.push({
-          x:x+random(base+220+f)*100,
-          y:-100-random(base+230+f)*300,
-          w:20+D.d*12, h:20+D.d*12,
-          vy:100+random(base+240+f)*220+D.d*250,
-          resetY:-220-random(base+250+f)*150
+
+          x:
+            x+
+            random(base+220+f)*100,
+
+          y:
+            -100-
+            random(base+230+f)*300,
+
+          w:
+            20+
+            D.d*12,
+
+          h:
+            20+
+            D.d*12,
+
+          vy:
+            100+
+            random(base+240+f)*220+
+            D.d*250,
+
+          resetY:
+            -220-
+            random(base+250+f)*150
+
         });
+
       }
+
     }
 
-    if(chance(base+260,D.walls)){
+    if(
+      chance(base+260,D.walls)
+    ){
+
       walls.push({
-        x:x+width+70+random(base+261)*90,
-        y:py-100,
-        w:18+D.d*12, h:100+D.d*120,
-        range:20+D.d*100, speed:.8+D.d*2,
-        phase:random(base+262)*6.28
+
+        x:
+          x+
+          width+
+          70+
+          random(base+261)*90,
+
+        y:
+          py-
+          100,
+
+        w:
+          18+
+          D.d*12,
+
+        h:
+          100+
+          D.d*120,
+
+        range:
+          20+
+          D.d*100,
+
+        speed:
+          .8+
+          D.d*2,
+
+        phase:
+          random(base+262)*6.28
+
       });
+
     }
+
   }
 
   const finalStart=x+60;
-  platforms.push({x:finalStart, y:groundY, w:500, h:80, safe:true});
 
-  const gateCount=n<16 ? 0 : Math.min(5, Math.floor(D.d*5));
-  for(let g=0; g<gateCount; g++){
+  platforms.push({
+
+    x:finalStart,
+    y:groundY,
+    w:500,
+    h:80,
+    safe:true
+
+  });
+
+  const gateCount=
+    n<16
+    ?0
+    :Math.min(
+      5,
+      Math.floor(D.d*5)
+    );
+
+  for(
+    let g=0;
+    g<gateCount;
+    g++
+  ){
+
     finishGates.push({
-      x:finalStart+80+g*75, y:groundY-130,
-      w:12, h:130,
-      phase:random(n*6000+g)*6.28,
-      period:.8+random(n*6001+g)*1.3
+
+      x:
+        finalStart+
+        80+
+        g*75,
+
+      y:
+        groundY-
+        130,
+
+      w:12,
+
+      h:130,
+
+      phase:
+        random(
+          n*6000+g
+        )*6.28,
+
+      period:
+        .8+
+        random(
+          n*6001+g
+        )*1.3
+
     });
+
   }
 
-  const finishX=finalStart+430;
-  const stormCount=n<16 ? 0 : Math.min(12, 1+Math.floor(D.d*11));
+  const finishX=
+    finalStart+
+    430;
 
-  for(let i=0; i<stormCount; i++){
-    const seed=n*8000+i*31;
+  const stormCount=
+    n<16
+    ?0
+    :Math.min(
+      12,
+      1+
+      Math.floor(
+        D.d*11
+      )
+    );
+
+  for(
+    let i=0;
+    i<stormCount;
+    i++
+  ){
+
+    const seed=
+      n*8000+i*31;
+
     lightnings.push({
-      x:430+random(seed)*Math.max(300,x-400),
-      y:groundY-250-random(seed+1)*180,
-      timer:random(seed+2)*1.5,
-      cool:Math.max(.42, 1.35-D.d*.78-random(seed+3)*.35),
-      warning:Math.max(.16, .72-D.d*.48)
+
+      x:
+        430+
+        random(seed)*
+        Math.max(
+          300,
+          x-400
+        ),
+
+      y:
+        groundY-
+        250-
+        random(seed+1)*180,
+
+      timer:
+        random(seed+2)*1.5,
+
+      cool:
+        Math.max(
+          .42,
+          1.35-
+          D.d*.78-
+          random(seed+3)*.35
+        ),
+
+      warning:
+        Math.max(
+          .16,
+          .72-
+          D.d*.48
+        )
+
     });
+
   }
 
   const chaos=[];
-  const chaosCount=n<16 ? 0 : Math.floor(5+D.d*35);
-  for(let i=0; i<chaosCount; i++){
-    const seed=n*90000+i*719;
+
+  const chaosCount=
+    n<16
+    ?0
+    :Math.floor(
+      5+
+      D.d*35
+    );
+
+  for(
+    let i=0;
+    i<chaosCount;
+    i++
+  ){
+
+    const seed=
+      n*90000+i*719;
+
     chaos.push({
-      x:350+random(seed)*Math.max(300,x-300),
-      y:80+random(seed+1)*Math.max(100,groundY-160),
-      type:Math.floor(random(seed+2)*14),
-      size:8+random(seed+3)*(10+D.d*35),
-      speed:40+random(seed+4)*(100+D.d*350),
-      phase:random(seed+5)*6.28
+
+      x:
+        350+
+        random(seed)*
+        Math.max(
+          300,
+          x-300
+        ),
+
+      y:
+        80+
+        random(seed+1)*
+        Math.max(
+          100,
+          groundY-160
+        ),
+
+      type:
+        Math.floor(
+          random(seed+2)*14
+        ),
+
+      size:
+        8+
+        random(seed+3)*
+        (10+D.d*35),
+
+      speed:
+        40+
+        random(seed+4)*
+        (100+D.d*350),
+
+      phase:
+        random(seed+5)*6.28
+
     });
+
   }
 
-  const advancedObstacles = makeAdvancedObstacles(n,groundY,finishX,D);
+  const advancedObstacles =
+    makeAdvancedObstacles(
+      n,
+      groundY,
+      finishX,
+      D
+    );
 
   let ideaIndex;
+
   if(n<=15){
+
     ideaIndex=n-1;
+
   }else{
-    ideaIndex=15+Math.floor(D.d*(ideas.length-16));
-    ideaIndex=Math.min(ideas.length-1,ideaIndex);
+
+    ideaIndex=
+      15+
+      Math.floor(
+        D.d*
+        (ideas.length-16)
+      );
+
+    ideaIndex=
+      Math.min(
+        ideas.length-1,
+        ideaIndex
+      );
   }
 
   return{
-    groundY, platforms, hazards, stars, balls, slopes, cracks, lightnings, fallers,
-    movingPlatforms, disappearingPlatforms, saws, lasers, bombs, windZones, iceZones,
-    fakePlatforms, walls, springs, portals, gravityZones, reverseZones, finishGates,
-    chaos, advancedObstacles, finishX, idea:ideas[ideaIndex], tier:D
+
+    groundY,
+
+    platforms,
+    hazards,
+    stars,
+    balls,
+    slopes,
+    cracks,
+    lightnings,
+    fallers,
+
+    movingPlatforms,
+    disappearingPlatforms,
+    saws,
+    lasers,
+    bombs,
+    windZones,
+    iceZones,
+    fakePlatforms,
+    walls,
+    springs,
+    portals,
+    gravityZones,
+    reverseZones,
+    finishGates,
+
+    chaos,
+
+    advancedObstacles,
+
+    finishX,
+
+    idea:ideas[ideaIndex],
+
+    tier:D
   };
 }
 
 function saveLevel(){
-  localStorage.setItem(SAVE_KEY, String(level));
+
+  localStorage.setItem(
+    SAVE_KEY,
+    String(level)
+  );
 }
 
 function resetLevel(){
+
   levelWon=false;
   paused=false;
-  levelData=makeLevel(level);
+
+  levelData=
+    makeLevel(level);
 
   player.x=70;
-  player.y=levelData.groundY-player.h;
+
+  player.y=
+    levelData.groundY-
+    player.h;
+
   player.vx=0;
   player.vy=0;
+
   player.grounded=true;
   player.coyote=0;
+
   player.dashCooldown=0;
   player.dashTime=0;
   player.gravityScale=1;
@@ -1481,1095 +2320,4451 @@ function resetLevel(){
   player.invincible=0;
 
   cameraX=0;
+
   stormFlash=0;
   screenShake=0;
 
   levelEl.textContent=level;
-  tierEl.textContent="• "+levelData.tier.name;
+
+  tierEl.textContent=
+    "• "+
+    levelData.tier.name;
 
   if(level<=15){
+
     levelIdea.style.display="block";
-    levelIdea.textContent=`LEVEL ${level}: ${levelData.idea}`;
+
+    levelIdea.textContent=
+      `LEVEL ${level}: ${levelData.idea}`;
+
   }else{
+
     levelIdea.style.display="none";
+
   }
 
-  player.speed=levelData.tier.speed;
-  player.jumpPower=levelData.tier.jump;
+  player.speed=
+    levelData.tier.speed;
+
+  player.jumpPower=
+    levelData.tier.jump;
+
   win.style.display="none";
+
   saveLevel();
 }
 
-startBtn.addEventListener("pointerdown", e=>{
-  e.preventDefault();
-  intro.style.display="none";
-  playing=true;
-  bgMusic.play().catch(err => console.log("Audio play blocked:", err));
-  resetLevel();
-  lastTime=performance.now();
-  requestAnimationFrame(loop);
-});
+startBtn.addEventListener(
+  "pointerdown",
+  e=>{
+
+    e.preventDefault();
+
+    intro.style.display="none";
+
+    playing=true;
+
+    // لێدانی میوزیک کاتێک یاری دەستپێدەکات
+    bgMusic.play().catch(err => console.log("Audio play blocked:", err));
+
+    resetLevel();
+
+    lastTime=
+      performance.now();
+
+    requestAnimationFrame(loop);
+  }
+);
 
 function winLevel(){
-  if(levelWon) return;
+
+  if(levelWon)
+    return;
+
   levelWon=true;
   paused=true;
+
   saveLevel();
 
   finishBanner.classList.remove("show");
+
   void finishBanner.offsetWidth;
+
   finishBanner.classList.add("show");
 
-  winText.textContent=`تۆ مەرحەلەی ${level} ـت بە سەرکەوتوویی بردەوە.`;
+  winText.textContent=
+    `تۆ مەرحەلەی ${level} ـت بە سەرکەوتوویی بردەوە.`;
+
   win.style.display="flex";
 }
 
 function nextLevel(){
+
   if(level>=TOTAL_LEVELS){
+
     level=1;
+
   }else{
+
     level++;
+
   }
+
   saveLevel();
   resetLevel();
 }
 
-document.getElementById("retryBtn").addEventListener("pointerdown", e=>{
-  e.preventDefault();
-  resetLevel();
-});
+document
+  .getElementById("retryBtn")
+  .addEventListener(
+    "pointerdown",
+    e=>{
+      e.preventDefault();
+      resetLevel();
+    }
+  );
 
-document.getElementById("nextBtn").addEventListener("pointerdown", e=>{
-  e.preventDefault();
-  nextLevel();
-});
+document
+  .getElementById("nextBtn")
+  .addEventListener(
+    "pointerdown",
+    e=>{
+      e.preventDefault();
+      nextLevel();
+    }
+  );
 
 function slopeSurfaceY(s,x){
-  const t=clamp((x-s.x)/s.w,0,1);
+
+  const t=
+    clamp(
+      (x-s.x)/s.w,
+      0,
+      1
+    );
+
   return s.y-s.rise*t;
 }
 
 function particleBurst(x,y,type="normal"){
-  const count=type==="danger"?18:10;
-  for(let i=0; i<count; i++){
+
+  const count=
+    type==="danger"
+    ?18
+    :10;
+
+  for(
+    let i=0;
+    i<count;
+    i++
+  ){
+
     particles.push({
-      x, y,
-      vx:(random(performance.now()+i*31)-.5)*220,
-      vy:(random(performance.now()+i*53)-.5)*220,
-      life:.5+random(performance.now()+i*71)*.6,
-      size:2+random(performance.now()+i*91)*5
+
+      x,
+      y,
+
+      vx:
+        (random(
+          performance.now()+i*31
+        )-.5)*220,
+
+      vy:
+        (random(
+          performance.now()+i*53
+        )-.5)*220,
+
+      life:.5+
+        random(
+          performance.now()+i*71
+        )*.6,
+
+      size:
+        2+
+        random(
+          performance.now()+i*91
+        )*5
+
     });
+
   }
 }
 
 function updateParticles(dt){
-  for(let i=particles.length-1; i>=0; i--){
+
+  for(
+    let i=particles.length-1;
+    i>=0;
+    i--
+  ){
+
     const p=particles[i];
+
     p.x+=p.vx*dt;
     p.y+=p.vy*dt;
+
     p.vy+=300*dt;
+
     p.life-=dt;
+
     if(p.life<=0){
+
       particles.splice(i,1);
+
     }
+
   }
 }
 
 function updateAdvancedObstacles(dt){
-  if(!levelData || !levelData.advancedObstacles) return false;
-  const now = performance.now()/1000;
-  const D = levelData.tier.d;
 
-  for(const o of levelData.advancedObstacles){
-    const t = now+o.phase+o.variant*.001;
+  if(
+    !levelData ||
+    !levelData.advancedObstacles
+  ){
+    return false;
+  }
+
+  const now =
+    performance.now()/1000;
+
+  const D =
+    levelData.tier.d;
+
+  for(
+    const o
+    of levelData.advancedObstacles
+  ){
+
+    const t =
+      now+
+      o.phase+
+      o.variant*.001;
+
     let hit=false;
 
     if(o.type===0){
-      const targetX = player.x+player.w/2;
-      const targetY = player.y+player.h/2;
-      const dx = targetX-o.x;
-      const dy = targetY-o.y;
-      const dist = Math.max(1, Math.hypot(dx,dy));
-      const tracking = .45+D*1.7+(o.variant%7)*.025;
-      o.x += dx/dist*o.speed*tracking*dt;
-      o.y += dy/dist*o.speed*.35*dt;
 
-      if(Math.hypot(player.x+player.w/2-o.x, player.y+player.h/2-o.y) < o.size+17){
+      const targetX =
+        player.x+
+        player.w/2;
+
+      const targetY =
+        player.y+
+        player.h/2;
+
+      const dx =
+        targetX-o.x;
+
+      const dy =
+        targetY-o.y;
+
+      const dist =
+        Math.max(
+          1,
+          Math.hypot(dx,dy)
+        );
+
+      const tracking =
+        .45+
+        D*1.7+
+        (o.variant%7)*.025;
+
+      o.x +=
+        dx/dist*
+        o.speed*
+        tracking*
+        dt;
+
+      o.y +=
+        dy/dist*
+        o.speed*
+        .35*
+        dt;
+
+      if(
+        Math.hypot(
+          player.x+
+          player.w/2-
+          o.x,
+
+          player.y+
+          player.h/2-
+          o.y
+        ) <
+        o.size+
+        17
+      ){
+
         hit=true;
+
       }
+
     }
+
     else if(o.type===1){
-      const distance = Math.abs(player.x+player.w/2-o.baseX);
-      if(distance < 110+D*120){
+
+      const distance =
+        Math.abs(
+          player.x+
+          player.w/2-
+          o.baseX
+        );
+
+      const triggerDistance =
+        110+
+        D*120;
+
+      if(
+        distance<
+        triggerDistance
+      ){
+
         o.triggered=true;
       }
+
       if(o.triggered){
+
         o.timer+=dt;
-        if(o.timer > Math.max(.08, .42-D*.28)){
-          hit=player.grounded && player.x+player.w>o.baseX-o.w && player.x<o.baseX+o.w;
+
+        const activeDelay =
+          Math.max(
+            .08,
+            .42-
+            D*.28
+          );
+
+        if(
+          o.timer>
+          activeDelay
+        ){
+
+          hit=
+            player.grounded &&
+            player.x+player.w>
+            o.baseX-o.w &&
+            player.x<
+            o.baseX+o.w;
+
         }
+
       }
+
     }
+
     else if(o.type===2){
-      const cycle = (t+o.delay)%(1.25-D*.35);
-      const active = cycle>(.55-D*.2);
+
+      const cycle =
+        (
+          t+
+          o.delay
+        )%
+        (
+          1.25-
+          D*.35
+        );
+
+      const active =
+        cycle>
+        (
+          .55-
+          D*.2
+        );
+
       if(active){
-        hit=rectHit(player, {x:o.baseX-o.w/2, y:levelData.groundY-48-o.h, w:o.w, h:o.h+48});
+
+        hit=
+          rectHit(
+            player,
+            {
+              x:o.baseX-o.w/2,
+              y:levelData.groundY-48-o.h,
+              w:o.w,
+              h:o.h+48
+            }
+          );
+
       }
+
     }
+
     else if(o.type===3){
-      const cycle = Math.sin(t*(1.2+D*3));
-      const xx = o.baseX+cycle*o.range;
-      const yy = o.baseY+Math.sin(t*2)*25;
-      hit=rectHit(player, {x:xx, y:yy, w:o.w, h:o.h});
+
+      const cycle =
+        Math.sin(t*(
+          1.2+
+          D*3
+        ));
+
+      const xx =
+        o.baseX+
+        cycle*
+        o.range;
+
+      const yy =
+        o.baseY+
+        Math.sin(t*2)*25;
+
+      hit=
+        rectHit(
+          player,
+          {
+            x:xx,
+            y:yy,
+            w:o.w,
+            h:o.h
+          }
+        );
+
     }
+
     else if(o.type===4){
-      const cycle = (t*(.75+D*2.2))%2;
-      const down = cycle<1?cycle:2-cycle;
-      const yy = 50+down*(levelData.groundY-100);
-      hit=rectHit(player, {x:o.baseX-o.w/2, y:yy, w:o.w, h:o.h+25});
+
+      const cycle =
+        (
+          t*
+          (
+            .75+
+            D*2.2
+          )
+        )%2;
+
+      const down =
+        cycle<1
+        ?cycle
+        :2-cycle;
+
+      const yy =
+        50+
+        down*
+        (
+          levelData.groundY-
+          100
+        );
+
+      hit=
+        rectHit(
+          player,
+          {
+            x:o.baseX-o.w/2,
+            y:yy,
+            w:o.w,
+            h:o.h+25
+          }
+        );
+
     }
+
     else if(o.type===5){
-      const distance = Math.abs(player.x+player.w/2-o.baseX);
-      if(distance<170+D*130){ o.triggered=true; }
+
+      const distance =
+        Math.abs(
+          player.x+
+          player.w/2-
+          o.baseX
+        );
+
+      if(
+        distance<
+        170+
+        D*130
+      ){
+
+        o.triggered=true;
+      }
+
       if(o.triggered){
+
         o.timer+=dt;
-        const radius = o.timer*(180+D*260);
-        const vertical = Math.abs(player.y+player.h/2-o.baseY);
-        if(Math.abs(player.x+player.w/2-o.baseX)<radius+18 && vertical<42+D*35){
+
+        const radius =
+          o.timer*
+          (
+            180+
+            D*260
+          );
+
+        const vertical =
+          Math.abs(
+            player.y+
+            player.h/2-
+            o.baseY
+          );
+
+        if(
+          Math.abs(
+            player.x+
+            player.w/2-
+            o.baseX
+          )<
+          radius+18 &&
+          vertical<
+          42+
+          D*35
+        ){
+
           hit=true;
+
         }
-        if(radius>300+D*500){
+
+        if(
+          radius>
+          300+
+          D*500
+        ){
+
           o.triggered=false;
           o.timer=0;
+
         }
+
       }
-    }
-    else if(o.type===6){
-      const distance = Math.abs(player.x+player.w/2-o.baseX);
-      if(distance<70+D*80){ o.triggered=true; }
-      if(o.triggered){
-        const fall = Math.min(1, (o.timer+=dt)*(1+D*2));
-        if(player.grounded && player.x+player.w>o.baseX-o.w && player.x<o.baseX+o.w){
-          player.vy += 250+D*450;
-          if(fall>.45){ hit=true; }
-        }
-      }
-    }
-    else if(o.type===7){
-      o.y += o.vy*(1+D*1.8)*dt;
-      if(o.y>levelData.groundY+80){
-        o.y = -120-random(o.variant*77+level)*240;
-        o.x = o.baseX+(random(o.variant*81+Math.floor(now))-.5)*(120+D*260);
-      }
-      hit=rectHit(player, {x:o.x-o.size, y:o.y-o.size, w:o.size*2, h:o.size*2});
-    }
-    else if(o.type===8){
-      const xx = o.baseX+Math.sin(t*(.8+D*2.5))*o.range;
-      const yy = levelData.groundY-o.h-10-Math.abs(Math.sin(t*1.4))*(30+D*100);
-      hit=rectHit(player, {x:xx, y:yy, w:o.w, h:o.h});
-    }
-    else if(o.type===9){
-      const cycle = (t*(.9+D*3))%1;
-      const active = cycle>(.22-D*.1);
-      if(active){
-        const yy = o.baseY+Math.sin(t*1.7)*(25+D*100);
-        hit=rectHit(player, {x:o.baseX-90-D*60, y:yy, w:180+D*120, h:7+D*7});
-      }
-    }
-    else if(o.type===10){
-      const distance = Math.hypot(player.x+player.w/2-o.baseX, player.y+player.h/2-o.baseY);
-      if(distance<120+D*100){ o.triggered=true; }
-      if(o.triggered){
-        o.timer+=dt;
-        if(o.timer>Math.max(.15, .75-D*.45)){
-          hit=distance<(55+D*95);
-        }
-      }
-      if(o.timer>1.3){ o.triggered=false; o.timer=0; }
-    }
-    else if(o.type===11){
-      const xx = o.baseX+Math.sin(t*(1.5+D*3))*o.range;
-      const yy = o.baseY+Math.cos(t*(2+D*3))*(20+D*80);
-      hit=circleHit(xx, yy, o.size, player);
-    }
-    else if(o.type===12){
-      const cx=o.baseX, cy=o.baseY;
-      const angle = t*(1.5+D*5);
-      const length = 45+D*75;
-      const ex = cx+Math.cos(angle)*length;
-      const ey = cy+Math.sin(angle)*length;
-      const px = player.x+player.w/2, py = player.y+player.h/2;
-      const A=ex-cx, B=ey-cy, C=px-cx, E=py-cy;
-      const dot=A*C+B*E, len2=A*A+B*B;
-      const u=clamp(dot/Math.max(1,len2),0,1);
-      hit=Math.hypot(px-(cx+A*u), py-(cy+B*u)) < 13+D*9;
-    }
-    else if(o.type===13){
-      const distance = Math.abs(player.x+player.w/2-o.baseX);
-      if(distance<100+D*120){ o.triggered=true; }
-      if(o.triggered){
-        o.y += (120+D*500)*dt;
-        if(o.y>levelData.groundY+100){ o.y=o.baseY; o.triggered=false; }
-      }
-      hit=rectHit(player, {x:o.baseX-o.w/2, y:o.y, w:o.w, h:o.h});
-    }
-    else if(o.type===14){
-      const distance = Math.abs(player.x+player.w/2-o.baseX);
-      if(distance<80+D*120){
-        player.gravityScale=1.7+D*1.7;
-        player.vy+=80+D*180;
-      }
-    }
-    else if(o.type===15){
-      const distance = Math.abs(player.x+player.w/2-o.baseX);
-      if(distance<75+D*115){
-        player.reverseTimer=Math.max(player.reverseTimer, .45+D*1.4);
-      }
-    }
-    else if(o.type===16){
-      const distance = Math.hypot(player.x+player.w/2-o.baseX, player.y+player.h/2-o.baseY);
-      if(distance<o.size+22 && !o.triggered){
-        o.triggered=true;
-        player.x=Math.max(70, player.x-(180+D*350));
-        screenShake=8;
-        particleBurst(o.baseX, o.baseY, "danger");
-      }
-      if(distance>100){ o.triggered=false; }
-    }
-    else if(o.type===17){
-      const cx=o.baseX, cy=o.baseY;
-      const radius = 30+(Math.sin(t*(2+D*4))*.5+.5)*(60+D*100);
-      const distance=Math.hypot(player.x+player.w/2-cx, player.y+player.h/2-cy);
-      hit=Math.abs(distance-radius)<12+D*8;
-    }
-    else if(o.type===18){
-      const xx = o.baseX+Math.sin(t*2)*o.range;
-      hit=rectHit(player, {x:xx, y:levelData.groundY-90-D*80, w:16+D*20, h:90+D*120});
-    }
-    else if(o.type===19){
-      o.y = o.baseY+Math.abs(Math.sin(t*(1.5+D*3)))*(80+D*170);
-      o.x = o.baseX+Math.sin(t*.8)*(25+D*80);
-      hit=circleHit(o.x, o.y, o.size+D*5, player);
+
     }
 
-    if(hit && player.invincible<=0){
+    else if(o.type===6){
+
+      const distance =
+        Math.abs(
+          player.x+
+          player.w/2-
+          o.baseX
+        );
+
+      if(
+        distance<
+        70+
+        D*80
+      ){
+
+        o.triggered=true;
+      }
+
+      if(o.triggered){
+
+        const fall =
+          Math.min(
+            1,
+            (
+              o.timer+=dt
+            )*
+            (
+              1+
+              D*2
+            )
+          );
+
+        if(
+          player.grounded &&
+          player.x+player.w>
+          o.baseX-o.w &&
+          player.x<
+          o.baseX+o.w
+        ){
+
+          player.vy +=
+            250+
+            D*450;
+
+          if(fall>.45){
+            hit=true;
+          }
+
+        }
+
+      }
+
+    }
+
+    else if(o.type===7){
+
+      o.y +=
+        o.vy*
+        (
+          1+
+          D*1.8
+        )*
+        dt;
+
+      if(
+        o.y>
+        levelData.groundY+80
+      ){
+
+        o.y=
+          -120-
+          random(
+            o.variant*77+
+            level
+          )*240;
+
+        o.x=
+          o.baseX+
+          (
+            random(
+              o.variant*81+
+              Math.floor(now)
+            )-.5
+          )*
+          (
+            120+
+            D*260
+          );
+
+      }
+
+      hit=
+        rectHit(
+          player,
+          {
+            x:o.x-o.size,
+            y:o.y-o.size,
+            w:o.size*2,
+            h:o.size*2
+          }
+        );
+
+    }
+
+    else if(o.type===8){
+
+      const xx =
+        o.baseX+
+        Math.sin(t*(
+          .8+
+          D*2.5
+        ))*
+        o.range;
+
+      const yy =
+        levelData.groundY-
+        o.h-
+        10-
+        Math.abs(
+          Math.sin(t*1.4)
+        )*
+        (
+          30+
+          D*100
+        );
+
+      hit=
+        rectHit(
+          player,
+          {
+            x:xx,
+            y:yy,
+            w:o.w,
+            h:o.h
+          }
+        );
+
+    }
+
+    else if(o.type===9){
+
+      const cycle =
+        (
+          t*
+          (
+            .9+
+            D*3
+          )
+        )%1;
+
+      const active =
+        cycle>
+        (
+          .22-
+          D*.1
+        );
+
+      if(active){
+
+        const yy =
+          o.baseY+
+          Math.sin(t*1.7)*
+          (
+            25+
+            D*100
+          );
+
+        hit=
+          rectHit(
+            player,
+            {
+              x:o.baseX-90-D*60,
+              y:yy,
+              w:180+D*120,
+              h:7+D*7
+            }
+          );
+
+      }
+
+    }
+
+    else if(o.type===10){
+
+      const distance =
+        Math.hypot(
+          player.x+
+          player.w/2-
+          o.baseX,
+
+          player.y+
+          player.h/2-
+          o.baseY
+        );
+
+      if(
+        distance<
+        120+
+        D*100
+      ){
+
+        o.triggered=true;
+      }
+
+      if(o.triggered){
+
+        o.timer+=dt;
+
+        if(
+          o.timer>
+          Math.max(
+            .15,
+            .75-
+            D*.45
+          )
+        ){
+
+          const blast =
+            55+
+            D*95;
+
+          hit=
+            distance<
+            blast;
+
+        }
+
+      }
+
+      if(o.timer>1.3){
+
+        o.triggered=false;
+        o.timer=0;
+
+      }
+
+    }
+
+    else if(o.type===11){
+
+      const xx =
+        o.baseX+
+        Math.sin(
+          t*
+          (
+            1.5+
+            D*3
+          )
+        )*
+        o.range;
+
+      const yy =
+        o.baseY+
+        Math.cos(
+          t*
+          (
+            2+
+            D*3
+          )
+        )*
+        (
+          20+
+          D*80
+        );
+
+      hit=
+        circleHit(
+          xx,
+          yy,
+          o.size,
+          player
+        );
+
+    }
+
+    else if(o.type===12){
+
+      const cx=o.baseX;
+      const cy=o.baseY;
+
+      const angle =
+        t*
+        (
+          1.5+
+          D*5
+        );
+
+      const length =
+        45+
+        D*75;
+
+      const ex =
+        cx+
+        Math.cos(angle)*
+        length;
+
+      const ey =
+        cy+
+        Math.sin(angle)*
+        length;
+
+      const px =
+        player.x+
+        player.w/2;
+
+      const py =
+        player.y+
+        player.h/2;
+
+      const A=
+        ex-cx;
+
+      const B=
+        ey-cy;
+
+      const C=
+        px-cx;
+
+      const E=
+        py-cy;
+
+      const dot=
+        A*C+B*E;
+
+      const len2=
+        A*A+B*B;
+
+      const u=
+        clamp(
+          dot/Math.max(1,len2),
+          0,
+          1
+        );
+
+      const closestX=
+        cx+A*u;
+
+      const closestY=
+        cy+B*u;
+
+      hit=
+        Math.hypot(
+          px-closestX,
+          py-closestY
+        )<
+        13+
+        D*9;
+
+    }
+
+    else if(o.type===13){
+
+      const distance =
+        Math.abs(
+          player.x+
+          player.w/2-
+          o.baseX
+        );
+
+      if(
+        distance<
+        100+
+        D*120
+      ){
+
+        o.triggered=true;
+      }
+
+      if(o.triggered){
+
+        o.y +=
+          (
+            120+
+            D*500
+          )*
+          dt;
+
+        if(
+          o.y>
+          levelData.groundY+100
+        ){
+
+          o.y=
+            o.baseY;
+
+          o.triggered=false;
+
+        }
+
+      }
+
+      hit=
+        rectHit(
+          player,
+          {
+            x:o.baseX-o.w/2,
+            y:o.y,
+            w:o.w,
+            h:o.h
+          }
+        );
+
+    }
+
+    else if(o.type===14){
+
+      const distance =
+        Math.abs(
+          player.x+
+          player.w/2-
+          o.baseX
+        );
+
+      if(
+        distance<
+        80+
+        D*120
+      ){
+
+        player.gravityScale=
+          1.7+
+          D*1.7;
+
+        player.vy+=
+          80+
+          D*180;
+
+      }
+
+    }
+
+    else if(o.type===15){
+
+      const distance =
+        Math.abs(
+          player.x+
+          player.w/2-
+          o.baseX
+        );
+
+      if(
+        distance<
+        75+
+        D*115
+      ){
+
+        player.reverseTimer=
+          Math.max(
+            player.reverseTimer,
+            .45+
+            D*1.4
+          );
+
+      }
+
+    }
+
+    else if(o.type===16){
+
+      const distance =
+        Math.hypot(
+          player.x+
+          player.w/2-
+          o.baseX,
+
+          player.y+
+          player.h/2-
+          o.baseY
+        );
+
+      if(
+        distance<
+        o.size+
+        22 &&
+        !o.triggered
+      ){
+
+        o.triggered=true;
+
+        player.x=
+          Math.max(
+            70,
+            player.x-
+            (
+              180+
+              D*350
+            )
+          );
+
+        screenShake=8;
+
+        particleBurst(
+          o.baseX,
+          o.baseY,
+          "danger"
+        );
+
+      }
+
+      if(
+        distance>
+        100
+      ){
+
+        o.triggered=false;
+
+      }
+
+    }
+
+    else if(o.type===17){
+
+      const cx=o.baseX;
+      const cy=o.baseY;
+
+      const radius =
+        30+
+        (
+          Math.sin(t*(
+            2+
+            D*4
+          ))*.5+.5
+        )*
+        (
+          60+
+          D*100
+        );
+
+      const distance=
+        Math.hypot(
+          player.x+
+          player.w/2-
+          cx,
+
+          player.y+
+          player.h/2-
+          cy
+        );
+
+      hit=
+        Math.abs(
+          distance-radius
+        )<
+        12+
+        D*8;
+
+    }
+
+    else if(o.type===18){
+
+      const xx =
+        o.baseX+
+        Math.sin(t*2)*
+        o.range;
+
+      hit=
+        rectHit(
+          player,
+          {
+            x:xx,
+            y:
+              levelData.groundY-
+              90-
+              D*80,
+
+            w:
+              16+
+              D*20,
+
+            h:
+              90+
+              D*120
+          }
+        );
+
+    }
+
+    else if(o.type===19){
+
+      o.y =
+        o.baseY+
+        Math.abs(
+          Math.sin(
+            t*
+            (
+              1.5+
+              D*3
+            )
+          )
+        )*
+        (
+          80+
+          D*170
+        );
+
+      o.x =
+        o.baseX+
+        Math.sin(t*.8)*
+        (
+          25+
+          D*80
+        );
+
+      hit=
+        circleHit(
+          o.x,
+          o.y,
+          o.size+
+          D*5,
+          player
+        );
+
+    }
+
+    if(
+      hit &&
+      player.invincible<=0
+    ){
+
       resetLevel();
+
       return true;
     }
+
   }
+
   return false;
 }
 
 function update(dt){
-  if(paused || !levelData) return;
+
+  if(
+    paused ||
+    !levelData
+  ){
+    return;
+  }
 
   updateParticles(dt);
-  player.dashCooldown=Math.max(0, player.dashCooldown-dt);
-  player.dashTime=Math.max(0, player.dashTime-dt);
-  player.slowTimer=Math.max(0, player.slowTimer-dt);
-  player.reverseTimer=Math.max(0, player.reverseTimer-dt);
-  player.invincible=Math.max(0, player.invincible-dt);
+
+  player.dashCooldown=
+    Math.max(
+      0,
+      player.dashCooldown-dt
+    );
+
+  player.dashTime=
+    Math.max(
+      0,
+      player.dashTime-dt
+    );
+
+  player.slowTimer=
+    Math.max(
+      0,
+      player.slowTimer-dt
+    );
+
+  player.reverseTimer=
+    Math.max(
+      0,
+      player.reverseTimer-dt
+    );
+
+  player.invincible=
+    Math.max(
+      0,
+      player.invincible-dt
+    );
 
   const oldY=player.y;
-  const oldBottom=oldY+player.h;
+
+  const oldBottom=
+    oldY+player.h;
 
   let gravityScale=1;
-  let speedMultiplier=player.slowTimer>0?.55:1;
-  if(player.reverseTimer>0){ speedMultiplier*=.9; }
 
-  for(const g of levelData.gravityZones){
-    if(player.x+player.w>g.x && player.x<g.x+g.w && player.y+player.h>g.y && player.y<g.y+g.h){
+  let speedMultiplier=
+    player.slowTimer>0
+    ? .55
+    : 1;
+
+  if(
+    player.reverseTimer>0
+  ){
+    speedMultiplier*=.9;
+  }
+
+  for(
+    const g
+    of levelData.gravityZones
+  ){
+
+    if(
+      player.x+player.w>g.x &&
+      player.x<g.x+g.w &&
+      player.y+player.h>g.y &&
+      player.y<g.y+g.h
+    ){
+
       gravityScale=g.scale;
     }
   }
 
   let windForce=0;
-  for(const w of levelData.windZones){
-    if(player.x+player.w>w.x && player.x<w.x+w.w && player.y+player.h>w.y && player.y<w.y+w.h){
+
+  for(
+    const w
+    of levelData.windZones
+  ){
+
+    if(
+      player.x+player.w>w.x &&
+      player.x<w.x+w.w &&
+      player.y+player.h>w.y &&
+      player.y<w.y+w.h
+    ){
+
       windForce+=w.force;
     }
   }
 
   let controlX=input.x;
-  if(player.reverseTimer>0){ controlX=-controlX; }
 
-  const targetVX=controlX*player.speed*speedMultiplier;
-  const accel=player.slowTimer>0?6:12;
-  player.vx+=(targetVX-player.vx)*Math.min(1, dt*accel);
-  player.vx+=windForce*dt;
+  if(
+    player.reverseTimer>0
+  ){
 
-  if(player.dashTime>0){ player.vx*=1.015; }
+    controlX=-controlX;
 
-  player.vy+=1550*gravityScale*dt;
-  player.x+=player.vx*dt;
-  player.y+=player.vy*dt;
+  }
+
+  const targetVX=
+    controlX*
+    player.speed*
+    speedMultiplier;
+
+  const accel=
+    player.slowTimer>0
+    ?6
+    :12;
+
+  player.vx+=
+    (
+      targetVX-
+      player.vx
+    )*
+    Math.min(
+      1,
+      dt*accel
+    );
+
+  player.vx+=
+    windForce*dt;
+
+  if(player.dashTime>0){
+
+    player.vx*=1.015;
+
+  }
+
+  player.vy+=
+    1550*
+    gravityScale*
+    dt;
+
+  player.x+=
+    player.vx*dt;
+
+  player.y+=
+    player.vy*dt;
+
   player.grounded=false;
 
-  const now=performance.now()/1000;
+  const now=
+    performance.now()/1000;
 
-  for(const m of levelData.movingPlatforms){
+  for(
+    const m
+    of levelData.movingPlatforms
+  ){
+
     if(m.axis==="x"){
-      m.x=m.baseX+Math.sin(now*m.speed+m.phase)*m.range;
+
+      m.x=
+        m.baseX+
+        Math.sin(
+          now*m.speed+
+          m.phase
+        )*
+        m.range;
+
     }else{
-      m.y=m.baseY+Math.sin(now*m.speed+m.phase)*m.range;
+
+      m.y=
+        m.baseY+
+        Math.sin(
+          now*m.speed+
+          m.phase
+        )*
+        m.range;
+
     }
-    const horizontal=player.x+player.w>m.x-m.w/2 && player.x<m.x+m.w/2;
-    const top=m.y, newBottom=player.y+player.h;
-    if(horizontal && player.vy>=0 && oldBottom<=top+10 && newBottom>=top){
-      player.y=top-player.h;
+
+    const p=m;
+
+    const horizontal=
+      player.x+player.w>p.x-
+      p.w/2 &&
+      player.x<p.x+
+      p.w/2;
+
+    const top=p.y;
+
+    const newBottom=
+      player.y+player.h;
+
+    if(
+      horizontal &&
+      player.vy>=0 &&
+      oldBottom<=top+10 &&
+      newBottom>=top
+    ){
+
+      player.y=
+        top-player.h;
+
       player.vy=0;
       player.grounded=true;
+
     }
+
   }
 
-  for(const p of levelData.platforms){
-    const horizontal=player.x+player.w>p.x && player.x<p.x+p.w;
-    const newBottom=player.y+player.h;
-    if(horizontal && player.vy>=0 && oldBottom<=p.y+10 && newBottom>=p.y){
-      player.y=p.y-player.h;
+  for(
+    const p
+    of levelData.platforms
+  ){
+
+    const horizontal=
+      player.x+player.w>p.x &&
+      player.x<p.x+p.w;
+
+    const newBottom=
+      player.y+player.h;
+
+    if(
+      horizontal &&
+      player.vy>=0 &&
+      oldBottom<=p.y+10 &&
+      newBottom>=p.y
+    ){
+
+      player.y=
+        p.y-player.h;
+
       player.vy=0;
       player.grounded=true;
+
     }
+
   }
 
-  for(const p of levelData.disappearingPlatforms){
+  for(
+    const p
+    of levelData.disappearingPlatforms
+  ){
+
     if(p.active){
+
       p.timer-=dt;
-      if(p.timer<=0){ p.active=false; p.timer=p.respawn; }
+
+      if(p.timer<=0){
+
+        p.active=false;
+
+        p.timer=p.respawn;
+
+      }
+
     }else{
+
       p.timer-=dt;
-      if(p.timer<=0){ p.active=true; p.timer=.8+levelData.tier.d; }
+
+      if(p.timer<=0){
+
+        p.active=true;
+
+        p.timer=
+          .8+
+          levelData.tier.d;
+
+      }
+
     }
-    if(!p.active) continue;
-    const horizontal=player.x+player.w>p.x && player.x<p.x+p.w;
-    const newBottom=player.y+player.h;
-    if(horizontal && player.vy>=0 && oldBottom<=p.y+10 && newBottom>=p.y){
-      player.y=p.y-player.h;
+
+    if(!p.active)
+      continue;
+
+    const horizontal=
+      player.x+player.w>p.x &&
+      player.x<p.x+p.w;
+
+    const newBottom=
+      player.y+player.h;
+
+    if(
+      horizontal &&
+      player.vy>=0 &&
+      oldBottom<=p.y+10 &&
+      newBottom>=p.y
+    ){
+
+      player.y=
+        p.y-player.h;
+
       player.vy=0;
       player.grounded=true;
+
     }
+
   }
 
-  for(const p of levelData.fakePlatforms){
-    if(rectHit(player,p)){
-      particleBurst(p.x+p.w/2, p.y, "danger");
+  for(
+    const p
+    of levelData.fakePlatforms
+  ){
+
+    if(
+      rectHit(player,p)
+    ){
+
+      particleBurst(
+        p.x+p.w/2,
+        p.y,
+        "danger"
+      );
+
       player.vy+=100;
+
     }
+
   }
 
-  for(const s of levelData.slopes){
-    if(player.x+player.w>s.x && player.x<s.x+s.w){
-      const surface=slopeSurfaceY(s, player.x+player.w*.5);
-      const bottom=player.y+player.h;
-      if(player.vy>=0 && bottom>=surface && oldBottom<=surface+15){
-        player.y=surface-player.h;
+  for(
+    const s
+    of levelData.slopes
+  ){
+
+    if(
+      player.x+player.w>s.x &&
+      player.x<s.x+s.w
+    ){
+
+      const surface=
+        slopeSurfaceY(
+          s,
+          player.x+
+          player.w*.5
+        );
+
+      const bottom=
+        player.y+
+        player.h;
+
+      if(
+        player.vy>=0 &&
+        bottom>=surface &&
+        oldBottom<=surface+15
+      ){
+
+        player.y=
+          surface-player.h;
+
         player.vy=0;
         player.grounded=true;
+
       }
+
     }
+
   }
 
   if(player.grounded){
+
     player.coyote=.12;
+
   }else{
-    player.coyote=Math.max(0, player.coyote-dt);
+
+    player.coyote=
+      Math.max(
+        0,
+        player.coyote-dt
+      );
+
   }
 
-  for(const ice of levelData.iceZones){
-    if(player.x+player.w>ice.x && player.x<ice.x+ice.w && player.y+player.h>ice.y && player.y<ice.y+ice.h){
+  for(
+    const ice
+    of levelData.iceZones
+  ){
+
+    if(
+      player.x+player.w>ice.x &&
+      player.x<ice.x+ice.w &&
+      player.y+player.h>ice.y &&
+      player.y<ice.y+ice.h
+    ){
+
       player.slowTimer=.25;
+
       player.vx*=.985;
+
     }
+
   }
 
-  for(const s of levelData.springs){
-    if(rectHit(player,s) && player.vy>=0){
-      player.vy=-s.power;
+  for(
+    const s
+    of levelData.springs
+  ){
+
+    if(
+      rectHit(
+        player,
+        s
+      ) &&
+      player.vy>=0
+    ){
+
+      player.vy=
+        -s.power;
+
       player.grounded=false;
-      particleBurst(s.x, s.y, "normal");
+
+      particleBurst(
+        s.x,
+        s.y,
+        "normal"
+      );
+
     }
+
   }
 
-  for(const s of levelData.stars){
-    if(s.taken) continue;
-    const dx=player.x+player.w/2-s.x, dy=player.y+player.h/2-s.y;
-    if(Math.hypot(dx,dy)<30){
+  for(
+    const s
+    of levelData.stars
+  ){
+
+    if(s.taken)
+      continue;
+
+    const dx=
+      player.x+
+      player.w/2-
+      s.x;
+
+    const dy=
+      player.y+
+      player.h/2-
+      s.y;
+
+    if(
+      Math.hypot(dx,dy)<30
+    ){
+
       s.taken=true;
-      particleBurst(s.x, s.y);
+
+      particleBurst(
+        s.x,
+        s.y
+      );
+
     }
+
   }
 
-  for(const c of levelData.cracks){
-    const hit=player.x+player.w>c.x && player.x<c.x+c.w && player.y+player.h>=c.y-12 && player.y+player.h<=c.y+25;
-    if(hit && !c.active){
+  for(
+    const c
+    of levelData.cracks
+  ){
+
+    const hit=
+      player.x+player.w>c.x &&
+      player.x<c.x+c.w &&
+      player.y+player.h>=c.y-12 &&
+      player.y+player.h<=c.y+25;
+
+    if(
+      hit &&
+      !c.active
+    ){
+
       c.active=true;
-      c.timer=Math.max(.35, 1.0-levelData.tier.d*.6);
+
+      c.timer=
+        Math.max(
+          .35,
+          1.0-
+          levelData.tier.d*.6
+        );
+
     }
-    if(c.active && !c.broken){
+
+    if(
+      c.active &&
+      !c.broken
+    ){
+
       c.timer-=dt;
+
       if(c.timer<=0){
+
         c.broken=true;
-        particleBurst(c.x+c.w/2, c.y, "danger");
+
+        particleBurst(
+          c.x+c.w/2,
+          c.y,
+          "danger"
+        );
+
       }
+
     }
-    if(c.broken && rectHit(player, {x:c.x, y:c.y, w:c.w, h:30})){
+
+    if(
+      c.broken &&
+      rectHit(
+        player,
+        {
+          x:c.x,
+          y:c.y,
+          w:c.w,
+          h:30
+        }
+      )
+    ){
+
       player.vy+=260;
+
     }
+
   }
 
-  for(const b of levelData.balls){
+  for(
+    const b
+    of levelData.balls
+  ){
+
     b.targetTimer-=dt;
-    if(b.targetTimer<=0){
-      b.dir=player.x>b.x?1:-1;
-      b.targetTimer=Math.max(.25, .75+random(level*77+Math.floor(performance.now()/700))*1.2-levelData.tier.d*.4);
+
+    if(
+      b.targetTimer<=0
+    ){
+
+      b.dir=
+        player.x>b.x
+        ?1
+        :-1;
+
+      b.targetTimer=
+        Math.max(
+          .25,
+          .75+
+          random(
+            level*77+
+            Math.floor(
+              performance.now()/700
+            )
+          )*1.2-
+          levelData.tier.d*.4
+        );
+
     }
-    b.x+=b.dir*b.speed*dt;
-    if(b.x<=b.minX){ b.x=b.minX; b.dir=1; }
-    if(b.x>=b.maxX){ b.x=b.maxX; b.dir=-1; }
-    if(circleHit(b.x, b.y, b.r, player)){
-      if(player.invincible<=0){ resetLevel(); return; }
+
+    b.x+=
+      b.dir*
+      b.speed*
+      dt;
+
+    if(
+      b.x<=b.minX
+    ){
+
+      b.x=b.minX;
+      b.dir=1;
+
     }
+
+    if(
+      b.x>=b.maxX
+    ){
+
+      b.x=b.maxX;
+      b.dir=-1;
+
+    }
+
+    if(
+      circleHit(
+        b.x,
+        b.y,
+        b.r,
+        player
+      )
+    ){
+
+      if(player.invincible<=0){
+
+        resetLevel();
+        return;
+
+      }
+
+    }
+
   }
 
-  for(const s of levelData.saws){
-    s.y=s.baseY+Math.sin(now*s.speed+s.phase)*s.amp;
-    if(circleHit(s.x, s.y, s.r, player)){
-      if(player.invincible<=0){ resetLevel(); return; }
+  for(
+    const s
+    of levelData.saws
+  ){
+
+    s.y=
+      s.baseY+
+      Math.sin(
+        now*s.speed+
+        s.phase
+      )*
+      s.amp;
+
+    if(
+      circleHit(
+        s.x,
+        s.y,
+        s.r,
+        player
+      )
+    ){
+
+      if(player.invincible<=0){
+
+        resetLevel();
+        return;
+
+      }
+
     }
+
   }
 
-  for(const l of levelData.lasers){
-    const phase=(now+l.phase)%l.period;
-    const active=phase>l.warning;
-    if(active && rectHit(player, {x:l.x, y:l.y, w:l.w, h:l.h})){
-      if(player.invincible<=0){ resetLevel(); return; }
+  for(
+    const l
+    of levelData.lasers
+  ){
+
+    const phase=
+      (
+        now+
+        l.phase
+      )%
+      l.period;
+
+    const active=
+      phase>
+      l.warning;
+
+    if(
+      active &&
+      rectHit(
+        player,
+        {
+          x:l.x,
+          y:l.y,
+          w:l.w,
+          h:l.h
+        }
+      )
+    ){
+
+      if(player.invincible<=0){
+
+        resetLevel();
+        return;
+
+      }
+
     }
+
   }
 
-  for(const b of levelData.bombs){
+  for(
+    const b
+    of levelData.bombs
+  ){
+
     b.timer-=dt;
     b.pulse+=dt;
+
     if(b.timer<=0){
-      const dx=player.x+player.w/2-b.x, dy=player.y+player.h/2-b.y;
-      if(Math.hypot(dx,dy)<110+levelData.tier.d*80){
-        if(player.invincible<=0){ resetLevel(); return; }
+
+      const dx=
+        player.x+
+        player.w/2-
+        b.x;
+
+      const dy=
+        player.y+
+        player.h/2-
+        b.y;
+
+      const distance=
+        Math.hypot(dx,dy);
+
+      if(distance<
+        110+
+        levelData.tier.d*80
+      ){
+
+        if(player.invincible<=0){
+
+          resetLevel();
+          return;
+
+        }
+
       }
-      b.timer=.8+random(performance.now())*1.5;
+
+      b.timer=
+        .8+
+        random(
+          performance.now()
+        )*1.5;
+
     }
+
   }
 
-  for(const f of levelData.fallers){
+  for(
+    const f
+    of levelData.fallers
+  ){
+
     f.y+=f.vy*dt;
-    if(f.y>levelData.groundY+40){ f.y=f.resetY; }
-    if(rectHit(player, {x:f.x-8, y:f.y-8, w:f.w+16, h:f.h+16})){
-      if(player.invincible<=0){ resetLevel(); return; }
+
+    if(
+      f.y>
+      levelData.groundY+40
+    ){
+
+      f.y=f.resetY;
+
     }
+
+    const box={
+      x:f.x-8,
+      y:f.y-8,
+      w:f.w+16,
+      h:f.h+16
+    };
+
+    if(
+      rectHit(
+        player,
+        box
+      )
+    ){
+
+      if(player.invincible<=0){
+
+        resetLevel();
+        return;
+
+      }
+
+    }
+
   }
 
-  for(const w of levelData.walls){
-    w.x+=Math.sin(now*w.speed+w.phase)*w.range*dt;
-    if(rectHit(player, w)){
-      if(player.invincible<=0){ resetLevel(); return; }
+  for(
+    const w
+    of levelData.walls
+  ){
+
+    w.x+=
+      Math.sin(
+        now*w.speed+
+        w.phase
+      )*
+      w.range*
+      dt;
+
+    if(
+      rectHit(
+        player,
+        w
+      )
+    ){
+
+      if(player.invincible<=0){
+
+        resetLevel();
+        return;
+
+      }
+
     }
+
   }
 
-  for(const p of levelData.portals){
-    if(p.used) continue;
-    if(Math.hypot(player.x+player.w/2-p.x, player.y+player.h/2-p.y)<p.r+18){
+  for(
+    const p
+    of levelData.portals
+  ){
+
+    if(p.used)
+      continue;
+
+    if(
+      Math.hypot(
+        player.x+
+        player.w/2-
+        p.x,
+
+        player.y+
+        player.h/2-
+        p.y
+      )<p.r+18
+    ){
+
       p.used=true;
-      player.x+=p.targetOffset;
-      particleBurst(p.x, p.y);
+
+      player.x+=
+        p.targetOffset;
+
+      particleBurst(
+        p.x,
+        p.y
+      );
+
       screenShake=8;
+
     }
+
   }
 
-  for(const r of levelData.reverseZones){
-    if(player.x+player.w>r.x && player.x<r.x+r.w && player.y+player.h>r.y && player.y<r.y+r.h){
-      player.reverseTimer=r.time;
+  for(
+    const r
+    of levelData.reverseZones
+  ){
+
+    if(
+      player.x+player.w>r.x &&
+      player.x<r.x+r.w &&
+      player.y+player.h>r.y &&
+      player.y<r.y+r.h
+    ){
+
+      player.reverseTimer=
+        r.time;
+
       dangerEl.classList.add("show");
+
     }
+
   }
 
-  for(const h of levelData.hazards){
-    if(rectHit(player, h)){
-      if(player.invincible<=0){ resetLevel(); return; }
+  for(
+    const h
+    of levelData.hazards
+  ){
+
+    if(
+      rectHit(
+        player,
+        h
+      )
+    ){
+
+      if(player.invincible<=0){
+
+        resetLevel();
+        return;
+
+      }
+
     }
+
   }
 
-  for(const l of levelData.lightnings){
+  for(
+    const l
+    of levelData.lightnings
+  ){
+
     l.timer+=dt;
-    if(l.timer>l.cool){ l.timer=0; }
-    const phase=l.timer/l.cool;
-    const strikeStart=l.warning/l.cool;
-    if(phase>=strikeStart && phase<strikeStart+.14){
-      stormFlash=1;
-      if(Math.abs(player.x+player.w/2-l.x)<48 && player.y>l.y-15){
-        if(player.invincible<=0){ resetLevel(); return; }
-      }
+
+    if(
+      l.timer>l.cool
+    ){
+
+      l.timer=0;
+
     }
+
+    const phase=
+      l.timer/l.cool;
+
+    const strikeStart=
+      l.warning/l.cool;
+
+    if(
+      phase>=strikeStart &&
+      phase<strikeStart+.14
+    ){
+
+      stormFlash=1;
+
+      if(
+        Math.abs(
+          player.x+
+          player.w/2-
+          l.x
+        )<48 &&
+        player.y>
+        l.y-15
+      ){
+
+        if(player.invincible<=0){
+
+          resetLevel();
+          return;
+
+        }
+
+      }
+
+    }
+
   }
 
-  for(const c of levelData.chaos){
-    const t=now+c.phase;
+  for(
+    const c
+    of levelData.chaos
+  ){
+
+    const t=
+      now+
+      c.phase;
+
     let hit=false;
+
     if(c.type===0){
-      hit=circleHit(c.x+Math.sin(t*2)*40, c.y+Math.cos(t*1.5)*30, c.size, player);
-    }
-    else if(c.type===1){
-      hit=rectHit(player, {x:c.x+Math.sin(t)*60, y:c.y, w:c.size*2, h:c.size});
-    }
-    else if(c.type===2){
-      hit=rectHit(player, {x:c.x, y:c.y+Math.sin(t*2)*40, w:c.size, h:c.size*3});
-    }
-    else if(c.type===3){
-      hit=circleHit(c.x+Math.cos(t*2)*55, c.y+Math.sin(t*2)*55, c.size, player);
-    }
-    else if(c.type===4){
-      hit=circleHit(c.x, c.y, c.size*(1+Math.sin(t*5)*.5), player);
-    }
-    else if(c.type===5){
-      hit=circleHit(c.x, c.y+((t*c.speed)%280), c.size*.7, player);
-    }
-    else if(c.type===6){
-      hit=rectHit(player, {x:c.x-80, y:c.y+Math.sin(t*1.7)*90, w:160, h:5});
-    }
-    else if(c.type===7){
-      hit=circleHit(c.x+Math.cos(t)*70, c.y+Math.sin(t)*70, c.size, player);
-    }
-    else if(c.type===8){
-      hit=rectHit(player, {x:c.x+Math.sin(t*2)*45, y:c.y-70, w:c.size, h:140});
-    }
-    else if(c.type===9){
-      hit=circleHit(c.x, c.y+Math.abs(Math.sin(t*2))*80, c.size, player);
-    }
-    else if(c.type===10){
-      hit=circleHit(c.x+Math.sin(t*3)*90, c.y, c.size, player);
-    }
-    else if(c.type===11){
-      hit=circleHit(c.x+Math.sin(t)*50, c.y+Math.cos(t)*50, c.size, player);
-    }
-    else if(c.type===12){
-      hit=rectHit(player, {x:c.x+Math.sin(t)*35, y:c.y+Math.cos(t)*35, w:c.size, h:c.size});
-    }
-    else{
-      if(Math.sin(t*c.speed*.03)>0.8){
-        hit=circleHit(c.x, c.y, c.size, player);
-      }
+
+      const cx=
+        c.x+
+        Math.sin(t*2)*40;
+
+      const cy=
+        c.y+
+        Math.cos(t*1.5)*30;
+
+      hit=
+        circleHit(
+          cx,
+          cy,
+          c.size,
+          player
+        );
+
     }
 
-    if(hit && player.invincible<=0){
+    else if(c.type===1){
+
+      hit=
+        rectHit(
+          player,
+          {
+            x:
+              c.x+
+              Math.sin(t)*60,
+
+            y:c.y,
+
+            w:c.size*2,
+            h:c.size
+          }
+        );
+
+    }
+
+    else if(c.type===2){
+
+      hit=
+        rectHit(
+          player,
+          {
+            x:c.x,
+            y:
+              c.y+
+              Math.sin(t*2)*40,
+
+            w:c.size,
+            h:c.size*3
+          }
+        );
+
+    }
+
+    else if(c.type===3){
+
+      const cx=
+        c.x+
+        Math.cos(t*2)*55;
+
+      const cy=
+        c.y+
+        Math.sin(t*2)*55;
+
+      hit=
+        circleHit(
+          cx,
+          cy,
+          c.size,
+          player
+        );
+
+    }
+
+    else if(c.type===4){
+
+      const radius=
+        c.size*
+        (
+          1+
+          Math.sin(t*5)*.5
+        );
+
+      hit=
+        circleHit(
+          c.x,
+          c.y,
+          radius,
+          player
+        );
+
+    }
+
+    else if(c.type===5){
+
+      const yy=
+        c.y+
+        (
+          (t*c.speed)%280
+        );
+
+      hit=
+        circleHit(
+          c.x,
+          yy,
+          c.size*.7,
+          player
+        );
+
+    }
+
+    else if(c.type===6){
+
+      const yy=
+        c.y+
+        Math.sin(t*1.7)*90;
+
+      hit=
+        rectHit(
+          player,
+          {
+            x:c.x-80,
+            y:yy,
+            w:160,
+            h:5
+          }
+        );
+
+    }
+
+    else if(c.type===7){
+
+      const cx=
+        c.x+
+        Math.cos(t)*70;
+
+      const cy=
+        c.y+
+        Math.sin(t)*70;
+
+      hit=
+        circleHit(
+          cx,
+          cy,
+          c.size,
+          player
+        );
+
+    }
+
+    else if(c.type===8){
+
+      const xx=
+        c.x+
+        Math.sin(t*2)*45;
+
+      hit=
+        rectHit(
+          player,
+          {
+            x:xx,
+            y:c.y-70,
+            w:c.size,
+            h:140
+          }
+        );
+
+    }
+
+    else if(c.type===9){
+
+      const yy=
+        c.y+
+        Math.abs(
+          Math.sin(t*2)
+        )*
+        80;
+
+      hit=
+        circleHit(
+          c.x,
+          yy,
+          c.size,
+          player
+        );
+
+    }
+
+    else if(c.type===10){
+
+      const xx=
+        c.x+
+        Math.sin(t*3)*90;
+
+      hit=
+        circleHit(
+          xx,
+          c.y,
+          c.size,
+          player
+        );
+
+    }
+
+    else if(c.type===11){
+
+      hit=
+        circleHit(
+          c.x+
+          Math.sin(t)*50,
+
+          c.y+
+          Math.cos(t)*50,
+
+          c.size,
+
+          player
+        );
+
+    }
+
+    else if(c.type===12){
+
+      hit=
+        rectHit(
+          player,
+          {
+            x:
+              c.x+
+              Math.sin(t)*35,
+
+            y:
+              c.y+
+              Math.cos(t)*35,
+
+            w:c.size,
+            h:c.size
+          }
+        );
+
+    }
+
+    else{
+
+      if(
+        Math.sin(t*c.speed*.03)>0.8
+      ){
+
+        hit=
+          circleHit(
+            c.x,
+            c.y,
+            c.size,
+            player
+          );
+
+      }
+
+    }
+
+    if(
+      hit &&
+      player.invincible<=0
+    ){
+
       resetLevel();
       return;
+
     }
+
   }
 
-  if(updateAdvancedObstacles(dt)) return;
+  if(
+    updateAdvancedObstacles(dt)
+  ){
+    return;
+  }
 
-  const danger=levelData.tier.d;
-  if(danger>.65 || player.reverseTimer>0){
+  const danger=
+    levelData.tier.d;
+
+  if(
+    danger>.65 ||
+    player.reverseTimer>0
+  ){
+
     dangerEl.classList.add("show");
+
   }else{
+
     dangerEl.classList.remove("show");
+
   }
 
-  stormFlash=Math.max(0, stormFlash-dt*5);
-  screenShake=Math.max(0, screenShake-dt*18);
+  stormFlash=
+    Math.max(
+      0,
+      stormFlash-
+      dt*5
+    );
 
-  if(player.y>H+180){
+  screenShake=
+    Math.max(
+      0,
+      screenShake-
+      dt*18
+    );
+
+  if(
+    player.y>
+    H+180
+  ){
+
     resetLevel();
     return;
+
   }
 
   let gateBlocked=false;
-  for(const g of levelData.finishGates){
-    const phase=(now+g.phase)%g.period;
-    const active=phase<g.period*.55;
-    if(active && rectHit(player, {x:g.x, y:g.y, w:g.w, h:g.h})){
+
+  for(
+    const g
+    of levelData.finishGates
+  ){
+
+    const phase=
+      (
+        now+
+        g.phase
+      )%
+      g.period;
+
+    const active=
+      phase<
+      g.period*.55;
+
+    if(
+      active &&
+      rectHit(
+        player,
+        {
+          x:g.x,
+          y:g.y,
+          w:g.w,
+          h:g.h
+        }
+      )
+    ){
+
       gateBlocked=true;
+
     }
+
   }
 
-  if(!gateBlocked && player.x+player.w>=levelData.finishX){
+  if(
+    !gateBlocked &&
+    player.x+
+    player.w>=
+    levelData.finishX
+  ){
+
     winLevel();
     return;
+
   }
 
-  const targetCamera=Math.max(0, player.x-W*.32);
-  cameraX+=(targetCamera-cameraX)*Math.min(1, dt*7);
+  const targetCamera=
+    Math.max(
+      0,
+      player.x-
+      W*.32
+    );
+
+  cameraX+=
+    (
+      targetCamera-
+      cameraX
+    )*
+    Math.min(
+      1,
+      dt*7
+    );
+
 }
 
 function drawBackground(){
-  const d=levelData?levelData.tier.d:0;
-  const sky=ctx.createLinearGradient(0,0,0,H);
-  sky.addColorStop(0, d>.7?"#20243a":"#8fd3ff");
-  sky.addColorStop(.55, d>.7?"#343047":"#b9e8b0");
-  sky.addColorStop(1, d>.7?"#171821":"#e9d8a6");
+
+  const d=
+    levelData
+    ?levelData.tier.d
+    :0;
+
+  const sky=
+    ctx.createLinearGradient(
+      0,
+      0,
+      0,
+      H
+    );
+
+  sky.addColorStop(
+    0,
+    d>.7
+    ?"#20243a"
+    :"#8fd3ff"
+  );
+
+  sky.addColorStop(
+    .55,
+    d>.7
+    ?"#343047"
+    :"#b9e8b0"
+  );
+
+  sky.addColorStop(
+    1,
+    d>.7
+    ?"#171821"
+    :"#e9d8a6"
+  );
 
   ctx.fillStyle=sky;
-  ctx.fillRect(0,0,W,H);
+
+  ctx.fillRect(
+    0,
+    0,
+    W,
+    H
+  );
 
   ctx.save();
-  ctx.translate(-cameraX*.12,0);
 
-  for(let i=0; i<35; i++){
+  ctx.translate(
+    -cameraX*.12,
+    0
+  );
+
+  for(
+    let i=0;
+    i<35;
+    i++
+  ){
+
     const x=i*280+100;
     const y=95+(i%4)*45;
-    ctx.fillStyle=d>.7?"rgba(150,150,180,.15)":"rgba(255,255,255,.45)";
+
+    ctx.fillStyle=
+      d>.7
+      ?"rgba(150,150,180,.15)"
+      :"rgba(255,255,255,.45)";
+
     ctx.beginPath();
-    ctx.arc(x,y,28,0,Math.PI*2);
-    ctx.arc(x+30,y-8,35,0,Math.PI*2);
-    ctx.arc(x+65,y,25,0,Math.PI*2);
+
+    ctx.arc(
+      x,
+      y,
+      28,
+      0,
+      Math.PI*2
+    );
+
+    ctx.arc(
+      x+30,
+      y-8,
+      35,
+      0,
+      Math.PI*2
+    );
+
+    ctx.arc(
+      x+65,
+      y,
+      25,
+      0,
+      Math.PI*2
+    );
+
     ctx.fill();
+
   }
 
-  if(levelData && levelData.lightnings.length){
-    for(const l of levelData.lightnings){
-      const phase=l.timer/l.cool;
+  if(
+    levelData &&
+    levelData.lightnings.length
+  ){
+
+    for(
+      const l
+      of levelData.lightnings
+    ){
+
+      const phase=
+        l.timer/l.cool;
+
       let alpha=.2;
-      if(phase<l.warning/l.cool){ alpha=.65; }
-      ctx.fillStyle=`rgba(35,40,60,${alpha})`;
+
+      if(
+        phase<
+        l.warning/l.cool
+      ){
+        alpha=.65;
+      }
+
+      ctx.fillStyle=
+        `rgba(35,40,60,${alpha})`;
+
       ctx.beginPath();
-      ctx.arc(l.x,75,45,0,Math.PI*2);
-      ctx.arc(l.x+42,85,55,0,Math.PI*2);
-      ctx.arc(l.x-40,88,42,0,Math.PI*2);
+
+      ctx.arc(
+        l.x,
+        75,
+        45,
+        0,
+        Math.PI*2
+      );
+
+      ctx.arc(
+        l.x+42,
+        85,
+        55,
+        0,
+        Math.PI*2
+      );
+
+      ctx.arc(
+        l.x-40,
+        88,
+        42,
+        0,
+        Math.PI*2
+      );
+
       ctx.fill();
+
     }
+
   }
+
   ctx.restore();
 
   if(stormFlash>0){
-    ctx.fillStyle=`rgba(255,255,255,${Math.min(.5, stormFlash*.5)})`;
-    ctx.fillRect(0,0,W,H);
+
+    ctx.fillStyle=
+      `rgba(
+        255,
+        255,
+        255,
+        ${Math.min(
+          .5,
+          stormFlash*.5
+        )}
+      )`;
+
+    ctx.fillRect(
+      0,
+      0,
+      W,
+      H
+    );
+
   }
 }
 
 function drawAdvancedObstacles(){
-  if(!levelData || !levelData.advancedObstacles) return;
-  const now=performance.now()/1000;
-  const D=levelData.tier.d;
 
-  for(const o of levelData.advancedObstacles){
-    const t=now+o.phase+o.variant*.001;
+  if(
+    !levelData ||
+    !levelData.advancedObstacles
+  ){
+    return;
+  }
+
+  const now=
+    performance.now()/1000;
+
+  const D=
+    levelData.tier.d;
+
+  for(
+    const o
+    of levelData.advancedObstacles
+  ){
+
+    const t=
+      now+
+      o.phase+
+      o.variant*.001;
+
     ctx.save();
 
     if(o.type===0){
+
       ctx.fillStyle="#ff315d";
+
       ctx.beginPath();
-      ctx.arc(o.x, o.y, o.size+4, 0, Math.PI*2);
+
+      ctx.arc(
+        o.x,
+        o.y,
+        o.size+4,
+        0,
+        Math.PI*2
+      );
+
       ctx.fill();
+
       ctx.fillStyle="#fff";
+
       ctx.beginPath();
-      ctx.arc(o.x-4, o.y-3, 3, 0, Math.PI*2);
-      ctx.arc(o.x+5, o.y-3, 3, 0, Math.PI*2);
+
+      ctx.arc(
+        o.x-4,
+        o.y-3,
+        3,
+        0,
+        Math.PI*2
+      );
+
+      ctx.arc(
+        o.x+5,
+        o.y-3,
+        3,
+        0,
+        Math.PI*2
+      );
+
       ctx.fill();
+
     }
+
     else if(o.type===1){
-      ctx.fillStyle=o.triggered?"rgba(255,50,80,.9)":"#4b4d55";
-      ctx.fillRect(o.baseX-o.w, levelData.groundY-7, o.w*2, 9);
+
+      ctx.fillStyle=
+        o.triggered
+        ?"rgba(255,50,80,.9)"
+        :"#4b4d55";
+
+      ctx.fillRect(
+        o.baseX-o.w,
+        levelData.groundY-7,
+        o.w*2,
+        9
+      );
+
       if(o.triggered){
+
         ctx.fillStyle="#ef476f";
-        for(let i=-1; i<=1; i++){
+
+        for(
+          let i=-1;
+          i<=1;
+          i++
+        ){
+
           ctx.beginPath();
-          ctx.moveTo(o.baseX+i*18-8, levelData.groundY);
-          ctx.lineTo(o.baseX+i*18, levelData.groundY-35-D*25);
-          ctx.lineTo(o.baseX+i*18+8, levelData.groundY);
+
+          ctx.moveTo(
+            o.baseX+i*18-8,
+            levelData.groundY
+          );
+
+          ctx.lineTo(
+            o.baseX+i*18,
+            levelData.groundY-35-D*25
+          );
+
+          ctx.lineTo(
+            o.baseX+i*18+8,
+            levelData.groundY
+          );
+
           ctx.fill();
+
         }
+
       }
+
     }
+
     else if(o.type===2){
-      const cycle=(t+o.delay)%(1.25-D*.35);
-      const active=cycle>(.55-D*.2);
+
+      const cycle=
+        (
+          t+
+          o.delay
+        )%
+        (
+          1.25-
+          D*.35
+        );
+
+      const active=
+        cycle>
+        (
+          .55-
+          D*.2
+        );
+
       ctx.fillStyle="#ef476f";
-      const h=active?48+D*35:7;
+
+      const h=
+        active
+        ?48+D*35
+        :7;
+
       ctx.beginPath();
-      ctx.moveTo(o.baseX-o.w/2, levelData.groundY);
-      ctx.lineTo(o.baseX, levelData.groundY-h);
-      ctx.lineTo(o.baseX+o.w/2, levelData.groundY);
+
+      ctx.moveTo(
+        o.baseX-o.w/2,
+        levelData.groundY
+      );
+
+      ctx.lineTo(
+        o.baseX,
+        levelData.groundY-h
+      );
+
+      ctx.lineTo(
+        o.baseX+o.w/2,
+        levelData.groundY
+      );
+
       ctx.fill();
+
     }
+
     else if(o.type===3){
-      const xx=o.baseX+Math.sin(t*(1.2+D*3))*o.range;
-      const yy=o.baseY+Math.sin(t*2)*25;
+
+      const xx =
+        o.baseX+
+        Math.sin(t*(
+          1.2+
+          D*3
+        ))*
+        o.range;
+
+      const yy =
+        o.baseY+
+        Math.sin(t*2)*25;
+
       ctx.fillStyle="#ff4d6d";
-      ctx.fillRect(xx, yy, o.w, o.h);
+
+      ctx.fillRect(
+        xx,
+        yy,
+        o.w,
+        o.h
+      );
+
     }
+
     else if(o.type===4){
-      const cycle=(t*(.75+D*2.2))%2;
-      const down=cycle<1?cycle:2-cycle;
-      const yy=50+down*(levelData.groundY-100);
+
+      const cycle=
+        (
+          t*
+          (
+            .75+
+            D*2.2
+          )
+        )%2;
+
+      const down=
+        cycle<1
+        ?cycle
+        :2-cycle;
+
+      const yy=
+        50+
+        down*
+        (
+          levelData.groundY-
+          100
+        );
+
       ctx.fillStyle="#5f55a8";
-      ctx.fillRect(o.baseX-o.w/2, yy, o.w, o.h+25);
+
+      ctx.fillRect(
+        o.baseX-o.w/2,
+        yy,
+        o.w,
+        o.h+25
+      );
+
       ctx.fillStyle="#ef476f";
-      ctx.fillRect(o.baseX-o.w/2, yy+o.h+20, o.w, 7);
+
+      ctx.fillRect(
+        o.baseX-o.w/2,
+        yy+o.h+20,
+        o.w,
+        7
+      );
+
     }
+
     else if(o.type===5){
+
       if(o.triggered){
-        const radius=o.timer*(180+D*260);
-        ctx.strokeStyle="rgba(255,70,100,.85)";
-        ctx.lineWidth=5+D*4;
+
+        const radius=
+          o.timer*
+          (
+            180+
+            D*260
+          );
+
+        ctx.strokeStyle=
+          "rgba(255,70,100,.85)";
+
+        ctx.lineWidth=
+          5+
+          D*4;
+
         ctx.beginPath();
-        ctx.arc(o.baseX, o.baseY, radius, 0, Math.PI*2);
+
+        ctx.arc(
+          o.baseX,
+          o.baseY,
+          radius,
+          0,
+          Math.PI*2
+        );
+
         ctx.stroke();
+
       }else{
+
         ctx.fillStyle="#ffb703";
+
         ctx.beginPath();
-        ctx.arc(o.baseX, o.baseY, 10+Math.sin(t*5)*3, 0, Math.PI*2);
+
+        ctx.arc(
+          o.baseX,
+          o.baseY,
+          10+
+          Math.sin(t*5)*3,
+          0,
+          Math.PI*2
+        );
+
         ctx.fill();
+
       }
+
     }
+
     else if(o.type===6){
-      ctx.globalAlpha=o.triggered?.55:1;
+
+      ctx.globalAlpha=
+        o.triggered
+        ?.55
+        :1;
+
       ctx.fillStyle="#8e72ff";
-      ctx.fillRect(o.baseX-o.w, levelData.groundY-8, o.w*2, 8);
+
+      ctx.fillRect(
+        o.baseX-o.w,
+        levelData.groundY-8,
+        o.w*2,
+        8
+      );
+
       ctx.globalAlpha=1;
+
     }
+
     else if(o.type===7){
+
       ctx.fillStyle="#7b61ff";
+
       ctx.beginPath();
-      ctx.arc(o.x, o.y, o.size, 0, Math.PI*2);
+
+      ctx.arc(
+        o.x,
+        o.y,
+        o.size,
+        0,
+        Math.PI*2
+      );
+
       ctx.fill();
+
       ctx.strokeStyle="#ff4d6d";
+
       ctx.lineWidth=4;
+
       ctx.beginPath();
-      ctx.moveTo(o.x, o.y-o.size);
-      ctx.lineTo(o.x, o.y-o.size-35);
+
+      ctx.moveTo(
+        o.x,
+        o.y-o.size
+      );
+
+      ctx.lineTo(
+        o.x,
+        o.y-o.size-35
+      );
+
       ctx.stroke();
+
     }
+
     else if(o.type===8){
-      const xx=o.baseX+Math.sin(t*(.8+D*2.5))*o.range;
-      const yy=levelData.groundY-o.h-10-Math.abs(Math.sin(t*1.4))*(30+D*100);
+
+      const xx =
+        o.baseX+
+        Math.sin(t*(
+          .8+
+          D*2.5
+        ))*
+        o.range;
+
+      const yy =
+        levelData.groundY-
+        o.h-
+        10-
+        Math.abs(
+          Math.sin(t*1.4)
+        )*
+        (
+          30+
+          D*100
+        );
+
       ctx.fillStyle="#8e72ff";
-      ctx.fillRect(xx, yy, o.w, o.h);
+
+      ctx.fillRect(
+        xx,
+        yy,
+        o.w,
+        o.h
+      );
+
     }
+
     else if(o.type===9){
-      const cycle=(t*(.9+D*3))%1;
-      const active=cycle>(.22-D*.1);
-      const yy=o.baseY+Math.sin(t*1.7)*(25+D*100);
-      ctx.fillStyle=active?"rgba(255,40,70,.95)":"rgba(255,220,70,.5)";
-      ctx.fillRect(o.baseX-90-D*60, yy, 180+D*120, active?8+D*7:3);
+
+      const cycle=
+        (
+          t*
+          (
+            .9+
+            D*3
+          )
+        )%1;
+
+      const active=
+        cycle>
+        (
+          .22-
+          D*.1
+        );
+
+      const yy =
+        o.baseY+
+        Math.sin(t*1.7)*
+        (
+          25+
+          D*100
+        );
+
+      ctx.fillStyle=
+        active
+        ?"rgba(255,40,70,.95)"
+        :"rgba(255,220,70,.5)";
+
+      ctx.fillRect(
+        o.baseX-90-D*60,
+        yy,
+        180+D*120,
+        active
+        ?8+D*7
+        :3
+      );
+
     }
+
     else if(o.type===10){
-      const pulse=Math.sin(t*8)*.2;
+
+      const pulse=
+        Math.sin(t*8)*.2;
+
       ctx.fillStyle="#222";
+
       ctx.beginPath();
-      ctx.arc(o.baseX, o.baseY, o.size*(1+pulse), 0, Math.PI*2);
+
+      ctx.arc(
+        o.baseX,
+        o.baseY,
+        o.size*(1+pulse),
+        0,
+        Math.PI*2
+      );
+
       ctx.fill();
-      ctx.fillStyle=o.triggered?"red":"#ffd166";
+
+      ctx.fillStyle=
+        o.triggered
+        ?"red"
+        :"#ffb703";
+
       ctx.beginPath();
-      ctx.arc(o.baseX, o.baseY, o.size*.5, 0, Math.PI*2);
+
+      ctx.arc(
+        o.baseX-4,
+        o.baseY-4,
+        4,
+        0,
+        Math.PI*2
+      );
+
       ctx.fill();
+
     }
+
     else if(o.type===11){
-      const xx=o.baseX+Math.sin(t*(1.5+D*3))*o.range;
-      const yy=o.baseY+Math.cos(t*(2+D*3))*(20+D*80);
-      ctx.fillStyle="#4cc9f0";
+
+      const xx =
+        o.baseX+
+        Math.sin(
+          t*
+          (
+            1.5+
+            D*3
+          )
+        )*
+        o.range;
+
+      const yy =
+        o.baseY+
+        Math.cos(
+          t*
+          (
+            2+
+            D*3
+          )
+        )*
+        (
+          20+
+          D*80
+        );
+
+      ctx.fillStyle="#ff6b35";
+
       ctx.beginPath();
-      ctx.arc(xx, yy, o.size, 0, Math.PI*2);
+
+      ctx.arc(
+        xx,
+        yy,
+        o.size,
+        0,
+        Math.PI*2
+      );
+
       ctx.fill();
+
     }
+
     else if(o.type===12){
-      const cx=o.baseX, cy=o.baseY;
-      const angle=t*(1.5+D*5);
-      const length=45+D*75;
-      const ex=cx+Math.cos(angle)*length;
-      const ey=cy+Math.sin(angle)*length;
-      ctx.strokeStyle="#f72585";
-      ctx.lineWidth=4;
+
+      const angle=
+        t*
+        (
+          1.5+
+          D*5
+        );
+
+      const length=
+        45+
+        D*75;
+
+      ctx.translate(
+        o.baseX,
+        o.baseY
+      );
+
+      ctx.rotate(angle);
+
+      ctx.fillStyle="#ef476f";
+
+      ctx.fillRect(
+        0,
+        -5,
+        length,
+        10
+      );
+
+      ctx.fillRect(
+        -length,
+        -5,
+        length,
+        10
+      );
+
+      ctx.fillStyle="#222";
+
       ctx.beginPath();
-      ctx.moveTo(cx, cy);
-      ctx.lineTo(ex, ey);
-      ctx.stroke();
+
+      ctx.arc(
+        0,
+        0,
+        10,
+        0,
+        Math.PI*2
+      );
+
+      ctx.fill();
+
     }
+
     else if(o.type===13){
-      ctx.fillStyle="#480ca8";
-      ctx.fillRect(o.baseX-o.w/2, o.y, o.w, o.h);
+
+      ctx.fillStyle="#6c4cff";
+
+      ctx.fillRect(
+        o.baseX-o.w/2,
+        o.y,
+        o.w,
+        o.h
+      );
+
+      ctx.fillStyle="#fff";
+
+      ctx.fillRect(
+        o.baseX-4,
+        o.y+5,
+        4,
+        4
+      );
+
     }
+
     else if(o.type===14){
-      ctx.fillStyle="rgba(72,12,168,.18)";
-      ctx.fillRect(o.baseX-50, 0, 100, levelData.groundY);
-    }
-    else if(o.type===15){
-      ctx.fillStyle="rgba(247,37,133,.18)";
-      ctx.fillRect(o.baseX-60, 0, 120, levelData.groundY);
-    }
-    else if(o.type===16){
-      ctx.fillStyle="#3a0ca3";
-      ctx.beginPath();
-      ctx.arc(o.baseX, o.baseY, o.size, 0, Math.PI*2);
-      ctx.fill();
-    }
-    else if(o.type===17){
-      const cx=o.baseX, cy=o.baseY;
-      const radius=30+(Math.sin(t*(2+D*4))*.5+.5)*(60+D*100);
-      ctx.strokeStyle="rgba(247,37,133,.6)";
+
+      ctx.strokeStyle=
+        "rgba(120,80,255,.65)";
+
       ctx.lineWidth=3;
+
       ctx.beginPath();
-      ctx.arc(cx, cy, radius, 0, Math.PI*2);
+
+      ctx.arc(
+        o.baseX,
+        o.baseY,
+        30+
+        Math.sin(t*3)*8,
+        0,
+        Math.PI*2
+      );
+
       ctx.stroke();
+
     }
-    else if(o.type===18){
-      const xx=o.baseX+Math.sin(t*2)*o.range;
-      ctx.fillStyle="#7209b7";
-      ctx.fillRect(xx, levelData.groundY-90-D*80, 16+D*20, 90+D*120);
-    }
-    else if(o.type===19){
-      ctx.fillStyle="#f72585";
+
+    else if(o.type===15){
+
+      ctx.strokeStyle=
+        "rgba(255,80,160,.8)";
+
+      ctx.lineWidth=4;
+
       ctx.beginPath();
-      ctx.arc(o.x, o.y, o.size+D*5, 0, Math.PI*2);
+
+      ctx.arc(
+        o.baseX,
+        o.baseY,
+        25+
+        Math.sin(t*4)*8,
+        0,
+        Math.PI*2
+      );
+
+      ctx.stroke();
+
+      ctx.font="bold 17px system-ui";
+      ctx.fillStyle="#fff";
+      ctx.textAlign="center";
+      ctx.fillText(
+        "↔",
+        o.baseX,
+        o.baseY+6
+      );
+
+    }
+
+    else if(o.type===16){
+
+      ctx.strokeStyle=
+        o.triggered
+        ?"rgba(255,80,80,.4)"
+        :"#64d8ff";
+
+      ctx.lineWidth=5;
+
+      ctx.beginPath();
+
+      ctx.arc(
+        o.baseX,
+        o.baseY,
+        o.size+8,
+        0,
+        Math.PI*2
+      );
+
+      ctx.stroke();
+
+    }
+
+    else if(o.type===17){
+
+      const radius =
+        30+
+        (
+          Math.sin(t*(
+            2+
+            D*4
+          ))*.5+.5
+        )*
+        (
+          60+
+          D*100
+        );
+
+      ctx.strokeStyle="#ff315d";
+
+      ctx.lineWidth=
+        12+
+        D*8;
+
+      ctx.beginPath();
+
+      ctx.arc(
+        o.baseX,
+        o.baseY,
+        radius,
+        0,
+        Math.PI*2
+      );
+
+      ctx.stroke();
+
+    }
+
+    else if(o.type===18){
+
+      const xx =
+        o.baseX+
+        Math.sin(t*2)*
+        o.range;
+
+      ctx.fillStyle="#ff315d";
+
+      ctx.fillRect(
+        xx,
+        levelData.groundY-90-D*80,
+        16+D*20,
+        90+D*120
+      );
+
+    }
+
+    else if(o.type===19){
+
+      const yy =
+        o.baseY+
+        Math.abs(
+          Math.sin(
+            t*
+            (
+              1.5+
+              D*3
+            )
+          )
+        )*
+        (
+          80+
+          D*170
+        );
+
+      const xx =
+        o.baseX+
+        Math.sin(t*.8)*
+        (
+          25+
+          D*80
+        );
+
+      ctx.fillStyle="#222";
+
+      ctx.beginPath();
+
+      ctx.arc(
+        xx,
+        yy,
+        o.size+
+        D*5,
+        0,
+        Math.PI*2
+      );
+
       ctx.fill();
+
+      ctx.fillStyle="#ff315d";
+
+      ctx.beginPath();
+
+      ctx.arc(
+        xx-4,
+        yy-4,
+        4,
+        0,
+        Math.PI*2
+      );
+
+      ctx.fill();
+
     }
 
     ctx.restore();
+
   }
 }
 
-function draw(){
+function drawWorld(){
+
   ctx.save();
+
+  let sx=0;
+  let sy=0;
 
   if(screenShake>0){
-    const s=screenShake;
-    ctx.translate(
-      (random(performance.now())-.5)*s,
-      (random(performance.now()+1)-.5)*s
-    );
+
+    sx=
+      (Math.random()-.5)*
+      screenShake;
+
+    sy=
+      (Math.random()-.5)*
+      screenShake;
+
   }
 
-  drawBackground();
-
-  ctx.save();
-  ctx.translate(-cameraX,0);
-
-  ctx.fillStyle="#1b1c25";
-  ctx.fillRect(
-    -400,
-    levelData.groundY,
-    levelData.finishX+1200,
-    H-levelData.groundY+200
+  ctx.translate(
+    -cameraX+sx,
+    sy
   );
 
-  for(const p of levelData.platforms){
-    ctx.fillStyle=p.safe?"#303548":"#e63946";
-    ctx.fillRect(p.x, p.y, p.w, p.h);
-  }
+  for(
+    const p
+    of levelData.platforms
+  ){
 
-  for(const m of levelData.movingPlatforms){
-    ctx.fillStyle="#4361ee";
-    ctx.fillRect(m.x-m.w/2, m.y, m.w, m.h);
-  }
+    ctx.fillStyle="#292b31";
 
-  for(const p of levelData.disappearingPlatforms){
-    if(!p.active) continue;
-    ctx.fillStyle="#f77f00";
-    ctx.fillRect(p.x, p.y, p.w, p.h);
-  }
+    ctx.fillRect(
+      p.x,
+      p.y,
+      p.w,
+      p.h
+    );
 
-  for(const p of levelData.fakePlatforms){
-    ctx.fillStyle="#303548";
-    ctx.fillRect(p.x, p.y, p.w, p.h);
-  }
+    ctx.fillStyle="#65d878";
 
-  for(const s of levelData.slopes){
-    ctx.fillStyle="#3a3f58";
-    ctx.beginPath();
-    ctx.moveTo(s.x, s.y);
-    ctx.lineTo(s.x+s.w, s.y-s.rise);
-    ctx.lineTo(s.x+s.w, levelData.groundY+80);
-    ctx.lineTo(s.x, levelData.groundY+80);
-    ctx.fill();
-  }
+    ctx.fillRect(
+      p.x,
+      p.y,
+      p.w,
+      7
+    );
 
-  for(const h of levelData.hazards){
-    ctx.fillStyle="#ef476f";
-    ctx.beginPath();
-    ctx.moveTo(h.x, h.y+h.h);
-    ctx.lineTo(h.x+h.w/2, h.y);
-    ctx.lineTo(h.x+h.w, h.y+h.h);
-    ctx.fill();
-  }
+    ctx.fillStyle=
+      "rgba(255,255,255,.13)";
 
-  for(const c of levelData.cracks){
-    ctx.fillStyle=c.broken?"transparent":"#8d99ae";
-    ctx.fillRect(c.x, c.y, c.w, c.h);
-    if(c.active && !c.broken){
-      ctx.strokeStyle="#ef476f";
-      ctx.lineWidth=2;
-      ctx.strokeRect(c.x, c.y, c.w, c.h);
+    for(
+      let xx=p.x+18;
+      xx<p.x+p.w;
+      xx+=48
+    ){
+
+      ctx.fillRect(
+        xx,
+        p.y+22,
+        12,
+        5
+      );
+
     }
+
   }
 
-  for(const s of levelData.springs){
-    ctx.fillStyle="#4cc9f0";
-    ctx.fillRect(s.x, s.y, s.w, s.h);
-  }
+  for(
+    const p
+    of levelData.movingPlatforms
+  ){
 
-  for(const ice of levelData.iceZones){
-    ctx.fillStyle="rgba(150,220,255,.45)";
-    ctx.fillRect(ice.x, ice.y, ice.w, ice.h);
-  }
+    ctx.fillStyle="#39415c";
 
-  for(const p of levelData.portals){
-    if(p.used) continue;
-    ctx.fillStyle="#7209b7";
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-    ctx.fill();
-    ctx.strokeStyle="#4cc9f0";
-    ctx.lineWidth=3;
-    ctx.stroke();
-  }
+    ctx.fillRect(
+      p.x-p.w/2,
+      p.y,
+      p.w,
+      p.h
+    );
 
-  for(const s of levelData.stars){
-    if(s.taken) continue;
     ctx.fillStyle="#ffd166";
-    ctx.beginPath();
-    ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
-    ctx.fill();
+
+    ctx.fillRect(
+      p.x-p.w/2,
+      p.y,
+      p.w,
+      6
+    );
+
   }
 
-  for(const b of levelData.balls){
-    ctx.fillStyle="#f72585";
-    ctx.beginPath();
-    ctx.arc(b.x, b.y, b.r, 0, Math.PI*2);
-    ctx.fill();
+  for(
+    const p
+    of levelData.disappearingPlatforms
+  ){
+
+    if(!p.active)
+      continue;
+
+    ctx.globalAlpha=
+      .45+
+      .55*
+      Math.min(
+        1,
+        p.timer
+      );
+
+    ctx.fillStyle="#6c4cff";
+
+    ctx.fillRect(
+      p.x,
+      p.y,
+      p.w,
+      p.h
+    );
+
+    ctx.globalAlpha=1;
+
   }
 
-  for(const s of levelData.saws){
-    ctx.fillStyle="#adb5bd";
+  for(
+    const p
+    of levelData.fakePlatforms
+  ){
+
+    ctx.fillStyle=
+      "rgba(255,255,255,.38)";
+
+    ctx.fillRect(
+      p.x,
+      p.y,
+      p.w,
+      p.h
+    );
+
+  }
+
+  for(
+    const s
+    of levelData.slopes
+  ){
+
+    ctx.fillStyle="#292b31";
+
     ctx.beginPath();
-    ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+
+    ctx.moveTo(
+      s.x,
+      s.y
+    );
+
+    ctx.lineTo(
+      s.x+s.w,
+      s.y-s.rise
+    );
+
+    ctx.lineTo(
+      s.x+s.w,
+      s.y+55-s.rise
+    );
+
+    ctx.lineTo(
+      s.x,
+      s.y+55
+    );
+
+    ctx.closePath();
+
     ctx.fill();
-    ctx.strokeStyle="#ef476f";
-    ctx.lineWidth=3;
+
+    ctx.strokeStyle="#65d878";
+
+    ctx.lineWidth=7;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+      s.x,
+      s.y
+    );
+
+    ctx.lineTo(
+      s.x+s.w,
+      s.y-s.rise
+    );
+
     ctx.stroke();
+
   }
 
-  for(const l of levelData.lasers){
-    const phase=(performance.now()/1000+l.phase)%l.period;
-    const active=phase>l.warning;
-    ctx.fillStyle=active?"#f72585":"rgba(247,37,133,.3)";
-    ctx.fillRect(l.x, l.y, l.w, l.h);
+  for(
+    const ice
+    of levelData.iceZones
+  ){
+
+    ctx.fillStyle=
+      "rgba(150,225,255,.75)";
+
+    ctx.fillRect(
+      ice.x,
+      ice.y,
+      ice.w,
+      ice.h
+    );
+
   }
 
-  for(const b of levelData.bombs){
-    ctx.fillStyle="#3a0ca3";
-    ctx.beginPath();
-    ctx.arc(b.x, b.y, b.r, 0, Math.PI*2);
-    ctx.fill();
-    ctx.strokeStyle="#ffb703";
+  for(
+    const c
+    of levelData.cracks
+  ){
+
+    if(c.broken){
+
+      ctx.fillStyle="#111";
+
+      ctx.fillRect(
+        c.x-4,
+        c.y-4,
+        c.w+8,
+        24
+      );
+
+      continue;
+
+    }
+
+    ctx.fillStyle=
+      c.active
+      ?"#ef476f"
+      :"#555861";
+
+    ctx.fillRect(
+      c.x,
+      c.y,
+      c.w,
+      8
+    );
+
+    ctx.strokeStyle="#111";
+
     ctx.lineWidth=2;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+      c.x+10,
+      c.y
+    );
+
+    ctx.lineTo(
+      c.x+20,
+      c.y+8
+    );
+
+    ctx.lineTo(
+      c.x+28,
+      c.y
+    );
+
+    ctx.lineTo(
+      c.x+40,
+      c.y+8
+    );
+
     ctx.stroke();
+
   }
 
-  for(const f of levelData.fallers){
-    ctx.fillStyle="#480ca8";
-    ctx.fillRect(f.x, f.y, f.w, f.h);
+  for(
+    const h
+    of levelData.hazards
+  ){
+
+    ctx.fillStyle="#ef476f";
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+      h.x,
+      h.y+h.h
+    );
+
+    ctx.lineTo(
+      h.x+h.w/2,
+      h.y-10
+    );
+
+    ctx.lineTo(
+      h.x+h.w,
+      h.y+h.h
+    );
+
+    ctx.closePath();
+
+    ctx.fill();
+
+    ctx.fillStyle="#fff";
+
+    ctx.font="bold 9px system-ui";
+
+    ctx.fillText(
+      "!",
+      h.x+9,
+      h.y+10
+    );
+
   }
 
-  for(const w of levelData.walls){
-    ctx.fillStyle="#560bad";
-    ctx.fillRect(w.x, w.y, w.w, w.h);
+  for(
+    const s
+    of levelData.stars
+  ){
+
+    if(s.taken)
+      continue;
+
+    ctx.save();
+
+    ctx.translate(
+      s.x,
+      s.y
+    );
+
+    ctx.rotate(
+      performance.now()/700
+    );
+
+    ctx.fillStyle="#ffd166";
+
+    ctx.beginPath();
+
+    for(
+      let i=0;
+      i<10;
+      i++
+    ){
+
+      const a=
+        i*Math.PI/5;
+
+      const r=
+        i%2===0
+        ?11
+        :5;
+
+      const xx=
+        Math.cos(a)*r;
+
+      const yy=
+        Math.sin(a)*r;
+
+      if(i===0)
+        ctx.moveTo(xx,yy);
+      else
+        ctx.lineTo(xx,yy);
+
+    }
+
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.restore();
+
   }
 
-  for(const g of levelData.finishGates){
-    const phase=(performance.now()/1000+g.phase)%g.period;
-    const active=phase<g.period*.55;
-    ctx.fillStyle=active?"rgba(230,57,70,.85)":"rgba(76,201,240,.35)";
-    ctx.fillRect(g.x, g.y, g.w, g.h);
+  for(
+    const b
+    of levelData.balls
+  ){
+
+    ctx.save();
+
+    ctx.translate(
+      b.x,
+      b.y
+    );
+
+    ctx.fillStyle="#ff6b35";
+
+    ctx.beginPath();
+
+    ctx.arc(
+      0,
+      0,
+      b.r,
+      0,
+      Math.PI*2
+    );
+
+    ctx.fill();
+
+    ctx.strokeStyle="#fff";
+
+    ctx.lineWidth=3;
+
+    ctx.beginPath();
+
+    ctx.arc(
+      0,
+      0,
+      b.r-5,
+      0,
+      Math.PI*1.5
+    );
+
+    ctx.stroke();
+
+    ctx.fillStyle="#222";
+
+    ctx.beginPath();
+
+    ctx.arc(
+      -5,
+      -3,
+      3,
+      0,
+      Math.PI*2
+    );
+
+    ctx.arc(
+      5,
+      -3,
+      3,
+      0,
+      Math.PI*2
+    );
+
+    ctx.fill();
+
+    ctx.restore();
+
+  }
+
+  for(
+    const s
+    of levelData.saws
+  ){
+
+    ctx.save();
+
+    ctx.translate(
+      s.x,
+      s.y
+    );
+
+    ctx.rotate(
+      performance.now()/120
+    );
+
+    ctx.fillStyle="#e5e5e5";
+
+    ctx.beginPath();
+
+    for(
+      let i=0;
+      i<16;
+      i++
+    ){
+
+      const a=
+        i*Math.PI/8;
+
+      const r=
+        i%2===0
+        ?s.r
+        :s.r*.65;
+
+      const xx=
+        Math.cos(a)*r;
+
+      const yy=
+        Math.sin(a)*r;
+
+      if(i===0)
+        ctx.moveTo(xx,yy);
+      else
+        ctx.lineTo(xx,yy);
+
+    }
+
+    ctx.closePath();
+    ctx.fill();
+
+    ctx.fillStyle="#333";
+
+    ctx.beginPath();
+
+    ctx.arc(
+      0,
+      0,
+      6,
+      0,
+      Math.PI*2
+    );
+
+    ctx.fill();
+
+    ctx.strokeStyle="#555";
+
+    ctx.lineWidth=3;
+
+    ctx.beginPath();
+
+    ctx.arc(
+      0,
+      0,
+      s.r*.35,
+      0,
+      Math.PI*2
+    );
+
+    ctx.stroke();
+
+    ctx.restore();
+
+  }
+
+  for(
+    const l
+    of levelData.lasers
+  ){
+
+    const phase=
+      (
+        performance.now()/1000+
+        l.phase
+      )%
+      l.period;
+
+    const active=
+      phase>
+      l.warning;
+
+    ctx.fillStyle=
+      active
+      ?"rgba(255,50,80,.88)"
+      :"rgba(255,220,100,.35)";
+
+    ctx.fillRect(
+      l.x,
+      l.y,
+      l.w,
+      active
+      ?l.h
+      :3
+    );
+
+  }
+
+  for(
+    const b
+    of levelData.bombs
+  ){
+
+    ctx.save();
+
+    ctx.translate(
+      b.x,
+      b.y
+    );
+
+    ctx.fillStyle=
+      Math.sin(b.pulse*12)>0
+      ?"#ff315d"
+      :"#222";
+
+    ctx.beginPath();
+
+    ctx.arc(
+      0,
+      0,
+      b.r,
+      0,
+      Math.PI*2
+    );
+
+    ctx.fill();
+
+    ctx.restore();
+
+  }
+
+  for(
+    const f
+    of levelData.fallers
+  ){
+
+    ctx.fillStyle="#8e72ff";
+
+    ctx.fillRect(
+      f.x,
+      f.y,
+      f.w,
+      f.h
+    );
+
+    ctx.fillStyle="#fff";
+
+    ctx.fillRect(
+      f.x+4,
+      f.y+4,
+      4,
+      4
+    );
+
+  }
+
+  for(
+    const w
+    of levelData.walls
+  ){
+
+    ctx.fillStyle="#ff315d";
+
+    ctx.fillRect(
+      w.x,
+      w.y,
+      w.w,
+      w.h
+    );
+
+  }
+
+  for(
+    const p
+    of levelData.portals
+  ){
+
+    ctx.fillStyle="#64d8ff";
+
+    ctx.beginPath();
+
+    ctx.arc(
+      p.x,
+      p.y,
+      p.r,
+      0,
+      Math.PI*2
+    );
+
+    ctx.fill();
+
+    ctx.fillStyle="#101116";
+
+    ctx.beginPath();
+
+    ctx.arc(
+      p.x,
+      p.y,
+      p.r-6,
+      0,
+      Math.PI*2
+    );
+
+    ctx.fill();
+
+  }
+
+  for(
+    const r
+    of levelData.reverseZones
+  ){
+
+    ctx.fillStyle=
+      "rgba(255,80,160,.12)";
+
+    ctx.fillRect(
+      r.x,
+      r.y,
+      r.w,
+      r.h
+    );
+
+    ctx.strokeStyle=
+      "rgba(255,80,160,.35)";
+
+    ctx.lineWidth=2;
+
+    ctx.strokeRect(
+      r.x,
+      r.y,
+      r.w,
+      r.h
+    );
+
+  }
+
+  for(
+    const l
+    of levelData.lightnings
+  ){
+
+    const phase=
+      l.timer/l.cool;
+
+    const strikeStart=
+      l.warning/l.cool;
+
+    if(
+      phase>=strikeStart
+    ){
+
+      ctx.strokeStyle="#fff";
+
+      ctx.lineWidth=5;
+
+      ctx.beginPath();
+
+      ctx.moveTo(
+        l.x,
+        l.y
+      );
+
+      ctx.lineTo(
+        l.x-8,
+        l.y+80
+      );
+
+      ctx.lineTo(
+        l.x+10,
+        l.y+150
+      );
+
+      ctx.lineTo(
+        l.x-5,
+        levelData.groundY
+      );
+
+      ctx.stroke();
+
+    }else if(
+      phase>strikeStart-.25
+    ){
+
+      ctx.strokeStyle=
+        "rgba(255,255,100,.5)";
+
+      ctx.lineWidth=2;
+
+      ctx.beginPath();
+
+      ctx.moveTo(
+        l.x,
+        l.y
+      );
+
+      ctx.lineTo(
+        l.x,
+        levelData.groundY
+      );
+
+      ctx.stroke();
+
+    }
+
+  }
+
+  for(
+    const c
+    of levelData.chaos
+  ){
+
+    ctx.fillStyle="#ff315d";
+
+    ctx.beginPath();
+
+    ctx.arc(
+      c.x,
+      c.y,
+      c.size,
+      0,
+      Math.PI*2
+    );
+
+    ctx.fill();
+
   }
 
   drawAdvancedObstacles();
 
-  for(const c of levelData.chaos){
-    ctx.fillStyle="rgba(247,37,133,.65)";
-    ctx.beginPath();
-    ctx.arc(c.x, c.y, c.size, 0, Math.PI*2);
-    ctx.fill();
-  }
+  for(
+    const g
+    of levelData.finishGates
+  ){
 
-  for(const l of levelData.lightnings){
-    const phase=l.timer/l.cool;
-    const strikeStart=l.warning/l.cool;
-    if(phase>=strikeStart && phase<strikeStart+.14){
-      ctx.strokeStyle="#fff";
-      ctx.lineWidth=6;
-      ctx.beginPath();
-      ctx.moveTo(l.x, l.y-200);
-      ctx.lineTo(l.x+15, l.y-70);
-      ctx.lineTo(l.x-10, l.y);
-      ctx.lineTo(l.x+5, levelData.groundY);
-      ctx.stroke();
-    }else if(phase<strikeStart){
-      ctx.strokeStyle="rgba(255,255,255,.35)";
-      ctx.lineWidth=2;
-      ctx.setLineDash([4,4]);
-      ctx.beginPath();
-      ctx.moveTo(l.x, l.y-200);
-      ctx.lineTo(l.x, levelData.groundY);
-      ctx.stroke();
-      ctx.setLineDash([]);
-    }
+    const phase=
+      (
+        performance.now()/1000+
+        g.phase
+      )%
+      g.period;
+
+    const active=
+      phase<
+      g.period*.55;
+
+    ctx.fillStyle=
+      active
+      ?"#65d878"
+      :"#ef476f";
+
+    ctx.fillRect(
+      g.x,
+      g.y,
+      g.w,
+      g.h
+    );
+
   }
 
   ctx.fillStyle="#ffd166";
-  ctx.fillRect(
-    player.x,
-    player.y,
-    player.w,
-    player.h
-  );
 
-  ctx.fillStyle="#202020";
-  ctx.fillRect(
-    player.x+6,
-    player.y+10,
-    6,
-    8
-  );
-  ctx.fillRect(
-    player.x+20,
-    player.y+10,
-    6,
-    8
-  );
-
-  for(const p of particles){
-    ctx.fillStyle="rgba(255,255,255,.8)";
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
-    ctx.fill();
-  }
-
-  ctx.fillStyle="#4cc9f0";
   ctx.fillRect(
     levelData.finishX,
     levelData.groundY-140,
-    18,
+    14,
     140
+  );
+
+  ctx.fillStyle="#65d878";
+
+  ctx.beginPath();
+
+  ctx.moveTo(
+    levelData.finishX+14,
+    levelData.groundY-140
+  );
+
+  ctx.lineTo(
+    levelData.finishX+75,
+    levelData.groundY-115
+  );
+
+  ctx.lineTo(
+    levelData.finishX+14,
+    levelData.groundY-90
+  );
+
+  ctx.fill();
+
+  for(
+    const p
+    of particles
+  ){
+
+    ctx.fillStyle=
+      "rgba(255,255,255,.85)";
+
+    ctx.fillRect(
+      p.x,
+      p.y,
+      p.size,
+      p.size
+    );
+
+  }
+
+  ctx.restore();
+}
+
+/* =========================================================
+   PLAYER DRAW
+========================================================= */
+
+function drawPlayer(){
+
+  ctx.save();
+
+  ctx.translate(
+    -cameraX,
+    0
+  );
+
+  if(
+    player.invincible>0 &&
+    Math.floor(
+      performance.now()/60
+    )%2===0
+  ){
+    ctx.globalAlpha=.4;
+  }
+
+  const pw=player.w;
+  const ph=player.h;
+
+  const px=player.x;
+  const py=player.y;
+
+  const facing =
+    input.x<0
+    ? -1
+    : 1;
+
+  ctx.save();
+
+  ctx.translate(
+    px+pw/2,
+    py+ph/2
+  );
+
+  ctx.scale(
+    facing,
+    1
+  );
+
+  const squashX =
+    player.grounded
+    ? 1.12
+    : .9;
+
+  const squashY =
+    player.grounded
+    ? .88
+    : 1.1;
+
+  ctx.scale(
+    squashX,
+    squashY
+  );
+
+  ctx.fillStyle="#ffd166";
+
+  ctx.beginPath();
+
+  ctx.arc(
+    0,
+    -4,
+    16,
+    0,
+    Math.PI*2
+  );
+
+  ctx.fill();
+
+  ctx.fillStyle="#222";
+
+  ctx.beginPath();
+
+  ctx.arc(
+    5,
+    -7,
+    2.5,
+    0,
+    Math.PI*2
+  );
+
+  ctx.arc(
+    11,
+    -7,
+    2.5,
+    0,
+    Math.PI*2
+  );
+
+  ctx.fill();
+
+  ctx.fillStyle="#ff315d";
+
+  ctx.beginPath();
+
+  ctx.arc(
+    8,
+    -2,
+    2,
+    0,
+    Math.PI*2
+  );
+
+  ctx.fill();
+
+  ctx.fillStyle="#6c4cff";
+
+  ctx.fillRect(
+    -13,
+    5,
+    26,
+    22
+  );
+
+  ctx.fillStyle="#fff";
+
+  ctx.fillRect(
+    -3,
+    11,
+    6,
+    9
+  );
+
+  ctx.fillStyle="#30323a";
+
+  const legOffset =
+    Math.abs(player.vx)>20
+    ? Math.sin(
+        performance.now()/65
+      )*6
+    : 0;
+
+  ctx.fillRect(
+    -10,
+    27,
+    6,
+    10+legOffset
+  );
+
+  ctx.fillRect(
+    4,
+    27,
+    6,
+    10-legOffset
   );
 
   ctx.restore();
   ctx.restore();
 
-  const sanScreenX = player.x - cameraX + 10;
-  const sanScreenY = player.y - 75;
-  san.style.left = Math.max(10, Math.min(W - 90, sanScreenX)) + "px";
-  san.style.top = Math.max(50, Math.min(H - 150, sanScreenY)) + "px";
+  san.style.left =
+    (
+      player.x -
+      cameraX +
+      W/2 -
+      41
+    ) + "px";
+
+  san.style.top =
+    (
+      player.y -
+      12
+    ) + "px";
 }
 
-function loop(timestamp){
-  if(!playing) return;
+/* =========================================================
+   LOOP
+========================================================= */
 
-  const dt = Math.min(0.033, (timestamp-lastTime)/1000);
-  lastTime = timestamp;
+function loop(time){
+
+  if(!playing)
+    return;
+
+  const dt =
+    Math.min(
+      .1,
+      (time-lastTime)/1000
+    );
+
+  lastTime=time;
 
   update(dt);
-  draw();
+
+  ctx.clearRect(
+    0,
+    0,
+    W,
+    H
+  );
+
+  drawBackground();
+  drawWorld();
+  drawPlayer();
 
   requestAnimationFrame(loop);
 }
-
 </script>
 </body>
 </html>
