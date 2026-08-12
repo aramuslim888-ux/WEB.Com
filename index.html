@@ -11,7 +11,7 @@ minimum-scale=1,
 user-scalable=no,
 viewport-fit=cover">
 
-<title>SAN B AHAMD — 1000 Levels</title>
+<title>SAN B AHAMD — 5000 Levels</title>
 
 <style>
 *{
@@ -20,23 +20,19 @@ viewport-fit=cover">
   -webkit-touch-callout:none;
 }
 
-html,
-body{
+html,body{
   margin:0;
   padding:0;
   width:100%;
   height:100%;
   overflow:hidden;
-
   background:#101116;
-
   font-family:
     system-ui,
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
-
   touch-action:none;
   overscroll-behavior:none;
   -webkit-user-select:none;
@@ -51,12 +47,9 @@ body{
 canvas{
   position:fixed;
   inset:0;
-
   width:100%;
   height:100%;
-
   display:block;
-
   touch-action:none;
 }
 
@@ -69,50 +62,34 @@ button{
 
 #hud{
   position:fixed;
-
-  top:
-    calc(env(safe-area-inset-top) + 12px);
-
+  top:calc(env(safe-area-inset-top) + 12px);
   left:14px;
   right:14px;
-
   display:flex;
   justify-content:space-between;
-
   z-index:20;
-
   pointer-events:none;
 }
 
 .pill{
   background:rgba(20,30,24,.88);
   color:white;
-
   padding:12px 17px;
-
   border-radius:999px;
-
   font-size:15px;
   font-weight:900;
-
-  box-shadow:
-    0 8px 25px rgba(0,0,0,.18);
-
+  box-shadow:0 8px 25px rgba(0,0,0,.18);
   backdrop-filter:blur(10px);
 }
 
 #intro{
   position:fixed;
   inset:0;
-
   z-index:100;
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   text-align:center;
-
   color:white;
 
   background:
@@ -136,53 +113,35 @@ button{
 
 .introTitle{
   margin:0;
-
-  font-size:
-    clamp(42px,12vw,76px);
-
+  font-size:clamp(42px,12vw,76px);
   line-height:.88;
-
   font-weight:1000;
-
   text-transform:uppercase;
-
   color:#fff;
-
-  text-shadow:
-    4px 4px 0 #202020;
+  text-shadow:4px 4px 0 #202020;
 }
 
 .introName{
   margin:18px 0 6px;
-
   font-size:18px;
   font-weight:900;
 }
 
 .creator{
   margin:0 0 24px;
-
   opacity:.9;
-
   font-size:14px;
 }
 
 #start{
   border:0;
-
   padding:15px 28px;
-
   border-radius:999px;
-
   background:#20283a;
-
   color:white;
-
   font-size:17px;
   font-weight:900;
-
-  box-shadow:
-    0 8px 0 rgba(0,0,0,.2);
+  box-shadow:0 8px 0 rgba(0,0,0,.2);
 }
 
 #start:active{
@@ -192,25 +151,22 @@ button{
 
 #san{
   position:fixed;
-
   width:82px;
   height:82px;
-
   object-fit:contain;
-
   z-index:12;
-
   pointer-events:none;
 
   filter:
-    drop-shadow(0 8px 8px rgba(0,0,0,.25));
+    drop-shadow(
+      0 8px 8px rgba(0,0,0,.25)
+    );
 
   animation:
     sanFunny 2.1s ease-in-out infinite;
 }
 
 @keyframes sanFunny{
-
   0%,100%{
     transform:
       rotate(-7deg)
@@ -229,9 +185,7 @@ button{
 #controls{
   position:fixed;
   inset:0;
-
   z-index:30;
-
   pointer-events:none;
 }
 
@@ -263,7 +217,6 @@ button{
     0 8px 30px rgba(0,0,0,.18);
 
   pointer-events:auto;
-
   touch-action:none;
 }
 
@@ -278,8 +231,7 @@ button{
 
   border-radius:50%;
 
-  background:
-    rgba(255,255,255,.25);
+  background:rgba(255,255,255,.25);
 
   border:2px solid rgba(255,255,255,.65);
 
@@ -288,7 +240,6 @@ button{
   justify-content:center;
 
   font-size:28px;
-
   color:white;
 
   transition:transform .06s linear;
@@ -325,11 +276,9 @@ button{
   color:white;
 
   font-size:14px;
-
   font-weight:1000;
 
   pointer-events:auto;
-
   touch-action:none;
 
   backdrop-filter:blur(8px);
@@ -364,7 +313,6 @@ button{
   width:min(92vw,430px);
 
   background:#17181d;
-
   color:white;
 
   border-radius:28px;
@@ -379,7 +327,6 @@ button{
 
 .winCard h1{
   margin:0 0 10px;
-
   font-size:30px;
 }
 
@@ -390,21 +337,15 @@ button{
 .winButtons{
   display:flex;
   gap:10px;
-
   justify-content:center;
-
   margin-top:18px;
 }
 
 .winButtons button{
   border:0;
-
   border-radius:15px;
-
   padding:13px 18px;
-
   font-size:15px;
-
   font-weight:900;
 }
 
@@ -441,7 +382,6 @@ button{
   color:white;
 
   font-size:13px;
-
   font-weight:800;
 
   z-index:15;
@@ -472,11 +412,9 @@ button{
   border-radius:20px;
 
   font-size:22px;
-
   font-weight:1000;
 
   opacity:0;
-
   pointer-events:none;
 }
 
@@ -485,7 +423,6 @@ button{
 }
 
 @keyframes finishPop{
-
   0%{
     opacity:0;
     transform:
@@ -514,7 +451,6 @@ button{
 
 <canvas id="game"></canvas>
 
-<!-- INTRO -->
 <div id="intro">
 
   <div class="introCard">
@@ -525,7 +461,7 @@ button{
 
     <div class="introName">
       One funny hero.<br>
-      1000 tiny challenges.
+      5000 tiny challenges.
     </div>
 
     <p class="creator">
@@ -540,8 +476,6 @@ button{
 
 </div>
 
-
-<!-- HUD -->
 <div id="hud">
 
   <div class="pill">
@@ -551,27 +485,21 @@ button{
   <div class="pill">
     LEVEL
     <span id="level">1</span>
-    / 1000
+    / 5000
   </div>
 
 </div>
 
-
-<!-- FUNNY SAN IMAGE -->
 <img
   id="san"
   src="san.PNG"
   alt=""
 >
 
-
-<!-- LEVEL IDEA -->
 <div id="levelIdea">
   💡 Get ready...
 </div>
 
-
-<!-- CONTROLS -->
 <div id="controls">
 
   <div id="joystick">
@@ -581,7 +509,6 @@ button{
     </div>
 
   </div>
-
 
   <div id="actionArea">
 
@@ -613,8 +540,6 @@ button{
 
 </div>
 
-
-<!-- WIN -->
 <div id="win">
 
   <div class="winCard">
@@ -628,7 +553,7 @@ button{
     </p>
 
     <p>
-      دیار جۆینی گروپی سان FX ـت کردووە 😎
+      تۆ دیار جۆینی گروپی سان FX ـت کردووە 😎
     </p>
 
     <div class="winButtons">
@@ -647,7 +572,6 @@ button{
 
 </div>
 
-
 <div id="finishBanner">
   🎉 LEVEL COMPLETE!
 </div>
@@ -659,7 +583,7 @@ button{
 
 
 /* =========================================================
-   BASIC SETUP
+   SETUP
 ========================================================= */
 
 const canvas =
@@ -667,7 +591,6 @@ const canvas =
 
 const ctx =
   canvas.getContext("2d");
-
 
 const intro =
   document.getElementById("intro");
@@ -728,12 +651,7 @@ function resize(){
     H+"px";
 
   ctx.setTransform(
-    DPR,
-    0,
-    0,
-    DPR,
-    0,
-    0
+    DPR,0,0,DPR,0,0
   );
 
 }
@@ -747,23 +665,43 @@ resize();
 
 
 /* =========================================================
-   GAME
+   SAVE PROGRESS
+   Refresh -> same level
 ========================================================= */
 
-const TOTAL_LEVELS=1000;
+const SAVE_KEY =
+  "san_b_ahamd_saved_level_v3";
 
-let level=1;
+const TOTAL_LEVELS=5000;
+
+let savedLevel =
+  parseInt(
+    localStorage.getItem(
+      SAVE_KEY
+    ) || "1",
+    10
+  );
+
+if(
+  !Number.isFinite(savedLevel) ||
+  savedLevel<1 ||
+  savedLevel>TOTAL_LEVELS
+){
+  savedLevel=1;
+}
+
+let level=savedLevel;
+
+
+/* =========================================================
+   GAME STATE
+========================================================= */
 
 let playing=false;
-
 let paused=false;
-
 let cameraX=0;
-
 let lastTime=0;
-
 let levelData=null;
-
 let levelWon=false;
 
 
@@ -783,12 +721,12 @@ const player={
   vy:0,
 
   speed:250,
-
   jumpPower:620,
 
   grounded:false,
+  coyote:0,
 
-  coyote:0
+  previousY:0
 
 };
 
@@ -798,21 +736,23 @@ const player={
 ========================================================= */
 
 const input={
-
-  x:0,
-
-  jump:false,
-
-  dash:false
-
+  x:0
 };
 
 
+/* =========================================================
+   JOYSTICK
+========================================================= */
+
 const joystick =
-  document.getElementById("joystick");
+  document.getElementById(
+    "joystick"
+  );
 
 const stick =
-  document.getElementById("stick");
+  document.getElementById(
+    "stick"
+  );
 
 let joystickPointer=null;
 
@@ -836,8 +776,7 @@ function setJoystick(e){
       Math.min(max,dx)
     );
 
-  input.x=
-    dx/max;
+  input.x=dx/max;
 
   stick.style.transform=
     `translateX(${dx}px)`;
@@ -923,16 +862,24 @@ joystick.addEventListener(
 ========================================================= */
 
 const jumpBtn=
-  document.getElementById("jumpBtn");
+  document.getElementById(
+    "jumpBtn"
+  );
 
 const dashBtn=
-  document.getElementById("dashBtn");
+  document.getElementById(
+    "dashBtn"
+  );
 
 const resetBtn=
-  document.getElementById("resetBtn");
+  document.getElementById(
+    "resetBtn"
+  );
 
 const nextQuickBtn=
-  document.getElementById("nextQuickBtn");
+  document.getElementById(
+    "nextQuickBtn"
+  );
 
 
 function jump(){
@@ -1080,46 +1027,36 @@ window.addEventListener(
 
 
 /* =========================================================
-   PREVENT iPHONE ZOOM / SCROLL
+   IPHONE PREVENT ZOOM
 ========================================================= */
 
 document.addEventListener(
   "gesturestart",
-  e=>{
-    e.preventDefault();
-  },
+  e=>e.preventDefault(),
   {passive:false}
 );
 
 document.addEventListener(
   "gesturechange",
-  e=>{
-    e.preventDefault();
-  },
+  e=>e.preventDefault(),
   {passive:false}
 );
 
 document.addEventListener(
   "gestureend",
-  e=>{
-    e.preventDefault();
-  },
+  e=>e.preventDefault(),
   {passive:false}
 );
 
 document.addEventListener(
   "touchmove",
-  e=>{
-
-    e.preventDefault();
-
-  },
+  e=>e.preventDefault(),
   {passive:false}
 );
 
 
 /* =========================================================
-   SEEDED RANDOM
+   RANDOM
 ========================================================= */
 
 function random(n){
@@ -1134,7 +1071,7 @@ function random(n){
 
 
 /* =========================================================
-   1000 LEVEL IDEAS
+   IDEAS
 ========================================================= */
 
 const ideas=[
@@ -1142,7 +1079,6 @@ const ideas=[
   "💡 Jump the tiny wall.",
   "💡 The gap looks scary. It isn't.",
   "💡 Grab the star before moving on.",
-  "💡 The safe road is usually the funny one.",
   "💡 Small jump. Big brain.",
   "💡 Don't rush the moving block.",
   "💡 Try the upper route.",
@@ -1153,20 +1089,20 @@ const ideas=[
   "💡 Dash across the gap.",
   "💡 Look before you jump.",
   "💡 One obstacle at a time.",
-  "💡 The funny block is hiding the shortcut.",
+  "💡 The funny block hides the shortcut.",
   "💡 Keep calm and jump.",
-  "💡 You can definitely do this.",
   "💡 The finish is closer than it looks.",
   "💡 Don't overthink it.",
-  "💡 San knows the way 😎"
+  "💡 Watch the ball!",
+  "💡 The road is tilted.",
+  "💡 Think before you jump."
 
 ];
 
 
 /* =========================================================
    LEVEL GENERATOR
-   IMPORTANT:
-   EVERY LEVEL IS GENERATED SOLVABLE.
+   5000 SOLVABLE LEVELS
 ========================================================= */
 
 function makeLevel(n){
@@ -1174,7 +1110,7 @@ function makeLevel(n){
   const difficulty=
     Math.min(
       1,
-      (n-1)/999
+      (n-1)/4999
     );
 
 
@@ -1190,45 +1126,44 @@ function makeLevel(n){
 
 
   const platforms=[];
-
   const hazards=[];
-
   const stars=[];
+  const balls=[];
+  const slopes=[];
 
 
-  /* START PLATFORM */
+  /*
+    START
+  */
 
   platforms.push({
 
-    x:-200,
-
+    x:-250,
     y:groundY,
-
-    w:430,
-
-    h:70
+    w:470,
+    h:75
 
   });
 
 
-  let x=280;
+  let x=270;
 
 
   /*
-    More levels,
-    but distance remains reachable.
+    More obstacles later,
+    but jumps stay reachable.
   */
 
-  const obstacles=
+  const obstacleCount=
     5+
     Math.floor(
-      difficulty*6
+      difficulty*8
     );
 
 
   for(
     let i=0;
-    i<obstacles;
+    i<obstacleCount;
     i++
   ){
 
@@ -1239,17 +1174,15 @@ function makeLevel(n){
 
 
     /*
-      IMPORTANT:
-
-      The maximum horizontal gap
-      stays within player jump range.
+      GAP
+      Never becomes impossible.
     */
 
     const gap=
-      75+
+      70+
       Math.floor(
-        r*55+
-        difficulty*25
+        r*45+
+        difficulty*20
       );
 
 
@@ -1261,21 +1194,17 @@ function makeLevel(n){
       Math.floor(
         random(
           n*200+i*31
-        )*75
+        )*80
       );
 
 
     /*
-      Platforms can rise,
-      but never too high.
+      PLATFORM HEIGHT
     */
 
-    const heightVariation=
-      Math.min(
-        80,
-        20+
-        difficulty*45
-      );
+    const maxRise=
+      20+
+      difficulty*55;
 
 
     const py=
@@ -1283,40 +1212,38 @@ function makeLevel(n){
       Math.floor(
         random(
           n*300+i*17
-        )*heightVariation
+        )*maxRise
       );
 
+
+    /*
+      Normal platform
+    */
 
     platforms.push({
 
       x:x,
-
       y:py,
-
       w:width,
-
       h:18
 
     });
 
 
     /*
-      STAR / FUNNY OBJECT
+      STAR
     */
 
     if(
       i%2===0 ||
-      r>.65
+      r>.6
     ){
 
       stars.push({
 
         x:x+width*.5,
-
         y:py-38,
-
         r:9,
-
         taken:false
 
       });
@@ -1325,27 +1252,24 @@ function makeLevel(n){
 
 
     /*
-      HAZARD
-
-      Never placed so it blocks
-      the entire platform.
+      SPIKE
     */
 
     if(
       i%3===1 &&
-      width>120
+      width>125
     ){
 
       const spikeX=
         x+
-        25+
+        28+
         Math.floor(
           random(
             n*500+i
           )*
           Math.max(
-            25,
-            width-65
+            20,
+            width-70
           )
         );
 
@@ -1353,11 +1277,8 @@ function makeLevel(n){
       hazards.push({
 
         x:spikeX,
-
         y:py-22,
-
         w:24,
-
         h:22
 
       });
@@ -1365,33 +1286,121 @@ function makeLevel(n){
     }
 
 
-    x+=width;
+    /*
+      BALL
+      Some levels have a ball.
+    */
+
+    if(
+      (n%7===0 && i===2) ||
+      (n%13===0 && i===4) ||
+      (n%29===0 && i===3)
+    ){
+
+      balls.push({
+
+        x:x+width+100,
+
+        y:py-20,
+
+        r:17,
+
+        speed:
+          130+
+          difficulty*80,
+
+        minX:x-20,
+
+        maxX:x+width+190,
+
+        dir:-1
+
+      });
+
+    }
+
+
+    /*
+      SLOPED ROAD
+    */
+
+    if(
+      i%5===2 ||
+      (n%11===0 && i===3)
+    ){
+
+      const sx=
+        x+width+35;
+
+      const sw=
+        170+
+        Math.floor(
+          random(
+            n*700+i
+          )*90
+        );
+
+      const rise=
+        25+
+        Math.floor(
+          random(
+            n*800+i
+          )*45
+        );
+
+
+      slopes.push({
+
+        x:sx,
+
+        y:groundY,
+
+        w:sw,
+
+        rise:rise
+
+      });
+
+
+      /*
+        Put a safe platform after slope.
+      */
+
+      x=
+        sx+
+        sw;
+
+    }else{
+
+      x+=width;
+
+    }
 
   }
 
 
   /*
-    SAFE FINISH PLATFORM
+    EASY FINAL AREA
 
-    The final platform is deliberately
-    wide and easy to reach.
+    Always reachable.
   */
 
-  const finishX=
-    x+65;
+  const finalStart=
+    x+50;
 
 
   platforms.push({
 
-    x:x+30,
-
+    x:finalStart,
     y:groundY,
-
-    w:240,
-
-    h:70
+    w:330,
+    h:75
 
   });
+
+
+  const finishX=
+    finalStart+110;
 
 
   return{
@@ -1399,16 +1408,17 @@ function makeLevel(n){
     groundY,
 
     platforms,
-
     hazards,
-
     stars,
+    balls,
+    slopes,
 
     finishX,
 
     idea:
       ideas[
-        (n-1)%ideas.length
+        (n-1)%
+        ideas.length
       ]
 
   };
@@ -1417,13 +1427,26 @@ function makeLevel(n){
 
 
 /* =========================================================
-   LEVEL RESET
+   SAVE
+========================================================= */
+
+function saveLevel(){
+
+  localStorage.setItem(
+    SAVE_KEY,
+    String(level)
+  );
+
+}
+
+
+/* =========================================================
+   RESET LEVEL
 ========================================================= */
 
 function resetLevel(){
 
   levelWon=false;
-
   paused=false;
 
   levelData=
@@ -1436,14 +1459,14 @@ function resetLevel(){
     levelData.groundY-
     player.h;
 
-  player.vx=0;
+  player.previousY=
+    player.y;
 
+  player.vx=0;
   player.vy=0;
 
   player.grounded=true;
-
   player.coyote=0;
-
 
   cameraX=0;
 
@@ -1457,6 +1480,8 @@ function resetLevel(){
 
 
   win.style.display="none";
+
+  saveLevel();
 
 }
 
@@ -1475,7 +1500,11 @@ startBtn.addEventListener(
 
     playing=true;
 
-    level=1;
+    /*
+      IMPORTANT:
+      Start from saved level,
+      NOT level 1.
+    */
 
     resetLevel();
 
@@ -1522,8 +1551,15 @@ function winLevel(){
   if(levelWon)return;
 
   levelWon=true;
-
   paused=true;
+
+  /*
+    Save CURRENT completed level.
+    Refresh stays here.
+  */
+
+  saveLevel();
+
 
   finishBanner.classList.remove(
     "show"
@@ -1554,6 +1590,11 @@ function nextLevel(){
     level>=TOTAL_LEVELS
   ){
 
+    /*
+      Finished all 5000.
+      Start again from 1.
+    */
+
     level=1;
 
   }else{
@@ -1561,6 +1602,9 @@ function nextLevel(){
     level++;
 
   }
+
+
+  saveLevel();
 
   resetLevel();
 
@@ -1600,6 +1644,26 @@ document
 
 
 /* =========================================================
+   SLOPE HEIGHT
+========================================================= */
+
+function slopeSurfaceY(s,x){
+
+  const t=
+    Math.max(
+      0,
+      Math.min(
+        1,
+        (x-s.x)/s.w
+      )
+    );
+
+  return s.y-s.rise*t;
+
+}
+
+
+/* =========================================================
    UPDATE
 ========================================================= */
 
@@ -1612,16 +1676,25 @@ function update(dt){
 
 
   /*
-    NATURAL MOVEMENT
+    SAVE OLD POSITION
+    This fixes falling through platforms.
+  */
 
-    LEFT = negative
-    RIGHT = positive
+  const oldY=
+    player.y;
 
-    NO INVERSION.
+  const oldBottom=
+    oldY+
+    player.h;
+
+
+  /*
+    MOVEMENT
   */
 
   const targetVX=
-    input.x*player.speed;
+    input.x*
+    player.speed;
 
 
   player.vx +=
@@ -1651,7 +1724,9 @@ function update(dt){
 
 
   /*
-    PLATFORM LANDING
+    NORMAL PLATFORM LANDING
+
+    More reliable than before.
   */
 
   for(
@@ -1659,23 +1734,29 @@ function update(dt){
     of levelData.platforms
   ){
 
-    const falling=
-      player.vy>=0;
-
     const horizontal=
       player.x+player.w>p.x &&
       player.x<p.x+p.w;
 
-    const crossed=
-      player.y+player.h>=p.y &&
-      player.y+player.h-
-      player.vy*dt<=p.y;
+
+    const newBottom=
+      player.y+
+      player.h;
+
+
+    const descending=
+      player.vy>=0;
+
+
+    const crossedTop=
+      oldBottom<=p.y+8 &&
+      newBottom>=p.y;
 
 
     if(
-      falling &&
       horizontal &&
-      crossed
+      descending &&
+      crossedTop
     ){
 
       player.y=
@@ -1690,9 +1771,63 @@ function update(dt){
   }
 
 
+  /*
+    SLOPED ROADS
+
+    Safe walkable tilted surface.
+  */
+
+  for(
+    const s
+    of levelData.slopes
+  ){
+
+    if(
+      player.x+player.w>s.x &&
+      player.x<s.x+s.w
+    ){
+
+      const surface=
+        slopeSurfaceY(
+          s,
+          player.x+
+          player.w*.5
+        );
+
+
+      const bottom=
+        player.y+
+        player.h;
+
+
+      if(
+        player.vy>=0 &&
+        bottom>=surface &&
+        oldBottom<=surface+12
+      ){
+
+        player.y=
+          surface-
+          player.h;
+
+        player.vy=0;
+
+        player.grounded=true;
+
+      }
+
+    }
+
+  }
+
+
+  /*
+    COYOTE TIME
+  */
+
   if(player.grounded){
 
-    player.coyote=.1;
+    player.coyote=.12;
 
   }else{
 
@@ -1740,10 +1875,69 @@ function update(dt){
 
 
   /*
-    HAZARDS
+    BALLS
 
-    A spike only kills if player
-    actually touches it.
+    Ball travels toward player.
+  */
+
+  for(
+    const b
+    of levelData.balls
+  ){
+
+    b.x+=
+      b.dir*
+      b.speed*
+      dt;
+
+
+    if(
+      b.x<=b.minX
+    ){
+
+      b.x=b.minX;
+      b.dir=1;
+
+    }
+
+
+    if(
+      b.x>=b.maxX
+    ){
+
+      b.x=b.maxX;
+      b.dir=-1;
+
+    }
+
+
+    const dx=
+      player.x+
+      player.w/2-
+      b.x;
+
+    const dy=
+      player.y+
+      player.h/2-
+      b.y;
+
+
+    if(
+      Math.hypot(dx,dy)<
+      b.r+18
+    ){
+
+      resetLevel();
+
+      return;
+
+    }
+
+  }
+
+
+  /*
+    SPIKES
   */
 
   for(
@@ -1769,9 +1963,6 @@ function update(dt){
 
   /*
     FALL
-
-    Respawn rather than impossible
-    game over.
   */
 
   if(
@@ -1788,8 +1979,6 @@ function update(dt){
 
   /*
     FINISH
-
-    Wide finish zone.
   */
 
   if(
@@ -1807,8 +1996,6 @@ function update(dt){
 
   /*
     CAMERA
-
-    Smooth follow.
   */
 
   const targetCamera=
@@ -1833,17 +2020,14 @@ function update(dt){
 
 
 /* =========================================================
-   DRAW BACKGROUND
+   BACKGROUND
 ========================================================= */
 
 function drawBackground(){
 
   const sky=
     ctx.createLinearGradient(
-      0,
-      0,
-      0,
-      H
+      0,0,0,H
     );
 
 
@@ -1866,16 +2050,9 @@ function drawBackground(){
   ctx.fillStyle=sky;
 
   ctx.fillRect(
-    0,
-    0,
-    W,
-    H
+    0,0,W,H
   );
 
-
-  /*
-    Funny clouds
-  */
 
   ctx.save();
 
@@ -1887,7 +2064,7 @@ function drawBackground(){
 
   for(
     let i=0;
-    i<25;
+    i<30;
     i++
   ){
 
@@ -1933,13 +2110,14 @@ function drawBackground(){
 
   }
 
+
   ctx.restore();
 
 }
 
 
 /* =========================================================
-   DRAW WORLD
+   WORLD
 ========================================================= */
 
 function drawWorld(){
@@ -1953,7 +2131,7 @@ function drawWorld(){
 
 
   /*
-    Platforms
+    PLATFORMS
   */
 
   for(
@@ -1963,7 +2141,6 @@ function drawWorld(){
 
     ctx.fillStyle=
       "#292b31";
-
 
     ctx.fillRect(
       p.x,
@@ -1976,7 +2153,6 @@ function drawWorld(){
     ctx.fillStyle=
       "#65d878";
 
-
     ctx.fillRect(
       p.x,
       p.y,
@@ -1985,22 +2161,18 @@ function drawWorld(){
     );
 
 
-    /*
-      tiny funny marks
-    */
-
     ctx.fillStyle=
       "rgba(255,255,255,.13)";
 
 
     for(
-      let x=p.x+18;
-      x<p.x+p.w;
-      x+=48
+      let xx=p.x+18;
+      xx<p.x+p.w;
+      xx+=48
     ){
 
       ctx.fillRect(
-        x,
+        xx,
         p.y+22,
         12,
         5
@@ -2012,7 +2184,67 @@ function drawWorld(){
 
 
   /*
-    Hazards
+    SLOPED ROADS
+  */
+
+  for(
+    const s
+    of levelData.slopes
+  ){
+
+    ctx.fillStyle="#292b31";
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+      s.x,
+      s.y
+    );
+
+    ctx.lineTo(
+      s.x+s.w,
+      s.y-s.rise
+    );
+
+    ctx.lineTo(
+      s.x+s.w,
+      s.y+55-s.rise
+    );
+
+    ctx.lineTo(
+      s.x,
+      s.y+55
+    );
+
+    ctx.closePath();
+
+    ctx.fill();
+
+
+    ctx.strokeStyle=
+      "#65d878";
+
+    ctx.lineWidth=7;
+
+    ctx.beginPath();
+
+    ctx.moveTo(
+      s.x,
+      s.y
+    );
+
+    ctx.lineTo(
+      s.x+s.w,
+      s.y-s.rise
+    );
+
+    ctx.stroke();
+
+  }
+
+
+  /*
+    SPIKES
   */
 
   for(
@@ -2022,7 +2254,6 @@ function drawWorld(){
 
     ctx.fillStyle=
       "#ef476f";
-
 
     ctx.beginPath();
 
@@ -2061,7 +2292,7 @@ function drawWorld(){
 
 
   /*
-    Stars
+    STARS
   */
 
   for(
@@ -2079,15 +2310,12 @@ function drawWorld(){
       s.y
     );
 
-
     ctx.rotate(
       performance.now()/700
     );
 
-
     ctx.fillStyle=
       "#ffd166";
-
 
     ctx.beginPath();
 
@@ -2103,11 +2331,8 @@ function drawWorld(){
 
       const r=
         i%2===0
-        ?
-        11
-        :
-        5;
-
+        ?11
+        :5;
 
       const sx=
         Math.cos(a)*r;
@@ -2138,6 +2363,85 @@ function drawWorld(){
     ctx.closePath();
 
     ctx.fill();
+
+    ctx.restore();
+
+  }
+
+
+  /*
+    BALLS
+  */
+
+  for(
+    const b
+    of levelData.balls
+  ){
+
+    ctx.save();
+
+    ctx.translate(
+      b.x,
+      b.y
+    );
+
+
+    ctx.fillStyle=
+      "#ff6b35";
+
+    ctx.beginPath();
+
+    ctx.arc(
+      0,
+      0,
+      b.r,
+      0,
+      Math.PI*2
+    );
+
+    ctx.fill();
+
+
+    ctx.strokeStyle=
+      "#fff";
+
+    ctx.lineWidth=3;
+
+    ctx.beginPath();
+
+    ctx.arc(
+      0,
+      0,
+      b.r-5,
+      0,
+      Math.PI*1.5
+    );
+
+    ctx.stroke();
+
+
+    ctx.fillStyle="#222";
+
+    ctx.beginPath();
+
+    ctx.arc(
+      -5,
+      -3,
+      3,
+      0,
+      Math.PI*2
+    );
+
+    ctx.arc(
+      5,
+      -3,
+      3,
+      0,
+      Math.PI*2
+    );
+
+    ctx.fill();
+
 
     ctx.restore();
 
@@ -2198,13 +2502,8 @@ function drawWorld(){
   );
 
 
-  /*
-    funny body
-  */
-
   ctx.fillStyle=
     "#684cff";
-
 
   ctx.beginPath();
 
@@ -2220,11 +2519,10 @@ function drawWorld(){
 
 
   /*
-    eyes
+    EYES
   */
 
   ctx.fillStyle="#fff";
-
 
   ctx.beginPath();
 
@@ -2247,12 +2545,7 @@ function drawWorld(){
   ctx.fill();
 
 
-  /*
-    pupils
-  */
-
   ctx.fillStyle="#111";
-
 
   ctx.beginPath();
 
@@ -2276,11 +2569,10 @@ function drawWorld(){
 
 
   /*
-    smile
+    SMILE
   */
 
   ctx.strokeStyle="#111";
-
   ctx.lineWidth=3;
 
   ctx.beginPath();
@@ -2297,7 +2589,7 @@ function drawWorld(){
 
 
   /*
-    legs
+    LEGS
   */
 
   ctx.fillStyle="#222";
@@ -2321,7 +2613,7 @@ function drawWorld(){
 
 
   /*
-    funny text around world
+    FUNNY TEXT
   */
 
   ctx.fillStyle=
@@ -2331,13 +2623,9 @@ function drawWorld(){
     "900 15px system-ui";
 
 
-  const jokeX=
-    player.x+100;
-
-
   ctx.fillText(
     "هەموو شتێک باشە 😎",
-    jokeX,
+    player.x+100,
     player.y-30
   );
 
@@ -2348,37 +2636,38 @@ function drawWorld(){
 
 
 /* =========================================================
-   FUNNY IMAGE POSITION
+   SAN IMAGE
 ========================================================= */
 
 function updateSanPosition(){
 
-  /*
-    Image changes location every level
-    so it feels like a funny easter egg.
-  */
-
   const positions=[
+
     {
       right:18,
       top:110
     },
+
     {
       right:W*.28,
       top:90
     },
+
     {
       right:35,
       top:180
     },
+
     {
       right:W*.45,
       top:120
     },
+
     {
       right:20,
       top:250
     }
+
   ];
 
 
@@ -2395,11 +2684,6 @@ function updateSanPosition(){
   san.style.top=
     p.top+"px";
 
-
-  /*
-    Make it slightly smaller
-    on small iPhones.
-  */
 
   const size=
     Math.min(
@@ -2440,7 +2724,7 @@ function draw(){
 
 
 /* =========================================================
-   GAME LOOP
+   LOOP
 ========================================================= */
 
 function loop(time){
@@ -2460,11 +2744,9 @@ function loop(time){
 
   lastTime=time;
 
-
   update(dt);
 
   draw();
-
 
   requestAnimationFrame(
     loop
@@ -2474,11 +2756,14 @@ function loop(time){
 
 
 /* =========================================================
-   INITIAL DRAW
+   INITIAL
 ========================================================= */
 
 levelData=
-  makeLevel(1);
+  makeLevel(level);
+
+levelEl.textContent=
+  level;
 
 draw();
 
