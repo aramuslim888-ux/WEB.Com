@@ -3,13 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>SAN B AHAMD — 5000 HARD LEVELS</title>
+
+<title>SAN B AHAMD — 5000 LEVELS</title>
 
 <style>
 *{
  box-sizing:border-box;
- -webkit-tap-highlight-color:transparent
+ -webkit-tap-highlight-color:transparent;
 }
+
 html,body{
  margin:0;
  width:100%;
@@ -18,15 +20,22 @@ html,body{
  background:#101116;
  font-family:system-ui,-apple-system,sans-serif;
  touch-action:none;
- user-select:none
+ user-select:none;
 }
+
 canvas{
  position:fixed;
  inset:0;
  width:100%;
- height:100%
+ height:100%;
 }
-button{font:inherit}
+
+button{
+ font:inherit;
+ cursor:pointer;
+ -webkit-user-select:none;
+ user-select:none;
+}
 
 #hud{
  position:fixed;
@@ -36,15 +45,16 @@ button{font:inherit}
  display:flex;
  justify-content:space-between;
  z-index:20;
- pointer-events:none
+ pointer-events:none;
 }
+
 .pill{
  background:#151923dd;
  color:#fff;
  padding:9px 12px;
  border-radius:20px;
  font-weight:900;
- font-size:12px
+ font-size:12px;
 }
 
 #intro{
@@ -58,33 +68,38 @@ button{font:inherit}
  radial-gradient(circle at 90% 85%,#7bdcb5 0 13%,transparent 14%),
  #f07157;
  color:#fff;
- text-align:center
+ text-align:center;
 }
+
 .card{
  width:min(94vw,460px);
- padding:25px
+ padding:25px;
 }
+
 .title{
  font-size:clamp(42px,13vw,78px);
  line-height:.84;
  font-weight:1000;
- text-shadow:5px 5px #222
+ text-shadow:5px 5px #222;
 }
-.card button,.win button{
+
+.card button,
+.win button{
  border:0;
  border-radius:999px;
  padding:15px 25px;
  background:#20283a;
  color:#fff;
- font-weight:1000
+ font-weight:1000;
 }
 
 #controls{
  position:fixed;
  inset:0;
  z-index:15;
- pointer-events:none
+ pointer-events:none;
 }
+
 .joy{
  position:absolute;
  left:18px;
@@ -94,8 +109,9 @@ button{font:inherit}
  border:3px solid #ffffff88;
  border-radius:50%;
  background:#ffffff0c;
- pointer-events:auto
+ pointer-events:auto;
 }
+
 .stick{
  position:absolute;
  left:30px;
@@ -108,8 +124,9 @@ button{font:inherit}
  display:grid;
  place-items:center;
  color:#fff;
- font-size:24px
+ font-size:24px;
 }
+
 .acts{
  position:absolute;
  right:18px;
@@ -117,8 +134,9 @@ button{font:inherit}
  display:grid;
  grid-template-columns:78px 78px;
  gap:9px;
- pointer-events:none
+ pointer-events:none;
 }
+
 .act{
  width:78px;
  height:78px;
@@ -128,11 +146,12 @@ button{font:inherit}
  color:#fff;
  font-weight:1000;
  font-size:11px;
- pointer-events:auto
+ pointer-events:auto;
 }
+
 .act:active{
  transform:scale(.9);
- background:#6c4cff
+ background:#6c4cff;
 }
 
 #idea{
@@ -148,7 +167,7 @@ button{font:inherit}
  text-align:center;
  font-size:11px;
  font-weight:900;
- z-index:16
+ z-index:16;
 }
 
 #danger{
@@ -163,9 +182,12 @@ button{font:inherit}
  padding:6px 12px;
  font-size:10px;
  font-weight:1000;
- opacity:0
+ opacity:0;
 }
-#danger.on{opacity:1}
+
+#danger.on{
+ opacity:1;
+}
 
 #win{
  position:fixed;
@@ -174,19 +196,30 @@ button{font:inherit}
  display:none;
  place-items:center;
  background:#0009;
- backdrop-filter:blur(7px)
+ backdrop-filter:blur(7px);
 }
+
 .win{
  width:min(92vw,430px);
  padding:25px;
  border-radius:25px;
  background:#17181d;
  color:#fff;
- text-align:center
+ text-align:center;
 }
-.win button{border-radius:14px;margin:4px}
-.next{background:#6c4cff!important}
-.retry{background:#30323a!important}
+
+.win button{
+ border-radius:14px;
+ margin:4px;
+}
+
+.next{
+ background:#6c4cff!important;
+}
+
+.retry{
+ background:#30323a!important;
+}
 
 #banner{
  position:fixed;
@@ -200,19 +233,21 @@ button{font:inherit}
  border-radius:20px;
  font-weight:1000;
  opacity:0;
- pointer-events:none
+ pointer-events:none;
 }
+
 .show{
- animation:pop .8s forwards
+ animation:pop .8s forwards;
 }
+
 @keyframes pop{
  35%{
   opacity:1;
-  transform:translate(-50%,-50%) scale(1.1)
+  transform:translate(-50%,-50%) scale(1.1);
  }
  100%{
   opacity:0;
-  transform:translate(-50%,-50%) scale(1)
+  transform:translate(-50%,-50%) scale(1);
  }
 }
 </style>
@@ -224,51 +259,121 @@ button{font:inherit}
 
 <div id="intro">
  <div class="card">
-  <div class="title">SAN<br>B AHAMD</div>
-  <p><b>5000 HARD CHALLENGES</b></p>
-  <p>لە Level 16 ـەوە هیچ ئاستێک ئاسان نییە.</p>
-  <button id="start">TAP TO BEGIN</button>
+
+  <div class="title">
+   SAN<br>B AHAMD
+  </div>
+
+  <p><b>5000 LEVELS</b></p>
+
+  <p>
+   لە Level 16 ـەوە قورسایی بە هێواشی زیاد دەبێت.
+   <br>
+   هەرچی بەرەو 5000 دەچیت، یارییەکە قورس‌تر دەبێت. 😈
+  </p>
+
+  <button id="start">
+   TAP TO BEGIN
+  </button>
+
  </div>
 </div>
+
 
 <div id="hud">
- <div class="pill">SAN B AHAMD</div>
+
  <div class="pill">
-  LEVEL <span id="level">1</span> / 5000
+  SAN B AHAMD
+ </div>
+
+ <div class="pill">
+  LEVEL
+  <span id="level">1</span>
+  / 5000
   <span id="tier"></span>
  </div>
+
 </div>
 
-<div id="danger">⚠️ مەترسیی زۆر بەرزە</div>
-<div id="idea">💡 ئامادە بە...</div>
+
+<div id="danger">
+ ⚠️ مەترسیی زۆر بەرزە
+</div>
+
+
+<div id="idea">
+ 💡 ئامادە بە...
+</div>
+
 
 <div id="controls">
+
  <div class="joy" id="joy">
   <div class="stick" id="stick">↔</div>
  </div>
 
  <div class="acts">
-  <button class="act" id="jump">JUMP</button>
-  <button class="act" id="dash">DASH</button>
-  <button class="act" id="reset">RESET</button>
-  <button class="act" id="next">NEXT</button>
+
+  <button class="act" id="jump">
+   JUMP
+  </button>
+
+  <button class="act" id="dash">
+   DASH
+  </button>
+
+  <button class="act" id="reset">
+   RESET
+  </button>
+
+  <button class="act" id="next">
+   NEXT
+  </button>
+
  </div>
+
 </div>
+
 
 <div id="win">
+
  <div class="win">
-  <h1>پیرۆزە! 🎉</h1>
+
+  <h1>
+   پیرۆزە! 🎉
+  </h1>
+
   <p id="winText"></p>
-  <p>ئامادەی مەرحەلەی داهاتوویت؟ 😈</p>
-  <button class="retry" id="retry">دووبارە</button>
-  <button class="next" id="nextBtn">مەرحەلەی داهاتوو →</button>
+
+  <p>
+   ئامادەی مەرحەلەی داهاتوویت؟ 😈
+  </p>
+
+  <button class="retry" id="retry">
+   دووبارە
+  </button>
+
+  <button class="next" id="nextBtn">
+   مەرحەلەی داهاتوو →
+  </button>
+
  </div>
+
 </div>
 
-<div id="banner">🎉 LEVEL COMPLETE!</div>
+
+<div id="banner">
+ 🎉 LEVEL COMPLETE!
+</div>
+
 
 <script>
 "use strict";
+
+
+/* =========================================================
+   CANVAS
+========================================================= */
 
 const C=document.getElementById("game");
 const X=C.getContext("2d");
@@ -287,84 +392,219 @@ let H=innerHeight;
 let DPR=1;
 
 function resize(){
+
  W=innerWidth;
  H=innerHeight;
- DPR=Math.min(devicePixelRatio||1,2);
+
+ DPR=Math.min(
+  devicePixelRatio||1,
+  2
+ );
 
  C.width=W*DPR;
  C.height=H*DPR;
+
  C.style.width=W+"px";
  C.style.height=H+"px";
 
- X.setTransform(DPR,0,0,DPR,0,0);
+ X.setTransform(
+  DPR,
+  0,
+  0,
+  DPR,
+  0,
+  0
+ );
 }
 
-addEventListener("resize",resize);
+addEventListener(
+ "resize",
+ resize
+);
+
 resize();
 
-const KEY="san_b_ahamd_5000_hard_v21";
+
+/* =========================================================
+   SAVE SYSTEM — FIXED
+========================================================= */
+
+/*
+  ئەمە KEY ـێکی نوێیە.
+
+  KEY ـی کۆنی یاری بەکارناهێنین،
+  بۆیە ئەگەر پێشتر Level 10 هەڵگیراوە،
+  ئەم وەشانە لە Level 1 دەست پێدەکات.
+*/
+
+const SAVE_KEY="san_b_ahamd_5000_progress_v40";
+
 const TOTAL=5000;
 
-let level=+localStorage.getItem(KEY)||1;
+function loadLevel(){
 
-if(level<1||level>TOTAL)
- level=1;
+ try{
+
+  const value=
+   parseInt(
+    localStorage.getItem(SAVE_KEY),
+    10
+   );
+
+  if(
+   Number.isFinite(value)&&
+   value>=1&&
+   value<=TOTAL
+  ){
+
+   return value;
+  }
+
+ }catch(e){}
+
+ return 1;
+}
+
+
+function saveLevel(){
+
+ try{
+
+  localStorage.setItem(
+   SAVE_KEY,
+   String(level)
+  );
+
+ }catch(e){}
+}
+
+
+let level=loadLevel();
+
+
+/* =========================================================
+   GAME STATE
+========================================================= */
 
 let playing=false;
 let paused=false;
 let won=false;
+
 let last=0;
 let cam=0;
 let shake=0;
 let flash=0;
+
 let parts=[];
+
 let LD;
 
+
+/* =========================================================
+   PLAYER
+========================================================= */
+
 const P={
+
  x:70,
  y:0,
+
  w:34,
  h:42,
+
  vx:0,
  vy:0,
+
  speed:280,
  jump:610,
+
  ground:false,
  coyote:0,
+
  dash:0,
  cd:0,
  inv:0,
+
  reverse:0,
  slow:0
 };
 
-const I={x:0};
 
-const ideas=[
- "تۆپەکان دەتوانن شوێنت پێشبینی بکەن.",
- "هەورە تریشقەکە پێش لێدان warning دەدات.",
- "زەوی لەپڕ دەشکێت.",
- "دیوارەکە دەتوانێت لەپڕ بزوێت.",
- "لە ئێستاوە هیچ شتێک safe نییە.",
- "DASH بۆ ڕزگاربوون لە کاتێکی قورس.",
- "هەموو شتێک دەتوانێت لەگەڵ شتێکی تر کۆببێتەوە.",
- "لە Level 16 ـەوە قورسایی بەردەوام زیاد دەکات.",
- "1000 جۆری challenge هەن و دەتوانن تێکەڵ ببنەوە.",
- "Level 5000 کۆتاییەکەیە. 😈"
-];
-
-const r=n=>{
- let x=Math.sin(n*12.9898)*43758.5453;
- return x-Math.floor(x);
+const I={
+ x:0
 };
 
-const cl=(v,a,b)=>Math.max(a,Math.min(b,v));
 
-const hit=(a,b)=>
- a.x<b.x+b.w &&
- a.x+a.w>b.x &&
- a.y<b.y+b.h &&
- a.y+a.h>b.y;
+/* =========================================================
+   IDEAS
+========================================================= */
+
+const ideas=[
+
+ "تۆپەکان دەتوانن شوێنت پێشبینی بکەن.",
+
+ "هەورە تریشقەکە پێش لێدان warning دەدات.",
+
+ "زەوی لەپڕ دەشکێت.",
+
+ "دیوارەکە دەتوانێت لەپڕ بزوێت.",
+
+ "لە ئێستاوە traps دەست پێدەکەن.",
+
+ "DASH بۆ ڕزگاربوون لە کاتێکی قورس.",
+
+ "هەموو شتێک دەتوانێت لەگەڵ شتێکی تر کۆببێتەوە.",
+
+ "قورسایی بە هێواشی زیاد دەبێت.",
+
+ "چەندین جۆری challenge دەتوانن تێکەڵ ببن.",
+
+ "Level 5000 کۆتاییەکەیە. 😈"
+
+];
+
+
+/* =========================================================
+   RANDOM
+========================================================= */
+
+function r(n){
+
+ let x=
+  Math.sin(n*12.9898)*
+  43758.5453;
+
+ return x-
+  Math.floor(x);
+}
+
+
+function cl(v,a,b){
+
+ return Math.max(
+  a,
+  Math.min(
+   b,
+   v
+  )
+ );
+}
+
+
+function hit(a,b){
+
+ return(
+  a.x<b.x+b.w&&
+  a.x+a.w>b.x&&
+  a.y<b.y+b.h&&
+  a.y+a.h>b.y
+ );
+}
+
+
+/* =========================================================
+   DIFFICULTY
+========================================================= */
 
 function difficulty(n){
 
@@ -373,91 +613,231 @@ function difficulty(n){
   let p=(n-1)/14;
 
   return{
-   d:0,
-   gap:145-p*25,
-   width:180-p*20,
-   rise:p*20,
-   speed:250,
-   jump:650,
-   types:1,
-   hard:false
-  };
 
+   d:0,
+
+   gap:
+    145-
+    p*25,
+
+   width:
+    180-
+    p*20,
+
+   rise:
+    p*20,
+
+   speed:250,
+
+   jump:650,
+
+   types:0,
+
+   hard:false,
+
+   spikes:0,
+
+   balls:0,
+
+   special:0,
+
+   gates:0
+  };
  }
 
- let p=(n-16)/4984;
 
- /* تەنها کەمێک ئاسانتر */
- let d=Math.pow(p,.70);
+ let raw=
+  (n-16)/
+  (TOTAL-16);
+
+ raw=cl(
+  raw,
+  0,
+  1
+ );
+
+
+ let d=
+  Math.pow(
+   raw,
+   1.12
+  );
+
 
  return{
+
   d,
-  gap:cl(120-82*d,28,120),
-  width:cl(155-108*d,42,155),
-  rise:12+135*d,
-  speed:270+45*d,
-  jump:650-60*d,
+
+  gap:
+   cl(
+    145-
+    107*d,
+    38,
+    145
+   ),
+
+  width:
+   cl(
+    180-
+    122*d,
+    58,
+    180
+   ),
+
+  rise:
+   10+
+   115*d,
+
+  speed:
+   250+
+   100*d,
+
+  jump:
+   650-
+   45*d,
+
   types:1000,
-  hard:true
+
+  hard:true,
+
+  spikes:
+   cl(
+    (n-20)/250,
+    0,
+    1
+   )*
+   d,
+
+  balls:
+   cl(
+    (n-40)/500,
+    0,
+    1
+   )*
+   d,
+
+  special:
+   cl(
+    (n-25)/100,
+    0,
+    1
+   )*
+   d,
+
+  gates:
+   cl(
+    (n-500)/1500,
+    0,
+    1
+   )*
+   d
  };
 }
 
-function challenge(seed,id,d){
+
+/* =========================================================
+   CHALLENGE
+========================================================= */
+
+function challenge(
+ seed,
+ id,
+ d
+){
 
  let q={
+
   id,
-  kind:id%24,
+
+  kind:
+   id%24,
+
   x:0,
   y:0,
+
   w:18,
   h:18,
+
   s:1,
+
   a:0,
   b:0,
   c:0
  };
 
- q.kind=id%24;
 
  q.x=
   300+
-  r(seed+id*3)*5000;
+  r(seed+id*3)*
+  5000;
+
 
  q.y=
   80+
   r(seed+id*5)*
-  Math.max(80,H-240);
+  Math.max(
+   80,
+   H-240
+  );
+
 
  q.w=
   12+
   r(seed+id*7)*
-  (35+d*70);
+  (
+   35+
+   d*70
+  );
+
 
  q.h=
   12+
   r(seed+id*11)*
-  (35+d*70);
+  (
+   35+
+   d*70
+  );
+
 
  q.s=
   .5+
   r(seed+id*13)*
-  (1+d*5);
+  (
+   1+
+   d*5
+  );
+
 
  q.a=
-  r(seed+id*17)*6.28;
+  r(seed+id*17)*
+  6.28;
+
 
  q.b=
   40+
   r(seed+id*19)*
-  (80+d*260);
+  (
+   80+
+   d*260
+  );
+
 
  q.c=
   40+
   r(seed+id*23)*
-  (80+d*300);
+  (
+   80+
+   d*300
+  );
+
 
  return q;
 }
+
+
+/* =========================================================
+   MAKE LEVEL
+========================================================= */
 
 function makeLevel(n){
 
@@ -473,6 +853,7 @@ function makeLevel(n){
    )
   );
 
+
  let world=[];
  let haz=[];
  let balls=[];
@@ -481,73 +862,107 @@ function makeLevel(n){
  let gates=[];
 
  let x=230;
- let seed=n*99991;
+
+ let seed=
+  n*99991;
+
 
  world.push({
+
   x:-300,
+
   y:gY,
+
   w:500,
+
   h:80
  });
 
- let count=
-  n<=15
-  ?5
-  :Math.floor(
-   9+D.d*25
-  );
 
- for(let i=0;i<count;i++){
+ let count;
 
-  let s=seed+i*7919;
+ if(n<=15){
+
+  count=5;
+
+ }else{
+
+  count=
+   5+
+   Math.floor(
+    D.d*8
+   );
+ }
+
+
+ for(
+  let i=0;
+  i<count;
+  i++
+ ){
+
+  let s=
+   seed+
+   i*7919;
+
 
   let gap=
    D.gap+
-   r(s)*45;
+   r(s)*35;
+
 
   let w=
    Math.max(
     38,
     D.width+
-    r(s+1)*45
+    r(s+1)*35
    );
+
 
   let y=
    gY-
    r(s+2)*D.rise;
 
+
   x+=gap;
 
+
   world.push({
+
    x,
+
    y,
+
    w,
+
    h:18
   });
 
-  if(i%2===0){
-
-   stars.push({
-    x:x+w/2,
-    y:y-35,
-    t:0
-   });
-
-  }
-
-  let base=
-   x+
-   w+
-   25+
-   r(s+3)*80;
 
   if(
-   n>7 &&
+   i%2===0
+  ){
+
+   stars.push({
+
+    x:x+w/2,
+
+    y:y-35,
+
+    t:0
+   });
+  }
+
+
+  if(
+   n>20&&
    r(s+4)<
-   .18+D.d*.72
+   .12+
+   D.spikes*.75
   ){
 
    haz.push({
+
     x:
      x+
      r(s+5)*
@@ -555,34 +970,49 @@ function makeLevel(n){
       10,
       w-20
      ),
+
     y:y-22,
+
     w:22,
+
     h:22
    });
-
   }
 
+
   if(
-   n>9 &&
+   n>40&&
    r(s+6)<
-   .2+D.d*.8
+   .12+
+   D.balls*.75
   ){
 
    balls.push({
-    x:base,
+
+    x:
+     x+
+     w+
+     25+
+     r(s+3)*70,
+
     y:
      y-
      30-
-     r(s+7)*100,
+     r(s+7)*80,
+
     r:
      15+
      D.d*7,
-    min:x-60,
+
+    min:
+     x-60,
+
     max:
      x+
      w+
-     240+
+     220+
      D.d*300,
+
     v:
      (
       r(s+8)>.5
@@ -590,124 +1020,206 @@ function makeLevel(n){
       :-1
      )*
      (
-      130+
+      120+
       D.d*360
      )
    });
-
   }
 
-  if(n>15){
+
+  if(
+   n>25&&
+   r(s+9)<
+   .18+
+   D.special*.75
+  ){
 
    let amount=
     1+
     Math.floor(
-     r(s+9)*
+     r(s+10)*
      (
       1+
-      D.d*2.7
+      D.d*3
      )
     );
 
-   for(let k=0;k<amount;k++){
+
+   amount=
+    Math.min(
+     amount,
+     1+
+     Math.floor(
+      D.d*3
+     )
+    );
+
+
+   for(
+    let k=0;
+    k<amount;
+    k++
+   ){
 
     special.push(
      challenge(
       s,
-      k+(i*37),
+      k+
+      i*37,
       D.d
      )
     );
-
    }
   }
 
+
   x+=w;
 
+
   if(
-   r(s+10)<
-   .35+D.d*.6
+   r(s+11)<
+   .25+
+   D.d*.55
   ){
 
+   let ew=
+    Math.max(
+     45,
+     D.width*.72
+    );
+
+
    world.push({
+
     x:x+20,
+
     y:
      gY-
-     r(s+11)*D.rise,
-    w:
-     Math.max(
-      40,
-      D.width*.75
-     ),
+     r(s+12)*D.rise,
+
+    w:ew,
+
     h:18
    });
 
-   x+=Math.max(
-    40,
-    D.width*.75
-   );
+
+   x+=ew;
   }
  }
 
- let finish=x+300;
+
+ let finish=
+  x+300;
+
 
  world.push({
+
   x:x+50,
+
   y:gY,
+
   w:500,
+
   h:80
  });
 
+
+ let gateCount=
+  Math.floor(
+   D.gates*5
+  );
+
+
  for(
   let i=0;
-  i<Math.floor(D.d*5);
+  i<gateCount;
   i++
  ){
 
   gates.push({
+
    x:
     x+
     100+
     i*65,
-   y:gY-140,
+
+   y:
+    gY-140,
+
    w:10,
+
    h:140,
-   p:r(seed+700+i),
+
+   p:
+    r(seed+700+i),
+
    t:
     1+
     r(seed+710+i)*1.2
   });
-
  }
 
+
+ let ideaIndex;
+
+ if(n<=15){
+
+  ideaIndex=n-1;
+
+ }else{
+
+  ideaIndex=
+   Math.min(
+    9,
+    Math.floor(
+     D.d*10
+    )
+   );
+ }
+
+
  return{
+
   D,
+
   gY,
+
   world,
+
   haz,
+
   balls,
+
   stars,
+
   special,
+
   gates,
+
   finish,
+
   idea:
    ideas[
-    n<=15
-    ?n-1
-    :Math.min(
-     9,
-     Math.floor(D.d*10)
-    )
+    ideaIndex
    ]
  };
 }
+
+
+/* =========================================================
+   RESET LEVEL
+========================================================= */
 
 function reset(){
 
  won=false;
  paused=false;
 
- LD=makeLevel(level);
+ win.style.display="none";
+
+ LD=
+  makeLevel(level);
+
 
  P.x=70;
 
@@ -723,74 +1235,140 @@ function reset(){
 
  P.dash=0;
  P.cd=0;
-
- /* spawn protection */
- P.inv=.55;
+ P.inv=0;
 
  P.reverse=0;
  P.slow=0;
 
  cam=0;
 
- lvlEl.textContent=level;
+ lvlEl.textContent=
+  level;
+
+
+ let tier;
+
+ if(level<=15){
+
+  tier="فێرکاری";
+
+ }else if(level<500){
+
+  tier="ئاسان";
+
+ }else if(level<1500){
+
+  tier="مامناوەند";
+
+ }else if(level<3000){
+
+  tier="قورس";
+
+ }else if(level<4500){
+
+  tier="زۆر قورس";
+
+ }else{
+
+  tier="HELL 😈";
+ }
+
 
  tierEl.textContent=
   " • "+
-  (
-   level<=15
-   ?"فێرکاری"
-   :"قورس"
-  )+
-  " "+
-  level;
+  tier;
+
 
  ideaEl.textContent=
   `LEVEL ${level}: ${LD.idea}`;
 
- P.speed=LD.D.speed;
- P.jump=LD.D.jump;
+
+ P.speed=
+  LD.D.speed;
+
+ P.jump=
+  LD.D.jump;
+
 
  danger.classList.toggle(
   "on",
-  level>15
+  level>=1000
  );
 
- localStorage.setItem(
-  KEY,
-  level
- );
+
+ /*
+   گرنگ:
+   هەر کات reset دەکرێت،
+   level ـی ئێستا هەڵدەگیرێت.
+ */
+
+ saveLevel();
 }
+
+
+/* =========================================================
+   PARTICLES
+========================================================= */
 
 function burst(x,y){
 
- for(let i=0;i<12;i++){
+ for(
+  let i=0;
+  i<12;
+  i++
+ ){
 
   parts.push({
+
    x,
+
    y,
+
    vx:
     (
-     r(performance.now()+i)-.5
-    )*250,
+     r(
+      performance.now()+i
+     )-.5
+    )*
+    250,
+
    vy:
     (
-     r(performance.now()+i*2)-.5
-    )*250,
+     r(
+      performance.now()+i*2
+     )-.5
+    )*
+    250,
+
    l:
     .4+
-    r(i+performance.now())*.5
+    r(
+     i+
+     performance.now()
+    )*.5
   });
-
  }
 }
 
+
+/* =========================================================
+   DIE
+========================================================= */
+
 function die(){
 
- if(P.inv>0)
-  return;
+ if(
+  P.inv<=0
+ ){
 
- reset();
+  reset();
+ }
 }
+
+
+/* =========================================================
+   JUMP
+========================================================= */
 
 function jump(){
 
@@ -799,95 +1377,186 @@ function jump(){
   P.coyote>0
  ){
 
-  P.vy=-P.jump;
+  P.vy=
+   -P.jump;
+
   P.ground=false;
+
   P.coyote=0;
  }
 }
+
+
+/* =========================================================
+   DASH
+========================================================= */
 
 function dash(){
 
  if(P.cd>0)
   return;
 
+
  let d=
   Math.abs(I.x)>.1
   ?I.x
   :1;
 
- P.vx=d*780;
+
+ P.vx=
+  d*780;
+
  P.dash=.16;
 
  P.cd=
   Math.max(
    .28,
-   .75-LD.D.d*.25
+   .75-
+   LD.D.d*.25
   );
 
  P.inv=.18;
+
  shake=6;
 }
+
+
+/* =========================================================
+   UPDATE
+========================================================= */
 
 function update(dt){
 
  if(paused)
   return;
 
- let oldY=P.y;
- let oldB=oldY+P.h;
 
- P.cd=Math.max(0,P.cd-dt);
- P.dash=Math.max(0,P.dash-dt);
- P.inv=Math.max(0,P.inv-dt);
- P.reverse=Math.max(0,P.reverse-dt);
- P.slow=Math.max(0,P.slow-dt);
+ let oldY=
+  P.y;
+
+ let oldB=
+  oldY+
+  P.h;
+
+
+ P.cd=
+  Math.max(
+   0,
+   P.cd-dt
+  );
+
+ P.dash=
+  Math.max(
+   0,
+   P.dash-dt
+  );
+
+ P.inv=
+  Math.max(
+   0,
+   P.inv-dt
+  );
+
+ P.reverse=
+  Math.max(
+   0,
+   P.reverse-dt
+  );
+
+ P.slow=
+  Math.max(
+   0,
+   P.slow-dt
+  );
+
 
  let ctrl=
   P.reverse>0
   ?-I.x
   :I.x;
 
+
  P.vx+=
   (
-   ctrl*P.speed-P.vx
+   ctrl*
+   P.speed-
+   P.vx
   )*
   Math.min(
    1,
-   dt*(P.slow>0?5:12)
+   dt*
+   (
+    P.slow>0
+    ?5
+    :12
+   )
   );
 
- P.vy+=1550*dt;
 
- P.x+=P.vx*dt;
- P.y+=P.vy*dt;
+ P.vy+=
+  1550*
+  dt;
+
+
+ P.x+=
+  P.vx*
+  dt;
+
+ P.y+=
+  P.vy*
+  dt;
+
 
  P.ground=false;
 
- for(let q of LD.world){
+
+ for(
+  let q
+  of LD.world
+ ){
 
   if(
-   P.x+P.w>q.x &&
-   P.x<q.x+q.w &&
-   P.vy>=0 &&
-   oldB<=q.y+10 &&
+   P.x+P.w>q.x&&
+   P.x<q.x+q.w&&
+   P.vy>=0&&
+   oldB<=q.y+10&&
    P.y+P.h>=q.y
   ){
 
-   P.y=q.y-P.h;
+   P.y=
+    q.y-
+    P.h;
+
    P.vy=0;
+
    P.ground=true;
   }
  }
 
- for(let q of LD.haz){
 
-  if(hit(P,q))
+ for(
+  let q
+  of LD.haz
+ ){
+
+  if(
+   hit(P,q)
+  ){
+
    return die();
+  }
  }
 
- for(let b of LD.balls){
 
-  b.x+=b.v*dt;
+ for(
+  let b
+  of LD.balls
+ ){
+
+  b.x+=
+   b.v*
+   dt;
+
 
   if(
    b.x<b.min||
@@ -896,17 +1565,24 @@ function update(dt){
 
    b.v*=-1;
 
-   b.x=cl(
-    b.x,
-    b.min,
-    b.max
-   );
+   b.x=
+    cl(
+     b.x,
+     b.min,
+     b.max
+    );
   }
+
 
   if(
    Math.hypot(
-    P.x+P.w/2-b.x,
-    P.y+P.h/2-b.y
+    P.x+
+    P.w/2-
+    b.x,
+
+    P.y+
+    P.h/2-
+    b.y
    )<
    b.r+18
   ){
@@ -915,304 +1591,436 @@ function update(dt){
   }
  }
 
- let now=performance.now()/1000;
 
- for(let s of LD.special){
+ let now=
+  performance.now()/1000;
 
-  let t=now+s.a;
+
+ for(
+  let s
+  of LD.special
+ ){
+
+  let t=
+   now+
+   s.a;
+
 
   let q={
+
    x:s.x,
    y:s.y,
+
    w:s.w,
    h:s.h
   };
 
+
   let cx=s.x;
   let cy=s.y;
 
-  switch(s.kind){
+
+  switch(
+   s.kind
+  ){
 
    case 0:
-    cx+=Math.sin(t*s.s)*s.b;
-    cy+=Math.cos(t*s.s)*s.c;
+
+    cx+=
+     Math.sin(
+      t*s.s
+     )*
+     s.b;
+
+    cy+=
+     Math.cos(
+      t*s.s
+     )*
+     s.c;
+
    break;
+
 
    case 1:
-    cx+=Math.sin(t*s.s)*s.b;
+
+    cx+=
+     Math.sin(
+      t*s.s
+     )*
+     s.b;
+
    break;
+
 
    case 2:
-    cy+=Math.sin(t*s.s)*s.c;
+
+    cy+=
+     Math.sin(
+      t*s.s
+     )*
+     s.c;
+
    break;
+
 
    case 3:
-    q.x+=Math.sin(t*s.s)*s.b;
+
+    q.x+=
+     Math.sin(
+      t*s.s
+     )*
+     s.b;
+
    break;
+
 
    case 4:
-    q.y+=Math.cos(t*s.s)*s.c;
+
+    q.y+=
+     Math.cos(
+      t*s.s
+     )*
+     s.c;
+
    break;
 
+
    case 5:
+
     q.w*=
      1+
      Math.abs(
-      Math.sin(t*s.s)
-     )*3;
+      Math.sin(
+       t*s.s
+      )
+     )*
+     3;
+
    break;
 
+
    case 6:
+
     q.h*=
      1+
      Math.abs(
-      Math.cos(t*s.s)
-     )*3;
+      Math.cos(
+       t*s.s
+      )
+     )*
+     3;
+
    break;
+
 
    case 7:
 
     if(
-     Math.sin(t*s.s)<0
-    )
+     Math.sin(
+      t*s.s
+     )<0
+    ){
+
      q.x=-99999;
+    }
 
    break;
+
 
    case 8:
 
     P.vx+=
-     Math.sin(t*s.s)*
+     Math.sin(
+      t*s.s
+     )*
      s.b*
      .015;
 
    break;
 
+
    case 9:
 
-    if(hit(P,q)){
-     P.vy-=350*dt;
+    if(
+     hit(P,q)
+    ){
+
+     P.vy-=
+      350*
+      dt;
     }
 
    break;
 
+
    case 10:
 
-    if(hit(P,q)){
+    if(
+     hit(P,q)
+    ){
+
      P.reverse=1.5;
     }
 
    break;
 
+
    case 11:
 
-    if(hit(P,q)){
+    if(
+     hit(P,q)
+    ){
+
      P.slow=.35;
     }
 
    break;
 
+
    case 12:
 
-    q.x=
-     s.x+
-     Math.cos(t*s.s)*s.b;
+    q.x+=
+     Math.cos(
+      t*s.s
+     )*
+     s.b;
 
-    q.y=
-     s.y+
-     Math.sin(t*s.s)*s.c;
-
-    cx=q.x;
-    cy=q.y;
+    q.y+=
+     Math.sin(
+      t*s.s
+     )*
+     s.c;
 
    break;
+
 
    case 13:
 
     if(
-     Math.sin(t*s.s)>.75
-    )
+     Math.sin(
+      t*s.s
+     )>.75
+    ){
+
      q.h*=4;
+    }
 
    break;
+
 
    case 14:
 
     q.y+=
      Math.abs(
-      Math.sin(t*s.s)
-     )*s.c;
+      Math.sin(
+       t*s.s
+      )
+     )*
+     s.c;
 
    break;
+
 
    case 15:
 
     q.x+=
      Math.abs(
-      Math.sin(t*s.s)
-     )*s.b;
+      Math.sin(
+       t*s.s
+      )
+     )*
+     s.b;
 
    break;
+
 
    case 16:
 
     cx+=
-     Math.cos(t*s.s)*s.b;
+     Math.cos(
+      t*s.s
+     )*
+     s.b;
 
     cy+=
-     Math.sin(t*s.s)*s.b;
+     Math.sin(
+      t*s.s
+     )*
+     s.b;
 
    break;
+
 
    case 17:
 
     q.x+=
-     Math.sin(t*s.s*2)*s.b;
+     Math.sin(
+      t*s.s*2
+     )*
+     s.b;
 
     q.y+=
-     Math.cos(t*s.s*2)*s.c;
+     Math.cos(
+      t*s.s*2
+     )*
+     s.c;
 
    break;
+
 
    case 18:
 
     if(
-     Math.sin(t*s.s)>.65
-    )
-     q.w*=4;
-
-   break;
-
-   case 19:
-
-    if(
-     Math.sin(t*s.s)>.9
+     Math.sin(
+      t*s.s
+     )>.65
     ){
 
-     q.x+=Math.sin(t*9)*100;
-     q.y+=Math.cos(t*7)*80;
-
+     q.w*=4;
     }
 
    break;
 
+
+   case 19:
+
+    if(
+     Math.sin(
+      t*s.s
+     )>.9
+    ){
+
+     q.x+=
+      Math.sin(t*9)*
+      100;
+
+     q.y+=
+      Math.cos(t*7)*
+      80;
+    }
+
+   break;
+
+
    case 20:
 
     if(
-     Math.sin(t*s.s)>.72
-    )
+     Math.sin(
+      t*s.s
+     )>.72
+    ){
+
      q.w*=5;
+    }
 
    break;
+
 
    case 21:
 
     if(
-     Math.sin(t*s.s)>.82
+     Math.sin(
+      t*s.s
+     )>.82
     ){
 
-     P.vy-=500*dt;
+     P.vy-=
+      500*
+      dt;
+
      flash=1;
     }
 
    break;
 
+
    case 22:
 
     if(
-     Math.sin(t*s.s)>.9
+     Math.sin(
+      t*s.s
+     )>.9
     ){
 
      P.y+=35;
+
      P.vy+=220;
     }
 
    break;
 
+
    case 23:
 
-    q.x=
-     s.x+
-     Math.sin(t*s.s)*s.b;
+    if(
+     Math.sin(
+      t*s.s
+     )>.86
+    ){
 
-    q.y=
-     s.y+
-     Math.cos(t*s.s)*s.c;
+     P.vx+=
+      Math.sign(
+       P.x-s.x
+      )*
+      350;
 
-    cx=q.x;
-    cy=q.y;
+     shake=8;
+    }
 
    break;
   }
 
-  /*
-   IMPORTANT:
-   8 = wind
-   9 = bounce
-   11 = slow zone
 
-   ئەمانە نابێت بە collision بکوژن.
-  */
+  if(
+   Math.hypot(
+    P.x+
+    P.w/2-
+    cx,
 
-  let harmless=
-   s.kind===8||
-   s.kind===9||
-   s.kind===11;
+    P.y+
+    P.h/2-
+    cy
+   )<
+   Math.max(
+    s.w,
+    s.h
+   )/2+
+   20
+  ){
 
-  /*
-   moving circle hazards
-  */
+   return die();
+  }
 
-  let circleHazard=
-   [
-    0,
-    1,
-    2,
-    12,
-    16,
-    17,
-    23
-   ].includes(s.kind);
 
-  if(!harmless){
+  if(
+   hit(P,q)&&
+   s.kind!==8&&
+   s.kind!==9&&
+   s.kind!==11
+  ){
 
-   if(circleHazard){
-
-    if(
-     Math.hypot(
-      P.x+P.w/2-cx,
-      P.y+P.h/2-cy
-     )<
-     Math.max(
-      8,
-      Math.max(s.w,s.h)/2
-     )+14
-    ){
-
-     return die();
-
-    }
-
-   }else if(hit(P,q)){
-
-    return die();
-
-   }
+   return die();
   }
  }
 
- for(let g of LD.gates){
+
+ for(
+  let g
+  of LD.gates
+ ){
 
   let active=
    (
     (
-     now+g.p
+     now+
+     g.p
     )%
     g.t
    )/
    g.t
    <
    .55;
+
 
   if(
    active&&
@@ -1223,15 +2031,25 @@ function update(dt){
   }
  }
 
- for(let s of LD.stars){
+
+ for(
+  let s
+  of LD.stars
+ ){
 
   if(s.t)
    continue;
 
+
   if(
    Math.hypot(
-    P.x+P.w/2-s.x,
-    P.y+P.h/2-s.y
+    P.x+
+    P.w/2-
+    s.x,
+
+    P.y+
+    P.h/2-
+    s.y
    )<28
   ){
 
@@ -1244,11 +2062,20 @@ function update(dt){
   }
  }
 
- if(P.y>H+180)
-  return die();
 
  if(
-  P.x+P.w>=LD.finish
+  P.y>
+  H+180
+ ){
+
+  return die();
+ }
+
+
+ if(
+  P.x+
+  P.w>=
+  LD.finish
  ){
 
   let blocked=
@@ -1256,7 +2083,8 @@ function update(dt){
     g=>
      (
       (
-       now+g.p
+       now+
+       g.p
       )%
       g.t
      )/
@@ -1267,9 +2095,13 @@ function update(dt){
      hit(P,g)
    );
 
-  if(!blocked)
+
+  if(!blocked){
+
    winLevel();
+  }
  }
+
 
  P.coyote=
   P.ground
@@ -1279,24 +2111,37 @@ function update(dt){
    P.coyote-dt
   );
 
+
  cam+=
   (
    Math.max(
     0,
-    P.x-W*.32
-   )-cam
+    P.x-
+    W*.32
+   )-
+   cam
   )*
-  Math.min(1,dt*7);
+  Math.min(
+   1,
+   dt*7
+  );
 
- shake=Math.max(
-  0,
-  shake-dt*18
- );
 
- flash=Math.max(
-  0,
-  flash-dt*5
- );
+ shake=
+  Math.max(
+   0,
+   shake-
+   dt*18
+  );
+
+
+ flash=
+  Math.max(
+   0,
+   flash-
+   dt*5
+  );
+
 
  for(
   let i=parts.length-1;
@@ -1306,59 +2151,166 @@ function update(dt){
 
   let a=parts[i];
 
-  a.x+=a.vx*dt;
-  a.y+=a.vy*dt;
-  a.vy+=400*dt;
+  a.x+=
+   a.vx*
+   dt;
+
+  a.y+=
+   a.vy*
+   dt;
+
+  a.vy+=
+   400*
+   dt;
+
   a.l-=dt;
 
-  if(a.l<=0)
-   parts.splice(i,1);
+  if(
+   a.l<=0
+  ){
+
+   parts.splice(
+    i,
+    1
+   );
+  }
  }
 }
+
+
+/* =========================================================
+   WIN
+========================================================= */
 
 function winLevel(){
 
  if(won)
   return;
 
+
  won=true;
  paused=true;
 
- localStorage.setItem(
-  KEY,
-  level
- );
+
+ /*
+   هەرگیز level ـێکی کۆن overwrite ناکەین
+   بە level ـی هەڵە.
+
+   تەنها level ـی ئێستا save دەکەین.
+ */
+
+ saveLevel();
+
 
  winText.textContent=
   `تۆ مەرحەلەی ${level} ـت بردەوە.`;
 
+
  win.style.display="grid";
 
- banner.classList.remove("show");
+
+ banner.classList.remove(
+  "show"
+ );
 
  void banner.offsetWidth;
 
- banner.classList.add("show");
+ banner.classList.add(
+  "show"
+ );
 }
+
+
+/* =========================================================
+   NEXT LEVEL — FIXED
+========================================================= */
 
 function next(){
 
- level=
+ /*
+   ئەگەر level ـەکە نەبردبێتەوە،
+   Next نابێت کار بکات.
+ */
+
+ if(!won){
+  return;
+ }
+
+
+ /*
+   لە 5000 زیاتر ناچین.
+ */
+
+ if(
   level>=TOTAL
-  ?1
-  :level+1;
+ ){
+
+  level=1;
+
+ }else{
+
+  level++;
+ }
+
+
+ /*
+   گرنگترین بەش:
+
+   level ـی نوێ پێش reset save دەکرێت.
+ */
+
+ saveLevel();
+
+
+ /*
+   popup دابخە.
+ */
+
+ win.style.display="none";
+
+
+ /*
+   state ـەکان پاک بکە.
+ */
+
+ won=false;
+ paused=false;
+
+
+ /*
+   Level ـی نوێ دروست بکە.
+ */
 
  reset();
+
+
+ /*
+   دڵنیابینەوە HUD ـەکە level ـی نوێ نیشان دەدات.
+ */
+
+ lvlEl.textContent=
+  level;
 }
+
+
+/* =========================================================
+   DRAW
+========================================================= */
 
 function draw(){
 
- let d=LD?.D.d||0;
+ let d=
+  LD?.D.d||0;
+
 
  let gr=
   X.createLinearGradient(
-   0,0,0,H
+   0,
+   0,
+   0,
+   H
   );
+
 
  gr.addColorStop(
   0,
@@ -1367,6 +2319,7 @@ function draw(){
   :"#8fd3ff"
  );
 
+
  gr.addColorStop(
   1,
   d>.7
@@ -1374,36 +2327,65 @@ function draw(){
   :"#e9d8a6"
  );
 
+
  X.fillStyle=gr;
- X.fillRect(0,0,W,H);
+
+
+ X.fillRect(
+  0,
+  0,
+  W,
+  H
+ );
+
 
  if(!LD)
   return;
 
+
  X.save();
 
+
  X.translate(
+
   -cam+
-  (Math.random()-.5)*shake,
-  (Math.random()-.5)*shake
+  (Math.random()-.5)*
+  shake,
+
+  (Math.random()-.5)*
+  shake
  );
 
- for(let q of LD.world){
+
+ for(
+  let q
+  of LD.world
+ ){
 
   X.fillStyle="#292b31";
 
   X.fillRect(
-   q.x,q.y,q.w,q.h
+   q.x,
+   q.y,
+   q.w,
+   q.h
   );
 
   X.fillStyle="#65d878";
 
   X.fillRect(
-   q.x,q.y,q.w,7
+   q.x,
+   q.y,
+   q.w,
+   7
   );
  }
 
- for(let q of LD.haz){
+
+ for(
+  let q
+  of LD.haz
+ ){
 
   X.fillStyle="#ef476f";
 
@@ -1427,7 +2409,11 @@ function draw(){
   X.fill();
  }
 
- for(let s of LD.stars){
+
+ for(
+  let s
+  of LD.stars
+ ){
 
   if(s.t)
    continue;
@@ -1447,7 +2433,11 @@ function draw(){
   X.fill();
  }
 
- for(let b of LD.balls){
+
+ for(
+  let b
+  of LD.balls
+ ){
 
   X.fillStyle="#ff6b35";
 
@@ -1486,190 +2476,251 @@ function draw(){
   X.fill();
  }
 
- let now=performance.now()/1000;
 
- for(let s of LD.special){
+ let now=
+  performance.now()/1000;
+
+
+ for(
+  let s
+  of LD.special
+ ){
 
   let q={
+
    x:s.x,
    y:s.y,
+
    w:s.w,
    h:s.h
   };
 
+
   let xx=s.x;
   let yy=s.y;
 
-  let t=now+s.a;
 
-  switch(s.kind){
+  let t=
+   now+
+   s.a;
+
+
+  switch(
+   s.kind
+  ){
 
    case 0:
 
     xx+=
-     Math.sin(t*s.s)*s.b;
+     Math.sin(
+      t*s.s
+     )*
+     s.b;
 
     yy+=
-     Math.cos(t*s.s)*s.c;
+     Math.cos(
+      t*s.s
+     )*
+     s.c;
 
    break;
+
 
    case 1:
 
     xx+=
-     Math.sin(t*s.s)*s.b;
+     Math.sin(
+      t*s.s
+     )*
+     s.b;
 
    break;
+
 
    case 2:
 
     yy+=
-     Math.sin(t*s.s)*s.c;
+     Math.sin(
+      t*s.s
+     )*
+     s.c;
 
    break;
+
 
    case 3:
 
     q.x+=
-     Math.sin(t*s.s)*s.b;
+     Math.sin(
+      t*s.s
+     )*
+     s.b;
 
    break;
+
 
    case 4:
 
     q.y+=
-     Math.cos(t*s.s)*s.c;
+     Math.cos(
+      t*s.s
+     )*
+     s.c;
 
    break;
+
 
    case 5:
 
     q.w*=
      1+
      Math.abs(
-      Math.sin(t*s.s)
-     )*3;
+      Math.sin(
+       t*s.s
+      )
+     )*
+     3;
 
    break;
+
 
    case 6:
 
     q.h*=
      1+
      Math.abs(
-      Math.cos(t*s.s)
-     )*3;
+      Math.cos(
+       t*s.s
+      )
+     )*
+     3;
 
    break;
+
 
    case 7:
 
     if(
-     Math.sin(t*s.s)<0
-    )
-     continue;
-
-   break;
-
-   case 12:
-
-    xx=
-     s.x+
-     Math.cos(t*s.s)*s.b;
-
-    yy=
-     s.y+
-     Math.sin(t*s.s)*s.c;
-
-   break;
-
-   case 13:
-
-    if(
-     Math.sin(t*s.s)>.75
-    )
-     q.h*=4;
-
-   break;
-
-   case 14:
-
-    q.y+=
-     Math.abs(
-      Math.sin(t*s.s)
-     )*s.c;
-
-   break;
-
-   case 15:
-
-    q.x+=
-     Math.abs(
-      Math.sin(t*s.s)
-     )*s.b;
-
-   break;
-
-   case 16:
-
-    xx=
-     s.x+
-     Math.cos(t*s.s)*s.b;
-
-    yy=
-     s.y+
-     Math.sin(t*s.s)*s.b;
-
-   break;
-
-   case 17:
-
-    q.x+=
-     Math.sin(t*s.s*2)*s.b;
-
-    q.y+=
-     Math.cos(t*s.s*2)*s.c;
-
-   break;
-
-   case 18:
-
-    if(
-     Math.sin(t*s.s)>.65
-    )
-     q.w*=4;
-
-   break;
-
-   case 19:
-
-    if(
-     Math.sin(t*s.s)>.9
+     Math.sin(
+      t*s.s
+     )<0
     ){
 
-     q.x+=Math.sin(t*9)*100;
-     q.y+=Math.cos(t*7)*80;
-
+     continue;
     }
 
    break;
 
+
+   case 12:
+
+    xx+=
+     Math.cos(
+      t*s.s
+     )*
+     s.b;
+
+    yy+=
+     Math.sin(
+      t*s.s
+     )*
+     s.c;
+
+   break;
+
+
+   case 16:
+
+    xx+=
+     Math.cos(
+      t*s.s
+     )*
+     s.b;
+
+    yy+=
+     Math.sin(
+      t*s.s
+     )*
+     s.b;
+
+   break;
+
+
+   case 17:
+
+    q.x+=
+     Math.sin(
+      t*s.s*2
+     )*
+     s.b;
+
+    q.y+=
+     Math.cos(
+      t*s.s*2
+     )*
+     s.c;
+
+   break;
+
+
+   case 18:
+
+    if(
+     Math.sin(
+      t*s.s
+     )>.65
+    ){
+
+     q.w*=4;
+    }
+
+   break;
+
+
+   case 19:
+
+    if(
+     Math.sin(
+      t*s.s
+     )>.9
+    ){
+
+     q.x+=
+      Math.sin(t*9)*
+      100;
+
+     q.y+=
+      Math.cos(t*7)*
+      80;
+    }
+
+   break;
+
+
    case 20:
 
     if(
-     Math.sin(t*s.s)>.72
-    )
+     Math.sin(
+      t*s.s
+     )>.72
+    ){
+
      q.w*=5;
+    }
 
    break;
+
 
    case 21:
 
     if(
-     Math.sin(t*s.s)>.72
+     Math.sin(
+      t*s.s
+     )>.72
     ){
 
      X.strokeStyle="#fff36b";
+
      X.lineWidth=6;
 
      X.beginPath();
@@ -1699,9 +2750,11 @@ function draw(){
 
    break;
 
+
    case 22:
 
     X.strokeStyle="#ef476f";
+
     X.lineWidth=3;
 
     X.beginPath();
@@ -1730,42 +2783,60 @@ function draw(){
 
    break;
 
+
    case 23:
 
-    xx=
-     s.x+
-     Math.sin(t*s.s)*s.b;
+    q.x+=
+     Math.sin(
+      t*s.s
+     )*
+     s.b;
 
-    yy=
-     s.y+
-     Math.cos(t*s.s)*s.c;
+    q.y+=
+     Math.cos(
+      t*s.s
+     )*
+     s.c;
 
    break;
   }
 
+
   X.fillStyle=
    s.id%3===0
-   ?"#ff4d6d"
+   ?" #ff4d6d"
    :"#9b7cff";
+
 
   X.beginPath();
 
   X.arc(
    xx,
    yy,
-   Math.max(7,s.w/2),
+   Math.max(
+    7,
+    s.w/2
+   ),
    0,
    7
   );
 
   X.fill();
 
+
   if(
    [
-    3,4,5,6,
-    13,14,15,
-    18,19,20
-   ].includes(s.kind)
+    3,
+    4,
+    5,
+    6,
+    13,
+    18,
+    19,
+    20
+   ].includes(
+    s.kind
+   )
   ){
 
    X.strokeStyle="#fff8";
@@ -1779,12 +2850,17 @@ function draw(){
   }
  }
 
- for(let g of LD.gates){
+
+ for(
+  let g
+  of LD.gates
+ ){
 
   let active=
    (
     (
-     now+g.p
+     now+
+     g.p
     )%
     g.t
    )/
@@ -1792,10 +2868,12 @@ function draw(){
    <
    .55;
 
+
   X.fillStyle=
    active
    ?" #ff3c58cc"
    :"#64ff9a77";
+
 
   X.fillRect(
    g.x,
@@ -1804,6 +2882,7 @@ function draw(){
    g.h
   );
  }
+
 
  X.fillStyle="#222";
 
@@ -1814,6 +2893,7 @@ function draw(){
   120
  );
 
+
  X.fillStyle="#ff4d6d";
 
  X.fillRect(
@@ -1823,14 +2903,8 @@ function draw(){
   28
  );
 
- /*
-  PLAYER
- */
 
- X.fillStyle=
-  P.inv>0
-  ?"#8c78ff"
-  :"#684cff";
+ X.fillStyle="#684cff";
 
  X.fillRect(
   P.x,
@@ -1838,6 +2912,7 @@ function draw(){
   P.w,
   P.h
  );
+
 
  X.fillStyle="#fff";
 
@@ -1861,6 +2936,7 @@ function draw(){
 
  X.fill();
 
+
  X.fillStyle="#111";
 
  X.beginPath();
@@ -1883,10 +2959,18 @@ function draw(){
 
  X.fill();
 
- for(let p of parts){
+
+ for(
+  let p
+  of parts
+ ){
 
   X.globalAlpha=
-   cl(p.l,0,1);
+   cl(
+    p.l,
+    0,
+    1
+   );
 
   X.fillStyle="#ffd166";
 
@@ -1898,30 +2982,36 @@ function draw(){
   );
  }
 
+
  X.globalAlpha=1;
 
  X.restore();
 
+
  if(flash){
 
   X.fillStyle=
-   `rgba(
-    255,
-    255,
-    255,
-    ${flash*.5}
-   )`;
+   `rgba(255,255,255,${flash*.5})`;
 
   X.fillRect(
-   0,0,W,H
+   0,
+   0,
+   W,
+   H
   );
  }
 }
+
+
+/* =========================================================
+   GAME LOOP
+========================================================= */
 
 function loop(t){
 
  if(!playing)
   return;
+
 
  let dt=
   cl(
@@ -1930,13 +3020,22 @@ function loop(t){
    .033
   );
 
+
  last=t;
 
  update(dt);
+
  draw();
 
- requestAnimationFrame(loop);
+ requestAnimationFrame(
+  loop
+ );
 }
+
+
+/* =========================================================
+   JOYSTICK
+========================================================= */
 
 const joy=
  document.getElementById("joy");
@@ -1946,10 +3045,12 @@ const stick=
 
 let jp=null;
 
+
 function joySet(e){
 
  let z=
   joy.getBoundingClientRect();
+
 
  let dx=
   cl(
@@ -1962,97 +3063,184 @@ function joySet(e){
    42
   );
 
- I.x=dx/42;
+
+ I.x=
+  dx/42;
+
 
  stick.style.transform=
   `translateX(${dx}px)`;
 }
 
+
 function joyReset(){
 
  jp=null;
+
  I.x=0;
 
  stick.style.transform=
   "translateX(0)";
 }
 
+
 joy.onpointerdown=e=>{
+
+ e.preventDefault();
 
  jp=e.pointerId;
 
- joy.setPointerCapture(jp);
+ joy.setPointerCapture(
+  jp
+ );
 
  joySet(e);
 };
 
+
 joy.onpointermove=e=>{
 
- if(e.pointerId===jp)
+ if(
+  e.pointerId===jp
+ )
   joySet(e);
 };
 
-joy.onpointerup=joyReset;
-joy.onpointercancel=joyReset;
+
+joy.onpointerup=
+ joyReset;
+
+
+joy.onpointercancel=
+ joyReset;
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
 
 document
  .getElementById("jump")
- .onpointerdown=e=>{
+ .addEventListener(
+  "pointerdown",
+  e=>{
 
-  e.preventDefault();
-  jump();
- };
+   e.preventDefault();
+
+   jump();
+  }
+ );
+
 
 document
  .getElementById("dash")
- .onpointerdown=e=>{
+ .addEventListener(
+  "pointerdown",
+  e=>{
 
-  e.preventDefault();
-  dash();
- };
+   e.preventDefault();
+
+   dash();
+  }
+ );
+
 
 document
  .getElementById("reset")
- .onpointerdown=e=>{
+ .addEventListener(
+  "pointerdown",
+  e=>{
 
-  e.preventDefault();
-  reset();
- };
+   e.preventDefault();
+
+   reset();
+  }
+ );
+
+
+/*
+  NEXT button ـی ناو یاری
+*/
 
 document
  .getElementById("next")
- .onpointerdown=e=>{
+ .addEventListener(
+  "pointerdown",
+  e=>{
 
-  e.preventDefault();
+   e.preventDefault();
+   e.stopPropagation();
 
-  if(won)
    next();
- };
+  }
+ );
+
+
+/*
+  Retry
+*/
 
 document
  .getElementById("retry")
- .onclick=
- reset;
+ .addEventListener(
+  "click",
+  e=>{
+
+   e.preventDefault();
+   e.stopPropagation();
+
+   reset();
+  }
+ );
+
+
+/*
+  Next Level popup
+*/
 
 document
  .getElementById("nextBtn")
- .onclick=
- next;
+ .addEventListener(
+  "click",
+  e=>{
+
+   e.preventDefault();
+   e.stopPropagation();
+
+   next();
+  }
+ );
+
+
+/* =========================================================
+   START
+========================================================= */
 
 document
  .getElementById("start")
- .onclick=()=>{
+ .addEventListener(
+  "click",
+  ()=>{
 
-  intro.style.display="none";
+   intro.style.display="none";
 
-  playing=true;
+   playing=true;
 
-  reset();
+   reset();
 
-  last=performance.now();
+   last=
+    performance.now();
 
-  requestAnimationFrame(loop);
- };
+   requestAnimationFrame(
+    loop
+   );
+  }
+ );
+
+
+/* =========================================================
+   KEYBOARD
+========================================================= */
 
 addEventListener(
  "keydown",
@@ -2061,14 +3249,20 @@ addEventListener(
   if(
    e.key==="ArrowLeft"||
    e.key.toLowerCase()==="a"
-  )
+  ){
+
    I.x=-1;
+  }
+
 
   if(
    e.key==="ArrowRight"||
    e.key.toLowerCase()==="d"
-  )
+  ){
+
    I.x=1;
+  }
+
 
   if(
    e.key===" "||
@@ -2076,19 +3270,36 @@ addEventListener(
   ){
 
    e.preventDefault();
+
    jump();
   }
 
+
   if(
    e.key.toLowerCase()==="shift"
-  )
+  ){
+
    dash();
+  }
+
 
   if(
    e.key.toLowerCase()==="r"
-  )
+  ){
+
    reset();
+  }
+
+
+  if(
+   e.key==="Enter"&&
+   won
+  ){
+
+   next();
+  }
  });
+
 
 addEventListener(
  "keyup",
@@ -2101,32 +3312,50 @@ addEventListener(
     "a",
     "d"
    ].includes(e.key)
-  )
+  ){
+
    I.x=0;
+  }
  });
+
+
+/* =========================================================
+   PREVENT MOBILE SCROLL
+========================================================= */
 
 document.addEventListener(
  "touchmove",
  e=>e.preventDefault(),
- {passive:false}
+ {
+  passive:false
+ }
 );
 
-LD=makeLevel(level);
 
-lvlEl.textContent=level;
+/* =========================================================
+   INITIAL
+========================================================= */
+
+LD=
+ makeLevel(level);
+
+
+lvlEl.textContent=
+ level;
+
 
 tierEl.textContent=
  " • "+
  (
   level<=15
   ?"فێرکاری"
-  :"قورس"
- )+
- " "+
- level;
+  :"ئاسان"
+ );
+
 
 draw();
 
 </script>
+
 </body>
 </html>
