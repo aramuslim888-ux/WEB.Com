@@ -51,12 +51,9 @@ body{
 canvas{
   position:fixed;
   inset:0;
-
   width:100%;
   height:100%;
-
   display:block;
-
   touch-action:none;
 }
 
@@ -73,57 +70,31 @@ button{
 ========================================================= */
 
 #hud{
-
   position:fixed;
-
-  top:
-    calc(
-      env(safe-area-inset-top) + 12px
-    );
-
+  top:calc(env(safe-area-inset-top) + 12px);
   left:14px;
   right:14px;
-
   display:flex;
-
   justify-content:space-between;
-
   gap:8px;
-
   z-index:20;
-
   pointer-events:none;
 }
 
 .pill{
-
-  background:
-    rgba(20,30,24,.88);
-
+  background:rgba(20,30,24,.88);
   color:white;
-
-  padding:
-    12px 17px;
-
+  padding:12px 17px;
   border-radius:999px;
-
   font-size:15px;
-
   font-weight:900;
-
-  box-shadow:
-    0 8px 25px rgba(0,0,0,.18);
-
-  backdrop-filter:
-    blur(10px);
+  box-shadow:0 8px 25px rgba(0,0,0,.18);
+  backdrop-filter:blur(10px);
 }
 
 #tier{
-
   font-size:11px;
-
   opacity:.8;
-
   margin-left:4px;
 }
 
@@ -133,117 +104,69 @@ button{
 ========================================================= */
 
 #intro{
-
   position:fixed;
-
   inset:0;
-
   z-index:100;
-
   display:flex;
-
   align-items:center;
-
   justify-content:center;
-
   text-align:center;
-
   color:white;
 
   background:
-
     radial-gradient(
       circle at 15% 20%,
       #ffd166 0 12%,
       transparent 13%
     ),
-
     radial-gradient(
       circle at 90% 90%,
       #7bdcb5 0 15%,
       transparent 16%
     ),
-
     #f07157;
 }
 
 .introCard{
-
   width:min(92vw,460px);
-
-  padding:
-    30px 24px;
+  padding:30px 24px;
 }
 
 .introTitle{
-
   margin:0;
-
-  font-size:
-    clamp(
-      42px,
-      12vw,
-      76px
-    );
-
+  font-size:clamp(42px,12vw,76px);
   line-height:.88;
-
   font-weight:1000;
-
   text-transform:uppercase;
-
   color:#fff;
-
-  text-shadow:
-    4px 4px 0 #202020;
+  text-shadow:4px 4px 0 #202020;
 }
 
 .introName{
-
-  margin:
-    18px 0 6px;
-
+  margin:18px 0 6px;
   font-size:18px;
-
   font-weight:900;
 }
 
 .creator{
-
-  margin:
-    0 0 24px;
-
+  margin:0 0 24px;
   opacity:.9;
-
   font-size:14px;
 }
 
 #start{
-
   border:0;
-
-  padding:
-    15px 28px;
-
+  padding:15px 28px;
   border-radius:999px;
-
   background:#20283a;
-
   color:white;
-
   font-size:17px;
-
   font-weight:900;
-
-  box-shadow:
-    0 8px 0 rgba(0,0,0,.2);
+  box-shadow:0 8px 0 rgba(0,0,0,.2);
 }
 
 #start:active{
-
-  transform:
-    translateY(4px);
-
+  transform:translateY(4px);
   box-shadow:none;
 }
 
@@ -253,16 +176,11 @@ button{
 ========================================================= */
 
 #san{
-
   position:fixed;
-
   width:82px;
   height:82px;
-
   object-fit:contain;
-
   z-index:12;
-
   pointer-events:none;
 
   filter:
@@ -279,7 +197,6 @@ button{
 @keyframes sanFunny{
 
   0%,100%{
-
     transform:
       rotate(-7deg)
       translateY(0)
@@ -287,7 +204,6 @@ button{
   }
 
   50%{
-
     transform:
       rotate(8deg)
       translateY(-8px)
@@ -301,13 +217,9 @@ button{
 ========================================================= */
 
 #controls{
-
   position:fixed;
-
   inset:0;
-
   z-index:30;
-
   pointer-events:none;
 }
 
@@ -315,7 +227,6 @@ button{
 /* JOYSTICK */
 
 #joystick{
-
   position:absolute;
 
   left:
@@ -347,7 +258,6 @@ button{
     rgba(255,255,255,.55);
 
   box-shadow:
-
     inset
     0 0 20px
     rgba(255,255,255,.08),
@@ -356,20 +266,15 @@ button{
     rgba(0,0,0,.18);
 
   pointer-events:auto;
-
   touch-action:none;
 }
 
 #stick{
-
   position:absolute;
-
   width:60px;
   height:60px;
-
   left:30px;
   top:30px;
-
   border-radius:50%;
 
   background:
@@ -380,13 +285,10 @@ button{
     rgba(255,255,255,.65);
 
   display:flex;
-
   align-items:center;
-
   justify-content:center;
 
   font-size:28px;
-
   color:white;
 
   transition:
@@ -397,7 +299,6 @@ button{
 /* ACTIONS */
 
 #actionArea{
-
   position:absolute;
 
   right:
@@ -413,20 +314,15 @@ button{
     );
 
   display:grid;
-
-  grid-template-columns:
-    82px 82px;
-
+  grid-template-columns:82px 82px;
   gap:12px;
 
   pointer-events:none;
 }
 
 .action{
-
   width:82px;
   height:82px;
-
   border-radius:50%;
 
   border:
@@ -439,24 +335,17 @@ button{
   color:white;
 
   font-size:14px;
-
   font-weight:1000;
 
   pointer-events:auto;
-
   touch-action:none;
 
-  backdrop-filter:
-    blur(8px);
+  backdrop-filter:blur(8px);
 }
 
 .action:active{
-
-  transform:
-    scale(.93);
-
-  background:
-    rgba(108,76,255,.8);
+  transform:scale(.93);
+  background:rgba(108,76,255,.8);
 }
 
 
@@ -465,7 +354,6 @@ button{
 ========================================================= */
 
 #levelIdea{
-
   position:fixed;
 
   left:50%;
@@ -476,33 +364,27 @@ button{
       + 170px
     );
 
-  transform:
-    translateX(-50%);
+  transform:translateX(-50%);
 
-  width:
-    min(90vw,480px);
+  width:min(90vw,520px);
 
-  padding:
-    10px 15px;
+  padding:10px 15px;
 
   text-align:center;
 
   border-radius:15px;
 
   background:
-    rgba(10,10,12,.58);
+    rgba(10,10,12,.62);
 
   color:white;
 
   font-size:13px;
-
   font-weight:800;
 
   z-index:15;
-
   pointer-events:none;
-
-  opacity:.9;
+  opacity:.92;
 }
 
 
@@ -511,17 +393,13 @@ button{
 ========================================================= */
 
 #win{
-
   position:fixed;
-
   inset:0;
-
   z-index:90;
 
   display:none;
 
   align-items:center;
-
   justify-content:center;
 
   padding:20px;
@@ -529,25 +407,20 @@ button{
   background:
     rgba(0,0,0,.55);
 
-  backdrop-filter:
-    blur(7px);
+  backdrop-filter:blur(7px);
 
   text-align:center;
 }
 
 .winCard{
-
-  width:
-    min(92vw,430px);
+  width:min(92vw,430px);
 
   background:#17181d;
-
   color:white;
 
   border-radius:28px;
 
-  padding:
-    28px 22px;
+  padding:28px 22px;
 
   box-shadow:
     0 25px 80px
@@ -559,54 +432,36 @@ button{
 }
 
 .winCard h1{
-
-  margin:
-    0 0 10px;
-
+  margin:0 0 10px;
   font-size:30px;
 }
 
 .winCard p{
-
   line-height:1.6;
 }
 
 .winButtons{
-
   display:flex;
-
   gap:10px;
-
   justify-content:center;
-
   margin-top:18px;
 }
 
 .winButtons button{
-
   border:0;
-
   border-radius:15px;
-
-  padding:
-    13px 18px;
-
+  padding:13px 18px;
   font-size:15px;
-
   font-weight:900;
 }
 
 #nextBtn{
-
   background:#6c4cff;
-
   color:white;
 }
 
 #retryBtn{
-
   background:#30323a;
-
   color:white;
 }
 
@@ -616,9 +471,7 @@ button{
 ========================================================= */
 
 #finishBanner{
-
   position:fixed;
-
   top:50%;
   left:50%;
 
@@ -632,22 +485,18 @@ button{
 
   background:#6c4cff;
 
-  padding:
-    18px 24px;
+  padding:18px 24px;
 
   border-radius:20px;
 
   font-size:22px;
-
   font-weight:1000;
 
   opacity:0;
-
   pointer-events:none;
 }
 
 #finishBanner.show{
-
   animation:
     finishPop
     .8s
@@ -658,31 +507,26 @@ button{
 @keyframes finishPop{
 
   0%{
-
     opacity:0;
-
     transform:
       translate(-50%,-50%)
       scale(.7);
   }
 
   35%{
-
     opacity:1;
-
     transform:
       translate(-50%,-50%)
       scale(1.1);
   }
 
   100%{
-
     opacity:0;
-
     transform:
       translate(-50%,-50%)
       scale(1);
   }
+
 }
 
 </style>
@@ -737,9 +581,7 @@ button{
   <div class="pill">
 
     LEVEL
-    <span id="level">
-      1
-    </span>
+    <span id="level">1</span>
 
     / 5000
 
@@ -758,7 +600,7 @@ button{
 
 
 <div id="levelIdea">
-  💡 Get ready...
+  💡 ئامادە بە...
 </div>
 
 
@@ -779,27 +621,19 @@ button{
 
   <div id="actionArea">
 
-    <button
-      class="action"
-      id="jumpBtn">
+    <button class="action" id="jumpBtn">
       JUMP
     </button>
 
-    <button
-      class="action"
-      id="dashBtn">
+    <button class="action" id="dashBtn">
       DASH
     </button>
 
-    <button
-      class="action"
-      id="resetBtn">
+    <button class="action" id="resetBtn">
       RESET
     </button>
 
-    <button
-      class="action"
-      id="nextQuickBtn">
+    <button class="action" id="nextQuickBtn">
       NEXT
     </button>
 
@@ -893,11 +727,8 @@ const finishBanner =
   document.getElementById("finishBanner");
 
 
-let W =
-  innerWidth;
-
-let H =
-  innerHeight;
+let W = innerWidth;
+let H = innerHeight;
 
 let DPR =
   Math.min(
@@ -908,11 +739,8 @@ let DPR =
 
 function resize(){
 
-  W =
-    innerWidth;
-
-  H =
-    innerHeight;
+  W = innerWidth;
+  H = innerHeight;
 
   DPR =
     Math.min(
@@ -957,7 +785,7 @@ resize();
 ========================================================= */
 
 const SAVE_KEY =
-  "san_b_ahamd_saved_level_v5";
+  "san_b_ahamd_saved_level_v6";
 
 const TOTAL_LEVELS =
   5000;
@@ -988,11 +816,9 @@ if(
 ========================================================= */
 
 let playing = false;
-
 let paused = false;
 
 let cameraX = 0;
-
 let lastTime = 0;
 
 let levelData = null;
@@ -1009,23 +835,18 @@ let stormFlash = 0;
 const player = {
 
   x:80,
-
   y:0,
 
   w:34,
-
   h:42,
 
   vx:0,
-
   vy:0,
 
   speed:255,
-
   jumpPower:650,
 
   grounded:false,
-
   coyote:0
 
 };
@@ -1036,9 +857,7 @@ const player = {
 ========================================================= */
 
 const input = {
-
   x:0
-
 };
 
 
@@ -1057,8 +876,7 @@ const stick =
   );
 
 
-let joystickPointer =
-  null;
+let joystickPointer = null;
 
 
 function setJoystick(e){
@@ -1074,8 +892,7 @@ function setJoystick(e){
     e.clientX -
     cx;
 
-  const max =
-    42;
+  const max = 42;
 
   dx =
     Math.max(
@@ -1097,8 +914,7 @@ function setJoystick(e){
 
 function resetJoystick(){
 
-  joystickPointer =
-    null;
+  joystickPointer = null;
 
   input.x = 0;
 
@@ -1263,9 +1079,7 @@ nextQuickBtn.addEventListener(
     e.preventDefault();
 
     if(levelWon){
-
       nextLevel();
-
     }
 
   }
@@ -1416,68 +1230,161 @@ function smooth(t){
 
 
 /* =========================================================
-   CONTINUOUS DIFFICULTY
-   ---------------------------------------------
-   THIS IS THE MAIN CHANGE.
-   1 → 5000 gradually becomes harder.
+   TUTORIAL + EXTREME DIFFICULTY
 ========================================================= */
 
 function difficulty(n){
 
-  const progress =
+  /*
+    LEVEL 1–15
+    -------------------------
+    Explicit tutorial system.
+  */
+
+  if(n <= 15){
+
+    const p =
+      (n - 1) / 14;
+
+    return {
+
+      progress:p,
+
+      d:0,
+
+      stage:1,
+
+      name:
+        `فێرکاری ${n}`,
+
+      gap:
+        Math.round(
+          145 -
+          p * 28
+        ),
+
+      width:
+        Math.round(
+          185 -
+          p * 25
+        ),
+
+      rise:
+        Math.round(
+          5 +
+          p * 20
+        ),
+
+      spikes:
+        n >= 9
+        ? .04 + p * .08
+        : 0,
+
+      balls:
+        n >= 11
+        ? .10 + p * .10
+        : 0,
+
+      cracks:
+        n >= 13
+        ? .08 + p * .10
+        : 0,
+
+      slopes:
+        n >= 7
+        ? .10 + p * .12
+        : 0,
+
+      storms:0,
+
+      fallers:0,
+
+      ballSpeed:
+        115 +
+        p * 25,
+
+      speed:
+        245,
+
+      jump:
+        665,
+
+      groups:
+        Math.round(
+          4 +
+          p * 3
+        )
+
+    };
+
+  }
+
+
+  /*
+    LEVEL 16+
+    -------------------------
+    Real difficulty begins.
+  */
+
+  const p =
     clamp(
-      (n - 1) /
-      (TOTAL_LEVELS - 1),
+      (n - 16) /
+      (TOTAL_LEVELS - 16),
       0,
       1
     );
 
 
+  /*
+    Stronger curve.
+
+    Early:
+    gradual
+
+    Middle:
+    aggressive
+
+    End:
+    brutal
+  */
+
   const d =
-    smooth(progress);
+    Math.pow(
+      p,
+      .72
+    );
 
 
   const stage =
     Math.min(
       12,
       Math.floor(
-        progress * 12
+        d * 12
       ) + 1
     );
 
 
   const names = [
 
-    "ئاستی ١",
-
-    "ئاستی ٢",
-
-    "ئاستی ٣",
-
-    "ئاستی ٤",
-
-    "ئاستی ٥",
-
-    "ئاستی ٦",
-
-    "ئاستی ٧",
-
-    "ئاستی ٨",
-
-    "ئاستی ٩",
-
-    "ئاستی ١٠",
-
-    "ئاستی ١١",
-
-    "ئاستی ١٢"
+    "ئاستی قورس ١",
+    "ئاستی قورس ٢",
+    "ئاستی قورس ٣",
+    "ئاستی قورس ٤",
+    "ئاستی قورس ٥",
+    "ئاستی قورس ٦",
+    "ئاستی قورس ٧",
+    "ئاستی قورس ٨",
+    "ئاستی قورس ٩",
+    "ئاستی قورس ١٠",
+    "ئاستی قورس ١١",
+    "ئاستی قورس ١٢"
 
   ];
 
 
   return {
 
-    progress,
+    progress:p,
 
     d,
 
@@ -1490,127 +1397,137 @@ function difficulty(n){
 
 
     /*
-      Gap gets bigger
+      GAP
+      122 → 47
     */
 
     gap:
-
       Math.round(
         122 -
-        48 * d
+        75 * d
       ),
 
 
     /*
-      Platform gets smaller
+      PLATFORM
+      158 → 57
     */
 
     width:
-
       Math.round(
         158 -
-        66 * d
+        101 * d
       ),
 
 
     /*
-      Height difference gets bigger
+      HEIGHT
+      8 → 115
     */
 
     rise:
-
       Math.round(
         8 +
-        78 * d
+        107 * d
       ),
 
 
     /*
-      Spikes slowly increase
+      SPIKES
+      5% → 94%
     */
 
     spikes:
-
       .05 +
-      .56 * d,
+      .89 * d,
 
 
     /*
-      Balls slowly increase
+      BALLS
+      3% → 96%
     */
 
     balls:
-
       .03 +
-      .74 * d,
+      .93 * d,
 
 
     /*
-      Cracks slowly increase
+      CRACKS
+      2% → 90%
     */
 
     cracks:
-
       .02 +
-      .60 * d,
+      .88 * d,
 
 
     /*
-      Lightning
+      SLOPES
+    */
+
+    slopes:
+      .08 +
+      .72 * d,
+
+
+    /*
+      LIGHTNING
     */
 
     storms:
-
-      Math.max(
-        0,
-        Math.floor(
-          d * 2.4
-        )
+      Math.floor(
+        d * 3.8
       ),
 
 
     /*
-      Falling objects
+      FALLERS
     */
 
     fallers:
-
-      Math.max(
-        0,
-        Math.floor(
-          d * 2.1
-        )
+      Math.floor(
+        d * 4.5
       ),
 
 
     /*
-      Ball speed
+      BALL SPEED
+      145 → 430
     */
 
     ballSpeed:
-
       145 +
-      170 * d,
+      285 * d,
 
 
     /*
-      Player speed
+      PLAYER SPEED
     */
 
     speed:
-
       255 +
-      20 * d,
+      35 * d,
 
 
     /*
-      Jump becomes slightly less forgiving
+      JUMP
     */
 
     jump:
-
       650 -
-      45 * d
+      70 * d,
+
+
+    /*
+      GROUPS
+    */
+
+    groups:
+      Math.round(
+        6 +
+        d * 18
+      )
 
   };
 
@@ -1623,29 +1540,99 @@ function difficulty(n){
 
 const ideas = [
 
-  "💡 سەرەتا ئارام بڕۆ و ڕێگاکە بناسە.",
+  "💡 فێرکاری: بە joystick بڕۆ بۆ لای ڕاست.",
 
-  "💡 دووری نێوان پلاتفۆرمەکان کەم کەم زیاد دەبێت.",
+  "💡 فێرکاری: JUMP بەکاربهێنە بۆ بازدان.",
 
-  "💡 پلاتفۆرمی بەرزتر هەندێ جار باشترین ڕێگایە.",
+  "💡 فێرکاری: پلاتفۆرمەکان بە ئارامی تێپەڕێنە.",
 
-  "💡 تۆپەکان هێواش هێواش خێراتر دەبن.",
+  "💡 فێرکاری: کاتی JUMP گرنگە؛ زوو یان درەنگ مەکە.",
 
-  "💡 کاتێک تۆپ نزیکە، JUMP بە کاتی خۆی بەکاربهێنە.",
+  "💡 فێرکاری: DASH بۆ خێرا تێپەڕین لە بۆشایی بەکاربهێنە.",
 
-  "💡 شەقبوونەکان پێش شکاندن ئاگادارت دەکەنەوە.",
+  "💡 فێرکاری: بۆشاییەکان کەم کەم درێژتر دەبن.",
 
-  "💡 لە ئاستە ناوەندییەکاندا دوو مەترسی دەتوانن پێکەوە بێن.",
+  "💡 فێرکاری: پلاتفۆرمی بەرزتر دەتوانێت ڕێگای باشتر بێت.",
 
-  "💡 DASH بۆ دەرچوون لە شوێنی توند بەکاربهێنە.",
+  "💡 فێرکاری: slope ـەکان ڕێگای نوێت پێشان دەدەن.",
 
-  "💡 هەورە تریشقەکان پێش لێدان نیشانە دەدەن.",
+  "💡 ئاگاداری: spike ـەکان دەست بە دەرکەوتن دەکەن.",
 
-  "💡 لە ئاستە قورسەکاندا خێرایی تۆپ و بۆشاییەکان پێکەوە زیاد دەبن.",
+  "💡 ئاگاداری: spike ـەکان مەترسین؛ JUMP بە کاتی خۆی بکە.",
 
-  "💡 هەموو شتێک پێشبینی بکە؛ تەنها خێرا بوون کافی نییە.",
+  "💡 ئاگاداری: تۆپ دەجوڵێت؛ چاوت لە شوێنی تۆپ بێت.",
 
-  "💡 ئەم ئاستە نزیکە لە کۆتایییە؛ هەموو تواناکانت بەکاربهێنە."
+  "💡 تۆپەکان کەم کەم خێراتر دەبن.",
+
+  "💡 crack ـەکان لە ژێر پێت دەشکێن؛ زۆر لەسەریان مەوەستە.",
+
+  "💡 لە ئێستاوە هەموو شتێک وردە وردە قورس دەبێت.",
+
+  "💡 کۆتایی فێرکارییە. لە ئاستی داهاتووەوە ڕەحم نابێت 😈",
+
+  "😈 Level 16: یاریی ڕاستەقینە ئێستا دەست پێدەکات.",
+
+  "😈 لەوە بەدواوە هیچ مەرحەلەیەک بە ئاسانی نابردرێتەوە.",
+
+  "🔥 دوو مەترسی دەتوانن لە یەک کاتدا بێن.",
+
+  "🔥 JUMP و DASH بە کاتی خۆیان بەکاربهێنە.",
+
+  "⚠️ تۆپ + spike دەتوانن پێکەوە بێن.",
+
+  "⚠️ crack ـەکان لەگەڵ بۆشاییەکان تێکەڵ دەکرێن.",
+
+  "⚡ هەورە تریشقەکان دەتوانن ناو ڕێگاکەت بگرن.",
+
+  "⚡ ئاگادارییەکە کورتتر دەبێت؛ خێرا بڕیار بدە.",
+
+  "🔥 پلاتفۆرمەکان بچووکتر و بەرزتر دەبن.",
+
+  "🔥 تۆپەکان زۆر خێرا دەبن.",
+
+  "😈 مەترسییەکان لەگەڵ یەکتر کۆدەبنەوە.",
+
+  "😈 هیچ شوێنێک بە تەواوی safe نییە.",
+
+  "💀 لەم ئاستەدا هەڵەیەکی بچووک دەتوانێت restart بکات.",
+
+  "💀 کاتت کەمە بۆ بڕیاردان.",
+
+  "🔥 ئاستەکان ئێستا دەچنە ناو قۆناغی زۆر قورس.",
+
+  "🔥 هەموو تواناکانت بەکاربهێنە.",
+
+  "⚡ تریشقە + تۆپ + spike.",
+
+  "💀 تەنها یەک هەڵە.",
+
+  "💀 پلاتفۆرمەکان زۆر بچووک بوون.",
+
+  "😈 داش بۆ ڕزگاربوون لە شوێنە توندەکانە.",
+
+  "🔥 هەموو مەترسییەکان بەردەست دەبن.",
+
+  "🔥 ئەم ئاستە بۆ یاریزانە بەهێزەکانە.",
+
+  "💀 لەوە بەدواوە یارییەکە هیچ ڕەحمێک نییە.",
+
+  "💀 5000 ـەکە نزیک دەبێتەوە؛ بەڵام قورسایی زۆرتر دەبێت.",
+
+  "☠️ ئەمە ئاستی زۆر قورسە.",
+
+  "☠️ ئەگەر بتوانیت ئەمە ببەیتەوە، تۆ یاریزانێکی باشیت.",
+
+  "😈 هیچ شتێک بە دڵنیایی safe نییە.",
+
+  "🔥 تۆپەکان لە زۆربەی ڕێگاکەدان.",
+
+  "⚡ تریشقەکان بە ئاگاداریی کەمتر دێن.",
+
+  "💀 بۆشاییەکان زۆر درێژن.",
+
+  "💀 پلاتفۆرمەکان زۆر بچووک بوون.",
+
+  "☠️ Level 5000: هەموو شتێک لە دژتدایە."
 
 ];
 
@@ -1672,36 +1659,25 @@ function makeLevel(n){
 
 
   const platforms = [];
-
   const hazards = [];
-
   const stars = [];
-
   const balls = [];
-
   const slopes = [];
-
   const cracks = [];
-
   const lightnings = [];
-
   const fallers = [];
 
 
   /*
-    START
+    START SAFE PLATFORM
   */
 
   platforms.push({
 
     x:-250,
-
     y:groundY,
-
     w:500,
-
     h:75,
-
     safe:true
 
   });
@@ -1711,29 +1687,30 @@ function makeLevel(n){
 
 
   /*
-    NUMBER OF OBSTACLE GROUPS
-    ALSO GRADUALLY INCREASES.
+    NUMBER OF GROUPS
+
+    Tutorial:
+    4 → 7
+
+    Hard:
+    6 → 24
   */
 
   const count =
-    Math.round(
-      5 +
-      n / 500 +
-      D.d * 5
-    );
+    n <= 15
+    ? D.groups
+    : D.groups;
 
 
   for(
-    let i = 0;
-    i < count;
+    let i=0;
+    i<count;
     i++
   ){
 
-    const r =
-      random(
-        n * 100 +
-        i * 19
-      );
+    const base =
+      n * 10000 +
+      i * 137;
 
 
     /*
@@ -1741,9 +1718,12 @@ function makeLevel(n){
     */
 
     const gap =
-      D.gap +
-      Math.floor(
-        r * 55
+      Math.max(
+        38,
+        D.gap +
+        Math.floor(
+          random(base + 1) * 50
+        )
       );
 
 
@@ -1756,28 +1736,22 @@ function makeLevel(n){
 
     const width =
       Math.max(
-        72,
+        55,
         D.width +
         Math.floor(
-          random(
-            n * 200 +
-            i * 31
-          ) * 45
+          random(base + 2) * 42
         )
       );
 
 
     /*
-      PLATFORM HEIGHT
+      HEIGHT
     */
 
     const py =
       groundY -
       Math.floor(
-        random(
-          n * 300 +
-          i * 17
-        ) *
+        random(base + 3) *
         D.rise
       );
 
@@ -1785,13 +1759,9 @@ function makeLevel(n){
     platforms.push({
 
       x:x,
-
       y:py,
-
       w:width,
-
       h:18,
-
       safe:true
 
     });
@@ -1799,11 +1769,13 @@ function makeLevel(n){
 
     /*
       STAR
+
+      Stars are optional.
     */
 
     if(
       i % 2 === 0 ||
-      r > .45
+      random(base + 4) > .50
     ){
 
       stars.push({
@@ -1825,150 +1797,187 @@ function makeLevel(n){
 
 
     /*
-      SPIKE
-      Gradually becomes more common.
+      SPIKES
+
+      Tutorial:
+      only after level 9.
+
+      Hard:
+      progressively almost everywhere.
     */
 
     if(
-      random(
-        n * 500 +
-        i
-      ) <
+      random(base + 5) <
       D.spikes
     ){
 
-      hazards.push({
-
-        x:
-          x +
-          20 +
-          Math.floor(
-            random(
-              n * 501 +
-              i
-            ) *
-            Math.max(
-              15,
-              width - 55
+      const spikeCount =
+        n < 16
+        ? 1
+        : Math.min(
+            3,
+            1 +
+            Math.floor(
+              D.d * 3
             )
-          ),
+          );
 
-        y:
-          py - 22,
 
-        w:24,
+      for(
+        let s=0;
+        s<spikeCount;
+        s++
+      ){
 
-        h:22
+        hazards.push({
 
-      });
+          x:
+            x +
+            12 +
+            Math.floor(
+              random(
+                base + 50 + s
+              ) *
+              Math.max(
+                15,
+                width - 35
+              )
+            ),
+
+          y:
+            py - 22,
+
+          w:24,
+          h:22
+
+        });
+
+      }
 
     }
 
 
     /*
       BALL
-      Gradually becomes more common.
+
+      Tutorial:
+      starts at 11.
+
+      Hard:
+      up to multiple balls.
     */
 
     if(
-      random(
-        n * 700 +
-        i
-      ) <
+      random(base + 6) <
       D.balls
     ){
 
-      balls.push({
+      const ballCount =
+        n < 16
+        ? 1
+        : Math.min(
+            3,
+            1 +
+            Math.floor(
+              D.d * 2
+            )
+          );
 
-        x:
-          x +
-          width +
-          70 +
-          random(
-            n * 702 +
-            i
-          ) * 80,
 
-        y:
-          py - 24,
+      for(
+        let bIndex=0;
+        bIndex<ballCount;
+        bIndex++
+      ){
 
-        r:17,
+        balls.push({
 
-        speed:
-          D.ballSpeed,
+          x:
+            x +
+            width +
+            60 +
+            random(
+              base + 60 + bIndex
+            ) * 110,
 
-        minX:
-          x - 40,
+          y:
+            py -
+            24 -
+            bIndex * 18,
 
-        maxX:
-          x +
-          width +
-          230,
+          r:
+            n >= 16
+            ? 17 + D.d * 3
+            : 17,
 
-        dir:
-          random(
-            n * 701 +
-            i
-          ) > .5
-          ? 1
-          : -1,
+          speed:
+            D.ballSpeed *
+            (
+              1 +
+              bIndex * .12
+            ),
 
-        targetTimer:
-          .7 +
-          random(
-            n * 703 +
-            i
-          ) * 1.6
+          minX:
+            x - 55,
 
-      });
+          maxX:
+            x +
+            width +
+            260,
+
+          dir:
+            random(
+              base + 70 + bIndex
+            ) > .5
+            ? 1
+            : -1,
+
+          targetTimer:
+            .55 +
+            random(
+              base + 80 + bIndex
+            ) * 1.3
+
+        });
+
+      }
 
     }
 
 
     /*
       SLOPE
-      Becomes more frequent.
     */
 
-    const slopeChance =
-      .08 +
-      D.d * .34;
-
-
     if(
-      random(
-        n * 800 +
-        i
-      ) <
-      slopeChance
+      random(base + 7) <
+      D.slopes
     ){
 
       const sx =
         x +
         width +
-        18;
+        15;
 
 
       const sw =
-        155 +
+        130 +
         Math.floor(
-          random(
-            n * 801 +
-            i
-          ) * 110
+          random(base + 8) *
+          (
+            150 -
+            D.d * 50
+          )
         );
 
 
       const rise =
-        12 +
+        10 +
         Math.floor(
-          random(
-            n * 802 +
-            i
-          ) *
+          random(base + 9) *
           (
-            15 +
-            D.rise * .7
+            18 +
+            D.rise * .75
           )
         );
 
@@ -1976,11 +1985,8 @@ function makeLevel(n){
       slopes.push({
 
         x:sx,
-
         y:groundY,
-
         w:sw,
-
         rise:rise
 
       });
@@ -2004,85 +2010,126 @@ function makeLevel(n){
     */
 
     if(
-      random(
-        n * 900 +
-        i
-      ) <
+      random(base + 10) <
       D.cracks
     ){
 
-      cracks.push({
+      const crackCount =
+        n < 16
+        ? 1
+        : Math.min(
+            3,
+            1 +
+            Math.floor(
+              D.d * 2
+            )
+          );
 
-        x:
-          x - 55,
 
-        y:
-          groundY - 3,
+      for(
+        let cIndex=0;
+        cIndex<crackCount;
+        cIndex++
+      ){
 
-        w:52,
+        cracks.push({
 
-        h:10,
+          x:
+            x -
+            65 +
+            cIndex * 22,
 
-        timer:0,
+          y:
+            groundY - 3,
 
-        active:false,
+          w:
+            52,
 
-        broken:false
+          h:10,
 
-      });
+          timer:0,
+
+          active:false,
+
+          broken:false
+
+        });
+
+      }
 
     }
 
 
     /*
       FALLING OBJECTS
-      Start appearing only after
-      the game has had time to teach
-      the player the basic mechanics.
+
+      Start only after 1200.
+      Become common later.
     */
 
     if(
-      n > 1200 &&
-      random(
-        n * 1000 +
-        i
-      ) <
-      D.fallers * .10
+      n >= 1200 &&
+      random(base + 11) <
+      D.fallers * .13
     ){
 
-      fallers.push({
+      const fallCount =
+        Math.min(
+          3,
+          1 +
+          Math.floor(
+            D.d * 2
+          )
+        );
 
-        x:
-          x + 20,
 
-        y:
-          -80 -
-          random(
-            n * 1001 +
-            i
-          ) * 180,
+      for(
+        let fIndex=0;
+        fIndex<fallCount;
+        fIndex++
+      ){
 
-        w:20,
+        fallers.push({
 
-        h:20,
+          x:
+            x +
+            20 +
+            random(
+              base + 100 + fIndex
+            ) * 80,
 
-        vy:
-          80 +
-          random(
-            n * 1002 +
-            i
-          ) * 100,
+          y:
+            -100 -
+            random(
+              base + 110 + fIndex
+            ) * 250,
 
-        minY:
-          groundY - 260,
+          w:
+            20 +
+            D.d * 7,
 
-        maxY:
-          groundY + 10,
+          h:
+            20 +
+            D.d * 7,
 
-        resetY:
-          groundY - 250
+          vy:
+            100 +
+            random(
+              base + 120 + fIndex
+            ) * 160,
 
-      });
+          minY:
+            groundY - 300,
+
+          maxY:
+            groundY + 10,
+
+          resetY:
+            groundY - 280
+
+        });
+
+      }
 
     }
 
@@ -2100,17 +2147,17 @@ function makeLevel(n){
   platforms.push({
 
     x:finalStart,
-
     y:groundY,
-
-    w:420,
-
+    w:440,
     h:75,
-
     safe:true
 
   });
 
+
+  /*
+    FINISH
+  */
 
   const finishX =
     finalStart + 145;
@@ -2118,21 +2165,29 @@ function makeLevel(n){
 
   /*
     LIGHTNING
-    Slowly appears.
+
+    Tutorial:
+    none.
+
+    Hard:
+    begins later,
+    becomes much more frequent.
   */
 
   const stormCount =
-    Math.min(
-      3,
-      Math.floor(
-        D.d * 2.8
-      )
-    );
+    n < 16
+    ? 0
+    : Math.min(
+        7,
+        Math.floor(
+          D.d * 7
+        )
+      );
 
 
   for(
-    let i = 0;
-    i < stormCount;
+    let i=0;
+    i<stormCount;
     i++
   ){
 
@@ -2161,7 +2216,7 @@ function makeLevel(n){
           random(
             n * 401 +
             i
-          ) * 110
+          ) * 150
         ),
 
       timer:
@@ -2171,17 +2226,21 @@ function makeLevel(n){
         ) * 1.5,
 
       cool:
-        1.35 -
-        random(
-          n * 403 +
-          i
-        ) * .35,
+        Math.max(
+          .62,
+          1.35 -
+          D.d * .65 -
+          random(
+            n * 403 +
+            i
+          ) * .28
+        ),
 
       warning:
         Math.max(
-          .42,
+          .25,
           .78 -
-          D.d * .25
+          D.d * .48
         )
 
     });
@@ -2194,28 +2253,29 @@ function makeLevel(n){
     groundY,
 
     platforms,
-
     hazards,
-
     stars,
-
     balls,
-
     slopes,
-
     cracks,
-
     lightnings,
-
     fallers,
 
     finishX,
 
     idea:
-      ideas[
-        (n - 1) %
-        ideas.length
-      ],
+      n <= 15
+      ? ideas[n - 1]
+      : ideas[
+          15 +
+          Math.min(
+            ideas.length - 16,
+            Math.floor(
+              D.d *
+              (ideas.length - 16)
+            )
+          )
+        ],
 
     tier:D
 
@@ -2244,36 +2304,24 @@ function saveLevel(){
 
 function resetLevel(){
 
-  levelWon =
-    false;
-
-  paused =
-    false;
-
+  levelWon = false;
+  paused = false;
 
   levelData =
-    makeLevel(
-      level
-    );
+    makeLevel(level);
 
 
-  player.x =
-    70;
+  player.x = 70;
 
   player.y =
     levelData.groundY -
     player.h;
 
   player.vx = 0;
-
   player.vy = 0;
 
-  player.grounded =
-    true;
-
-  player.coyote =
-    0;
-
+  player.grounded = true;
+  player.coyote = 0;
 
   cameraX = 0;
 
@@ -2295,7 +2343,6 @@ function resetLevel(){
 
   player.speed =
     levelData.tier.speed;
-
 
   player.jumpPower =
     levelData.tier.jump;
@@ -2323,8 +2370,7 @@ startBtn.addEventListener(
     intro.style.display =
       "none";
 
-    playing =
-      true;
+    playing = true;
 
     resetLevel();
 
@@ -2374,12 +2420,8 @@ function winLevel(){
     return;
 
 
-  levelWon =
-    true;
-
-  paused =
-    true;
-
+  levelWon = true;
+  paused = true;
 
   saveLevel();
 
@@ -2388,10 +2430,7 @@ function winLevel(){
     "show"
   );
 
-
-  void
-    finishBanner.offsetWidth;
-
+  void finishBanner.offsetWidth;
 
   finishBanner.classList.add(
     "show"
@@ -2437,9 +2476,7 @@ function nextLevel(){
 
 
 document
-  .getElementById(
-    "retryBtn"
-  )
+  .getElementById("retryBtn")
   .addEventListener(
     "pointerdown",
     e=>{
@@ -2453,9 +2490,7 @@ document
 
 
 document
-  .getElementById(
-    "nextBtn"
-  )
+  .getElementById("nextBtn")
   .addEventListener(
     "pointerdown",
     e=>{
@@ -2545,13 +2580,11 @@ function update(dt){
   player.x +=
     player.vx * dt;
 
-
   player.y +=
     player.vy * dt;
 
 
-  player.grounded =
-    false;
+  player.grounded = false;
 
 
   /*
@@ -2600,11 +2633,9 @@ function update(dt){
         p.y -
         player.h;
 
-      player.vy =
-        0;
+      player.vy = 0;
 
-      player.grounded =
-        true;
+      player.grounded = true;
 
     }
 
@@ -2654,11 +2685,9 @@ function update(dt){
           surface -
           player.h;
 
-        player.vy =
-          0;
+        player.vy = 0;
 
-        player.grounded =
-          true;
+        player.grounded = true;
 
       }
 
@@ -2675,8 +2704,7 @@ function update(dt){
     player.grounded
   ){
 
-    player.coyote =
-      .12;
+    player.coyote = .12;
 
   }
 
@@ -2700,9 +2728,7 @@ function update(dt){
     of levelData.stars
   ){
 
-    if(
-      s.taken
-    )
+    if(s.taken)
       continue;
 
 
@@ -2725,8 +2751,7 @@ function update(dt){
       ) < 30
     ){
 
-      s.taken =
-        true;
+      s.taken = true;
 
     }
 
@@ -2766,14 +2791,16 @@ function update(dt){
       !c.active
     ){
 
-      c.active =
-        true;
+      c.active = true;
 
       c.timer =
-        1.05 -
-        Math.min(
-          .35,
-          levelData.tier.d * .35
+        Math.max(
+          .45,
+          1.05 -
+          Math.min(
+            .45,
+            levelData.tier.d * .45
+          )
         );
 
     }
@@ -2784,16 +2811,14 @@ function update(dt){
       !c.broken
     ){
 
-      c.timer -=
-        dt;
+      c.timer -= dt;
 
 
       if(
         c.timer <= 0
       ){
 
-        c.broken =
-          true;
+        c.broken = true;
 
       }
 
@@ -2815,8 +2840,7 @@ function update(dt){
       c.y - 25
     ){
 
-      player.vy +=
-        180;
+      player.vy += 180;
 
     }
 
@@ -2832,8 +2856,7 @@ function update(dt){
     of levelData.balls
   ){
 
-    b.targetTimer -=
-      dt;
+    b.targetTimer -= dt;
 
 
     if(
@@ -2848,15 +2871,18 @@ function update(dt){
 
 
       b.targetTimer =
-        .8 +
-        random(
-          level * 77 +
-          Math.floor(
-            performance.now() /
-            1000
-          )
-        ) *
-        1.7;
+        Math.max(
+          .35,
+          .8 +
+          random(
+            level * 77 +
+            Math.floor(
+              performance.now() /
+              1000
+            )
+          ) * 1.7 -
+          levelData.tier.d * .35
+        );
 
     }
 
@@ -2872,11 +2898,8 @@ function update(dt){
       b.minX
     ){
 
-      b.x =
-        b.minX;
-
-      b.dir =
-        1;
+      b.x = b.minX;
+      b.dir = 1;
 
     }
 
@@ -2886,11 +2909,8 @@ function update(dt){
       b.maxX
     ){
 
-      b.x =
-        b.maxX;
-
-      b.dir =
-        -1;
+      b.x = b.maxX;
+      b.dir = -1;
 
     }
 
@@ -3016,8 +3036,7 @@ function update(dt){
     of levelData.lightnings
   ){
 
-    l.timer +=
-      dt;
+    l.timer += dt;
 
 
     if(
@@ -3025,8 +3044,7 @@ function update(dt){
       l.cool
     ){
 
-      l.timer =
-        0;
+      l.timer = 0;
 
     }
 
@@ -3047,8 +3065,7 @@ function update(dt){
       .13
     ){
 
-      stormFlash =
-        1;
+      stormFlash = 1;
 
 
       if(
@@ -3058,7 +3075,7 @@ function update(dt){
             player.w / 2
           ) -
           l.x
-        ) < 34 &&
+        ) < 42 &&
 
         player.y >
         l.y - 10
@@ -3172,8 +3189,7 @@ function drawBackground(){
   );
 
 
-  ctx.fillStyle =
-    sky;
+  ctx.fillStyle = sky;
 
 
   ctx.fillRect(
@@ -3198,15 +3214,13 @@ function drawBackground(){
   */
 
   for(
-    let i = 0;
-    i < 30;
+    let i=0;
+    i<35;
     i++
   ){
 
     const x =
-      i * 280 +
-      100;
-
+      i * 280 + 100;
 
     const y =
       95 +
@@ -3228,7 +3242,6 @@ function drawBackground(){
       Math.PI * 2
     );
 
-
     ctx.arc(
       x + 30,
       y - 8,
@@ -3236,7 +3249,6 @@ function drawBackground(){
       0,
       Math.PI * 2
     );
-
 
     ctx.arc(
       x + 65,
@@ -3271,8 +3283,7 @@ function drawBackground(){
         l.cool;
 
 
-      let alpha =
-        .2;
+      let alpha = .2;
 
 
       if(
@@ -3281,8 +3292,7 @@ function drawBackground(){
         l.cool
       ){
 
-        alpha =
-          .65;
+        alpha = .65;
 
       }
 
@@ -3302,7 +3312,6 @@ function drawBackground(){
         Math.PI * 2
       );
 
-
       ctx.arc(
         l.x + 42,
         85,
@@ -3310,7 +3319,6 @@ function drawBackground(){
         0,
         Math.PI * 2
       );
-
 
       ctx.arc(
         l.x - 40,
@@ -3458,18 +3466,15 @@ function drawWorld(){
       s.y
     );
 
-
     ctx.lineTo(
       s.x + s.w,
       s.y - s.rise
     );
 
-
     ctx.lineTo(
       s.x + s.w,
       s.y + 55 - s.rise
     );
-
 
     ctx.lineTo(
       s.x,
@@ -3485,9 +3490,7 @@ function drawWorld(){
     ctx.strokeStyle =
       "#65d878";
 
-
-    ctx.lineWidth =
-      7;
+    ctx.lineWidth = 7;
 
 
     ctx.beginPath();
@@ -3497,7 +3500,6 @@ function drawWorld(){
       s.x,
       s.y
     );
-
 
     ctx.lineTo(
       s.x + s.w,
@@ -3519,9 +3521,7 @@ function drawWorld(){
     of levelData.cracks
   ){
 
-    if(
-      c.broken
-    ){
+    if(c.broken){
 
       ctx.fillStyle =
         "#111";
@@ -3538,9 +3538,7 @@ function drawWorld(){
       ctx.strokeStyle =
         "#ef476f";
 
-
-      ctx.lineWidth =
-        2;
+      ctx.lineWidth = 2;
 
 
       ctx.beginPath();
@@ -3551,18 +3549,15 @@ function drawWorld(){
         c.y
       );
 
-
       ctx.lineTo(
         c.x + 18,
         c.y + 15
       );
 
-
       ctx.lineTo(
         c.x + 28,
         c.y + 2
       );
-
 
       ctx.lineTo(
         c.x + 39,
@@ -3594,9 +3589,7 @@ function drawWorld(){
     ctx.strokeStyle =
       "#111";
 
-
-    ctx.lineWidth =
-      2;
+    ctx.lineWidth = 2;
 
 
     ctx.beginPath();
@@ -3607,18 +3600,15 @@ function drawWorld(){
       c.y
     );
 
-
     ctx.lineTo(
       c.x + 20,
       c.y + 8
     );
 
-
     ctx.lineTo(
       c.x + 28,
       c.y
     );
-
 
     ctx.lineTo(
       c.x + 40,
@@ -3652,12 +3642,10 @@ function drawWorld(){
       h.y + h.h
     );
 
-
     ctx.lineTo(
       h.x + h.w / 2,
       h.y - 10
     );
-
 
     ctx.lineTo(
       h.x + h.w,
@@ -3667,13 +3655,11 @@ function drawWorld(){
 
     ctx.closePath();
 
-
     ctx.fill();
 
 
     ctx.fillStyle =
       "#fff";
-
 
     ctx.font =
       "bold 9px system-ui";
@@ -3697,13 +3683,8 @@ function drawWorld(){
     of levelData.stars
   ){
 
-    if(
-      s.taken
-    ){
-
+    if(s.taken)
       continue;
-
-    }
 
 
     ctx.save();
@@ -3728,8 +3709,8 @@ function drawWorld(){
 
 
     for(
-      let i = 0;
-      i < 10;
+      let i=0;
+      i<10;
       i++
     ){
 
@@ -3751,9 +3732,7 @@ function drawWorld(){
         Math.sin(a) * r;
 
 
-      if(
-        i === 0
-      ){
+      if(i===0){
 
         ctx.moveTo(
           sx,
@@ -3823,9 +3802,7 @@ function drawWorld(){
     ctx.strokeStyle =
       "#fff";
 
-
-    ctx.lineWidth =
-      3;
+    ctx.lineWidth = 3;
 
 
     ctx.beginPath();
@@ -3870,7 +3847,6 @@ function drawWorld(){
 
     ctx.fill();
 
-
     ctx.restore();
 
   }
@@ -3908,7 +3884,6 @@ function drawWorld(){
       4
     );
 
-
     ctx.fillRect(
       f.x + 12,
       f.y + 5,
@@ -3934,7 +3909,7 @@ function drawWorld(){
 
 
     /*
-      Warning
+      WARNING
     */
 
     if(
@@ -3968,7 +3943,7 @@ function drawWorld(){
 
 
     /*
-      Strike
+      STRIKE
     */
 
     else if(
@@ -3981,9 +3956,7 @@ function drawWorld(){
       ctx.strokeStyle =
         "#fff36b";
 
-
-      ctx.lineWidth =
-        8;
+      ctx.lineWidth = 8;
 
 
       ctx.beginPath();
@@ -3994,18 +3967,15 @@ function drawWorld(){
         l.y
       );
 
-
       ctx.lineTo(
         l.x - 18,
         l.y + 45
       );
 
-
       ctx.lineTo(
         l.x + 10,
         l.y + 45
       );
-
 
       ctx.lineTo(
         l.x - 5,
@@ -4052,12 +4022,10 @@ function drawWorld(){
     levelData.groundY - 120
   );
 
-
   ctx.lineTo(
     fx + 75,
     levelData.groundY - 94
   );
-
 
   ctx.lineTo(
     fx + 7,
@@ -4066,7 +4034,6 @@ function drawWorld(){
 
 
   ctx.closePath();
-
 
   ctx.fill();
 
@@ -4122,7 +4089,6 @@ function drawWorld(){
     Math.PI * 2
   );
 
-
   ctx.arc(
     23,
     12,
@@ -4150,7 +4116,6 @@ function drawWorld(){
     Math.PI * 2
   );
 
-
   ctx.arc(
     24,
     12,
@@ -4170,9 +4135,7 @@ function drawWorld(){
   ctx.strokeStyle =
     "#111";
 
-
-  ctx.lineWidth =
-    3;
+  ctx.lineWidth = 3;
 
 
   ctx.beginPath();
@@ -4205,7 +4168,6 @@ function drawWorld(){
     5
   );
 
-
   ctx.fillRect(
     21,
     38,
@@ -4223,7 +4185,6 @@ function drawWorld(){
 
   ctx.fillStyle =
     "rgba(20,20,20,.35)";
-
 
   ctx.font =
     "900 15px system-ui";
@@ -4287,7 +4248,6 @@ function updateSanPosition(){
   san.style.right =
     p.right + "px";
 
-
   san.style.top =
     p.top + "px";
 
@@ -4304,7 +4264,6 @@ function updateSanPosition(){
 
   san.style.width =
     size + "px";
-
 
   san.style.height =
     size + "px";
@@ -4353,8 +4312,7 @@ function loop(time){
     );
 
 
-  lastTime =
-    time;
+  lastTime = time;
 
 
   update(dt);
@@ -4374,9 +4332,7 @@ function loop(time){
 ========================================================= */
 
 levelData =
-  makeLevel(
-    level
-  );
+  makeLevel(level);
 
 
 levelEl.textContent =
